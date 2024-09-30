@@ -28,7 +28,8 @@ Imports:
   sf,
   stringr,
   tidyr,
-  uuid
+  uuid,
+  hms
 Suggests:
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
