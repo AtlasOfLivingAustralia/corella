@@ -8,8 +8,5 @@
 
 library(testthat)
 library(koala)
-library(glue)
-library(tibble)
-library(lubridate)
 
 test_check("koala")

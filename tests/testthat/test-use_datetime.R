@@ -1,5 +1,4 @@
 library(tibble)
-library(lubridate)
 
 # create quiet function that captures side-effects
 # NOTE: This must be re-run if changes are made to `use_datetime()` for bug-fixing
@@ -19,7 +18,7 @@ test_that("use_datetime errors when no dwc columns are named, or exist in the df
 })
 
 test_that("use_datetime returns tibble with updated dwc column names", {
-  df <- tibble(user_col = dmy(c("14-01-2023", "15-01-2023")))
+  df <- tibble(user_col = lubridate::dmy(c("14-01-2023", "15-01-2023")))
 
   suppressWarnings(suppressMessages(
   result <- df |>
@@ -31,7 +30,7 @@ test_that("use_datetime returns tibble with updated dwc column names", {
 })
 
 test_that("use_datetime detects unnamed but existing dwc column names in df", {
-  df <- tibble(eventDate = dmy(c("14-01-2023", "15-01-2023")),
+  df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
   df2 <- tibble(eventDate = "borp",
                 col2 = 1:2)
@@ -49,7 +48,7 @@ test_that("use_datetime detects unnamed but existing dwc column names in df", {
 })
 
 test_that("use_datetime has progress messages", {
-  df <- tibble(eventDate = dmy(c("14-01-2023", "15-01-2023")),
+  df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
 
   result <- df |> quiet_use_datetime()
@@ -59,9 +58,9 @@ test_that("use_datetime has progress messages", {
 })
 
 test_that("use_datetime detects correct number of existing fields", {
-  df <- tibble(eventDate = dmy(c("14-01-2023", "15-01-2023")),
+  df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
-  df2 <- tibble(eventDate = dmy(c("14-01-2023", "15-01-2023")),
+  df2 <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                 year = c(2023, 2023),
                 col2 = 1:2)
 
@@ -78,7 +77,7 @@ test_that("use_datetime detects correct number of existing fields", {
 })
 
 test_that("use_datetime checks eventDate format", {
-  correct <- tibble(eventDate = dmy(c("14-01-2023", "15-01-2023")),
+  correct <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                     col2 = 1:2)
   not_a_date <- tibble(eventDate = "borp",
                 col2 = 1:2)
@@ -117,7 +116,7 @@ test_that("use_datetime checks time format", {
                        col2 = 1:2)
   chr_not_a_time <- tibble(eventTime = "borp",
                        col2 = 1:2)
-  date_and_time <- tibble(eventTime = dmy_hms(c("14-01-2023 01:01:01", "15-01-2023 01:01:02")),
+  date_and_time <- tibble(eventTime = lubridate::dmy_hms(c("14-01-2023 01:01:01", "15-01-2023 01:01:02")),
                        col2 = 1:2)
 
   result1 <- correct_date |>

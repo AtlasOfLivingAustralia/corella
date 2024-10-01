@@ -76,9 +76,9 @@ test_that("check_is_string() works", {
   expect_equal(df_chr, result)
   expect_error(check_is_string(df_dbl, level = "abort"), # TODO capture full error message
                " must be a character")
-  expect_warning(check_is_string(x, level = "warn"))
-  expect_message(check_is_string(x, level = "inform"))
-  expect_message(check_is_string(x))
+  expect_warning(check_is_string(df_dbl, level = "warn"))
+  expect_message(check_is_string(df_dbl, level = "inform"))
+  expect_message(check_is_string(df_dbl))
 })
 
 test_that("check_unique() works", {
