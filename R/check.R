@@ -89,7 +89,7 @@ col_progress_bar <- function(cols) {
 #' @keywords Internal
 check_contains_values <- function(.df,
                                  values,
-                                 level = "abort",
+                                 level = "inform",
                                  .accepted_message = TRUE,
                                  call = caller_env()
 ){
@@ -155,7 +155,7 @@ check_contains_values <- function(.df,
 #' @noRd
 #' @keywords Internal
 check_is_numeric <- function(.df,
-                             level = "abort",
+                             level = "inform",
                              call = caller_env()
 ){
   check_data_frame(.df)

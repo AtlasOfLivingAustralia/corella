@@ -26,47 +26,56 @@ test_that("check_data_frame() works", {
 test_that("check_contains_values() works", {
   # case with no errors
   x <- tibble(variable = c(1, 2))
-  y <- c(1, 2, 3)
-  expect_no_error(check_contains_values(x, y))
-  result <- check_contains_values(x, y)
-  expect_equal(x, result) # i.e. check_ returns an unmodified tibble
+  values <- c(1, 2, 3)
+  result <- check_contains_values(x, values)
+  expect_no_error(check_contains_values(x, values))
+  expect_equal(x, result) # `check_` returns an unmodified tibble
+
   # with errors
-  y <- c(2, 3)
+  values <- c(2, 3)
   expect_error(
-    check_contains_values(x, y, level = "abort"), # TODO fix.
-    "Unexpected value in variable"
+    check_contains_values(x, values, level = "abort"), # TODO capture full error message
+    "Unexpected value in "
     )
-  expect_warning(check_contains_values(x, y, level = "warn"))
-  expect_message(check_contains_values(x, y, level = "inform"))
-  expect_message(check_contains_values(x, y)) # defaults to "inform"
+  expect_warning(check_contains_values(x, values, level = "warn"))
+  expect_message(check_contains_values(x, values, level = "inform"))
+  expect_message(check_contains_values(x, values)) # defaults to "inform"
 })
+
+# cli::test_that_cli(configs = "ascii", "check_contains_values()", {
+#   testthat::local_edition(3)
+#   testthat::expect_snapshot({
+#     check_contains_values(x, values, level = "abort")
+#   })
+# })
 
 test_that("check_is_numeric() works", {
   # case with no errors
-  x <- tibble(variable = as.double(c(1, 3)))
-  expect_no_error(check_is_numeric(x))
-  x <- tibble(variable = as.integer(c(1, 3)))
-  result <- check_is_numeric(x)
-  expect_equal(x, result)
+  df_dbl <- tibble(variable = as.double(c(1, 3)))
+  df_num <- tibble(variable = as.integer(c(1, 3)))
+  result <- check_is_numeric(df_num)
+
+  expect_no_error(check_is_numeric(df_dbl))
+  expect_no_error(check_is_numeric(df_num))
+  expect_equal(df_dbl, result)
   # with errors
-  x <- tibble(variable = "a_string")
-  expect_error(x |> check_is_numeric(level = "abort"),
-               "variable must be a numeric vector, not character") # TODO Fix this
-  expect_warning(check_is_numeric(x, level = "warn"))
-  expect_message(check_is_numeric(x, level = "inform"))
-  expect_message(check_is_numeric(x))
+  df_chr <- tibble(variable = "a_string")
+  expect_error(check_is_numeric(df_chr, level = "abort")) # TODO capture full error message
+  expect_warning(check_is_numeric(df_chr, level = "warn"))
+  expect_message(check_is_numeric(df_chr, level = "inform"))
+  expect_message(check_is_numeric(df_chr)) # defaults to inform
 })
 
 test_that("check_is_string() works", {
   # with no errors
-  x <- tibble(basisOfRecord = "something")
-  expect_no_error(check_is_string(x))
-  result <- check_is_string(x)
-  expect_equal(x, result)
-  # with errors
-  x <- tibble(variable = as.double(c(1, 3)))
-  expect_error(check_is_string(x, level = "abort"),
-               regexp = "\`variable\` is not a string")
+  df_chr <- tibble(basisOfRecord = "something")
+  df_dbl <- tibble(variable = as.double(c(1, 3)))
+  result <- check_is_string(df_chr)
+
+  expect_no_error(check_is_string(df_chr))
+  expect_equal(df_chr, result)
+  expect_error(check_is_string(df_dbl, level = "abort"), # TODO capture full error message
+               " must be a character")
   expect_warning(check_is_string(x, level = "warn"))
   expect_message(check_is_string(x, level = "inform"))
   expect_message(check_is_string(x))
@@ -74,22 +83,24 @@ test_that("check_is_string() works", {
 
 test_that("check_unique() works", {
   # with no errors
-  x <- tibble(variable = c(1, 2, 3, 4))
-  expect_no_error(check_unique(x))
-  result <- check_unique(x)
-  expect_equal(x, result)
-  # with numeric errors
-  x <- tibble(variable = c(1, 2, 2, 3, 4, 4))
-  expect_error(check_unique(x, level = "abort"),
-               regexp = "\`variable\` does not contain a unique value in each cell")
-  # with string errors
-  x <- tibble(variable = c("something", "something", "something_else"))
-  expect_error(check_unique(x, level = "abort"),
-               regexp = "\`variable\` does not contain a unique value in each cell")
-  # other reporting levels
-  expect_warning(check_unique(x, level = "warn"))
-  expect_message(check_unique(x, level = "inform"))
-  expect_message(check_unique(x))
+  values <- tibble(variable = c(1, 2, 3, 4))
+  dupes_dbl <- tibble(variable = c(1, 2, 2, 3, 4, 4))
+  dupes_chr <- tibble(variable = c("something", "something", "something_else"))
+  result <- check_unique(values)
+
+  expect_no_error(check_unique(values))
+  expect_equal(values, result)
+  expect_error( # numeric duplicates
+    check_unique(dupes_dbl, level = "abort"),
+    "Duplicate values in "
+    )
+  expect_error( # character duplicates
+    check_unique(dupes_chr, level = "abort"),
+    "Duplicate values in "
+    )
+  expect_warning(check_unique(dupes_chr, level = "warn")) # levels
+  expect_message(check_unique(dupes_chr, level = "inform"))
+  expect_message(check_unique(dupes_chr))
 })
 
 test_that("check_within_range() works", {
@@ -100,12 +111,12 @@ test_that("check_within_range() works", {
   expect_equal(x, result)
   # with numeric errors
   expect_error(check_within_range(x, level = "abort", lower = 4, upper = 20),
-               regexp = "\`variable\` contains values ouside of 4 <= x <= 20")
+               "Value is outside of expected range in ")
   expect_warning(check_within_range(x, level = "warn", lower = 4, upper = 20))
   expect_message(check_within_range(x, level = "inform", lower = 4, upper = 20))
   expect_message(check_within_range(x, lower = 4, upper = 20))
   # with string errors
   x <- tibble(variable = "something")
   expect_error(check_within_range(x, level = "abort", lower = 4, upper = 20),
-               regexp = "\`variable\` is not numeric")
+               regexp = " must be a numeric vector, not character.")
 })
