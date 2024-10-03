@@ -4,6 +4,11 @@
 # corroboree <img src="man/figures/corroboree-logo.png" align="right" style="margin: 0px 10px 0px 10px;" alt="" width="120"/><br>
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/corroboree)](https://CRAN.R-project.org/package=corroboree)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 ## Overview
