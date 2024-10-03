@@ -1,11 +1,11 @@
 #' Add taxonomic information to a `tibble`
-#' 
-#' Format fields that contain taxonomic name information from kingdom to 
+#'
+#' Format fields that contain taxonomic name information from kingdom to
 #' species, as well as the common/vernacular name, to a `tibble`.
-#' 
-#' In 
-#' practice this is no different from using `mutate()`, but gives some 
-#' informative errors, and serves as a useful lookup for taxonomic names in 
+#'
+#' In
+#' practice this is no different from using `mutate()`, but gives some
+#' informative errors, and serves as a useful lookup for taxonomic names in
 #' the Darwin Core Standard.
 #' @param df a `data.frame` or `tibble` that the column should be appended to.
 #' @param kingdom The kingdom name of identified taxon.
@@ -15,20 +15,20 @@
 #' @param family The family name of identified taxon.
 #' @param genus The genus name of the identified taxon.
 #' @param species The species name of the identified taxon.
-#' @param specificEpithet The name of the first species or species epithet of 
-#' the `scientificName`. 
-#' [See documentation](https://dwc.tdwg.org/list/#dwc_specificEpithet) 
+#' @param specificEpithet The name of the first species or species epithet of
+#' the `scientificName`.
+#' [See documentation](https://dwc.tdwg.org/list/#dwc_specificEpithet)
 #' @param vernacularName The common or vernacular name of the identified taxon.
-#' @param .keep Control which columns from .data are retained in the output. 
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to 
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to 
+#' @param .keep Control which columns from .data are retained in the output.
+#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.
 #' @details
 #' Examples of `specificEphithet`:
 #' * If `scientificName` is `Abies concolor`, the `specificEpithet` is `concolor`.
 #' * If `scientificName` is `Semisulcospira gottschei`, the `specificEpithet` is `gottschei`.
-#' 
+#'
 #' @seealso [use_scientific_name()] for adding `scientificName` and authorship information.
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
@@ -49,44 +49,44 @@ use_taxonomy <- function(
   if(missing(.df)){
     abort("df is missing, with no default")
   }
-  
+
   fn_args <- ls()
-  
+
   # capture arguments as a list of quosures
   # NOTE: enquos() must be listed alphabetically
   fn_quos <- enquos(class, family, genus, kingdom, order, phylum, species, specificEpithet, vernacularName)
   names(fn_quos) <- fn_args
-  
+
   # find arguments that are NULL but exist already in `df`
   # then remove their names before `mutate()`
-  # otherwise, these DwC columns are deleted by `mutate(.keep = "unused")` 
-  fn_quo_is_null <- fn_quos |> 
+  # otherwise, these DwC columns are deleted by `mutate(.keep = "unused")`
+  fn_quo_is_null <- fn_quos |>
     purrr::map(\(user_arg)
-               rlang::quo_is_null(user_arg)) |> 
+               rlang::quo_is_null(user_arg)) |>
     unlist()
-  
+
   null_col_exists_in_df <- fn_quo_is_null & (names(fn_quos) %in% colnames(.df))
-  
+
   if(any(null_col_exists_in_df)){
-    fn_quos <- fn_quos |> 
+    fn_quos <- fn_quos |>
       purrr::keep(!names(fn_quos) %in% names(which(null_col_exists_in_df)))
   }
-  
+
   # Update df
-  result <- .df |> 
-    mutate(!!!fn_quos, 
+  result <- .df |>
+    mutate(!!!fn_quos,
            .keep = .keep)
-  
-  check_missing_all_args(fn_call = match.call(), 
-                         fn_args = fn_args, 
+
+  check_missing_all_args(fn_call = match.call(),
+                         fn_args = fn_args,
                          user_cols = colnames(result))
-  
+
   # inform user which columns will be checked
   matched_cols <- names(result)[names(result) %in% fn_args]
   col_progress_bar(cols = matched_cols)
-  
+
   # run column checks
-  # Q: Should taxonomic names be validated in galaxias?
+  # Q: Should taxonomic names be validated in corroboree?
   #    Would a separate taxonomic checking package be worthwhile?
   check_kingdom(result, level = "abort")
   check_phylum(result, level = "abort")
@@ -97,18 +97,18 @@ use_taxonomy <- function(
   check_species(result, level = "abort")
   check_specificEpithet(result, level = "abort")
   check_vernacularName(result, level = "abort")
-  
+
   return(result)
 }
 
 #' Check kingdom field is valid
-#' 
+#'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_kingdom <- function(.df, 
+check_kingdom <- function(.df,
                           level = c("inform", "warn", "abort")
                           ){
   level <- match.arg(level)
@@ -124,11 +124,11 @@ check_kingdom <- function(.df,
 #' Check phylum field is valid
 #'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_phylum <- function(.df, 
+check_phylum <- function(.df,
                          level = c("inform", "warn", "abort")
                          ){
   level <- match.arg(level)
@@ -142,13 +142,13 @@ check_phylum <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 #' Check class field is valid
-#' 
+#'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_class <- function(.df, 
+check_class <- function(.df,
                         level = c("inform", "warn", "abort")
                         ){
   level <- match.arg(level)
@@ -162,13 +162,13 @@ check_class <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 #' Check order field is valid
-#' 
+#'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_order <- function(.df, 
+check_order <- function(.df,
                         level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
@@ -182,13 +182,13 @@ check_order <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 #' Check family field is valid
-#' 
+#'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_family <- function(.df, 
+check_family <- function(.df,
                          level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
@@ -204,11 +204,11 @@ check_family <- function(.df,
 #' Check genus field is valid
 #'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_genus <- function(.df, 
+check_genus <- function(.df,
                         level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
@@ -224,11 +224,11 @@ check_genus <- function(.df,
 #' Check species field is valid
 #'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_species <- function(.df, 
+check_species <- function(.df,
                           level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
@@ -242,13 +242,13 @@ check_species <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 #' Check specificEpithet field is valid
-#' 
+#'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_specificEpithet <- function(.df, 
+check_specificEpithet <- function(.df,
                                   level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
@@ -266,11 +266,11 @@ check_specificEpithet <- function(.df,
 #' Check vernacularName field is valid
 #'
 #' @rdname check_dwc
-#' @param level what action should the function take for non-conformance? 
+#' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
 #' @export
-check_vernacularName <- function(.df, 
+check_vernacularName <- function(.df,
                                  level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)

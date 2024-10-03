@@ -151,7 +151,7 @@ check_countryCode <- function(df,
   }
   # browser()
   # FIXME: Check that country code matches country
-  # NOTE: Does this need to be in galaxias?
+  # NOTE: Does this need to be in the package?
   # if(any(colnames(df) == "country")) {
   #   df |>
   #     select("countryCode", "country") |>

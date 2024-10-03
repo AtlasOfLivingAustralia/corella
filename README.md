@@ -16,17 +16,18 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 `corroboree` is an R package that helps users standardize their data
 using the [‘Darwin Core’](https://dwc.tdwg.org) data standard, used for
 biodiversity data like species occurrences. The package provides tools
-to edit, prepare and validate data against the standard’s criteria. Once
-standardized, data can be subsequently  
-shared as a [‘Darwin Core
-Archive’](https://ipt.gbif.org/manual/en/ipt/latest/dwca-guide#what-is-darwin-core-archive-dwc-a)—a
-packaged set of files with a simple descriptor to inform how data are
-organised—and published to open data infrastructures like the Atlas of
-Living Australia and GBIF. `corroboree` was built, and is maintained, by
-the [Science & Decision Support Team](https://labs.ala.org.au) at the
-[Atlas of Living Australia](https://www.ala.org.au) (ALA).
+to prepare, manipulate and validate data against the standard’s
+criteria. Once standardized, data can be subsequently shared as a
+[‘Darwin Core
+Archive’](https://ipt.gbif.org/manual/en/ipt/latest/dwca-guide#what-is-darwin-core-archive-dwc-a)
+and published to open data infrastructures like the [Atlas of Living
+Australia](https://www.ala.org.au) and [GBIF](https://www.gbif.org/).
 
-The package is named for an endangered Australian species of alpine frog
+`corroboree` was built, and is maintained, by the [Science & Decision
+Support Team](https://labs.ala.org.au) at the [Atlas of Living
+Australia](https://www.ala.org.au) (ALA). The package is named for an
+endangered Australian species of [alpine
+frog](https://bie.ala.org.au/species/https://biodiversity.org.au/afd/taxa/cbf9278d-64b7-43d6-9691-78b99b2eb65f#overview)
 native to the marshlands and forests of ACT and NSW.
 
 If you have any comments, questions or suggestions, please [contact
@@ -44,7 +45,7 @@ devtools::install_github("AtlasOfLivingAustralia/corroboree")
 
 ## Example
 
-## Citing galaxias
+## Citing corroboree
 
 To generate a citation for the package version you are using, you can
 run:

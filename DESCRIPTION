@@ -29,7 +29,9 @@ Imports:
   stringr,
   tidyr,
   uuid,
-  hms
+  hms,
+  nanoparquet,
+  here
 Suggests:
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
