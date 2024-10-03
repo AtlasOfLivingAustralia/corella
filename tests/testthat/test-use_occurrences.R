@@ -118,7 +118,7 @@ test_that("use_occurrences only accepts valid values for basisOfRecord", {
     )
 })
 
-test_that("use_datetime checks occurrenceStatus format", {
+test_that("use_occurrences checks occurrenceStatus format", {
   quiet_use_occurrences <- purrr::quietly(use_occurrences)
   valid_values <- c("present", "absent")
   df <- tibble(occurrenceStatus = valid_values)
