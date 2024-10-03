@@ -1,5 +1,5 @@
-Package: koala
-Title: Prepare and check data to comply with Darwin Core standards
+Package: corroboree
+Title: Prepare, manipulate and check data to comply with Darwin Core standards
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Martin",
