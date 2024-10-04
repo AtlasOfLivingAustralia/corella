@@ -17,6 +17,18 @@
 #' * 12.5 (`organismQuantity`) % biomass (`organismQuantityType`)
 #' * r (`organismQuantity`) Braun-Blanquet Scale (`organismQuantityType`)
 #' * many (`organismQuantity`) individuals (`organismQuantityType`)
+#' @examples
+#' suppressMessages(
+#'
+#' df <- data.frame(
+#'   species_name = "Pseudophryne corroboree",
+#'   n_obs = c(1, 3, 4))
+#'
+#'
+#' df |>
+#'   use_abundance(individualCount = n_obs)
+#'
+#' )
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

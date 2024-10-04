@@ -35,6 +35,7 @@
 \alias{check_lifeStage}
 \alias{check_sex}
 \alias{check_vitality}
+\alias{check_reproductiveCondition}
 \alias{check_recordedBy}
 \alias{check_recordedByID}
 \alias{check_scientificName}
@@ -55,11 +56,23 @@ check_fields(.df, level = c("inform", "warn", "abort"))
 
 check_occurrenceID(.df, level = c("inform", "warn", "abort"))
 
-check_individualCount(.df, level = c("inform", "warn", "abort"))
+check_individualCount(
+  .df,
+  level = c("inform", "warn", "abort"),
+  call = caller_env()
+)
 
-check_organismQuantity(.df, level = c("inform", "warn", "abort"))
+check_organismQuantity(
+  .df,
+  level = c("inform", "warn", "abort"),
+  call = caller_env()
+)
 
-check_organismQuantityType(.df, level = c("inform", "warn", "abort"))
+check_organismQuantityType(
+  .df,
+  level = c("inform", "warn", "abort"),
+  call = caller_env()
+)
 
 check_basisOfRecord(.df, level = c("inform", "warn", "abort"))
 
@@ -122,6 +135,8 @@ check_sex(.df, level = c("inform", "warn", "abort"))
 
 check_vitality(.df, level = c("inform", "warn", "abort"))
 
+check_reproductiveCondition(.df, level = c("inform", "warn", "abort"))
+
 check_recordedBy(.df, level = c("inform", "warn", "abort"))
 
 check_recordedByID(.df, level = c("inform", "warn", "abort"))
@@ -180,6 +195,8 @@ Check lifeStage field is valid
 Check sex field is valid
 
 Check vitality field is valid
+
+Check reproductiveCondition field is valid
 
 Check recordedBy field is valid
 

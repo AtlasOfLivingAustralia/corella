@@ -41,3 +41,16 @@ Examples of \code{organismQuantity} & \code{organismQuantityType} values:
 \item many (\code{organismQuantity}) individuals (\code{organismQuantityType})
 }
 }
+\examples{
+suppressMessages(
+
+df <- data.frame(
+  species_name = "Pseudophryne corroboree",
+  n_obs = c(1, 3, 4))
+
+
+df |>
+  use_abundance(individualCount = n_obs)
+
+)
+}
