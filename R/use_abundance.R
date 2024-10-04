@@ -11,24 +11,25 @@
 #' organisms. Used together with `organismQuantityType` to provide context.
 #' @param organismQuantityType The type of quantification system used for `organismQuantity`
 #' @returns A tibble with the requested fields (see details).
+#'
 #' @details
 #' Examples of `organismQuantity` & `organismQuantityType` values:
 #' * 27 (`organismQuantity`) individuals (`organismQuantityType`)
 #' * 12.5 (`organismQuantity`) % biomass (`organismQuantityType`)
 #' * r (`organismQuantity`) Braun-Blanquet Scale (`organismQuantityType`)
 #' * many (`organismQuantity`) individuals (`organismQuantityType`)
+#'
 #' @examples
-#' suppressMessages(
-#'
-#' df <- data.frame(
-#'   species_name = "Pseudophryne corroboree",
-#'   n_obs = c(1, 3, 4))
-#'
+#' df <- tibble::tibble(
+#'   species_name = c("Pseudophryne corroboree",
+#'                    "Pseudophryne corroboree",
+#'                    "Pseudophryne corroboree"),
+#'   n_obs = c(1, 3, 4)
+#'   )
 #'
 #' df |>
 #'   use_abundance(individualCount = n_obs)
 #'
-#' )
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

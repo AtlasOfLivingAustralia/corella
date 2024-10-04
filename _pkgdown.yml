@@ -1,0 +1,30 @@
+url: ~
+template:
+  bootstrap: 5
+reference:
+- title: Suggest where to start
+  contents:
+  - suggest_workflow
+- title: Add Darwin Core terms
+  contents:
+  - use_occurrences
+  - use_scientific_name
+  - use_coordinates
+  - use_sf
+  - use_datetime
+  - use_abundance
+  - use_collection
+  - use_individual_traits
+  - use_locality
+  - use_observer
+  - use_taxonomy
+- title: Add a unique ID
+  contents:
+  - use_id_random
+- title: Check data for Darwin Core compliance
+  contents:
+  - check_occurrences
+- title: Individual checks
+  contents:
+  - check_fields
+

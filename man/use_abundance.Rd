@@ -42,15 +42,14 @@ Examples of \code{organismQuantity} & \code{organismQuantityType} values:
 }
 }
 \examples{
-suppressMessages(
-
-df <- data.frame(
-  species_name = "Pseudophryne corroboree",
-  n_obs = c(1, 3, 4))
-
+df <- tibble::tibble(
+  species_name = c("Pseudophryne corroboree",
+                   "Pseudophryne corroboree",
+                   "Pseudophryne corroboree"),
+  n_obs = c(1, 3, 4)
+  )
 
 df |>
   use_abundance(individualCount = n_obs)
 
-)
 }
