@@ -28,18 +28,19 @@
 #'  fields, to an existing `tibble`.
 #'
 #'   * [use_coordinates()] for spatial data
-#'   * [use_eventDate()] for temporal data
+#'   * [use_sf()] for spatial data in `sf` format
+#'   * [use_datetime()] for temporal data
 #'   * [use_locality()] for spatial descriptions
 #'   * [use_occurrences()] basic information on observations (occurrenceID, basisOfrecord, occurrenceStatus, recordID (?))
 #'   * [use_scientificName()] record the highest level of taxonomic specificity in the dataset (scientificName, scientificNameRank, scientificNameAuthorship)
 #'   * [use_taxonomy()] to specify higher taxonomic columns (kingdom, phylum, class, order, family, genus, species, specificEpithet, vernacularName)
 #'   * [use_abundance()] to state how many animals were seen during the observation (individualCount, organismQuantity, organismQuantityType)
-#'   * [use_individuals()] attributes of individuals measured (individualID, lifeStage, sex, vitality, reproductiveCondition)
+#'   * [use_individual_traits()] attributes of individuals measured (individualID, lifeStage, sex, vitality, reproductiveCondition)
 #'   * [use_observer()] to specify who made the observation (recordedByID, recordedBy)
 #'   * [use_collection()] to give museum- or collection- specific information (datasetID, datasetName, catalogNumber)
+#'   * [use_events()] basic information on observation events (eventID, parentEventID, eventType)
 #'
 #'   Proposed:
-#'   * [use_events()] basic information on observation events (eventID, parentEventID)
 #'   * [use_darwin_core()] to subset to only fields with DwC names (i.e. same as `df |> select(any_of(dwc_fields()))`)
 #'   * [use_measurement()] for 'Measurement or Fact' data (optional rn)
 #'   * [use_media()] good idea, but unclear how users would supply said media; should be urls, but to where?

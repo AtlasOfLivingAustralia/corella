@@ -30,20 +30,21 @@ The following functions add single DwC fields, or collections of related
 fields, to an existing \code{tibble}.
 \itemize{
 \item \code{\link[=use_coordinates]{use_coordinates()}} for spatial data
-\item \code{\link[=use_eventDate]{use_eventDate()}} for temporal data
+\item \code{\link[=use_sf]{use_sf()}} for spatial data in \code{sf} format
+\item \code{\link[=use_datetime]{use_datetime()}} for temporal data
 \item \code{\link[=use_locality]{use_locality()}} for spatial descriptions
 \item \code{\link[=use_occurrences]{use_occurrences()}} basic information on observations (occurrenceID, basisOfrecord, occurrenceStatus, recordID (?))
 \item \code{\link[=use_scientificName]{use_scientificName()}} record the highest level of taxonomic specificity in the dataset (scientificName, scientificNameRank, scientificNameAuthorship)
 \item \code{\link[=use_taxonomy]{use_taxonomy()}} to specify higher taxonomic columns (kingdom, phylum, class, order, family, genus, species, specificEpithet, vernacularName)
 \item \code{\link[=use_abundance]{use_abundance()}} to state how many animals were seen during the observation (individualCount, organismQuantity, organismQuantityType)
-\item \code{\link[=use_individuals]{use_individuals()}} attributes of individuals measured (individualID, lifeStage, sex, vitality, reproductiveCondition)
+\item \code{\link[=use_individual_traits]{use_individual_traits()}} attributes of individuals measured (individualID, lifeStage, sex, vitality, reproductiveCondition)
 \item \code{\link[=use_observer]{use_observer()}} to specify who made the observation (recordedByID, recordedBy)
 \item \code{\link[=use_collection]{use_collection()}} to give museum- or collection- specific information (datasetID, datasetName, catalogNumber)
+\item \code{\link[=use_events]{use_events()}} basic information on observation events (eventID, parentEventID, eventType)
 }
 
 Proposed:
 \itemize{
-\item \code{\link[=use_events]{use_events()}} basic information on observation events (eventID, parentEventID)
 \item \code{\link[=use_darwin_core]{use_darwin_core()}} to subset to only fields with DwC names (i.e. same as \code{df |> select(any_of(dwc_fields()))})
 \item \code{\link[=use_measurement]{use_measurement()}} for 'Measurement or Fact' data (optional rn)
 \item \code{\link[=use_media]{use_media()}} good idea, but unclear how users would supply said media; should be urls, but to where?

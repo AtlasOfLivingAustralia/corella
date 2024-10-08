@@ -12,6 +12,7 @@ reference:
   - use_coordinates
   - use_sf
   - use_datetime
+  - use_events
   - use_abundance
   - use_collection
   - use_individual_traits
