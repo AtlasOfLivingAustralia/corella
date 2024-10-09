@@ -55,7 +55,7 @@
 #' @importFrom rlang enquos
 #' @importFrom rlang zap
 #' @importFrom purrr map
-#' @importFrom purrr pluck
+#' @importFrom purrr keep
 #' @export
 use_events <- function(
     .df,
@@ -79,15 +79,15 @@ use_events <- function(
   # then remove their names before `mutate()`
   # otherwise, these DwC columns are deleted by `mutate(.keep = "unused")`
   fn_quo_is_null <- fn_quos |>
-    purrr::map(\(user_arg)
-               rlang::quo_is_null(user_arg)) |>
+    map(\(user_arg)
+        quo_is_null(user_arg)) |>
     unlist()
 
   null_col_exists_in_df <- fn_quo_is_null & (names(fn_quos) %in% colnames(.df))
 
   if(any(null_col_exists_in_df)){
     fn_quos <- fn_quos |>
-      purrr::keep(!names(fn_quos) %in% names(which(null_col_exists_in_df)))
+      keep(!names(fn_quos) %in% names(which(null_col_exists_in_df)))
   }
 
   # Update df
@@ -105,9 +105,9 @@ use_events <- function(
 
   # run column checks
   # TODO: Uncertain exactly what these should contain given the flexibility of IDs and events
-  # check_eventID(level = "abort")
-  # check_eventType(level = "abort")
-  # check_parentEventID(level = "abort")
+  # check_eventID(result, level = "abort")
+  # check_eventType(result, level = "abort")
+  # check_parentEventID(result, level = "abort")
 
   result
 }
