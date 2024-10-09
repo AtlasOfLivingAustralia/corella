@@ -214,7 +214,7 @@ summary_message <- function(results, checkable_fields) {
 
   # message
   cat_line()
-  cat_line(glue("Summary: {col_red(n_errors)} errors, {col_green(n_passing_fields)} passing"))
+  cat_line(glue("[ FAIL: {col_red(n_errors)} | {col_green('PASS')} {col_green(n_passing_fields)} ]"))
 }
 
 
