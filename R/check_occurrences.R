@@ -41,7 +41,13 @@ check_occurrences <- function(.df){
   check_functions <- as.list(check_functions_names)
   names(check_functions) <- checkable_fields
 
-  ## Table
+  ## Tests
+
+  # inform user
+  cli::cli_alert_info("Testing data")
+  for(i in 1:100) {
+    wait(0.001)
+  }
 
   # print table headers
   add_table_headers(checkable_fields)
@@ -53,13 +59,13 @@ check_occurrences <- function(.df){
     map(~ check_all(.x, .df, checkable_fields)) |>
     bind_rows()
 
-  # result summary
+  # print result summary
   summary_message(check_results, checkable_fields)
 
 
   ## Messages
 
-  # truncate to 5 messages if there are more than 5
+  # truncate messages if there are more than 5
   if(length(check_results$messages) > 5) {
     check_results <- check_results |>
       slice_head(n = 5)
@@ -120,9 +126,11 @@ check_all <- function(fn, .df, checkable_fields) {
   # message format setup
   field_nchar <- max(ansi_nchar(checkable_fields))
   fn_name <- str_remove_all(fn, 'check_')
-  progress_msg <- paste0(ansi_align(glue("{fn_name}"), field_nchar), " ",
-                         ansi_align(glue("{m_counter}"), ansi_nchar(1)), " ",
-                         ansi_align(glue("{passing}"), ansi_nchar(1)), " "
+  progress_msg <- paste0(
+    # ansi_align(" ", max(ansi_nchar(symbol$tick))), " ",
+                         ansi_align(glue("| {m_counter}"), ansi_nchar("| E")), " ",
+                         ansi_align(glue("{passing} |"), ansi_nchar("P |")), " ",
+                         ansi_align(glue("{fn_name}"), field_nchar), " "
   )
 
   # run checks
@@ -137,17 +145,21 @@ check_all <- function(fn, .df, checkable_fields) {
         m_counter <<- m_counter + 1
         msgs <<- append(msgs, m$message)
         passing <<- col_red(symbol$cross)
-        progress_msg <<- paste0(ansi_align(glue("{fn_name}"), field_nchar), " ",
-                               ansi_align(glue("{m_counter}"), ansi_nchar(1)), " ",
-                               ansi_align(glue("{passing}"), ansi_nchar(1)), " "
+        progress_msg <<- paste0(
+          # ansi_align(" ", max(ansi_nchar(symbol$tick))), " ",
+                                ansi_align(glue("| {m_counter}"), ansi_nchar("| E")), " ",
+                                ansi_align(glue("{passing} |"), ansi_nchar("P |")), " ",
+                               ansi_align(glue("{fn_name}"), field_nchar), " "
         )
         cli_progress_update(id = progress)
         cnd_muffle(m)
       } else {
         passing <<- col_green(symbol$tick)
-        progress_msg <<- paste0(ansi_align(glue("{fn_name}"), field_nchar), " ",
-                                ansi_align(glue("{m_counter}"), ansi_nchar(1)), " ",
-                                ansi_align(glue("{passing}"), ansi_nchar(1)), " "
+        progress_msg <<- paste0(
+          # ansi_align(" ", max(ansi_nchar(symbol$tick))), " ",
+                                ansi_align(glue("| {m_counter}"), ansi_nchar("| E")), " ",
+                                ansi_align(glue("{passing} |"), ansi_nchar("P |")), " ",
+                               ansi_align(glue("{fn_name}"), field_nchar), " "
         )
       }
     }),
@@ -168,15 +180,19 @@ check_all <- function(fn, .df, checkable_fields) {
 #'
 #' @importFrom cli ansi_align
 #' @importFrom cli ansi_nchar
+#' @importFrom cli col_yellow
+#' @importFrom cli col_green
 #'
 #' @noRd
 #' @keywords Internal
 add_table_headers <- function(row_values) {
+  # browser()
   headers <- paste0(
-    ansi_align(" ", max(ansi_nchar(symbol$tick))), " ",
-    ansi_align(col_blue("Column"), max(ansi_nchar(row_values))), " ",
-    ansi_align(col_red("E"), max(ansi_nchar("E "))), " ",
-    ansi_align(col_green("P"), max(ansi_nchar("P")))
+    ansi_align(col_green(symbol$tick), max(ansi_nchar(symbol$tick))), " ",
+    ansi_align(glue("| {col_yellow('E')}"), max(ansi_nchar("| E"))), " ",
+    ansi_align(glue("{col_green('P')} |"), max(ansi_nchar(glue("{symbol$tick} |")))), " ",
+    ansi_align("Column", max(ansi_nchar(row_values)))
+
   )
   cat_line(headers)
 }
@@ -185,6 +201,8 @@ add_table_headers <- function(row_values) {
 #'
 #' @importFrom cli cat_line
 #' @importFrom cli cli_rule
+#' @importFrom cli style_bold
+#' @importFrom cli col_yellow
 #'
 #' @noRd
 #' @keywords Internal
@@ -195,7 +213,7 @@ format_messages_from_checks <- function(df) {
 
   # format & print
   cat_line()
-  cli_rule("Error in {term}")
+  cli_rule("{col_yellow(style_bold('Error'))} in {term}")
   cat_line()
   cat_line(m)
   cat_line()
@@ -214,7 +232,11 @@ summary_message <- function(results, checkable_fields) {
 
   # message
   cat_line()
-  cat_line(glue("[ FAIL: {col_red(n_errors)} | {col_green('PASS')} {col_green(n_passing_fields)} ]"))
+  cli_div(theme = list(rule = list("line-type" = "double")))
+  cli::cli_rule(left = "Results")
+  cli_end()
+  cat_line()
+  cat_line(glue("[ {col_yellow('Errors')}: {n_errors} | {col_green('Pass')}: {n_passing_fields} ]"))
 }
 
 
