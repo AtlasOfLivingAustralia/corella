@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(corroboree)
+library(corella)
 
-test_check("corroboree")
+test_check("corella")

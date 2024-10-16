@@ -86,7 +86,7 @@ use_taxonomy <- function(
   col_progress_bar(cols = matched_cols)
 
   # run column checks
-  # Q: Should taxonomic names be validated in corroboree?
+  # Q: Should taxonomic names be validated in corella?
   #    Would a separate taxonomic checking package be worthwhile?
   check_kingdom(result, level = "abort")
   check_phylum(result, level = "abort")

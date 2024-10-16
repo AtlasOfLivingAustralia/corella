@@ -1,17 +1,17 @@
 #' Build repositories to share biodiversity data
 #'
 #' @description
-#' `{corroboree}` is for data preparation, editing and checking of data to
+#' `{corella}` is for data preparation, editing and checking of data to
 #' follow 'Darwin Core standards'; a
 #' global data standard to store, document, and share biodiversity information.
 #' The package provides tools to manipulate data to
 #' conform with, and check validity against, Darwin Core standards.
-#' Using `{corroboree}` will allow users to verify that their data can be used to
+#' Using `{corella}` will allow users to verify that their data can be used to
 #' build 'Darwin Core Archives' using the `{galaxias}` package
 #'
 #' The package is named for an endangered species of alpine frog.
 #'
-#' @name corroboree-package
+#' @name corella-package
 #' @docType package
 #' @references If you have any questions, comments or suggestions, please email
 #' [support@ala.org.au](mailto:support@ala.org.au).

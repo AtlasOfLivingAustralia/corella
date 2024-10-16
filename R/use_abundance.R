@@ -21,9 +21,9 @@
 #'
 #' @examples
 #' df <- tibble::tibble(
-#'   species_name = c("Pseudophryne corroboree",
-#'                    "Pseudophryne corroboree",
-#'                    "Pseudophryne corroboree"),
+#'   species_name = c("Cacatua (Licmetis) tenuirostris",
+#'                    "Cacatua (Licmetis) tenuirostris",
+#'                    "Cacatua (Licmetis) tenuirostris"),
 #'   n_obs = c(1, 3, 4)
 #'   )
 #'

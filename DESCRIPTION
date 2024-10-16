@@ -1,4 +1,4 @@
-Package: corroboree
+Package: corella
 Title: Prepare, manipulate and check data to comply with Darwin Core standards
 Version: 0.1.0
 Authors@R: 
@@ -14,7 +14,12 @@ Authors@R:
              family = "Kellie",
              email = "dax.kellie@csiro.au",
              role = c("aut")))
-Description: What the package does (one paragraph).
+Description: `corella` is an R package that helps users standardize their data 
+using the "Darwin Core" data standard, used for biodiversity data like species 
+occurrences. `corella` provides tools to prepare, manipulate and 
+validate data against the standard’s criteria. Once standardized, data can be 
+subsequently shared as a ‘Darwin Core Archive’ and published to open data 
+infrastructures like the Atlas of Living Australia and GBIF.
 Depends: 
   R (>= 4.3.0)
 Imports:
