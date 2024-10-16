@@ -14,12 +14,8 @@ Authors@R:
              family = "Kellie",
              email = "dax.kellie@csiro.au",
              role = c("aut")))
-Description: `corella` is an R package that helps users standardize their data 
-using the "Darwin Core" data standard, used for biodiversity data like species 
-occurrences. `corella` provides tools to prepare, manipulate and 
-validate data against the standard’s criteria. Once standardized, data can be 
-subsequently shared as a ‘Darwin Core Archive’ and published to open data 
-infrastructures like the Atlas of Living Australia and GBIF.
+Description: Helps users standardize their data using the "Darwin Core" data 
+    standard, used for biodiversity data like species occurrences.
 Depends: 
   R (>= 4.3.0)
 Imports:
