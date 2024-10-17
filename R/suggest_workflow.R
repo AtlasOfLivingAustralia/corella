@@ -45,7 +45,7 @@ dwc_spinny_message <- function(which) {
   # define the spinner
   spinny <- make_spinner(
     which = "dots2",
-    template = "{spin} Checking DwC fields."
+    template = "{spin} Checking Darwin Core terms"
   )
 
   # update the spinner 100 times
@@ -92,7 +92,6 @@ check_contains_terms <- function(.df,
   matched_values <- user_column_names[name_lookup]
   unmatched_values <- user_column_names[!name_lookup]
   all_cols_match <- is_empty(unmatched_values)
-
 
   ## Minimum required terms
 
@@ -320,7 +319,7 @@ fn_to_term_table <- function() {
     "use_taxonomy()", "order",
     "use_taxonomy()", "family",
     "use_taxonomy()", "genus",
-    "use_taxonomy()", "species",
+    # "use_taxonomy()", "species",
     "use_taxonomy()", "specificEpithet",
     "use_taxonomy()", "vernacularName",
     "use_abundance()", "individualCount",

@@ -14,7 +14,6 @@
 #' @param order The order name of identified taxon.
 #' @param family The family name of identified taxon.
 #' @param genus The genus name of the identified taxon.
-#' @param species The species name of the identified taxon.
 #' @param specificEpithet The name of the first species or species epithet of
 #' the `scientificName`.
 #' [See documentation](https://dwc.tdwg.org/list/#dwc_specificEpithet)
@@ -41,7 +40,6 @@ use_taxonomy <- function(
     order = NULL,
     family = NULL,
     genus = NULL,
-    species = NULL,
     specificEpithet = NULL,
     vernacularName = NULL,
     .keep = "unused"
@@ -54,7 +52,7 @@ use_taxonomy <- function(
 
   # capture arguments as a list of quosures
   # NOTE: enquos() must be listed alphabetically
-  fn_quos <- enquos(class, family, genus, kingdom, order, phylum, species, specificEpithet, vernacularName)
+  fn_quos <- enquos(class, family, genus, kingdom, order, phylum, specificEpithet, vernacularName)
   names(fn_quos) <- fn_args
 
   # find arguments that are NULL but exist already in `df`
@@ -94,7 +92,6 @@ use_taxonomy <- function(
   check_order(result, level = "abort")
   check_family(result, level = "abort")
   check_genus(result, level = "abort")
-  check_species(result, level = "abort")
   check_specificEpithet(result, level = "abort")
   check_vernacularName(result, level = "abort")
 
@@ -215,26 +212,6 @@ check_genus <- function(.df,
   if(any(colnames(.df) == "genus")){
     .df |>
       select("genus") |>
-      check_is_string(level = level)
-  }
-  .df
-}
-# TODO: Currently only checks whether input is a string
-
-#' Check species field is valid
-#'
-#' @rdname check_dwc
-#' @param level what action should the function take for non-conformance?
-#' Defaults to `"inform"`.
-#' @order 7
-#' @export
-check_species <- function(.df,
-                          level = c("inform", "warn", "abort")
-){
-  level <- match.arg(level)
-  if(any(colnames(.df) == "species")){
-    .df |>
-      select("species") |>
       check_is_string(level = level)
   }
   .df

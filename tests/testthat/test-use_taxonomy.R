@@ -136,20 +136,6 @@ test_that("use_taxonomy checks genus format", {
   )
 })
 
-test_that("use_taxonomy checks species format", {
-
-  df_chr <- tibble::tibble(species = c("Pseudophryne corroboree", "Pseudophryne corroboree"))
-  df_dbl <- tibble::tibble(species =1:3)
-
-  expect_no_error(suppressMessages(
-    df_chr |> use_taxonomy(species = species)
-  ))
-  expect_error(suppressMessages(
-    df_dbl |> use_taxonomy(species = species)),
-    "species must be a character vector, not integer"
-  )
-})
-
 test_that("use_taxonomy checks specificEpithet format", {
 
   df_chr <- tibble::tibble(specificEpithet = c("corroboree", "corroboree"))

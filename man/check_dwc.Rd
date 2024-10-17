@@ -47,7 +47,6 @@
 \alias{check_order}
 \alias{check_family}
 \alias{check_genus}
-\alias{check_species}
 \alias{check_specificEpithet}
 \alias{check_vernacularName}
 \title{Check for non DwC fields}
@@ -159,8 +158,6 @@ check_family(.df, level = c("inform", "warn", "abort"))
 
 check_genus(.df, level = c("inform", "warn", "abort"))
 
-check_species(.df, level = c("inform", "warn", "abort"))
-
 check_specificEpithet(.df, level = c("inform", "warn", "abort"))
 
 check_vernacularName(.df, level = c("inform", "warn", "abort"))
@@ -219,8 +216,6 @@ Check order field is valid
 Check family field is valid
 
 Check genus field is valid
-
-Check species field is valid
 
 Check specificEpithet field is valid
 

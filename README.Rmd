@@ -43,7 +43,52 @@ You can install the development version of `corella` from [GitHub](https://githu
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```
 
-## Example
+## Usage
+
+```{r}
+library(corella)
+library(tibble)
+
+# A simple example of species occurrence data
+df <- tibble(
+  species = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+  latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+  longitude = c(149.125, 149.133),
+  eventDate = c("14-01-2023", "15-01-2023"),
+  status = c("present", "present")
+)
+```
+
+Update column names in your data to Darwin Core terms. This also runs basic checks on your data to make sure each column is in the correct format. Fix columns that flag errors in your pipe directly within `use_` functions, which support data wrangling operations & `dplyr::mutate()` functionality.
+
+```{r}
+df |>
+  use_coordinates(
+    decimalLatitude = as.numeric(latitude), # fix latitude
+    decimalLongitude = longitude
+    ) |>
+  use_scientific_name(
+    scientificName = species
+    ) |>
+  use_datetime(
+    eventDate = lubridate::dmy(eventDate) # specify date format
+    ) |>
+  use_occurrences(occurrenceStatus = status)
+```
+
+Not sure where to start? Use `suggest_workflow()` to know what steps you need to make to make your data Darwin Core compliant.
+
+```{r}
+df |> 
+  suggest_workflow()
+```
+
+Or, if your data is nearly ready and you want to run checks over all columns that match Darwin Core terms, run `check_occurrences()`.
+
+```{r}
+df |>
+  check_occurrences()
+```
 
 
 ## Citing corella

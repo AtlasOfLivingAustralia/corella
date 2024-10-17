@@ -41,7 +41,7 @@ check_occurrences <- function(.df){
   check_functions <- as.list(check_functions_names)
   names(check_functions) <- checkable_fields
 
-  ## Tests
+  ## Run Checks
 
   # inform user
   cli::cli_alert_info("Testing data")
@@ -61,9 +61,19 @@ check_occurrences <- function(.df){
 
   # print result summary
   summary_message(check_results, checkable_fields)
+  cat_line()
 
+  ## Darwin Core compliance
+  req_terms_results <- check_required_terms(checkable_fields)
+  is_dwc_compliant <- all(req_terms_results$result == "pass")
+  complies_text <- "Data complies with minimum Darwin Core requirements."
+  if(isTRUE(is_dwc_compliant)) {
+    cat_line(glue("{col_green(symbol$tick)} {complies_text}"))
+  } else {
+    cat_line(glue("{col_red(symbol$cross)} {complies_text}"))
+  }
 
-  ## Messages
+  ## Error Messages
 
   # truncate messages if there are more than 5
   if(length(check_results$messages) > 5) {
@@ -91,6 +101,10 @@ check_occurrences <- function(.df){
     # celebrate
     cat_line(paste0("\n", add_emoji(), " ", col_green("All column checks pass!"), "\n"))
   }
+
+  # browser()
+
+
 
   invisible(.df)
 }

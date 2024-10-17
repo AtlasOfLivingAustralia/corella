@@ -12,7 +12,6 @@ use_taxonomy(
   order = NULL,
   family = NULL,
   genus = NULL,
-  species = NULL,
   specificEpithet = NULL,
   vernacularName = NULL,
   .keep = "unused"
@@ -30,8 +29,6 @@ use_taxonomy(
 \item{family}{The family name of identified taxon.}
 
 \item{genus}{The genus name of the identified taxon.}
-
-\item{species}{The species name of the identified taxon.}
 
 \item{specificEpithet}{The name of the first species or species epithet of
 the \code{scientificName}.
