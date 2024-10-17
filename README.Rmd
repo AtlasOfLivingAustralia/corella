@@ -83,7 +83,7 @@ df |>
   suggest_workflow()
 ```
 
-Or, if your data is nearly ready and you want to run checks over all columns that match Darwin Core terms, run `check_occurrences()`.
+Or, if your data is nearly ready and you want to run checks over all columns that match Darwin Core terms, run `check_occurrences()`. `check_occurrences()` only checks columns with column names that match valid Darwin Core terms.
 
 ```{r}
 df |>

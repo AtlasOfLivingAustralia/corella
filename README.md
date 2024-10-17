@@ -77,12 +77,10 @@ df |>
     eventDate = lubridate::dmy(eventDate) # specify date format
     ) |>
   use_occurrences(occurrenceStatus = status)
-#> ⠙ Checking 2 columns: decimalLatitude and decimalLongitude⠹ Checking 2 columns: decimalLatitude and decimalLongitude⠸ Checking 2 columns: decimalLatitude and decimalLongitude✔ Checking 2 columns: decimalLatitude and decimalLongitude [960ms]
-#> ⠙ Checking 1 column: scientificName⠹ Checking 1 column: scientificName✔ Checking 1 column: scientificName [436ms]
-#> ⠙ Checking 1 column: eventDate⠹ Checking 1 column: eventDate✔ Checking 1 column: eventDate [448ms]
-#> Warning: eventDate defaults to UTC standard.
-#> ℹ To change timezone, use e.g. `lubridate::ymd_hms(x, tz = "timezone")`
-#> ⠙ Checking 1 column: occurrenceStatus⠹ Checking 1 column: occurrenceStatus✔ Checking 1 column: occurrenceStatus [440ms]
+#> ⠙ Checking 2 columns: decimalLatitude and decimalLongitude⠹ Checking 2 columns: decimalLatitude and decimalLongitude⠸ Checking 2 columns: decimalLatitude and decimalLongitude✔ Checking 2 columns: decimalLatitude and decimalLongitude [966ms]
+#> ⠙ Checking 1 column: scientificName⠹ Checking 1 column: scientificName✔ Checking 1 column: scientificName [455ms]
+#> ⠙ Checking 1 column: eventDate⠹ Checking 1 column: eventDate✔ Checking 1 column: eventDate [438ms]
+#> ⠙ Checking 1 column: occurrenceStatus⠹ Checking 1 column: occurrenceStatus✔ Checking 1 column: occurrenceStatus [463ms]
 #> # A tibble: 2 × 5
 #>   eventDate  decimalLatitude decimalLongitude scientificName    occurrenceStatus
 #>   <date>               <dbl>            <dbl> <chr>             <chr>           
@@ -126,21 +124,21 @@ df |>
 
 Or, if your data is nearly ready and you want to run checks over all
 columns that match Darwin Core terms, run `check_occurrences()`.
+`check_occurrences()` only checks columns with column names that match
+valid Darwin Core terms.
 
 ``` r
 df |>
   check_occurrences()
 #> ℹ Testing data
 #> ✔ | E P | Column
-#> ⠙ | 0 species
-#> ✔ | 0 ✔ | species    [149ms]
-#> ⠙ | 0  eventDate 
-#> Warning: eventDate defaults to UTC standard.
-#> ℹ To change timezone, use e.g. `lubridate::ymd_hms(x, tz = "timezone")`
-#> ✔ | 1 ✖ | eventDate  [280ms]
+#> ⠙ | 0 eventDate
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [343ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
-#> [ Errors: 1 | Pass: 1 ]
+#> [ Errors: 1 | Pass: 0 ]
+#> 
+#> ✖ Data complies with minimum Darwin Core requirements.
 #> ── Error in eventDate ──────────────────────────────────────────────────────────
 #> 
 #> eventDate must be a Date vector, not a character.
