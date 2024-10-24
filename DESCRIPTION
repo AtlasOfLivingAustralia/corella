@@ -2,17 +2,17 @@ Package: corella
 Title: Prepare, manipulate and check data to comply with Darwin Core standards
 Version: 0.1.0
 Authors@R: 
-    c(person(given = "Martin",
-             family = "Westgate",
-             email = "martin.westgate@csiro.au",
+    c(person(given = "Dax",
+             family = "Kellie",
+             email = "dax.kellie@csiro.au",
              role = c("aut", "cre")),
       person(given = "Shandiya",
              family = "Balasubramanium",
              email = "shandiya.balasubramanium@csiro.au",
              role = c("aut")),
-      person(given = "Dax",
-             family = "Kellie",
-             email = "dax.kellie@csiro.au",
+      person(given = "Martin",
+             family = "Westgate",
+             email = "martin.westgate@csiro.au",
              role = c("aut")))
 Description: Helps users standardize their data using the "Darwin Core" data 
     standard, used for biodiversity data like species occurrences.
