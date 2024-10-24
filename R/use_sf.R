@@ -184,13 +184,13 @@ check_has_crs <- function(.df,
   .df
 }
 
-#' @rdname check_dwc
-#' @order 6
+#' Convert sf `geometry` to valid Darwin Core columns
 #' @importFrom sf st_coordinates
 #' @importFrom sf st_crs
 #' @importFrom sf st_drop_geometry
 #' @importFrom cli cli_bullets
 #' @importFrom cli cli_fmt
+#' @noRd
 #' @keywords Internal
 col_sf_to_dwc <- function(.df,
                           col_name,

@@ -87,8 +87,7 @@ use_observer <- function(
   result
 }
 
-#' Check recordedBy field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -106,8 +105,7 @@ check_recordedBy <- function(.df,
   .df
 }
 
-#' Check recordedByID field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.

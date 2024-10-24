@@ -109,8 +109,7 @@ use_individual_traits <- function(
 }
 
 
-#' Check individualID field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -129,8 +128,7 @@ check_individualID <- function(.df,
 }
 
 
-#' Check lifeStage field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -149,8 +147,7 @@ check_lifeStage <- function(.df,
 }
 
 
-#' Check sex field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -169,8 +166,7 @@ check_sex <- function(.df,
 }
 
 
-#' Check vitality field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -189,8 +185,7 @@ check_vitality <- function(.df,
 }
 
 
-#' Check reproductiveCondition field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.

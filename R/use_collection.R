@@ -94,8 +94,6 @@ use_collection <- function(
 }
 
 
-#' Check datasetName field is valid
-#'
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.

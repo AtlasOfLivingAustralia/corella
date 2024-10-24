@@ -137,8 +137,7 @@ check_country <- function(df,
 #' @order 5
 #' @export
 check_countryCode <- function(df,
-                              level = c("inform", "warn", "abort"),
-                              call = caller_env()
+                              level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
   if(any(colnames(df) == "countryCode")){
@@ -160,8 +159,7 @@ check_countryCode <- function(df,
 }
 
 
-#' Check stateProvince field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -179,8 +177,7 @@ check_stateProvince <- function(.df,
   .df
 }
 
-#' Check locality field is valid
-#'
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.

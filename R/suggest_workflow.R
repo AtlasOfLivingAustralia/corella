@@ -1,5 +1,6 @@
 #' Suggest workflow to make data compliant with Darwin Core
 #'
+#' @description
 #' Function to check whether a `data.frame` or `tibble` conforms to Darwin
 #' Core standards. While most users will only want to call `suggest_workflow()`,
 #' the underlying check functions are exported for detailed work, or for
@@ -17,13 +18,30 @@ suggest_workflow <- function(.df){
   invisible(.df)
 }
 
-#' Check for non DwC fields
+#' Check individual Darwin Core term columns are valid
+#'
+#' @description
+#' `check_` functions run validation checks on data in a specified Darwin Core
+#' column. `check_` functions are run by the `use_` functions that contain the
+#' respective term. Users are able to run these checks on individual columns
+#' outside of `use_` functions if they desire.
+#'
+#' @name check_dwc
+NULL
+#> NULL
+
+
+
+#' Initial term checks
+#'
+#' @description
+#' Checks whether user df contains sf `geometry` and preserves this information
+#' prior to running `check_contains_terms()`.
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom rlang warn
-#' @rdname check_dwc
-#' @order 2
-#' @export
+#' @noRd
+#' @keywords Internal
 check_fields <- function(.df,
                          level = c("inform", "warn", "abort")){
   level <- match.arg(level)
@@ -58,7 +76,11 @@ dwc_spinny_message <- function(message) {
   spinny$finish()
 }
 
-#' Match DwC terms to column names
+#' Match Darwin Core terms to column names
+#'
+#' @description
+#' This is the main workhorse function of `suggest_workflow()`.
+#'
 #' @param .df vector of values
 #' @param dwc_terms vector of valid Darwin Core terms against which .df should be compared
 #' @importFrom dplyr pull
@@ -151,7 +173,7 @@ check_contains_terms <- function(.df,
 }
 
 
-#' build "Matching terms" message
+#' Build "Matching terms" message
 #'
 #' @importFrom cli ansi_collapse
 #' @importFrom cli cat_line

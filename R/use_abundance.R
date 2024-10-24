@@ -89,7 +89,6 @@ use_abundance <- function(.df,
 
 }
 
-#' Check individualCount field is valid
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -145,15 +144,14 @@ check_individualCount <- function(.df,
   .df
 }
 
-#' Check organismQuantity field is valid
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 4
 #' @export
 check_organismQuantity <- function(.df,
-                                  level = c("inform", "warn", "abort"),
-                                  call = caller_env()
+                                  level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
   if(any(colnames(.df) == "organismQuantity")){
@@ -163,22 +161,20 @@ check_organismQuantity <- function(.df,
         i = "Must include {.field organismQuantityType} to give context to quantity. See {.code ?use_abundance}."
       )) |> cli_fmt()
       switch_check(level,
-                   bullets,
-                   call = call)
+                   bullets)
     }
   }
   .df
 }
 
-#' Check organismQuantityType field is valid
+
 #' @rdname check_dwc
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 4
 #' @export
 check_organismQuantityType <- function(.df,
-                                   level = c("inform", "warn", "abort"),
-                                   call = caller_env()
+                                   level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
   if(any(colnames(.df) == "organismQuantityType")){
@@ -192,8 +188,7 @@ check_organismQuantityType <- function(.df,
         i = "Must include {.field organismQuantity} to give a quantity to measurement type. See {.code ?use_abundance}."
       )) |> cli_fmt()
       switch_check(level,
-                   bullets,
-                   call = call)
+                   bullets)
     }
   }
   .df

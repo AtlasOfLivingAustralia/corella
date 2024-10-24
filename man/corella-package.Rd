@@ -75,12 +75,12 @@ If you have any questions, comments or suggestions, please email
 \href{mailto:support@ala.org.au}{support@ala.org.au}.
 }
 \author{
-\strong{Maintainer}: Martin Westgate \email{martin.westgate@csiro.au}
+\strong{Maintainer}: Dax Kellie \email{dax.kellie@csiro.au}
 
 Authors:
 \itemize{
   \item Shandiya Balasubramanium \email{shandiya.balasubramanium@csiro.au}
-  \item Dax Kellie \email{dax.kellie@csiro.au}
+  \item Martin Westgate \email{martin.westgate@csiro.au}
 }
 
 }
