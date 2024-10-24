@@ -12,7 +12,7 @@
 #' @order 1
 #' @export
 suggest_workflow <- function(.df){
-  dwc_spinny_message()
+  dwc_spinny_message("Checking Darwin Core terms")
   check_fields(.df)
   invisible(.df)
 }
@@ -40,12 +40,12 @@ check_fields <- function(.df,
 #' @importFrom cli make_spinner
 #' @noRd
 #' @keywords Internal
-dwc_spinny_message <- function(which) {
+dwc_spinny_message <- function(message) {
 
   # define the spinner
   spinny <- make_spinner(
     which = "dots2",
-    template = "{spin} Checking Darwin Core terms"
+    template = paste0("{spin}", glue(" {message}"))
   )
 
   # update the spinner 100 times

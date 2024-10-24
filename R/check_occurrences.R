@@ -49,11 +49,11 @@ check_occurrences <- function(.df){
     wait(0.001)
   }
 
-  # print table headers
+  # build table
   add_table_headers(checkable_fields)
   invisible() # prevent df results from printing with headers
 
-  # Check all checkable fields, save fields & error messages
+  # check all checkable fields, save fields & error messages
   check_results <-
     check_functions_names |>
     map(~ check_all(.x, .df, checkable_fields)) |>
@@ -63,27 +63,21 @@ check_occurrences <- function(.df){
   summary_message(check_results, checkable_fields)
   cat_line()
 
+
   ## Darwin Core compliance
-  req_terms_results <- check_required_terms(checkable_fields)
-  is_dwc_compliant <- all(req_terms_results$result == "pass")
-  complies_text <- "Data complies with minimum Darwin Core requirements."
-  if(isTRUE(is_dwc_compliant)) {
-    cat_line(glue("{col_green(symbol$tick)} {complies_text}"))
-  } else {
-    cat_line(glue("{col_red(symbol$cross)} {complies_text}"))
-  }
+  # dwc_spinny_message(c("Meets minimum requirements for Darwin Core terms"))
+  check_min_req_dwc(checkable_fields)
+
 
   ## Error Messages
 
-  # truncate messages if there are more than 5
-  if(length(check_results$messages) > 5) {
-    check_results <- check_results |>
-      slice_head(n = 5)
-
-    cli_h3(col_yellow(style_italic("Truncating to first 5 error messages")))
-  }
+  # truncate
+  gt_msg_max <- ifelse(length(check_results$messages) > 5, TRUE, FALSE)
+  check_results <- truncate_messages(check_results, gt_msg_max)
 
   if(length(check_results$messages) > 0) {
+
+    dwc_spinny_message(paste0("Collecting error messages"))
 
   # split messages by function for message formatting
     results_split <- check_results |>
@@ -101,10 +95,6 @@ check_occurrences <- function(.df){
     # celebrate
     cat_line(paste0("\n", add_emoji(), " ", col_green("All column checks pass!"), "\n"))
   }
-
-  # browser()
-
-
 
   invisible(.df)
 }
@@ -147,7 +137,7 @@ check_all <- function(fn, .df, checkable_fields) {
                          ansi_align(glue("{fn_name}"), field_nchar), " "
   )
 
-  # run checks
+  # run live checks
   tryCatch(withCallingHandlers(
     {
       progress <- cli_progress_step("{progress_msg}", spinner = TRUE) # prints message
@@ -253,6 +243,62 @@ summary_message <- function(results, checkable_fields) {
   cat_line(glue("[ {col_yellow('Errors')}: {n_errors} | {col_green('Pass')}: {n_passing_fields} ]"))
 }
 
+
+#' Check whether data meets minimum requirements
+#'
+#' @description
+#' Simple check for whether data meets minimum requirements to be accepted as a
+#' Darwin Core archive. The check is a simplifed version of the underlying check
+#' in `suggest_workflow()`.
+#'
+#' @importFrom cli cat_line
+#' @importFrom cli col_red
+#' @importFrom cli col_green
+#' @importFrom cli cli_progress_step
+#' @noRd
+#' @keywords Internal
+check_min_req_dwc <- function(checkable_fields) {
+  # check matching user columns with minimum required DwC terms
+  req_terms_results <- check_required_terms(checkable_fields)
+  is_dwc_compliant <- all(req_terms_results$result == "pass")
+
+  # message
+  dwc_spinny_message(glue("Data meets minimum Darwin Core requirements"))
+
+  complies_text <- "Data meets minimum Darwin Core requirements"
+  if(isTRUE(is_dwc_compliant)) {
+    cli::cli_status_clear()
+    cat_line(glue("{col_green(symbol$tick)} {complies_text}"))
+  } else {
+    cli::cli_status_clear()
+    cat_line(glue("{col_red(symbol$cross)} {complies_text}"))
+    cli_bullets(c(i = "Use `suggest_workflow()` to see more information."))
+  }
+
+  cat_line()
+}
+
+#' Truncate list of messages
+#'
+#' @description
+#' Truncates list of messages if greater than 5.
+#'
+#' @importFrom cli cat_line
+#' @importFrom cli cli_h3
+#' @importFrom cli col_green
+#' @importFrom dplyr slice_head
+#' @noRd
+#' @keywords Internal
+truncate_messages <- function(check_results, gt_msg_max) {
+  if(isTRUE(gt_msg_max)) {
+    check_results <- check_results |>
+      slice_head(n = 5)
+
+    cli_h3(col_yellow(style_italic("Truncating to first 5 error messages")))
+  }
+
+  return(check_results)
+}
 
 #' Advanced `check_all()` with separate message, warning, error tracking
 #' @noRd
