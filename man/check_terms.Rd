@@ -2,7 +2,7 @@
 % Please edit documentation in R/use_occurrences.R, R/use_abundance.R,
 %   R/use_locality.R, R/use_coordinates.R, R/use_datetime.R, R/use_sf.R,
 %   R/use_collection.R, R/use_individual_traits.R, R/use_observer.R,
-%   R/use_scientific_name.R, R/use_taxonomy.R, R/suggest_workflow.R
+%   R/use_scientific_name.R, R/use_taxonomy.R, R/check_terms.R
 \name{check_occurrenceID}
 \alias{check_occurrenceID}
 \alias{check_occurrenceStatus}
@@ -47,18 +47,14 @@
 \alias{check_genus}
 \alias{check_specificEpithet}
 \alias{check_vernacularName}
-\alias{check_dwc}
+\alias{check_terms}
 \title{Check individual Darwin Core term columns are valid}
 \usage{
 check_occurrenceID(.df, level = c("inform", "warn", "abort"))
 
 check_occurrenceStatus(.df, level = c("inform", "warn", "abort"))
 
-check_individualCount(
-  .df,
-  level = c("inform", "warn", "abort"),
-  call = caller_env()
-)
+check_individualCount(.df, level = c("inform", "warn", "abort"))
 
 check_organismQuantity(.df, level = c("inform", "warn", "abort"))
 
@@ -141,6 +137,8 @@ check_specificEpithet(.df, level = c("inform", "warn", "abort"))
 check_vernacularName(.df, level = c("inform", "warn", "abort"))
 }
 \arguments{
+\item{.df}{description}
+
 \item{level}{what action should the function take for non-conformance?
 Defaults to \code{"inform"}.}
 }
