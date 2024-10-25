@@ -127,10 +127,10 @@ check_contains_terms <- function(.df,
   # this wraps text (which might not be optimal for this table)
   # withr::with_options(
   #   list(cli.width = 80),
-  #   full_alert()
+  #   full_workflow_message()
   # )
 
-  full_alert()
+  full_workflow_message()
 
   .df
 }
