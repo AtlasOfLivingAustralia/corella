@@ -99,7 +99,7 @@ use_taxonomy <- function(
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -118,7 +118,7 @@ check_kingdom <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -137,7 +137,7 @@ check_phylum <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -156,7 +156,7 @@ check_class <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -175,7 +175,7 @@ check_order <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -194,7 +194,7 @@ check_family <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -213,7 +213,7 @@ check_genus <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -234,7 +234,7 @@ check_specificEpithet <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7

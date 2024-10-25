@@ -90,7 +90,7 @@ use_locality <- function(.df,
 # Q: Add function to show countryCodes?
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 5
 #' @export
 check_continent <- function(df,
@@ -115,7 +115,7 @@ check_continent <- function(df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 5
 #' @export
 check_country <- function(df,
@@ -133,7 +133,7 @@ check_country <- function(df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 5
 #' @export
 check_countryCode <- function(df,
@@ -160,7 +160,7 @@ check_countryCode <- function(df,
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 5
@@ -178,7 +178,7 @@ check_stateProvince <- function(.df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 5

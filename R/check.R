@@ -22,7 +22,7 @@ switch_check <- function(level = "inform",
 #' @importFrom rlang abort
 #' @noRd
 #' @keywords internal
-check_data_frame <- function(.df,
+check_is_dataframe <- function(.df,
                              call = caller_env()
 ){
   if(!inherits(.df, "data.frame")){
@@ -93,13 +93,14 @@ check_contains_values <- function(.df,
                                  .accepted_message = TRUE,
                                  call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   user_values <- .df |>
     pull(field_name) |>
     unique() |>
     sort()
   name_lookup <- user_values %in% values
+
   if(any(!name_lookup)){
     unmatched_values <- user_values[!name_lookup]
     unmatched_string <- ansi_collapse(glue("{unmatched_values}"),
@@ -158,7 +159,7 @@ check_is_numeric <- function(.df,
                              level = "inform",
                              call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
   if(!inherits(x, c("numeric", "integer"))){
@@ -182,7 +183,7 @@ check_is_string <- function(.df,
                             level = "inform",
                             call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
   if(!inherits(x, "character")){
@@ -201,11 +202,11 @@ check_is_string <- function(.df,
 #' check a vector has one row per value
 #' @noRd
 #' @keywords Internal
-check_unique <- function(.df,
+check_is_unique <- function(.df,
                          level = "inform",
                          call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
   unique_check <- length(unique(x)) == length(x)
@@ -233,7 +234,7 @@ check_within_range <- function(.df,
                                error_call = caller_env()
 ){
   .df |>
-    check_data_frame() |>
+    check_is_dataframe() |>
     check_is_numeric(level = level, call = caller_env())
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
@@ -262,7 +263,7 @@ check_is_date <- function(.df,
                        level = "warn",
                        call = caller_env()
                        ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
 
@@ -344,7 +345,7 @@ check_is_date_time <- function(x,
 check_is_time <- function(.df,
                           level = "warn",
                           call = caller_env()) {
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
 
@@ -423,7 +424,7 @@ check_mismatch_code_country <- function(.df,
                                         call = caller_env()
                                         ){
   # browser()
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
 
@@ -455,7 +456,7 @@ check_word_number <- function(.df,
                               level = "inform",
                               call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
 

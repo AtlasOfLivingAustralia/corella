@@ -14,45 +14,10 @@
 #' @export
 suggest_workflow <- function(.df){
   dwc_spinny_message("Checking Darwin Core terms")
-  check_fields(.df)
+  check_dataframe(.df)
   invisible(.df)
 }
 
-#' Check individual Darwin Core term columns are valid
-#'
-#' @description
-#' `check_` functions run validation checks on data in a specified Darwin Core
-#' column. `check_` functions are run by the `use_` functions that contain the
-#' respective term. Users are able to run these checks on individual columns
-#' outside of `use_` functions if they desire.
-#'
-#' @name check_dwc
-NULL
-#> NULL
-
-
-
-#' Initial term checks
-#'
-#' @description
-#' Checks whether user df contains sf `geometry` and preserves this information
-#' prior to running `check_contains_terms()`.
-#' @importFrom glue glue
-#' @importFrom glue glue_collapse
-#' @importFrom rlang warn
-#' @noRd
-#' @keywords Internal
-check_fields <- function(.df,
-                         level = c("inform", "warn", "abort")){
-  level <- match.arg(level)
-  is_sf <- inherits(.df, "sf")
-
-  result <- tibble(dwc_terms = colnames(.df)) |>
-    check_contains_terms(dwc_terms = dwc_terms,
-                         is_sf = is_sf,
-                         level = level)
-  .df
-}
 
 #' Theatrics
 #' @importFrom cli make_spinner
@@ -75,6 +40,27 @@ dwc_spinny_message <- function(message) {
   # clear the spinner from the status bar
   spinny$finish()
 }
+
+
+#' Checks dataframe and column names
+#'
+#' @description
+#' Checks whether user dataframe contains sf `geometry` and preserves this
+#' information, then checks matching user columns to darwin core terms.
+#' @noRd
+#' @keywords Internal
+check_dataframe <- function(.df,
+                         level = c("inform", "warn", "abort")){
+  level <- match.arg(level)
+  is_sf <- inherits(.df, "sf")
+
+  result <- tibble(dwc_terms = colnames(.df)) |>
+    check_contains_terms(dwc_terms = dwc_terms,
+                         is_sf = is_sf,
+                         level = level)
+  .df
+}
+
 
 #' Match Darwin Core terms to column names
 #'
@@ -100,7 +86,7 @@ check_contains_terms <- function(.df,
                                  level = "inform",
                                  call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   user_column_names <- .df |>
     pull(field_name) |>
@@ -138,33 +124,10 @@ check_contains_terms <- function(.df,
     pull(use_function)
 
 
-  ### Build final message
-  full_alert <- function() {
-
-    # DwC terms
-    cli_div()
-    cli_h1("Matching Darwin Core terms")
-    matching_terms_message(matched_values,
-                           unmatched_values,
-                           all_cols_match)
-
-    cli_h1("Minimum required Darwin Core terms")
-    minreq_terms_message(req_terms_results)
-    cli_end()
-
-    # Suggested workflow
-    cli_h1("Suggested workflow")
-    suggest_message(suggested_functions,
-                    is_sf)
-
-    cli_h3(col_grey("Additional functions"))
-    additional_message(optional_functions)
-  }
-
   # this wraps text (which might not be optimal for this table)
   # withr::with_options(
   #   list(cli.width = 80),
-  #   custom_alert(suggested_functions_piped, optional_functions)
+  #   full_alert()
   # )
 
   full_alert()
@@ -239,9 +202,9 @@ minreq_terms_message <- function(req_terms_results) {
 #' @importFrom rlang is_empty
 #' @noRd
 #' @keywords Internal
-suggest_message <- function(suggested_functions,
-                            is_sf,
-                            .envir = parent.frame()) {
+suggest_functions_message <- function(suggested_functions,
+                                      is_sf,
+                                      .envir = parent.frame()) {
 
   # if POINT sf class, suggest `use_coordinates_sf()`
   if(isTRUE(is_sf)) {
@@ -287,8 +250,8 @@ suggest_message <- function(suggested_functions,
 #' @importFrom cli ansi_collapse
 #' @noRd
 #' @keywords Internal
-additional_message <- function(optional_functions,
-                               .envir = parent.frame()) {
+additional_functions_message <- function(optional_functions,
+                                         .envir = parent.frame()) {
 
   # add list of optional functions
   if(length(optional_functions) >= 1) {
@@ -310,7 +273,47 @@ additional_message <- function(optional_functions,
 }
 
 
-#' Build message about minimum required terms
+#' Build full workfow message for `suggest_workflow()`
+#'
+#' @importFrom cli cli_div
+#' @importFrom cli cli_end
+#' @importFrom cli cli_h1
+#' @importFrom cli cli_h3
+#'
+#' @noRd
+#' @keywords Internal
+full_workflow_message <- function(matched_values,
+                                  unmatched_values,
+                                  all_cols_match,
+                                  req_terms_results,
+                                  suggested_functions,
+                                  is_sf,
+                                  optional_functions) {
+
+  # build final message with separate components
+
+  # DwC terms
+  cli_div()
+  cli_h1("Matching Darwin Core terms")
+  matching_terms_message(matched_values,
+                         unmatched_values,
+                         all_cols_match)
+
+  cli_h1("Minimum required Darwin Core terms")
+  minreq_terms_message(req_terms_results)
+  cli_end()
+
+  # Suggested workflow
+  cli_h1("Suggested workflow")
+  suggest_functions_message(suggested_functions,
+                            is_sf)
+
+  cli_h3(col_grey("Additional functions"))
+  additional_functions_message(optional_functions)
+}
+
+
+#' Table of Darwin Core terms and their corresponding `use_` function
 #'
 #' @importFrom tibble lst
 #' @noRd
@@ -365,6 +368,9 @@ fn_to_term_table <- function() {
     "use_individual_traits()", "reproductiveCondition",
     "use_observer()", "recordedBy",
     "use_observer()", "recordedByID",
+    "use_events()", "eventID",
+    "use_events()", "eventType",
+    "use_events()", "parentEventID"
   )
 
   table <- lst(main, optional) # named list
@@ -376,6 +382,7 @@ fn_to_term_table <- function() {
 
 
 #' Build table for messaging about minimum required terms
+#'
 #' @importFrom tidyr unnest
 #' @importFrom dplyr case_when
 #' @importFrom dplyr group_by

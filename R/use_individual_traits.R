@@ -110,7 +110,7 @@ use_individual_traits <- function(
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -122,14 +122,14 @@ check_individualID <- function(.df,
   if(any(colnames(.df) == "individualID")){
     .df |>
       select("individualID") |>
-      check_unique(level = level)
+      check_is_unique(level = level)
   }
   .df
 }
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -148,7 +148,7 @@ check_lifeStage <- function(.df,
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -167,7 +167,7 @@ check_sex <- function(.df,
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -186,7 +186,7 @@ check_vitality <- function(.df,
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7

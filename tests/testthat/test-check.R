@@ -7,19 +7,19 @@ test_that("switch_check() works", {
   expect_message(switch_check()) # empty message when no args given
 })
 
-test_that("check_data_frame() works", {
+test_that("check_is_dataframe() works", {
   # case with no errors
   x <- tibble(variable = c(1, 2))
-  expect_no_error(check_data_frame(x))
-  result <- check_data_frame(x)
+  expect_no_error(check_is_dataframe(x))
+  result <- check_is_dataframe(x)
   expect_equal(x, result)
   # case with errors
   x <- list(variable = c(1, 2))
-  check_data_frame(x) |>
+  check_is_dataframe(x) |>
     expect_error(regexp = "Must supply a \`tibble\` or \`data.frame\` to \`check_\` functions.")
   x <- tibble(variable = c(1, 2),
               something = "a_value")
-  check_data_frame(x) |>
+  check_is_dataframe(x) |>
     expect_error(regexp = "Must supply \`data.frame\` with one column to \`check_\` functions.")
 })
 
@@ -81,26 +81,26 @@ test_that("check_is_string() works", {
   expect_message(check_is_string(df_dbl))
 })
 
-test_that("check_unique() works", {
+test_that("check_is_unique() works", {
   # with no errors
   values <- tibble(variable = c(1, 2, 3, 4))
   dupes_dbl <- tibble(variable = c(1, 2, 2, 3, 4, 4))
   dupes_chr <- tibble(variable = c("something", "something", "something_else"))
-  result <- check_unique(values)
+  result <- check_is_unique(values)
 
-  expect_no_error(check_unique(values))
+  expect_no_error(check_is_unique(values))
   expect_equal(values, result)
   expect_error( # numeric duplicates
-    check_unique(dupes_dbl, level = "abort"),
+    check_is_unique(dupes_dbl, level = "abort"),
     "Duplicate values in "
     )
   expect_error( # character duplicates
-    check_unique(dupes_chr, level = "abort"),
+    check_is_unique(dupes_chr, level = "abort"),
     "Duplicate values in "
     )
-  expect_warning(check_unique(dupes_chr, level = "warn")) # levels
-  expect_message(check_unique(dupes_chr, level = "inform"))
-  expect_message(check_unique(dupes_chr))
+  expect_warning(check_is_unique(dupes_chr, level = "warn")) # levels
+  expect_message(check_is_unique(dupes_chr, level = "inform"))
+  expect_message(check_is_unique(dupes_chr))
 })
 
 test_that("check_within_range() works", {

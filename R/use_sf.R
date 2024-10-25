@@ -102,7 +102,7 @@ use_sf <- function(
   result
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @export
 check_coords <- function(.df,
@@ -116,7 +116,7 @@ check_coords <- function(.df,
       check_has_crs(level = level)
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom sf st_is
 #' @importFrom sf st_geometry
@@ -125,7 +125,7 @@ check_is_sf <- function(.df,
                           level = c("inform", "warn", "abort"),
                           call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   # field_name <- colnames(.df)[[1]]
   # x <- .df |> pull(field_name)
   if (!inherits(.df, "sf")) {
@@ -138,7 +138,7 @@ check_is_sf <- function(.df,
   .df
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom sf st_is
 #' @importFrom sf st_geometry
@@ -147,7 +147,7 @@ check_is_point <- function(.df,
                         level = c("inform", "warn", "abort"),
                         call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   # enforce POINT geometry
   if (any(st_geometry_type(.df, by_geometry = FALSE) != "POINT")) {
     sf_type <- st_geometry_type(.df, by_geometry = FALSE)
@@ -157,7 +157,7 @@ check_is_point <- function(.df,
   .df
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom sf st_crs
 #' @importFrom sf st_geometry
@@ -168,7 +168,7 @@ check_has_crs <- function(.df,
                           level = c("inform", "warn", "abort"),
                           call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   if(is.na(st_crs(.df))){
 
     bullets <- cli_bullets(c(

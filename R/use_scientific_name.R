@@ -93,7 +93,7 @@ use_scientific_name <- function(
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -112,7 +112,7 @@ check_scientificName <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -132,7 +132,7 @@ check_scientificNameRank <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7

@@ -89,15 +89,14 @@ use_abundance <- function(.df,
 
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @importFrom cli cli_abort
 #' @order 4
 #' @export
 check_individualCount <- function(.df,
-                                  level = c("inform", "warn", "abort"),
-                                  call = caller_env()
+                                  level = c("inform", "warn", "abort")
                                   ){
   level <- match.arg(level)
   if(any(colnames(.df) == "individualCount")){
@@ -121,10 +120,12 @@ check_individualCount <- function(.df,
           bullets <- c(
             "{.field individualCount} values do not match {.field occurrenceStatus}.",
             x = "Found {n_unmatched} row{?s} where individualCount = 0 but occurrenceStatus = \"present\"."
-          ) |> cli_bullets() |> cli_fmt()
+          ) |>
+            cli_bullets() |>
+            cli_fmt()
+
           switch_check(level,
-                       bullets,
-                       call = call)
+                       bullets)
         }
       } else {
 
@@ -145,7 +146,7 @@ check_individualCount <- function(.df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 4
@@ -168,7 +169,7 @@ check_organismQuantity <- function(.df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 4

@@ -93,7 +93,7 @@ use_datetime <- function(
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom lubridate parse_date_time
 #' @export
@@ -122,7 +122,7 @@ check_eventDate <- function(.df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
@@ -141,7 +141,7 @@ check_year <- function(.df,
   }
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
@@ -182,7 +182,7 @@ check_month <- function(.df,
   }
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
@@ -217,7 +217,7 @@ check_day <- function(.df,
 
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today

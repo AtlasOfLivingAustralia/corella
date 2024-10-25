@@ -88,7 +88,7 @@ use_observer <- function(
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7
@@ -106,7 +106,7 @@ check_recordedBy <- function(.df,
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @order 7

@@ -91,7 +91,7 @@ use_coordinates <- function(
 }
 
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 6
 #' @export
 check_decimalLatitude <- function(.df, 
@@ -108,7 +108,7 @@ check_decimalLatitude <- function(.df,
   } 
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 7
 #' @export
 check_decimalLongitude <- function(.df, 
@@ -125,7 +125,7 @@ check_decimalLongitude <- function(.df,
   }
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 7
 #' @export
 check_geodeticDatum <- function(.df, 
@@ -139,7 +139,7 @@ check_geodeticDatum <- function(.df,
   }
 }
 
-#' @rdname check_dwc
+#' @rdname check_terms
 #' @order 7
 #' @importFrom sf st_crs
 #' @importFrom rlang try_fetch
@@ -148,7 +148,7 @@ check_crs <- function(.df,
                       level = "warn",
                       call = caller_env()
 ){
-  check_data_frame(.df)
+  check_is_dataframe(.df)
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
   
