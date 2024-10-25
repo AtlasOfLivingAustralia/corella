@@ -45,6 +45,8 @@ devtools::install_github("AtlasOfLivingAustralia/corella")
 
 ## Usage
 
+Here we have a small sample of some example data. We'd like to convert our data to use Darwin Core standards.
+
 ```{r}
 library(corella)
 library(tibble)
@@ -57,11 +59,17 @@ df <- tibble(
   eventDate = c("14-01-2023", "15-01-2023"),
   status = c("present", "present")
 )
+
+df
 ```
 
-Update column names in your data to Darwin Core terms. This also runs basic checks on your data to make sure each column is in the correct format. Fix columns that flag errors in your pipe directly within `use_` functions, which support data wrangling operations & `dplyr::mutate()` functionality.
+One of the most important aspects of Darwin Core standard is using standard column names (Darwin Core *terms*). We can update column names in our data to match Darwin Core terms with `use_` functions. 
+
+Each `use_` function name corresponds to the type of data, and argument names correspond to the available Darwin Core terms to use as column names. `use_` functions support data wrangling operations & `dplyr::mutate()` functionality, meaning columns can be changed or fixed in your pipe. `use_` functions will indicate if anything needs fixing because they also automatically run checks on each column data to make sure each column is in the correct format.
 
 ```{r}
+suppressMessages( # for readability
+
 df |>
   use_coordinates(
     decimalLatitude = as.numeric(latitude), # fix latitude
@@ -74,6 +82,8 @@ df |>
     eventDate = lubridate::dmy(eventDate) # specify date format
     ) |>
   use_occurrences(occurrenceStatus = status)
+
+)
 ```
 
 Not sure where to start? Use `suggest_workflow()` to know what steps you need to make to make your data Darwin Core compliant.

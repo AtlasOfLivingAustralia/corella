@@ -44,6 +44,9 @@ devtools::install_github("AtlasOfLivingAustralia/corella")
 
 ## Usage
 
+Here we have a small sample of some example data. We’d like to convert
+our data to use Darwin Core standards.
+
 ``` r
 library(corella)
 library(tibble)
@@ -56,15 +59,30 @@ df <- tibble(
   eventDate = c("14-01-2023", "15-01-2023"),
   status = c("present", "present")
 )
+
+df
+#> # A tibble: 2 × 5
+#>   species                  latitude longitude eventDate  status 
+#>   <chr>                    <chr>        <dbl> <chr>      <chr>  
+#> 1 Callocephalon fimbriatum -35.31        149. 14-01-2023 present
+#> 2 Eolophus roseicapilla    -35.273       149. 15-01-2023 present
 ```
 
-Update column names in your data to Darwin Core terms. This also runs
-basic checks on your data to make sure each column is in the correct
-format. Fix columns that flag errors in your pipe directly within `use_`
-functions, which support data wrangling operations & `dplyr::mutate()`
-functionality.
+One of the most important aspects of Darwin Core standard is using
+standard column names (Darwin Core *terms*). We can update column names
+in our data to match Darwin Core terms with `use_` functions.
+
+Each `use_` function name corresponds to the type of data, and argument
+names correspond to the available Darwin Core terms to use as column
+names. `use_` functions support data wrangling operations &
+`dplyr::mutate()` functionality, meaning columns can be changed or fixed
+in your pipe. `use_` functions will indicate if anything needs fixing
+because they also automatically run checks on each column data to make
+sure each column is in the correct format.
 
 ``` r
+suppressMessages( # for readability
+
 df |>
   use_coordinates(
     decimalLatitude = as.numeric(latitude), # fix latitude
@@ -77,10 +95,8 @@ df |>
     eventDate = lubridate::dmy(eventDate) # specify date format
     ) |>
   use_occurrences(occurrenceStatus = status)
-#> ⠙ Checking 2 columns: decimalLatitude and decimalLongitude⠹ Checking 2 columns: decimalLatitude and decimalLongitude⠸ Checking 2 columns: decimalLatitude and decimalLongitude✔ Checking 2 columns: decimalLatitude and decimalLongitude [966ms]
-#> ⠙ Checking 1 column: scientificName⠹ Checking 1 column: scientificName✔ Checking 1 column: scientificName [455ms]
-#> ⠙ Checking 1 column: eventDate⠹ Checking 1 column: eventDate✔ Checking 1 column: eventDate [438ms]
-#> ⠙ Checking 1 column: occurrenceStatus⠹ Checking 1 column: occurrenceStatus✔ Checking 1 column: occurrenceStatus [463ms]
+
+)
 #> # A tibble: 2 × 5
 #>   eventDate  decimalLatitude decimalLongitude scientificName    occurrenceStatus
 #>   <date>               <dbl>            <dbl> <chr>             <chr>           
@@ -133,12 +149,13 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [343ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [274ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
 #> 
-#> ✖ Data complies with minimum Darwin Core requirements.
+#> ✖ Data meets minimum Darwin Core requirements
+#> ℹ Use `suggest_workflow()` to see more information.
 #> ── Error in eventDate ──────────────────────────────────────────────────────────
 #> 
 #> eventDate must be a Date vector, not a character.
