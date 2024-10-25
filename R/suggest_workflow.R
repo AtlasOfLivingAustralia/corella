@@ -130,7 +130,13 @@ check_contains_terms <- function(.df,
   #   full_workflow_message()
   # )
 
-  full_workflow_message()
+  full_workflow_message(matched_values,
+                        unmatched_values,
+                        all_cols_match,
+                        req_terms_results,
+                        suggested_functions,
+                        is_sf,
+                        optional_functions)
 
   .df
 }
