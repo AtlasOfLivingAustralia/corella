@@ -1,0 +1,90 @@
+---
+title: "Quick start guide"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quick start guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of what organisms were observered in a location and time---in the Atlas of Living Australia, other Living Atlases and GBIF. The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
+
+The main tasks to standardise data to comply with Darwin Core standards is to 
+
+  1. Ensure columns use valid Darwin Core terms as column names
+  2. Include all required information (e.g. scientific name, unique observation ID, valid date)
+  3. Ensure columns contain valid data
+
+If this sounds daunting, corella is designed to reduce confusion of how to get started and which Darwin Core terms might match your column names.
+
+# Install
+
+To install from CRAN:
+
+```{r}
+#| eval: false
+install.packages("corella")
+```
+
+To install the development version from GitHub:
+
+```{r}
+#| eval: false
+# install.packages("devtools")
+devtools::install_github("AtlasOfLivingAustralia/corella")
+```
+
+To load the package:
+
+```{r}
+library(corella)
+```
+
+
+# Rename, add or edit columns
+
+Here is a minimal example dataset of [some species] observations.
+
+```{r}
+
+```
+
+
+
+One of the most confusing parts of Darwin Core can be knowing which column names to use. corella attempts to reduce this confusion with `use_` functions.
+
+# Suggest how to start
+
+Unsure where to start? Confused about what columns are required for you to share your data? That's what `suggest_workflow()` can help with.
+
+`suggest_workflow()` provides a high level summary designed to show you:
+
+  1. Which column names match valid Darwin Core terms
+  2. Which columns are present or missing are the minimum requirement for data to be shared.
+  3. A possible workflow to help you add the minimum required columns
+  4. Additional functions you could use (based on any matching Darwin Core column names)
+  
+The intention is that any time you are uncertain, this function can provide an idea of what to do next.
+
+```{r}
+# example
+```
+
+`suggest_workflow()` will update the suggested function pipe to only suggest functions that you still need to use to standardise your data correctly. For example, after using some suggested functions from above, when we run `suggest_workflow()` again, it only suggests one function, rather than the original three functions.
+
+```{r}
+# example
+```
+
+# Run full test suite
+
+<!-- check_occurrences() -->
+<!-- check_dataset_full() -->
+

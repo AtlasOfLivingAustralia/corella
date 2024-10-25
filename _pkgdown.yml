@@ -1,11 +1,27 @@
 url: ~
 template:
   bootstrap: 5
+navbar:
+  structure:
+    left:
+    - home
+    - quickstart
+    - reference
+    right:
+    - news
+    - github
+  components:
+    quickstart:
+      text: Quick start guide
+      href: articles/quick_start_guide.html
+    news:
+      text: News
+      href: news/index.html
 reference:
 - title: Suggest where to start
   contents:
   - suggest_workflow
-- title: Add Darwin Core terms
+- title: Add, rename or edit columns to match Darwin Core terms
   contents:
   - use_occurrences
   - use_scientific_name
@@ -19,13 +35,13 @@ reference:
   - use_locality
   - use_observer
   - use_taxonomy
-- title: Add a unique ID
-  contents:
-  - use_id_random
-- title: Check data for Darwin Core compliance
+- title: Test matching columns for Darwin Core compliance
   contents:
   - check_occurrences
 - title: Individual checks
   contents:
-  - check_fields
+  - check_terms
+- title: Add a unique ID
+  contents:
+  - use_id_random
 

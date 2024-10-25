@@ -52,3 +52,4 @@ rsconnect/
 # tests
 tests/my_tests.R
 docs
+inst/doc
