@@ -33,7 +33,7 @@ generate them.}
 A tibble with the requested fields added.
 }
 \description{
-Format fields that specify the collection or catelog number of a
+Format fields that specify the collection or catalog number of a
 specimen or occurrence record.
 
 In practice this is no different from using \code{mutate()}, but gives some

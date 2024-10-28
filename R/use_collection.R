@@ -1,7 +1,7 @@
 #' Add museum- or collection-specific information to a `tibble`
 #'
 #' @description
-#' Format fields that specify the collection or catelog number of a
+#' Format fields that specify the collection or catalog number of a
 #' specimen or occurrence record.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
