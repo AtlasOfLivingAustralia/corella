@@ -25,7 +25,7 @@ use_measurements <- function(
   if(missing(.df)){
     abort(".df is missing, with no default")
   }
-  browser()
+
   # capture columns
   fn_quos <- enquos(cols)
 
