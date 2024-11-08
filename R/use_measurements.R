@@ -25,24 +25,27 @@ use_measurements <- function(
   if(missing(.df)){
     abort(".df is missing, with no default")
   }
-
+  browser()
+  # capture columns
   fn_quos <- enquos(cols)
 
-  # browser()
-
-  # Nests measurement columns
+  # Creates measurementOrFact column, nests measurement columns
   cli::cli_progress_step("Adding measurement columns")
 
-  nested_df <- df_filtered |>
-    # NOTE: Must use group_split to ensure we are grouping by row, not an unexpected grouping (ie rowwise)
-    group_split(row_number(), .keep = FALSE) %>%
+  nested_df <- .df |>
+    # add row number for id
+    mutate(
+      padded_row_number = stringr::str_pad(row_number(), floor(log10(row_number())) + 1, pad = '0')
+      ) |>
+    # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
+    group_split(row_number(), .keep = FALSE) |>
     purrr::map_dfr( ~ .x |>
-                      nest(measurementOrFact = c(LMA_g.m2, LeafN_area_g.m2, PNUE)))
+                      nest(measurementOrFact = c(padded_row_number, !!!fn_quos)))
 
   # Pivots each row's data to long
-  # Adds `unit` and `type` information to each nested tibble
+  # Adds rowwise `unit` and `type` information to each nested tibble
   cli::cli_progress_step("Converting measurements to Darwin Core")
-
+  # browser()
   result <- nested_df |>
     dplyr::mutate(
       measurementOrFact = purrr::map(
@@ -50,31 +53,44 @@ use_measurements <- function(
         ~ .x |>
           pivot_longer(names_to = "column_name",
                        values_to = "measurementValue",
-                       cols = everything()) |>
+                       cols = !!!fn_quos) |>
           mutate(
+            measurementID = glue("{column_name}|{padded_row_number}") |> as.character(), # create id
             measurementUnit = unit,
             measurementType = type
-          )
+          ) |>
+          select(-column_name, -padded_row_number)
       ))
+
+  # if(!is.null(result$measurementOrFact)) {
+  #   matched_cols = result |>
+  #     select(measurementOrFact) |>
+  #     unnest(measurementOrFact) |>
+  #     colnames()
+  # }
+  #
+  # if(isTRUE(.messages)) {
+  #   if(length(matched_cols > 0)) {
+  #     col_progress_bar(cols = matched_cols)
+  #   }
+  # }
+  #
+  # check_eventDate(result, level = "abort")
 
   return(result)
 }
 
-#' Add measurement column to dataframe in Darwin Core standard
-#'
-#' @description
-#' tbd
-#'
-#' @importFrom uuid UUIDgenerate
-#' @importFrom dplyr n
+#' @rdname check_terms
+#' @order 8
 #' @export
-add_measure_column <- function(.df,
-                               column = NULL,
-                               type = NULL,
-                               unit = NULL) {
-
-  # column_name <- {{column}}
-
-
-
+check_measurementUnit <- function(.df,
+                                  level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "measurement")){
+    .df |>
+      select("eventTime") |>
+      check_is_time(level = level)
+  }
 }
+
