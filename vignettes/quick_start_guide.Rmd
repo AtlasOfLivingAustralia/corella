@@ -37,6 +37,8 @@ To install the development version from GitHub:
 
 ```{r}
 #| eval: false
+#| message: false
+#| warning: false
 # install.packages("devtools")
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```
@@ -53,12 +55,83 @@ library(corella)
 Here is a minimal example dataset of [some species] observations.
 
 ```{r}
+#| code-fold: true
+#| 
+library(tibble)
+library(lubridate)
 
+df <- tibble(
+  latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+  longitude = c(149.125, 149.133),
+  date = c("14-01-2023", "15-01-2023"),
+  time = c("10:23:00", "11:25:00"),
+  month = c("January", "February"),
+  day = c(100, 101),
+  species = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+  n = c(2, 3),
+  crs = c("WGS84", "WGS8d"),
+  country = c("Australia", "Denmark"),
+  continent = c("Oceania", "Europe")
+  )
 ```
 
 
+```{r}
+df
+```
 
-One of the most confusing parts of Darwin Core can be knowing which column names to use. corella attempts to reduce this confusion with `use_` functions.
+In our dataframe `df` there are columns that contain information that we would like standardised using Darwin Core. We can standardise our data with `use_` functions.
+
+One of the most confusing parts of Darwin Core can be knowing which column names to use. corella attempts to reduce this confusion with `use_` functions. These functions are named to suggest what type of data they are used to standardise. Their argument names are valid Darwin Core terms. Defining which of our columns match a specific Darwin Core term will update our dataframe.
+
+```{r}
+df |>
+  use_scientific_name(scientificName = species)
+```
+
+You'll notice 2 things happen:
+
+  1. The `species` column in our dataframe has been renamed `scientificName`.
+  2. `use_scientific_name()` ran a check on our `species` column to make sure it was formatted correctly.
+
+
+#### Update columns
+
+Let's try adding a column where we know there is an error in it. The `latitude` column in `df` is accidently a class `character` column. When we try to add it using `use_coordinates()`, an error will tell us something is wrong.
+
+```{r}
+#| eval: false
+# is it possible to print this error?
+df |>
+  use_scientific_name(scientificName = species) |>
+  use_coordinates(decimalLongitude = longitude,
+                  decimalLatitude = latitude)
+```
+
+`use_` functions are like specialised wrappers over the `mutate()` function from [dplyr](). This means you can use the same process to fix your column within the `use_` function that specified the error. We'll fix `latitude` so that it is class `numeric`.
+
+```{r}
+df |>
+  use_scientific_name(scientificName = species) |>
+  use_coordinates(decimalLongitude = longitude,
+                  decimalLatitude = as.numeric(latitude))
+```
+
+#### Detect columns
+
+corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, adding `use_locality()` to our pipe will detect several valid Darwin Core columns in `df` and check them automatically.
+
+```{r}
+df |>
+  use_scientific_name(scientificName = species) |>
+  use_coordinates(decimalLongitude = longitude,
+                  decimalLatitude = as.numeric(latitude)) |>
+  use_locality()
+```
+
+This auto-detection will ideally reduce the workload when datasets contains lots of columns!
+
+
 
 # Suggest how to start
 
@@ -74,17 +147,90 @@ Unsure where to start? Confused about what columns are required for you to share
 The intention is that any time you are uncertain, this function can provide an idea of what to do next.
 
 ```{r}
-# example
+df |>
+  suggest_workflow()
 ```
 
 `suggest_workflow()` will update the suggested function pipe to only suggest functions that you still need to use to standardise your data correctly. For example, after using some suggested functions from above, when we run `suggest_workflow()` again, it only suggests one function, rather than the original three functions.
 
 ```{r}
-# example
+df |>
+  use_occurrences(
+    occurrenceID = use_id_random(),
+    basisOfRecord = "humanObservation"
+    ) |>
+  suggest_workflow()
 ```
 
 # Run full test suite
 
+If your dataset already has darwin core columns and you want to just run tests on your entire dataset (rather than using individual `use_` functions). Use `check_occurrences()`
+
+```{r}
+df <- tibble(
+  latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+  longitude = c(149.125, 149.133),
+  date = c("14-01-2023", "15-01-2023"),
+  individualCount = c(0, 2),
+  species = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+  country = c("AU", "AU"),
+  occurrenceStatus = c("present", "present")
+  
+  )
+
+df |>
+  check_occurrences()
+```
+
+
 <!-- check_occurrences() -->
 <!-- check_dataset_full() -->
+
+# `use_measurements`: a work in progress
+
+Let's use a small sample of a real dataset with data on Australian native plant species including Eucalypts and Acacias. The dataset contains lots of measurement fields attached to each species occurrence that contain data the organism's traits or environment. I have extracted 3 examples: `LMA_g.m2`, `LeafN_area_g.m2`, `PNUE`.
+
+```{r}
+#| warning: false
+#| message: false
+library(tibble)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(here)
+
+# take a small sample
+df_filtered <- read_csv(here("inst", "examples", "data", "westerband_2022_wdate.csv")) |>
+  select(Site, Species, Latitude, Longitude, LMA_g.m2, LeafN_area_g.m2, PNUE)
+
+df_filtered
+```
+
+
+Darwin Core confusingly handles measurement fields. This nests them and assigns them to the correct columns. You just specify the column, the unit, and the type of measurement
+
+```{r, message=FALSE, warning=FALSE}
+df_nested <- df_filtered |>
+  slice(220:270) |>
+  use_measurements(cols = c(LMA_g.m2, 
+                            LeafN_area_g.m2, 
+                            PNUE),
+                   unit = c("g/m2", 
+                            "g/m2", 
+                            "co2/s"),
+                   type = c("leaf mass per area", 
+                            "leaf nitrogen per area", 
+                            "photosynthetic nitrogen use efficiency")
+                   )
+
+df_nested |> slice(1:3)
+```
+
+
+Then you can unnest that column, and it will have all the correct columns formatted correctly.
+
+```{r}
+df_nested |>
+  unnest(measurementOrFact)
+```
 
