@@ -1,9 +1,9 @@
-#' Add museum- or collection-specific information to a `tibble`
+#' Add measurement data for an individual or event to a `tibble`
 #'
 #' @description
 #' test
 #'
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
@@ -14,6 +14,7 @@
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
+#' @importFrom rlang enquos
 #' @export
 use_measurements <- function(
     .df,
@@ -45,7 +46,7 @@ use_measurements <- function(
   # Pivots each row's data to long
   # Adds rowwise `unit` and `type` information to each nested tibble
   cli::cli_progress_step("Converting measurements to Darwin Core")
-  # browser()
+
   result <- nested_df |>
     dplyr::mutate(
       measurementOrFact = purrr::map(

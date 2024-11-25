@@ -52,7 +52,7 @@ library(corella)
 
 # Rename, add or edit columns
 
-Here is a minimal example dataset of [some species] observations.
+Here is a minimal example dataset of [some species] observations. In our dataframe `df` there are columns that contain information that we would like standardised using Darwin Core.
 
 ```{r}
 #| code-fold: true
@@ -80,9 +80,9 @@ df <- tibble(
 df
 ```
 
-In our dataframe `df` there are columns that contain information that we would like standardised using Darwin Core. We can standardise our data with `use_` functions.
+We can standardise our data with `use_` functions. These functions a prefix of `use_`, and a suffix named to suggest what type of data they are used to standardise. For example, `use_coordinates` or `use_datetime`. The argument names in `use_` functions are valid Darwin Core terms. Our hope is that by grouping Darwin Core terms into groups based on their data type, corella makes it easier for users to know which Darwin Core terms to use as column names (which is one of the most confusing parts of Darwin Core).
 
-One of the most confusing parts of Darwin Core can be knowing which column names to use. corella attempts to reduce this confusion with `use_` functions. These functions are named to suggest what type of data they are used to standardise. Their argument names are valid Darwin Core terms. Defining which of our columns match a specific Darwin Core term will update our dataframe.
+Let's specify that the scientific name (i.e. genus & species name) in our data is in the `species` column by using `use_scientific_name()` to update our dataframe.
 
 ```{r}
 df |>
@@ -91,16 +91,14 @@ df |>
 
 You'll notice 2 things happen:
 
-  1. The `species` column in our dataframe has been renamed `scientificName`.
+  1. The `species` column in our dataframe has been renamed to `scientificName`.
   2. `use_scientific_name()` ran a check on our `species` column to make sure it was formatted correctly.
 
-
-#### Update columns
-
-Let's try adding a column where we know there is an error in it. The `latitude` column in `df` is accidently a class `character` column. When we try to add it using `use_coordinates()`, an error will tell us something is wrong.
+What happens when we add a column with an error in it? In our `df`, the `latitude` column is "accidentally" a class `character` column, when it should be a `numeric` column. When we try to add it using `use_coordinates()`, an error will tell us something is wrong.
 
 ```{r}
-#| eval: false
+#| eval: true
+#| error: true
 # is it possible to print this error?
 df |>
   use_scientific_name(scientificName = species) |>
@@ -108,7 +106,12 @@ df |>
                   decimalLatitude = latitude)
 ```
 
-`use_` functions are like specialised wrappers over the `mutate()` function from [dplyr](). This means you can use the same process to fix your column within the `use_` function that specified the error. We'll fix `latitude` so that it is class `numeric`.
+
+### Fix or update columns
+
+How do we fix the column that caused an error? One way is to edit the column within the `use_` function containing our problematic column.
+
+Each `use_` function is essentially a specialised [`mutate()`]() function from [dplyr](). This means you can edit columns using the same process you would use with `mutate()`. Let's fix the `latitude` column so that it is class `numeric`, which will fix the error.
 
 ```{r}
 df |>
@@ -117,9 +120,9 @@ df |>
                   decimalLatitude = as.numeric(latitude))
 ```
 
-#### Detect columns
+### Auto-detect columns
 
-corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, adding `use_locality()` to our pipe will detect several valid Darwin Core columns in `df` and check them automatically.
+corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, `df` contains columns with locality information. We can add `use_locality()` to our pipe to specify and check these columns. Some of our columns already have valid Darwin Core terms as column names (`country` and `continent`). If we add `use_locality()` to our pipe without any arguments, it will detect these valid Darwin Core columns in `df` and check them automatically.
 
 ```{r}
 df |>
@@ -129,42 +132,49 @@ df |>
   use_locality()
 ```
 
-This auto-detection will ideally reduce the workload when datasets contains lots of columns!
+By auto-detecting columns, corella prevents users from having to specify every single column when they are already named correctly in their dataset. This functionality will definitely help reduce the workload on datasets with lots of columns!
 
 
+# Suggest a workflow
 
-# Suggest how to start
+Unsure where to start? Confused about the minimum requirements to share your data? Try using `suggest_workflow()`.
 
-Unsure where to start? Confused about what columns are required for you to share your data? That's what `suggest_workflow()` can help with.
-
-`suggest_workflow()` provides a high level summary designed to show you:
+`suggest_workflow()` provides a high level summary designed to show:
 
   1. Which column names match valid Darwin Core terms
-  2. Which columns are present or missing are the minimum requirement for data to be shared.
-  3. A possible workflow to help you add the minimum required columns
-  4. Additional functions you could use (based on any matching Darwin Core column names)
+  2. The minimum requirements for data to be shared, and which columns are present in your dataframe.
+  3. A suggested workflow to help you add the minimum required columns
+  4. Additional functions you could add to your piped workflow (based on column names in your dataset that match other Darwin Core terms)
   
-The intention is that any time you are uncertain, this function can provide an idea of what to do next.
+The intention of `suggest_workflow()` is to provide a general help function whenever users feel uncertain about what to do next. Let's see what it says about what to do with our original dataframe `df`.
 
 ```{r}
 df |>
   suggest_workflow()
 ```
 
-`suggest_workflow()` will update the suggested function pipe to only suggest functions that you still need to use to standardise your data correctly. For example, after using some suggested functions from above, when we run `suggest_workflow()` again, it only suggests one function, rather than the original three functions.
+`suggest_workflow()` will update the suggested function pipe to only suggest functions that are necessary to standardise your data correctly. 
+
+For example, after using one of the suggested functions `use_occurrences()`, if we run `suggest_workflow()` again, the output message no longer suggests `use_occurrences()`. 
 
 ```{r}
-df |>
+#| message: false
+#| warning: false
+df_edited <- df |>
   use_occurrences(
     occurrenceID = use_id_random(),
     basisOfRecord = "humanObservation"
-    ) |>
+    )
+```
+
+```{r}
+df_edited |>
   suggest_workflow()
 ```
 
-# Run full test suite
+# Test your data
 
-If your dataset already has darwin core columns and you want to just run tests on your entire dataset (rather than using individual `use_` functions). Use `check_occurrences()`
+If your dataset already uses valid Darwin Core terms as column names, instead of working through each `use_` function, you might wish to run tests on your entire dataset. To run checks on your data like a test suite, use `check_occurrences()`. Much like `devtools::test()`, `check_occurrences()` runs the relevant check on each matching Darwin Core column and returns a summary of the results, along with any error messages returned by those checks.
 
 ```{r}
 df <- tibble(
@@ -175,7 +185,6 @@ df <- tibble(
   species = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
   country = c("AU", "AU"),
   occurrenceStatus = c("present", "present")
-  
   )
 
 df |>
