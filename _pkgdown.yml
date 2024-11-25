@@ -35,6 +35,7 @@ reference:
   - use_locality
   - use_observer
   - use_taxonomy
+  - use_measurements
 - title: Test matching columns for Darwin Core compliance
   contents:
   - check_occurrences
