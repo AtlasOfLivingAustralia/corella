@@ -91,8 +91,7 @@ use_locality <- function(.df,
 
 
 #' @rdname check_terms
-#' @order 5
-#' @export
+#' @keywords Internal
 check_continent <- function(df,
                             level = c("inform", "warn", "abort")
                             ){
@@ -116,8 +115,7 @@ check_continent <- function(df,
 
 
 #' @rdname check_terms
-#' @order 5
-#' @export
+#' @keywords Internal
 check_country <- function(df,
                           level = c("inform", "warn", "abort")
 ){
@@ -134,8 +132,7 @@ check_country <- function(df,
 
 
 #' @rdname check_terms
-#' @order 5
-#' @export
+#' @keywords Internal
 check_countryCode <- function(df,
                               level = c("inform", "warn", "abort")
 ){
@@ -163,8 +160,7 @@ check_countryCode <- function(df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 5
-#' @export
+#' @keywords Internal
 check_stateProvince <- function(.df,
                                  level = c("inform", "warn", "abort")
 ){
@@ -181,8 +177,7 @@ check_stateProvince <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 5
-#' @export
+#' @keywords Internal
 check_locality <- function(.df,
                            level = c("inform", "warn", "abort")
 ){

@@ -82,8 +82,7 @@ use_measurements <- function(
 }
 
 #' @rdname check_terms
-#' @order 8
-#' @export
+#' @keywords Internal
 check_measurementUnit <- function(.df,
                                   level = c("inform", "warn", "abort")
 ){

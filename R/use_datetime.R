@@ -94,9 +94,8 @@ use_datetime <- function(
 
 
 #' @rdname check_terms
-#' @order 6
 #' @importFrom lubridate parse_date_time
-#' @export
+#' @keywords Internal
 check_eventDate <- function(.df,
                             level = c("inform", "warn", "abort")
 ){
@@ -123,10 +122,9 @@ check_eventDate <- function(.df,
 
 
 #' @rdname check_terms
-#' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
-#' @export
+#' @keywords Internal
 check_year <- function(.df,
                        level = c("inform", "warn", "abort")
 ){
@@ -142,10 +140,9 @@ check_year <- function(.df,
 }
 
 #' @rdname check_terms
-#' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
-#' @export
+#' @keywords Internal
 check_month <- function(.df,
                         level = c("inform", "warn", "abort")) {
   level <- match.arg(level)
@@ -183,10 +180,9 @@ check_month <- function(.df,
 }
 
 #' @rdname check_terms
-#' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
-#' @export
+#' @keywords Internal
 check_day <- function(.df,
                         level = c("inform", "warn", "abort")
 ){
@@ -218,10 +214,9 @@ check_day <- function(.df,
 
 
 #' @rdname check_terms
-#' @order 6
 #' @importFrom lubridate year
 #' @importFrom lubridate today
-#' @export
+#' @keywords Internal
 check_eventTime <- function(.df,
                        level = c("inform", "warn", "abort")
 ){

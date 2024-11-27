@@ -113,8 +113,7 @@ use_individual_traits <- function(
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_individualID <- function(.df,
                                  level = c("inform", "warn", "abort")
 ){
@@ -132,8 +131,7 @@ check_individualID <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_lifeStage <- function(.df,
                             level = c("inform", "warn", "abort")
 ){
@@ -151,8 +149,7 @@ check_lifeStage <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_sex <- function(.df,
                       level = c("inform", "warn", "abort")
 ){
@@ -170,8 +167,7 @@ check_sex <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_vitality <- function(.df,
                            level = c("inform", "warn", "abort")
 ){
@@ -189,8 +185,7 @@ check_vitality <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_reproductiveCondition <- function(.df,
                            level = c("inform", "warn", "abort")
 ){

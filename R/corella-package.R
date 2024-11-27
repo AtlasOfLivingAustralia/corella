@@ -39,29 +39,20 @@
 #'   * [use_observer()] to specify who made the observation (recordedByID, recordedBy)
 #'   * [use_collection()] to give museum- or collection- specific information (datasetID, datasetName, catalogNumber)
 #'   * [use_events()] basic information on observation events (eventID, parentEventID, eventType)
+#'   * [use_measurements()] for 'Measurement or Fact' data (optional rn)
 #'
 #'   Proposed:
 #'   * [use_darwin_core()] to subset to only fields with DwC names (i.e. same as `df |> select(any_of(dwc_fields()))`)
-#'   * [use_measurement()] for 'Measurement or Fact' data (optional rn)
 #'   * [use_media()] good idea, but unclear how users would supply said media; should be urls, but to where?
 #'
 #'  **Checking data for Darwin Core compliance**
 #'
 #'  The wrapper function for checking tibbles for Darwin Core compliance is
-#'  [check_occurrences()]. It calls the following microfunctions:
+#'  [check_dataset()]. It calls all internal check functions for checking data in columns with matching Darwin Core terms.
 #'
-#'   * [check_fields()] Checks whether non-DwC fields are present
-#'   * [check_occurrenceID()]
-#'   * [check_basisOfRecord()]
-#'   * [check_continent()]
-#'   * [check_country()]
-#'   * [check_countryCode()]
-#'   * [check_decimalLatitude()]
-#'   * [check_decimalLongitude()]
-#'   * ADD MORE
+#'  ** Add occurrence ID **
 #'
-#'  Note that there are more `check_` functions than `use_` functions, because
-#'  some `use_` functions affect multiple fields.
+#'   * [use_id_random()] adds a valid uuid column to a tibble
 #'
 #' @keywords internal
 "_PACKAGE"

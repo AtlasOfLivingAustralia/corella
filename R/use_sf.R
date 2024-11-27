@@ -103,8 +103,7 @@ use_sf <- function(
 }
 
 #' @rdname check_terms
-#' @order 6
-#' @export
+#' @keywords Internal
 check_coords <- function(.df,
                          level = c("inform", "warn", "abort")
 ){
@@ -116,11 +115,10 @@ check_coords <- function(.df,
       check_has_crs(level = level)
 }
 
-#' @rdname check_terms
-#' @order 6
+#' @noRd
 #' @importFrom sf st_is
 #' @importFrom sf st_geometry
-#' @export
+#' @keywords Internal
 check_is_sf <- function(.df,
                           level = c("inform", "warn", "abort"),
                           call = caller_env()
@@ -138,11 +136,10 @@ check_is_sf <- function(.df,
   .df
 }
 
-#' @rdname check_terms
-#' @order 6
+#' @noRd
 #' @importFrom sf st_is
 #' @importFrom sf st_geometry
-#' @export
+#' @keywords Internal
 check_is_point <- function(.df,
                         level = c("inform", "warn", "abort"),
                         call = caller_env()
@@ -157,13 +154,12 @@ check_is_point <- function(.df,
   .df
 }
 
-#' @rdname check_terms
-#' @order 6
+#' @noRd
 #' @importFrom sf st_crs
 #' @importFrom sf st_geometry
 #' @importFrom cli cli_bullets
 #' @importFrom cli cli_fmt
-#' @export
+#' @keywords Internal
 check_has_crs <- function(.df,
                           level = c("inform", "warn", "abort"),
                           call = caller_env()

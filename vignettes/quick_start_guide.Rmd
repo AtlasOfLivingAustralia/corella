@@ -174,7 +174,7 @@ df_edited |>
 
 # Test your data
 
-If your dataset already uses valid Darwin Core terms as column names, instead of working through each `use_` function, you might wish to run tests on your entire dataset. To run checks on your data like a test suite, use `check_occurrences()`. Much like `devtools::test()`, `check_occurrences()` runs the relevant check on each matching Darwin Core column and returns a summary of the results, along with any error messages returned by those checks.
+If your dataset already uses valid Darwin Core terms as column names, instead of working through each `use_` function, you might wish to run tests on your entire dataset. To run checks on your data like a test suite, use `check_dataset()`. Much like `devtools::test()` or `devtools::check()`, `check_dataset()` runs the relevant check on each matching Darwin Core column and returns a summary of the results, along with any error messages returned by those checks.
 
 ```{r}
 df <- tibble(
@@ -188,12 +188,9 @@ df <- tibble(
   )
 
 df |>
-  check_occurrences()
+  check_dataset()
 ```
 
-
-<!-- check_occurrences() -->
-<!-- check_dataset_full() -->
 
 # `use_measurements`: a work in progress
 

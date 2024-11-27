@@ -191,8 +191,7 @@ use_id_composite <- function(data,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 4
-#' @export
+#' @keywords Internal
 check_basisOfRecord <- function(.df,
                                 level = c("inform", "warn", "abort")
 ){
@@ -220,9 +219,8 @@ valid_basisOfRecord <- function(){
 }
 
 #' @rdname check_terms
-#' @order 3
 #' @importFrom dplyr select
-#' @export
+#' @keywords Internal
 check_occurrenceID <- function(.df,
                                level = c("inform", "warn", "abort")
 ){
@@ -237,8 +235,7 @@ check_occurrenceID <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 3
-#' @export
+#' @keywords Internal
 check_occurrenceStatus <- function(.df,
                                 level = c("inform", "warn", "abort")
 ){

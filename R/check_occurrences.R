@@ -1,4 +1,4 @@
-#' Check occurrence data for Darwin Core conformance
+#' Check a dataset for Darwin Core conformance
 #'
 #' Function to check whether a `data.frame` or `tibble` conforms to Darwin
 #' Core standards. While most users will only want to call `suggest_workflow()`,
@@ -26,7 +26,7 @@
 #' side-effect of running check functions on that input.
 #' @order 1
 #' @export
-check_occurrences <- function(.df){
+check_dataset <- function(.df){
 
   # dwc_terms
   fields <- colnames(.df)
@@ -100,7 +100,7 @@ check_occurrences <- function(.df){
 }
 
 
-#' Check all fields that match Darwin Core terms in a dataframe
+#' Check all fields that match Darwin Core terms in a data frame
 #'
 #' @description
 #' Runs checks on all columns that match Darwin Core terms. `check_all()` does this by

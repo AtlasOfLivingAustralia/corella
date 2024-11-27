@@ -2,17 +2,17 @@
 % Please edit documentation in R/use_measurements.R
 \name{use_measurements}
 \alias{use_measurements}
-\title{Add museum- or collection-specific information to a \code{tibble}}
+\title{Add measurement data for an individual or event to a \code{tibble}}
 \usage{
 use_measurements(.df, cols = NULL, type = NULL, unit = NULL, .keep = "unused")
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields added.

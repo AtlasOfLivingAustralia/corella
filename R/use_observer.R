@@ -91,8 +91,7 @@ use_observer <- function(
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_recordedBy <- function(.df,
                              level = c("inform", "warn", "abort")
 ){
@@ -109,8 +108,7 @@ check_recordedBy <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_recordedByID <- function(.df,
                              level = c("inform", "warn", "abort")
 ){

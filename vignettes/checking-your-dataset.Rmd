@@ -1,0 +1,81 @@
+---
+title: "Checking your dataset"
+author: "Dax Kellie"
+date: "2024-11-27"
+output: html_document
+---
+
+A Darwin Core Archive consists of several pieces to ensure a dataset is structured correctly (and can be restructured correctly in the future). These pieces include the dataset, a metadata statement, and an xml file detailing how the columns in the data relate to each other. 
+
+corella is designed to check whether a dataset conforms to Darwin Core standard. This involves two main steps:
+  *  Ensuring that a dataset uses valid Darwin Core terms as column names
+  *  Checking that the data in each column is the correct type for the specified Darwin Core term
+
+This vignette gives additional information about the second step of checking each column's data.
+
+## Checking each term
+
+corella consists of many internal `check_` functions. Each one runs basic validation checks on the specified column to ensure the data conforms to the Darwin Core term's expected data type. 
+
+For example, here is a very small dataset with two observations of galahs (*Eolophus roseicapilla*) (class `character`), their latitude and longitude coordinates (class `numeric`), and a location description in the column `place` (class `character`). 
+
+```{r}
+#| error: true
+library(corella)
+
+df <- tibble::tibble(
+  name = c("Eolophus roseicapilla", "Eolophus roseicapilla"),
+  latitude = c(-35.310, -35.273),
+  longitude = c(149.125, 149.133),
+  place = c("a big tree", "an open field")
+)
+
+df
+```
+
+I can use the function `use_coordinates()` to specify which of my columns refer to the valid Darwin Core terms `decimalLatitude` and `decimalLongitude`. I have intentionally added the wrong column `place` as `decimalLatitude`. corella will return an error because `decimalLatitude` and `decimalLatitude` fields must be numeric in Darwin Core standard. This error comes from a small internal checking function called `check_decimalLatitude()`.
+
+```{r}
+df |>
+  use_coordinates(decimalLatitude = place, # wrong column
+                  decimalLongitude = longitude)
+```
+
+corella contains internal `check_` functions for all individual Darwin Core terms that are supported. These are as follows:
+
+[a scrollable table of all supported terms and their check functions]
+
+When a `use_` function is used, any specified or matching Darwin Core terms will trigger that each term's `check_` function is passed. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. The individual internal `check_` functions are useful to know about because they power the full suite of checks run by `check_dataset()`.
+
+## Checking a full dataset
+
+For users who are familiar with Darwin Core standards, or who have datasets that already conform to Darwin Core standards (or are very close), it might be more convenient to run many checks at one time. 
+
+Users can use the `check_dataset()` function to run a "test suite" on their dataset. `check_dataset()` detects all columns that match valid Darwin Core terms, and runs all matching `check_` functions all at once, interactively, much like `devtools::test()` or `devtools::check()`. 
+
+The output of `check_dataset()` returns: 
+  *  A summary table of whether each matching column's check passed or failed
+  *  The number of errors and passed columns
+  *  Whether the data meets minimum Darwin Core requirements
+  *  The first 5 error messages returned by checks
+  
+```{r}
+df <- tibble(
+  decimalLatitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+  decimalLongitude = c(149.125, 149.133),
+  date = c("14-01-2023", "15-01-2023"),
+  individualCount = c(0, 2),
+  scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+  country = c("AU", "AU"),
+  occurrenceStatus = c("present", "present")
+  )
+
+df |>
+  check_dataset()
+```
+
+`check_dataset()` currently only accepts occurrence-level datasets. It does not correctly check datasets with hierarchical events data (eg multiple or repeated Surveys, Site Locations).
+
+## Users have options
+
+As we detailed above, corella offers two options for checking dataset: Running individual checks through `use_` functions or running a "testing suite" through `check_dataset()`. We hope that these alternative options provide users with options, allowing them to choose or switch between methods!

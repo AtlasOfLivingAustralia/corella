@@ -14,11 +14,14 @@ navbar:
     quickstart:
       text: Quick start guide
       href: articles/quick_start_guide.html
+    articles:
+      text: Articles
+      href: articles/checking-your-dataset.html
     news:
       text: News
       href: news/index.html
 reference:
-- title: Suggest where to start
+- title: Suggest how to get started
   contents:
   - suggest_workflow
 - title: Add, rename or edit columns to match Darwin Core terms
@@ -36,12 +39,9 @@ reference:
   - use_observer
   - use_taxonomy
   - use_measurements
-- title: Test matching columns for Darwin Core compliance
+- title: Check a dataset for Darwin Core conformance
   contents:
-  - check_occurrences
-- title: Individual checks
-  contents:
-  - check_terms
+  - check_dataset
 - title: Add a unique ID
   contents:
   - use_id_random

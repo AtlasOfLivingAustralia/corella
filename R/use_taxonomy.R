@@ -102,8 +102,7 @@ use_taxonomy <- function(
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_kingdom <- function(.df,
                           level = c("inform", "warn", "abort")
                           ){
@@ -121,8 +120,7 @@ check_kingdom <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_phylum <- function(.df,
                          level = c("inform", "warn", "abort")
                          ){
@@ -140,8 +138,7 @@ check_phylum <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_class <- function(.df,
                         level = c("inform", "warn", "abort")
                         ){
@@ -159,8 +156,7 @@ check_class <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_order <- function(.df,
                         level = c("inform", "warn", "abort")
 ){
@@ -178,8 +174,7 @@ check_order <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_family <- function(.df,
                          level = c("inform", "warn", "abort")
 ){
@@ -197,8 +192,7 @@ check_family <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_genus <- function(.df,
                         level = c("inform", "warn", "abort")
 ){
@@ -216,8 +210,7 @@ check_genus <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_specificEpithet <- function(.df,
                                   level = c("inform", "warn", "abort")
 ){
@@ -237,8 +230,7 @@ check_specificEpithet <- function(.df,
 #' @rdname check_terms
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
-#' @order 7
-#' @export
+#' @keywords Internal
 check_vernacularName <- function(.df,
                                  level = c("inform", "warn", "abort")
 ){
