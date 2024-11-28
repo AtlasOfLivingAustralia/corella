@@ -94,9 +94,10 @@ use_collection <- function(
 }
 
 
-#' @rdname check_terms
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_datasetName <- function(.df,
                               level = c("inform", "warn", "abort")

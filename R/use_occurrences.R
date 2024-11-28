@@ -114,7 +114,7 @@ use_occurrences <- function(
 }
 
 #' Check whether a UUID column is already present in a dataset
-#' @rdname check_terms
+#'
 #' @param df Data frame or tibble passed by user
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
@@ -188,9 +188,10 @@ use_id_composite <- function(data,
   return(invisible(data))
 }
 
-#' @rdname check_terms
+#' check basisOfRecord
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_basisOfRecord <- function(.df,
                                 level = c("inform", "warn", "abort")
@@ -218,8 +219,9 @@ valid_basisOfRecord <- function(){
     "materialCitation")
 }
 
-#' @rdname check_terms
+#' check occurrenceID
 #' @importFrom dplyr select
+#' @noRd
 #' @keywords Internal
 check_occurrenceID <- function(.df,
                                level = c("inform", "warn", "abort")
@@ -232,9 +234,10 @@ check_occurrenceID <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' check occurrenceStatus
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_occurrenceStatus <- function(.df,
                                 level = c("inform", "warn", "abort")

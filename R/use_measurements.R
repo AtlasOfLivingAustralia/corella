@@ -81,7 +81,10 @@ use_measurements <- function(
   return(result)
 }
 
-#' @rdname check_terms
+#' TODO: select & unnest nested columns, then run normal individual term/column checks like other use functions
+
+#' Check measurementUnit
+#' @noRd
 #' @keywords Internal
 check_measurementUnit <- function(.df,
                                   level = c("inform", "warn", "abort")

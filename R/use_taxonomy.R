@@ -99,9 +99,10 @@ use_taxonomy <- function(
 }
 
 
-#' @rdname check_terms
+#' check kingdom
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_kingdom <- function(.df,
                           level = c("inform", "warn", "abort")
@@ -117,9 +118,10 @@ check_kingdom <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check phylum
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_phylum <- function(.df,
                          level = c("inform", "warn", "abort")
@@ -135,9 +137,10 @@ check_phylum <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check class
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_class <- function(.df,
                         level = c("inform", "warn", "abort")
@@ -153,9 +156,10 @@ check_class <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check order
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_order <- function(.df,
                         level = c("inform", "warn", "abort")
@@ -171,9 +175,10 @@ check_order <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_family <- function(.df,
                          level = c("inform", "warn", "abort")
@@ -189,9 +194,10 @@ check_family <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check genus
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_genus <- function(.df,
                         level = c("inform", "warn", "abort")
@@ -207,9 +213,10 @@ check_genus <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check specificEpithet
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_specificEpithet <- function(.df,
                                   level = c("inform", "warn", "abort")
@@ -227,9 +234,10 @@ check_specificEpithet <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check vernacularName
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_vernacularName <- function(.df,
                                  level = c("inform", "warn", "abort")

@@ -93,9 +93,10 @@ use_scientific_name <- function(
 }
 
 
-#' @rdname check_terms
+#' check scientificName
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_scientificName <- function(.df,
                                  level = c("inform", "warn", "abort")
@@ -111,9 +112,10 @@ check_scientificName <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check scientificNameRank
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_scientificNameRank <- function(.df,
                                      level = c("inform", "warn", "abort")
@@ -130,9 +132,10 @@ check_scientificNameRank <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' @rdname check_terms
+#' check scientificNameAuthorship
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_scientificNameAuthorship <- function(.df,
                                            level = c("inform", "warn", "abort")

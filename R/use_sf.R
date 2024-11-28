@@ -102,7 +102,8 @@ use_sf <- function(
   result
 }
 
-#' @rdname check_terms
+#' Check coordinates supplied by an sfc_POINT object
+#' @noRd
 #' @keywords Internal
 check_coords <- function(.df,
                          level = c("inform", "warn", "abort")
@@ -115,9 +116,10 @@ check_coords <- function(.df,
       check_has_crs(level = level)
 }
 
-#' @noRd
+#' Check whether an object is of class `sf`
 #' @importFrom sf st_is
 #' @importFrom sf st_geometry
+#' @noRd
 #' @keywords Internal
 check_is_sf <- function(.df,
                           level = c("inform", "warn", "abort"),
@@ -154,11 +156,12 @@ check_is_point <- function(.df,
   .df
 }
 
-#' @noRd
+#' Check whether dataframe has a CRS
 #' @importFrom sf st_crs
 #' @importFrom sf st_geometry
 #' @importFrom cli cli_bullets
 #' @importFrom cli cli_fmt
+#' @noRd
 #' @keywords Internal
 check_has_crs <- function(.df,
                           level = c("inform", "warn", "abort"),

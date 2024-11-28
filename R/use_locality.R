@@ -90,7 +90,8 @@ use_locality <- function(.df,
 # Q: Add function to show countryCodes?
 
 
-#' @rdname check_terms
+#' Check continent
+#' @noRd
 #' @keywords Internal
 check_continent <- function(df,
                             level = c("inform", "warn", "abort")
@@ -114,7 +115,8 @@ check_continent <- function(df,
 }
 
 
-#' @rdname check_terms
+#' Check country
+#' @noRd
 #' @keywords Internal
 check_country <- function(df,
                           level = c("inform", "warn", "abort")
@@ -131,7 +133,8 @@ check_country <- function(df,
 }
 
 
-#' @rdname check_terms
+#' Check countryCode
+#' @noRd
 #' @keywords Internal
 check_countryCode <- function(df,
                               level = c("inform", "warn", "abort")
@@ -157,9 +160,10 @@ check_countryCode <- function(df,
 
 
 
-#' @rdname check_terms
+#' Check stateProvince
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_stateProvince <- function(.df,
                                  level = c("inform", "warn", "abort")
@@ -174,9 +178,10 @@ check_stateProvince <- function(.df,
 }
 
 
-#' @rdname check_terms
+#' check locality
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_locality <- function(.df,
                            level = c("inform", "warn", "abort")

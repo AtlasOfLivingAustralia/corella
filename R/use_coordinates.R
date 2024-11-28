@@ -91,7 +91,8 @@ use_coordinates <- function(
 }
 
 
-#' @rdname check_terms
+#' Check decimalLatitude
+#' @noRd
 #' @keywords Internal
 check_decimalLatitude <- function(.df,
                                   level = c("inform", "warn", "abort")
@@ -107,7 +108,8 @@ check_decimalLatitude <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' Check decimalLongitude
+#' @noRd
 #' @keywords Internal
 check_decimalLongitude <- function(.df,
                                    level = c("inform", "warn", "abort")
@@ -123,7 +125,8 @@ check_decimalLongitude <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' Check geodeticDatum
+#' @noRd
 #' @keywords Internal
 check_geodeticDatum <- function(.df,
                                 level = c("inform", "warn", "abort")
@@ -136,9 +139,10 @@ check_geodeticDatum <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' Check that Coordinate Reference System exists and is valid
 #' @importFrom sf st_crs
 #' @importFrom rlang try_fetch
+#' @noRd
 #' @keywords Internal
 check_crs <- function(.df,
                       level = "warn",

@@ -93,7 +93,8 @@ use_datetime <- function(
 
 
 
-#' @rdname check_terms
+#' Check eventDate
+#' @noRd
 #' @importFrom lubridate parse_date_time
 #' @keywords Internal
 check_eventDate <- function(.df,
@@ -121,7 +122,8 @@ check_eventDate <- function(.df,
 }
 
 
-#' @rdname check_terms
+#' Check year
+#' @noRd
 #' @importFrom lubridate year
 #' @importFrom lubridate today
 #' @keywords Internal
@@ -139,7 +141,8 @@ check_year <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' Check month
+#' @noRd
 #' @importFrom lubridate year
 #' @importFrom lubridate today
 #' @keywords Internal
@@ -179,7 +182,8 @@ check_month <- function(.df,
   }
 }
 
-#' @rdname check_terms
+#' Check day
+#' @noRd
 #' @importFrom lubridate year
 #' @importFrom lubridate today
 #' @keywords Internal
@@ -213,7 +217,8 @@ check_day <- function(.df,
 
 
 
-#' @rdname check_terms
+#' Check eventTime
+#' @noRd
 #' @importFrom lubridate year
 #' @importFrom lubridate today
 #' @keywords Internal

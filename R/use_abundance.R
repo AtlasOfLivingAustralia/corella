@@ -89,10 +89,11 @@ use_abundance <- function(.df,
 
 }
 
-#' @rdname check_terms
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @importFrom cli cli_abort
+#' @noRd
 #' @keywords Internal
 check_individualCount <- function(.df,
                                   level = c("inform", "warn", "abort")
@@ -145,9 +146,10 @@ check_individualCount <- function(.df,
 }
 
 
-#' @rdname check_terms
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_organismQuantity <- function(.df,
                                   level = c("inform", "warn", "abort")
@@ -167,9 +169,10 @@ check_organismQuantity <- function(.df,
 }
 
 
-#' @rdname check_terms
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
+#' @noRd
 #' @keywords Internal
 check_organismQuantityType <- function(.df,
                                    level = c("inform", "warn", "abort")

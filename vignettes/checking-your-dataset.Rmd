@@ -20,7 +20,6 @@ corella consists of many internal `check_` functions. Each one runs basic valida
 For example, here is a very small dataset with two observations of galahs (*Eolophus roseicapilla*) (class `character`), their latitude and longitude coordinates (class `numeric`), and a location description in the column `place` (class `character`). 
 
 ```{r}
-#| error: true
 library(corella)
 
 df <- tibble::tibble(
@@ -36,6 +35,7 @@ df
 I can use the function `use_coordinates()` to specify which of my columns refer to the valid Darwin Core terms `decimalLatitude` and `decimalLongitude`. I have intentionally added the wrong column `place` as `decimalLatitude`. corella will return an error because `decimalLatitude` and `decimalLatitude` fields must be numeric in Darwin Core standard. This error comes from a small internal checking function called `check_decimalLatitude()`.
 
 ```{r}
+#| error: true
 df |>
   use_coordinates(decimalLatitude = place, # wrong column
                   decimalLongitude = longitude)
