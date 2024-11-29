@@ -1,7 +1,7 @@
 ---
 title: "Checking your dataset"
 author: "Dax Kellie"
-date: "2024-11-27"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -13,7 +13,7 @@ corella is designed to check whether a dataset conforms to Darwin Core standard.
 
 This vignette gives additional information about the second step of checking each column's data.
 
-## Checking each term
+## Checking individual terms
 
 corella consists of many internal `check_` functions. Each one runs basic validation checks on the specified column to ensure the data conforms to the Darwin Core term's expected data type. 
 
@@ -21,6 +21,7 @@ For example, here is a very small dataset with two observations of galahs (*Eolo
 
 ```{r}
 library(corella)
+library(tibble)
 
 df <- tibble::tibble(
   name = c("Eolophus roseicapilla", "Eolophus roseicapilla"),
@@ -41,11 +42,68 @@ df |>
                   decimalLongitude = longitude)
 ```
 
+
+### Supported terms
+
 corella contains internal `check_` functions for all individual Darwin Core terms that are supported. These are as follows:
 
-[a scrollable table of all supported terms and their check functions]
+```{r save-table, include=FALSE}
+# generate table
+# fn_to_term_table() |>
+#   dplyr::bind_rows() |>
+#   write.csv(here::here("data-raw", "supported-terms.csv"))
+```
 
-When a `use_` function is used, any specified or matching Darwin Core terms will trigger that each term's `check_` function is passed. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. The individual internal `check_` functions are useful to know about because they power the full suite of checks run by `check_dataset()`.
+
+```{r term-table-output, out.extra='max-height:200px;', class.output='output-scroll'}
+#| echo: false
+#| message: false
+#| warning: false
+library(gt)
+library(dplyr)
+
+readr::read_csv(here::here("data-raw", "supported-terms.csv")) |>
+  select(-1) |> # remove reference column
+  mutate(
+    check_function = glue::glue("check_{dwc_term}()")
+  ) |>
+  dplyr::select(2, 3, 1) |>
+  dplyr::rename(
+    "Term" = dwc_term,
+    "check function" = check_function,
+    "use function" = use_function
+  ) |> 
+  gt() |>
+  cols_align(
+    align = "left"
+  ) |>
+  tab_header(
+    title = md("Supported Darwin Core terms"),
+    subtitle = "and their associated functions"
+  ) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "#92b4ea", alpha = 0.3),
+      cell_text(font = c(google_font(name = "Roboto")))
+    ),
+    locations = cells_body(columns = c("Term"))
+  ) |>
+  tab_style(
+    style = list(
+      cell_borders(sides = c("l"), color = "gray50", weight = px(3)),
+      cell_text(font = c(google_font(name = "Fira Mono")))
+    ),
+    locations = cells_body(columns = c("check function", "use function"))
+  ) |>
+  tab_options(
+    container.height = "450px"
+  )
+```
+<br> 
+
+When a user specifies a column to a matching Darwin Core term (or the column/term is detected by corella automatically) in a `use_` function, the `use_` function triggers that matching term's `check_` function. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. 
+
+It's useful to know that these internal, individual `check_` functions exist because they are the building blocks of a full suite of checks, which users can run with `check_dataset()`.
 
 ## Checking a full dataset
 
@@ -60,7 +118,7 @@ The output of `check_dataset()` returns:
   *  The first 5 error messages returned by checks
   
 ```{r}
-df <- tibble(
+df <- tibble::tibble(
   decimalLatitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
   decimalLongitude = c(149.125, 149.133),
   date = c("14-01-2023", "15-01-2023"),
@@ -74,8 +132,8 @@ df |>
   check_dataset()
 ```
 
-`check_dataset()` currently only accepts occurrence-level datasets. It does not correctly check datasets with hierarchical events data (eg multiple or repeated Surveys, Site Locations).
+Note that `check_dataset()` currently only accepts occurrence-level datasets. Datasets with hierarchical events data (eg multiple or repeated Surveys, Site Locations) are not currently supported.
 
 ## Users have options
 
-As we detailed above, corella offers two options for checking dataset: Running individual checks through `use_` functions or running a "testing suite" through `check_dataset()`. We hope that these alternative options provide users with options, allowing them to choose or switch between methods!
+corella offers two options for checking a dataset, which we have detailed above: Running individual checks through `use_` functions, or running a "test suite" with `check_dataset()`. We hope that these alternative options provide users with different options for their workflow, allowing them to choose their favourite method or switch between methods as they standardise their data.

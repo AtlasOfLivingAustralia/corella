@@ -139,17 +139,17 @@ df |>
 ```
 
 Or, if your data is nearly ready and you want to run checks over all
-columns that match Darwin Core terms, run `check_occurrences()`.
-`check_occurrences()` only checks columns with column names that match
-valid Darwin Core terms.
+columns that match Darwin Core terms, run `check_dataset()`.
+`check_dataset()` checks all columns with valid Darwin Core terms as
+column names.
 
 ``` r
 df |>
-  check_occurrences()
+  check_dataset()
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [274ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [223ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
@@ -174,6 +174,5 @@ citation(package = "corella")
 
 The current recommended citation is:
 
-> Westgate MJ, Balasubramaniam S & Kellie D (2024) corella: Tools to
-> standardize biodiversity data to Darwin Core. R Package version
-> 0.1.0.9999.
+> Kellie D, Balasubramaniam S & Westgate MJ (2024) corella: Tools to
+> standardize biodiversity data to Darwin Core. R Package version 0.1.0.

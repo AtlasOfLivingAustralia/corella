@@ -6,8 +6,10 @@ navbar:
     left:
     - home
     - quickstart
+    - articles
     - reference
     right:
+    - search
     - news
     - github
   components:
@@ -16,7 +18,10 @@ navbar:
       href: articles/quick_start_guide.html
     articles:
       text: Articles
-      href: articles/checking-your-dataset.html
+      menu:
+      - text: Checking your dataset
+        href: articles/checking-your-dataset.html
+
     news:
       text: News
       href: news/index.html
@@ -39,7 +44,7 @@ reference:
   - use_observer
   - use_taxonomy
   - use_measurements
-- title: Check a dataset for Darwin Core conformance
+- title: Run checks on a dataset for Darwin Core conformance
   contents:
   - check_dataset
 - title: Add a unique ID
