@@ -149,7 +149,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [223ms]
+#> ✔ | 1 ✖ | eventDate  [268ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
