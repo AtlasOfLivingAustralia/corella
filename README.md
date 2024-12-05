@@ -24,10 +24,9 @@ Australia](https://www.ala.org.au) and [GBIF](https://www.gbif.org/).
 
 `corella` was built, and is maintained, by the [Science & Decision
 Support Team](https://labs.ala.org.au) at the [Atlas of Living
-Australia](https://www.ala.org.au) (ALA). The package is named for an
-endangered Australian species of [alpine
-frog](https://bie.ala.org.au/species/https://biodiversity.org.au/afd/taxa/cbf9278d-64b7-43d6-9691-78b99b2eb65f#overview)
-native to the marshlands and forests of ACT and NSW.
+Australia](https://www.ala.org.au) (ALA). It is named for the Little
+Corella ([*Cacatua
+sanguinea*](https://bie.ala.org.au/species/https%3A//biodiversity.org.au/afd/taxa/34b31e86-7ade-4cba-960f-82a6ae586206)).
 
 If you have any comments, questions or suggestions, please [contact
 us](mailto:support@ala.org.au).
@@ -149,7 +148,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ✔ | 1 ✖ | eventDate  [268ms]
+#> ✔ | 1 ✖ | eventDate  [62ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]

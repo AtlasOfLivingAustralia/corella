@@ -14,7 +14,8 @@ conform with, and check validity against, Darwin Core standards.
 Using \code{{corella}} will allow users to verify that their data can be used to
 build 'Darwin Core Archives' using the \code{{galaxias}} package
 
-The package is named for an endangered species of alpine frog.
+The package is named for a genus of Australian birds. The logo image is of
+the Little Corella (\emph{Cacatua sanguinea}), and was drawn by Dax Kellie.
 }
 \section{Functions}{
 
@@ -64,6 +65,13 @@ The wrapper function for checking tibbles for Darwin Core compliance is
 \references{
 If you have any questions, comments or suggestions, please email
 \href{mailto:support@ala.org.au}{support@ala.org.au}.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://corella.ala.org.au}
+}
+
 }
 \author{
 \strong{Maintainer}: Dax Kellie \email{dax.kellie@csiro.au}

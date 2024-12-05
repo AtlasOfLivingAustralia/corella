@@ -9,7 +9,8 @@
 #' Using `{corella}` will allow users to verify that their data can be used to
 #' build 'Darwin Core Archives' using the `{galaxias}` package
 #'
-#' The package is named for an endangered species of alpine frog.
+#' The package is named for a genus of Australian birds. The logo image is of
+#' the Little Corella (_Cacatua sanguinea_), and was drawn by Dax Kellie.
 #'
 #' @name corella-package
 #' @docType package
