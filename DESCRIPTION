@@ -21,21 +21,22 @@ Depends:
 Imports:
   cli,
   dplyr,
-  tibble,
   glue,
+  here,
+  hms,
   lubridate,
   purrr,
   rlang,
   sf,
   stringr,
+  tibble,
   tidyr,
-  uuid,
-  hms,
   nanoparquet,
-  here
+  uuid
 Suggests:
   gt,
   knitr,
+  readr,
   rmarkdown,
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
