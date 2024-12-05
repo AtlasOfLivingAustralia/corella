@@ -34,9 +34,10 @@ Imports:
   nanoparquet,
   here
 Suggests:
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0)
+  gt,
+  knitr,
+  rmarkdown,
+  testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://corella.ala.org.au
 Encoding: UTF-8
