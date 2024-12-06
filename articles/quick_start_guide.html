@@ -17,7 +17,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">corella</a>
 
@@ -149,7 +149,7 @@ name) in our data is in the <code>species</code> column by using
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_scientific_name.html">use_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[334ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[338ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   latitude longitude date       time   month   day     n crs   country continent</span></span>
@@ -179,16 +179,17 @@ wrong.</p>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="va">latitude</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[315ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[317ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[619ms]</span></span></span>
+<span><span class="co">#&gt; ⠹ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[636ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_decimalLatitude()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">decimalLatitude</span> must be a numeric vector, not character.</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="fix-or-update-columns">Fix or update columns<a class="anchor" aria-label="anchor" href="#fix-or-update-columns"></a>
-</h4>
+<div class="section level3">
+<h3 id="fix-or-update-columns">Fix or update columns<a class="anchor" aria-label="anchor" href="#fix-or-update-columns"></a>
+</h3>
 <p>How do we fix the column that caused an error? One way is to edit the
 column within the <code>use_</code> function containing our problematic
 column.</p>
@@ -202,10 +203,10 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[316ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[616ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -214,9 +215,9 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 15-01-2023 11:25:00 Februa…   101     3 WGS8d Denmark Europe    Eolophus rose…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: decimalLatitude &lt;dbl&gt;, decimalLongitude &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="auto-detect-columns">Auto-detect columns<a class="anchor" aria-label="anchor" href="#auto-detect-columns"></a>
-</h4>
+<div class="section level3">
+<h3 id="auto-detect-columns">Auto-detect columns<a class="anchor" aria-label="anchor" href="#auto-detect-columns"></a>
+</h3>
 <p>corella is also able to detect when columns already contain valid
 Darwin Core terms as column names. For example, <code>df</code> contains
 columns with locality information. We can add
@@ -233,13 +234,13 @@ them automatically.</p>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_locality.html">use_locality</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[619ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[617ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -379,10 +380,10 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[32ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[33ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[23ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[26ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -403,12 +404,12 @@ error messages returned by those checks.</p>
 <h2 id="use_measurements-a-work-in-progress">
 <code>use_measurements</code>: a work in progress<a class="anchor" aria-label="anchor" href="#use_measurements-a-work-in-progress"></a>
 </h2>
-<p>Let’s use a small sample of a real dataset with data on Australian
-native plant species including Eucalypts and Acacias. The dataset
-contains lots of measurement fields attached to each species occurrence
-that contain data the organism’s traits or environment. I have extracted
-3 examples: <code>LMA_g.m2</code>, <code>LeafN_area_g.m2</code>,
-<code>PNUE</code>.</p>
+<p>Let’s use a small sample of a real dataset of Australian native plant
+species, including Eucalypts and Acacias. The dataset contains lots of
+columns containing measurements that capture the traits or environment
+of each species occurrence. I have extracted 3 examples of these
+measurement columns: <code>LMA_g.m2</code>,
+<code>LeafN_area_g.m2</code>, <code>PNUE</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
@@ -435,9 +436,22 @@ that contain data the organism’s traits or environment. I have extracted
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Alice Mulga    Acacia est…    -<span style="color: #BB0000;">22.4</span>      133.      <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Alice Mulga    Acacia kem…    -<span style="color: #BB0000;">22.4</span>      133.      <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 751 more rows</span></span></span></code></pre></div>
-<p>Darwin Core confusingly handles measurement fields. This nests them
-and assigns them to the correct columns. You just specify the column,
-the unit, and the type of measurement</p>
+<p>The way that Darwin Core handles measurement fields is slightly
+different to how they are organised in these data. In
+<code>df_filtered</code>, lots of information about what data the column
+contains is in the abbreviated column name. This includes the type of
+measure, the unit it is measured in, and the value itself. In Darwin
+Core, this information needs to be documented individually for each
+measurement, which requires multiple columns and multiple rows (ie a
+‘long’ data format).</p>
+<p>corella can convert measurement columns into Darwin Core standard
+with <code><a href="../reference/use_measurements.html">use_measurements()</a></code>. This function requires the column,
+unit and measure type are specified for each respective measurement,
+after which <code><a href="../reference/use_measurements.html">use_measurements()</a></code> assigns this information to
+the correct Darwin Core columns. <code><a href="../reference/use_measurements.html">use_measurements()</a></code> then
+nests them so that they information is linked to each species
+occurrence, held in a nested column called
+<code>measurementOrFact</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_nested</span> <span class="op">&lt;-</span> <span class="va">df_filtered</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">220</span><span class="op">:</span><span class="fl">270</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -452,6 +466,7 @@ the unit, and the type of measurement</p>
 <span>                            <span class="st">"photosynthetic nitrogen use efficiency"</span><span class="op">)</span></span>
 <span>                   <span class="op">)</span></span>
 <span></span>
+<span></span>
 <span><span class="va">df_nested</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
 <span><span class="co">#&gt;   Site           Species                 Latitude Longitude measurementOrFact</span></span>
@@ -459,8 +474,9 @@ the unit, and the type of measurement</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Downfall Creek Gossia hillii              -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Downfall Creek Homalium circumpinnatum    -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Downfall Creek Polyalthia nitidissima     -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span></span></span></code></pre></div>
-<p>Then you can unnest that column, and it will have all the correct
-columns formatted correctly.</p>
+<p>To view or access this data, you can use
+<code>dplyr::unnest()</code>, which will extract the information into a
+‘long’ data format.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_nested</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measurementOrFact</span><span class="op">)</span></span>
