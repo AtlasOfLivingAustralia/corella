@@ -1,6 +1,8 @@
 url: https://corella.ala.org.au
 template:
   bootstrap: 5
+  params:
+    bootswatch: cerulean
 navbar:
   structure:
     left:
