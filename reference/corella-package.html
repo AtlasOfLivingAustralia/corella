@@ -92,7 +92,10 @@ fields, to an existing <code>tibble</code>.</p><ul><li><p><code><a href="use_coo
 </ul><p><strong>Checking data for Darwin Core compliance</strong></p>
 <p>The wrapper function for checking tibbles for Darwin Core compliance is
 <code><a href="check_dataset.html">check_dataset()</a></code>. It calls all internal check functions for checking data in columns with matching Darwin Core terms.</p>
-<p>** Add occurrence ID **</p><ul><li><p><code><a href="use_id_random.html">use_id_random()</a></code> adds a valid uuid column to a tibble</p></li>
+<p><strong>Helper functions</strong>
+These functions are called within <code>use_</code> (or <code>mutate()</code> functions), and assist in common problems</p><ul><li><p><code><a href="create_id.html">create_composite_id()</a></code> Supply a combination of variables to concatenate into a unique identifier</p></li>
+<li><p><code><a href="create_id.html">create_sequential_id()</a></code> Create a unique identifier of sequential numbers</p></li>
+<li><p><code><a href="create_id.html">create_random_id()</a></code> Create a unique identifier using <code>UUID()</code></p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
