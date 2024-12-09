@@ -53,51 +53,6 @@ test_that("use_occurrences has progress messages", {
 
 })
 
-test_that("use_occurrences handles `use_id_random()`", {
-  quiet_use_occurrences <- purrr::quietly(use_occurrences)
-  df <- tibble(basisOfRecord = "humanObservation",
-               col2 = 1:2)
-
-  result <- df |>
-    quiet_use_occurrences(occurrenceID = use_id_random())
-
-  expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(colnames(result$result), c("basisOfRecord", "col2", "occurrenceID"))
-  expect_type(result$result$occurrenceID, "character")
-  expect_equal(nchar(result$result$occurrenceID), c(36, 36))
-})
-
-test_that("use_id_random() generates unique UUID", {
-  quiet_use_occurrences <- purrr::quietly(use_occurrences)
-  df <- tibble(
-    basisOfRecord = "humanObservation",
-    col2 = 1:2
-  )
-
-  result <- df |>
-    quiet_use_occurrences(occurrenceID = use_id_random())
-
-  # if any aren't UUIDs, they will return NA
-  uuid_check <- result |>
-    purrr::pluck("result") |>
-    select(occurrenceID) |>
-    purrr::map_dfr(uuid::as.UUID)
-
-  expect_type(result$result$occurrenceID, "character")
-  expect_equal(nchar(result$result$occurrenceID), c(36, 36))
-  expect_true(all(!is.na(uuid_check)))
-  expect_equal(length(unique(result$result$occurrenceID)), nrow(result$result))
-})
-
-test_that("use_occurrences errors when UUID is already present in df", {
-  df <- tibble(basisOfRecord = "humanObservation",
-               id_col = uuid::UUIDgenerate())
-
-  expect_error(suppressMessages(
-    use_occurrences(df, occurrenceID = use_id_random())),
-    "Column id_col contains UUID values")
-})
-
 test_that("use_occurrences only accepts valid values for basisOfRecord", {
   valid_values <- c("humanObservation", "machineObservation", "livingSpecimen",
                        "preservedSpecimen", "fossilSpecimen", "materialCitation")
@@ -145,4 +100,68 @@ test_that("use_occurrences checks occurrenceStatus format", {
     ),
     "Unexpected value in occurrenceStatus"
   )
+})
+
+test_that("create_sequential_id() works with use_occurrences()", {
+  input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+                  basisOfRecord = "humanObservation",
+                  site = rep(c("A01", "A02", "A03"), each = 5))
+  suppressMessages(result <- input |>
+    use_occurrences(occurrenceID = create_sequential_id())
+  )
+  expect_equal(colnames(result),
+               c("eventDate", "basisOfRecord", "site", "occurrenceID"))
+  expect_equal(as.integer(result$occurrenceID),
+               seq_len(15))
+  expect_true(all(nchar(result$occurrenceID) == 3))
+})
+
+test_that("create_sequential_id() accepts `width` argument with use_occurrences()", {
+  input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+                  basisOfRecord = "humanObservation",
+                  site = rep(c("A01", "A02", "A03"), each = 5))
+  suppressMessages(result <- input |>
+    use_occurrences(occurrenceID = create_sequential_id(width = 10))
+  )
+  expect_true(all(nchar(result$occurrenceID) == 10))
+})
+
+test_that("create_random_id() works with use_occurrences()", {
+  input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+                  basisOfRecord = "humanObservation",
+                  site = rep(c("A01", "A02", "A03"), each = 5))
+  suppressMessages(result <- input |>
+    use_occurrences(occurrenceID = create_random_id())
+  )
+  expect_equal(colnames(result),
+               c("eventDate", "basisOfRecord", "site", "occurrenceID"))
+  expect_equal(length(unique(result$occurrenceID)),
+               nrow(result))
+})
+
+test_that("create_composite_id() works with use_occurrences()", {
+  input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+                  basisOfRecord = "humanObservation",
+                  site = rep(c("A01", "A02", "A03"), each = 5))
+  suppressMessages(result <- input |>
+    use_occurrences(occurrenceID = create_composite_id(site, eventDate))
+  )
+  expect_equal(colnames(result),
+               c("eventDate", "basisOfRecord", "site", "occurrenceID"))
+  expect_equal(paste0(result$site, "-", result$eventDate),
+               result$occurrenceID)
+})
+
+test_that("create_sequential_id() works within create_composite_id()", {
+  input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+                  basisOfRecord = "humanObservation",
+                  site = rep(c("A01", "A02", "A03"), each = 5))
+  suppressMessages(result <- input |>
+    use_occurrences(occurrenceID = create_composite_id(create_sequential_id(),
+                                                       site,
+                                                       eventDate))
+  )
+  expect_equal(colnames(result),
+               c("eventDate", "basisOfRecord", "site", "occurrenceID"))
+  expect_true(all(grepl("^[[:digit:]]{3}-", result$occurrenceID)))
 })

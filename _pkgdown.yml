@@ -49,7 +49,7 @@ reference:
 - title: Run checks on a dataset for Darwin Core conformance
   contents:
   - check_dataset
-- title: Add a unique ID
+- title: Helper functions
   contents:
-  - use_id_random
+  - create_composite_id
 

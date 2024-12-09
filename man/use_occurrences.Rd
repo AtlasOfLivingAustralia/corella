@@ -9,7 +9,7 @@ use_occurrences(
   occurrenceID = NULL,
   basisOfRecord = NULL,
   occurrenceStatus = NULL,
-  .keep = "unused",
+  .keep = "all",
   .messages = TRUE
 )
 }
@@ -28,9 +28,11 @@ Accepted \code{basisOfRecord} values are one of:
 }}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
-\code{"unused"}, which only keeps Darwin Core fields and not those fields used to
-generate them.}
+Note that unlike most other \code{use_} functions in \code{corella}, this defaults to
+\code{"all"} (i.e. same behavior as \code{dplyr::mutate}). This is because it is common
+to create composite indicators from other columns (via
+\code{create_composite_id()}), and deleting these columns by default is typically
+unwise.}
 
 \item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }

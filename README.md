@@ -27,7 +27,7 @@ Support Team](https://labs.ala.org.au) at the [Atlas of Living
 Australia](https://www.ala.org.au) (ALA). It is named for the Little
 Corella ([*Cacatua
 sanguinea*](https://bie.ala.org.au/species/https%3A//biodiversity.org.au/afd/taxa/34b31e86-7ade-4cba-960f-82a6ae586206)).
-The logo was designed by [Dax Kellie](https://daxkellie.com/)
+The logo was designed by [Dax Kellie](https://daxkellie.com/).
 
 If you have any comments, questions or suggestions, please [contact
 us](mailto:support@ala.org.au).
@@ -149,7 +149,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ✔ | 1 ✖ | eventDate  [207ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [71ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]

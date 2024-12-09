@@ -22,9 +22,11 @@
 #' @param parentEventID The parent event under which one or more Events sit
 #' within.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
-#' generate them.
+#' Note that unlike most other `use_` functions in `corella`, this defaults to
+#' `"all"` (i.e. same behavior as `dplyr::mutate`). This is because it is common
+#' to create composite indicators from other columns (via
+#' `create_composite_id()`), and deleting these columns by default is typically
+#' unwise.
 #' @returns A tibble with the requested fields added.
 #' @details
 #' Each Event requires a unique `eventID` and `eventType` (because there can
@@ -62,7 +64,7 @@ use_events <- function(
     eventID = NULL,
     eventType = NULL,
     parentEventID = NULL,
-    .keep = "unused"
+    .keep = "all"
 ){
   if(missing(.df)){
     abort(".df is missing, with no default")

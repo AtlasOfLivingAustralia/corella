@@ -51,9 +51,12 @@
 #'  The wrapper function for checking tibbles for Darwin Core compliance is
 #'  [check_dataset()]. It calls all internal check functions for checking data in columns with matching Darwin Core terms.
 #'
-#'  ** Add occurrence ID **
+#'  **Helper functions**
+#'  These functions are called within `use_` (or `mutate()` functions), and assist in common problems
 #'
-#'   * [use_id_random()] adds a valid uuid column to a tibble
+#'   * [create_composite_id()] Supply a combination of variables to concatenate into a unique identifier
+#'   * [create_sequential_id()] Create a unique identifier of sequential numbers
+#'   * [create_random_id()] Create a unique identifier using `UUID()`
 #'
 #' @keywords internal
 "_PACKAGE"

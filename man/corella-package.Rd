@@ -56,9 +56,12 @@ Proposed:
 The wrapper function for checking tibbles for Darwin Core compliance is
 \code{\link[=check_dataset]{check_dataset()}}. It calls all internal check functions for checking data in columns with matching Darwin Core terms.
 
-** Add occurrence ID **
+\strong{Helper functions}
+These functions are called within \code{use_} (or \code{mutate()} functions), and assist in common problems
 \itemize{
-\item \code{\link[=use_id_random]{use_id_random()}} adds a valid uuid column to a tibble
+\item \code{\link[=create_composite_id]{create_composite_id()}} Supply a combination of variables to concatenate into a unique identifier
+\item \code{\link[=create_sequential_id]{create_sequential_id()}} Create a unique identifier of sequential numbers
+\item \code{\link[=create_random_id]{create_random_id()}} Create a unique identifier using \code{UUID()}
 }
 }
 
