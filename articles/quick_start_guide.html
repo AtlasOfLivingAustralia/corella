@@ -149,7 +149,7 @@ name) in our data is in the <code>species</code> column by using
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_scientific_name.html">use_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[335ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[333ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   latitude longitude date       time   month   day     n crs   country continent</span></span>
@@ -182,8 +182,7 @@ wrong.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[316ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; ⠹ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[634ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_decimalLatitude()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">decimalLatitude</span> must be a numeric vector, not character.</span></span></code></pre></div>
@@ -203,10 +202,10 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -234,13 +233,13 @@ them automatically.</p>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_locality.html">use_locality</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[617ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[621ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[617ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -380,10 +379,10 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[30ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[32ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[25ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[23ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
