@@ -7,8 +7,8 @@
 use_scientific_name(
   .df,
   scientificName = NULL,
-  scientificNameRank = NULL,
   scientificNameAuthorship = NULL,
+  taxonRank = NULL,
   .keep = "unused"
 )
 }
@@ -16,9 +16,9 @@ use_scientific_name(
 \item{scientificName}{The full scientific name in the lower level taxonomic
 rank that can be determined.}
 
-\item{scientificNameRank}{The taxonomic rank of \code{scientificName}.}
-
 \item{scientificNameAuthorship}{The authorship information for \code{scientificName}.}
+
+\item{taxonRank}{The taxonomic rank of \code{scientificName}.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
@@ -45,19 +45,19 @@ users should not include this information):
 \item \verb{Ambystoma tigrinum diaboli} (genus + specificEpithet + infraspecificEpithet)
 }
 
-Examples of \code{scientificNameRank}:
-\itemize{
-\item \code{order}
-\item \code{genus}
-\item \code{subspecies}
-\item \code{infraspecies}
-}
-
 Examples of \code{scientificNameAuthorship}:
 \itemize{
 \item \verb{(Györfi, 1952)}
 \item \verb{R. A. Graham}
 \item \verb{(Martinovský) Tzvelev}
+}
+
+Examples of \code{taxonRank}:
+\itemize{
+\item \code{order}
+\item \code{genus}
+\item \code{subspecies}
+\item \code{infraspecies}
 }
 }
 \seealso{

@@ -65,20 +65,20 @@ test_that("use_scientific_name checks scientificName format", {
   )
 })
 
-test_that("use_scientific_name checks scientificNameRank format", {
+test_that("use_scientific_name checks taxonRank format", {
   quiet_use_scientific_name <- purrr::quietly(use_scientific_name)
-  df <- tibble(scientificNameRank = c("family", "species"),
+  df <- tibble(taxonRank = c("family", "species"),
                col2 = 1:2)
 
   result <- df |> quiet_use_scientific_name()
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(colnames(result$result), c("scientificNameRank", "col2"))
+  expect_equal(colnames(result$result), c("taxonRank", "col2"))
 
   expect_error(suppressMessages(
-    df |> use_scientific_name(scientificNameRank = col2)
+    df |> use_scientific_name(taxonRank = col2)
   ),
-  "scientificNameRank must be a character vector, not integer"
+  "taxonRank must be a character vector, not integer"
   )
 })
 

@@ -1,7 +1,7 @@
 #' Add measurement data for an individual or event to a `tibble`
 #'
 #' @description
-#' test
+#' This function is a work in progress, and should be used with caution.
 #'
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param .keep Control which columns from .data are retained in the output.

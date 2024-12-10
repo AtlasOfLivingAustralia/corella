@@ -144,7 +144,7 @@ check_countryCode <- function(df,
     df |>
       select("countryCode") |>
       check_is_string(level = level) |>
-      check_contains_values(country_codes$code,
+      check_contains_values(countryCode_values(),
                             level = level,
                             .accepted_message = FALSE)
   }

@@ -28,7 +28,7 @@
 "27","use_collection()","datasetName"
 "28","use_collection()","catalogNumber"
 "29","use_coordinates()","coordinatePrecision"
-"30","use_scientific_name()","scientificNameRank"
+"30","use_scientific_name()","taxonRank"
 "31","use_scientific_name()","scientificNameAuthorship"
 "32","use_datetime()","year"
 "33","use_datetime()","month"

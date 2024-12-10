@@ -361,7 +361,7 @@ fn_to_term_table <- function() {
     "use_collection()", "datasetName",
     "use_collection()", "catalogNumber",
     "use_coordinates()", "coordinatePrecision",
-    "use_scientific_name()", "scientificNameRank",
+    "use_scientific_name()", "taxonRank",
     "use_scientific_name()", "scientificNameAuthorship",
     "use_datetime()", "year",
     "use_datetime()", "month",

@@ -6,7 +6,7 @@
 #' practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for how spatial fields are
 #' represented in the Darwin Core Standard.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param eventDate The date or date + time that the observation/event occurred.
 #' @param year The year of the observation/event.
 #' @param month The month of the observation/event.
@@ -16,6 +16,8 @@
 #' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
+#' @param .messages (logical) Should informative messages be shown? Defaults to
+#' `TRUE`.
 #' @returns A tibble with the requested fields added.
 #' @details
 #' Example values are:

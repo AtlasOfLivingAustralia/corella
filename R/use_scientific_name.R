@@ -5,7 +5,7 @@
 #' @param df a `data.frame` or `tibble` that the column should be appended to.
 #' @param scientificName The full scientific name in the lower level taxonomic
 #' rank that can be determined.
-#' @param scientificNameRank The taxonomic rank of `scientificName`.
+#' @param taxonRank The taxonomic rank of `scientificName`.
 #' @param scientificNameAuthorship The authorship information for `scientificName`.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
@@ -21,16 +21,16 @@
 #' * `Ctenomys sociabilis` (genus + specificEpithet)
 #' * `Ambystoma tigrinum diaboli` (genus + specificEpithet + infraspecificEpithet)
 #'
-#' Examples of `scientificNameRank`:
-#' * `order`
-#' * `genus`
-#' * `subspecies`
-#' * `infraspecies`
-#'
 #' Examples of `scientificNameAuthorship`:
 #' * `(Györfi, 1952)`
 #' * `R. A. Graham`
 #' * `(Martinovský) Tzvelev`
+#'
+#' Examples of `taxonRank`:
+#' * `order`
+#' * `genus`
+#' * `subspecies`
+#' * `infraspecies`
 #'
 #' @seealso [use_taxonomy()] for taxonomic name information.
 #' @importFrom dplyr mutate
@@ -39,8 +39,8 @@
 use_scientific_name <- function(
     .df,
     scientificName = NULL,
-    scientificNameRank = NULL,
     scientificNameAuthorship = NULL,
+    taxonRank = NULL,
     .keep = "unused"
 ){
   if(missing(.df)){
@@ -51,7 +51,7 @@ use_scientific_name <- function(
 
   # capture arguments as a list of quosures
   # NOTE: enquos() must be listed alphabetically
-  fn_quos <- enquos(scientificName, scientificNameAuthorship, scientificNameRank)
+  fn_quos <- enquos(scientificName, scientificNameAuthorship, taxonRank)
   names(fn_quos) <- fn_args
 
   # find arguments that are NULL but exist already in `df`
@@ -86,7 +86,7 @@ use_scientific_name <- function(
 
   # run column checks
   check_scientificName(result, level = "abort")
-  check_scientificNameRank(result, level = "abort")
+  check_taxonRank(result, level = "abort")
   check_scientificNameAuthorship(result, level = "abort")
 
   result
@@ -112,18 +112,18 @@ check_scientificName <- function(.df,
 # TODO: Currently only checks whether input is a string
 
 
-#' check scientificNameRank
+#' check taxonRank
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @noRd
 #' @keywords Internal
-check_scientificNameRank <- function(.df,
+check_taxonRank <- function(.df,
                                      level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
-  if(any(colnames(.df) == "scientificNameRank")){
+  if(any(colnames(.df) == "taxonRank")){
     .df |>
-      select("scientificNameRank") |>
+      select("taxonRank") |>
       check_is_string(level = level)
     # Should this check a list of valid values?
   }

@@ -16,6 +16,8 @@ use_datetime(
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{eventDate}{The date or date + time that the observation/event occurred.}
 
 \item{year}{The year of the observation/event.}
@@ -29,7 +31,8 @@ Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defau
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
 
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.messages}{(logical) Should informative messages be shown? Defaults to
+\code{TRUE}.}
 
 \item{time}{The time of the observation/event.}
 }

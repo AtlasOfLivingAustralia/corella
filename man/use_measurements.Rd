@@ -18,7 +18,7 @@ generate them.}
 A tibble with the requested fields added.
 }
 \description{
-test
+This function is a work in progress, and should be used with caution.
 }
 \details{
 add examples
