@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_measurements</span><span class="op">(</span><span class="va">.df</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span>, unit <span class="op">=</span> <span class="cn">NULL</span>, .keep <span class="op">=</span> <span class="st">"unused"</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_measurements</span><span class="op">(</span><span class="va">.df</span>, cols <span class="op">=</span> <span class="cn">NULL</span>, unit <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span>, .keep <span class="op">=</span> <span class="st">"unused"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -54,9 +54,21 @@
 <dd><p>a <code>data.frame</code> or <code>tibble</code> that the column should be appended to.</p></dd>
 
 
+<dt id="arg-cols">cols<a class="anchor" aria-label="anchor" href="#arg-cols"></a></dt>
+<dd><p>vector of column names to be included as 'measurements'. Unquoted.</p></dd>
+
+
+<dt id="arg-unit">unit<a class="anchor" aria-label="anchor" href="#arg-unit"></a></dt>
+<dd><p>vector of strings giving units for each variable</p></dd>
+
+
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p>vector of strings giving a description for each variable</p></dd>
+
+
 <dt id="arg--keep">.keep<a class="anchor" aria-label="anchor" href="#arg--keep"></a></dt>
 <dd><p>Control which columns from .data are retained in the output.
-Note that unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate</a></code>, which defaults to <code>"all"</code> this defaults to
+Note that unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which defaults to <code>"all"</code> this defaults to
 <code>"unused"</code>; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.</p></dd>
 

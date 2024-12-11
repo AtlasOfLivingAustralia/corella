@@ -59,7 +59,11 @@ occurrence, along with the rank and authorship of the provided name.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-scientificname">scientificName<a class="anchor" aria-label="anchor" href="#arg-scientificname"></a></dt>
+<dl><dt id="arg--df">.df<a class="anchor" aria-label="anchor" href="#arg--df"></a></dt>
+<dd><p>a <code>data.frame</code> or <code>tibble</code> that the column should be appended to.</p></dd>
+
+
+<dt id="arg-scientificname">scientificName<a class="anchor" aria-label="anchor" href="#arg-scientificname"></a></dt>
 <dd><p>The full scientific name in the lower level taxonomic
 rank that can be determined.</p></dd>
 
@@ -74,13 +78,9 @@ rank that can be determined.</p></dd>
 
 <dt id="arg--keep">.keep<a class="anchor" aria-label="anchor" href="#arg--keep"></a></dt>
 <dd><p>Control which columns from .data are retained in the output.
-Note that unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate</a></code>, which defaults to <code>"all"</code> this defaults to
+Note that unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which defaults to <code>"all"</code> this defaults to
 <code>"unused"</code>; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.</p></dd>
-
-
-<dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>a <code>data.frame</code> or <code>tibble</code> that the column should be appended to.</p></dd>
 
 </dl></div>
     <div class="section level2">

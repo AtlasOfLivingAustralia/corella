@@ -66,7 +66,8 @@ the Darwin Core Standard.</p>
 <span>  occurrenceID <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  basisOfRecord <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  occurrenceStatus <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .keep <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  .keep <span class="op">=</span> <span class="st">"unused"</span>,</span>
+<span>  .keep_composite <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  .messages <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -75,7 +76,11 @@ the Darwin Core Standard.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-occurrenceid">occurrenceID<a class="anchor" aria-label="anchor" href="#arg-occurrenceid"></a></dt>
+<dl><dt id="arg--df">.df<a class="anchor" aria-label="anchor" href="#arg--df"></a></dt>
+<dd><p>a <code>data.frame</code> or <code>tibble</code> that the column should be appended to.</p></dd>
+
+
+<dt id="arg-occurrenceid">occurrenceID<a class="anchor" aria-label="anchor" href="#arg-occurrenceid"></a></dt>
 <dd><p>A character string. Every occurrence should have an
 <code>occurrenceID</code> entry. Ideally IDs should be persistent to avoid being lost
 in future updates. They should also be unique, both within the dataset, and
@@ -90,17 +95,27 @@ Accepted <code>basisOfRecord</code> values are one of:</p><ul><li><p><code>"huma
 </ul></dd>
 
 
+<dt id="arg-occurrencestatus">occurrenceStatus<a class="anchor" aria-label="anchor" href="#arg-occurrencestatus"></a></dt>
+<dd><p>Either <code>"present"</code> or <code>"absent"</code>.</p></dd>
+
+
 <dt id="arg--keep">.keep<a class="anchor" aria-label="anchor" href="#arg--keep"></a></dt>
-<dd><p>Control which columns from .data are retained in the output.
-Note that unlike most other <code>use_</code> functions in <code>corella</code>, this defaults to
-<code>"all"</code> (i.e. same behavior as <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate</a></code>). This is because it is common
-to create composite indicators from other columns (via
-<code><a href="create_id.html">create_composite_id()</a></code>), and deleting these columns by default is typically
-unwise.</p></dd>
+<dd><p>Control which columns from <code>.df</code> are retained in the output.
+Note that unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>, which defaults to <code>"all"</code> this defaults
+to <code>"unused"</code>; i.e. only keeps Darwin Core fields, and not those fields used
+to generate them.</p></dd>
 
 
-<dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
-<dd><p>a <code>data.frame</code> or <code>tibble</code> that the column should be appended to.</p></dd>
+<dt id="arg--keep-composite">.keep_composite<a class="anchor" aria-label="anchor" href="#arg--keep-composite"></a></dt>
+<dd><p>Control which columns from <code>.df</code> are kept when
+<code><a href="identifier_functions.html">composite_id()</a></code> is used to assign values to <code>occurrenceID</code>, defaulting to
+<code>"all"</code>. This has a different default from <code>.keep</code> because composite
+identifiers often contain information that is valuable in other contexts,
+meaning that deleting these columns by default is typically unwise.</p></dd>
+
+
+<dt id="arg--messages">.messages<a class="anchor" aria-label="anchor" href="#arg--messages"></a></dt>
+<dd><p>Logical: Should progress bar be shown? Defaults to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -114,6 +129,11 @@ unwise.</p></dd>
 </ul><p>Accepted <code>basisOfRecord</code> values are one of:</p><ul><li><p><code>"humanObservation"</code>, <code>"machineObservation"</code>, <code>"livingSpecimen"</code>,
 <code>"preservedSpecimen"</code>, <code>"fossilSpecimen"</code>, <code>"materialCitation"</code></p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="accepted_values.html">basisOfRecord_values()</a></code> for accepted values for the <code>basisOfRecord</code>
+field'; <code><a href="use_abundance.html">use_abundance()</a></code> for occurrence-level counts.</p></div>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

@@ -73,7 +73,7 @@ the Little Corella (<em>Cacatua sanguinea</em>), and was drawn by Dax Kellie.</p
 <p>The following functions add single DwC fields, or collections of related
 fields, to an existing <code>tibble</code>.</p><ul><li><p><code><a href="use_events.html">use_events()</a></code> basic information on observation events (<code>eventID</code>, <code>parentEventID</code>, <code>eventType</code>)</p></li>
 <li><p><code><a href="use_occurrences.html">use_occurrences()</a></code> basic information on observations (<code>occurrenceID</code>, <code>basisOfRecord</code>)</p></li>
-<li><p><code>use_scientificName()</code> record the highest level of taxonomic specificity in the dataset (<code>scientificName</code>, <code>scientificNameAuthorship</code>, <code>taxonRank</code>)</p></li>
+<li><p><code><a href="use_scientific_name.html">use_scientific_name()</a></code> record the highest level of taxonomic specificity in the dataset (<code>scientificName</code>, <code>scientificNameAuthorship</code>, <code>taxonRank</code>)</p></li>
 <li><p><code><a href="use_taxonomy.html">use_taxonomy()</a></code> to specify higher taxonomic columns (<code>kingdom</code>, <code>phylum</code>, <code>class</code>, <code>order</code>, <code>family</code>, <code>genus</code>, <code>species</code>, <code>specificEpithet</code>, <code>vernacularName</code>)</p></li>
 <li><p><code><a href="use_coordinates.html">use_coordinates()</a></code> for spatial data (<code>decimalLatitude</code>, <code>decimalLongitude</code>, <code>geodeticDatum</code>, <code>coordinateUncertaintyInMeters</code>, <code>coordinatePrecision</code>)</p></li>
 <li><p><code><a href="use_sf.html">use_sf()</a></code> for spatial data in <code>sf</code> format</p></li>
@@ -90,7 +90,7 @@ fields, to an existing <code>tibble</code>.</p><ul><li><p><code><a href="use_eve
 in columns with matching Darwin Core terms.</p>
 <p><strong>Helper functions</strong></p>
 <p>These functions are called within <code>use_</code> (or <code>mutate()</code> functions), and
-assist in common problems.</p><ul><li><p><code><a href="create_id.html">create_composite_id()</a></code> Supply a combination of variables to concatenate into a unique identifier, optionally incorporating <code><a href="create_id.html">create_sequential_id()</a></code> or <code><a href="create_id.html">create_random_id()</a></code>.</p></li>
+assist in common problems.</p><ul><li><p><code><a href="identifier_functions.html">composite_id()</a></code> Supply a combination of variables to concatenate into a unique identifier, optionally incorporating <code><a href="identifier_functions.html">sequential_id()</a></code> or <code><a href="identifier_functions.html">random_id()</a></code>.</p></li>
 <li><p><code><a href="accepted_terms.html">occurrence_terms()</a></code> and <code><a href="accepted_terms.html">event_terms()</a></code> return a vector of accepted terms for different use cases.</p></li>
 <li><p><code><a href="accepted_values.html">basisOfRecord_values()</a></code> and <code><a href="accepted_values.html">countryCode_values()</a></code> return a vector of accepted values for <code>basisOfRecord</code> and <code>countryCode</code> (respectively)</p></li>
 </ul><p><strong>Data</strong></p>
