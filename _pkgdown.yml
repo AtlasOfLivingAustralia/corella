@@ -23,7 +23,6 @@ navbar:
       menu:
       - text: Checking your dataset
         href: articles/checking-your-dataset.html
-
     news:
       text: News
       href: news/index.html
@@ -51,7 +50,7 @@ reference:
   - check_dataset
 - title: Helper functions
   contents:
-  - create_composite_id
+  - composite_id
   - occurrence_terms
   - basisOfRecord_values
 - title: Data

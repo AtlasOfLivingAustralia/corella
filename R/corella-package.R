@@ -52,7 +52,7 @@
 #'  These functions are called within `use_` (or `mutate()` functions), and
 #'  assist in common problems.
 #'
-#'   * [create_composite_id()] Supply a combination of variables to concatenate into a unique identifier, optionally incorporating [create_sequential_id()] or [create_random_id()].
+#'   * [composite_id()] Supply a combination of variables to concatenate into a unique identifier, optionally incorporating [sequential_id()] or [random_id()].
 #'   * [occurrence_terms()] and [event_terms()] return a vector of accepted terms for different use cases.
 #'   * [basisOfRecord_values()] and [countryCode_values()] return a vector of accepted values for `basisOfRecord` and `countryCode` (respectively)
 #'

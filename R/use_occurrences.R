@@ -9,7 +9,7 @@
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param occurrenceID A character string. Every occurrence should have an
 #' `occurrenceID` entry. Ideally IDs should be persistent to avoid being lost
 #' in future updates. They should also be unique, both within the dataset, and
@@ -19,13 +19,19 @@
 #' Accepted `basisOfRecord` values are one of:
 #' * `"humanObservation"`, `"machineObservation"`, `"livingSpecimen"`,
 #' `"preservedSpecimen"`, `"fossilSpecimen"`, `"materialCitation"`
-#' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike most other `use_` functions in `corella`, this defaults to
-#' `"all"` (i.e. same behavior as `dplyr::mutate`). This is because it is common
-#' to create composite indicators from other columns (via
-#' `create_composite_id()`), and deleting these columns by default is typically
-#' unwise.
+#' @param .keep Control which columns from `.df` are retained in the output.
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults
+#' to `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used
+#' to generate them.
+#' @param .keep_composite Control which columns from `.df` are kept when
+#' [composite_id()] is used to assign values to `occurrenceID`, defaulting to
+#' `"all"`. This has a different default from `.keep` because composite
+#' identifiers often contain information that is valuable in other contexts,
+#' meaning that deleting these columns by default is typically unwise.
+#' @param .messages Logical: Should progress bar be shown? Defaults to `TRUE`.
 #' @returns A tibble with the requested fields added.
+#' @seealso [basisOfRecord_values()] for accepted values for the `basisOfRecord`
+#' field.
 #' @details
 #' Examples of `occurrenceID` values:
 #' * `000866d2-c177-4648-a200-ead4007051b9`
@@ -45,7 +51,8 @@ use_occurrences <- function(
     basisOfRecord = NULL,
     occurrenceStatus = NULL,
     # recordNumber = NULL, # keep?
-    .keep = "all",
+    .keep = "unused",
+    .keep_composite = "all",
     .messages = TRUE
 ){
   if(missing(.df)){
@@ -63,8 +70,7 @@ use_occurrences <- function(
   # then remove their names before `mutate()`
   # otherwise, these DwC columns are deleted by `mutate(.keep = "unused")`
   fn_quo_is_null <- fn_quos |>
-    purrr::map(\(user_arg)
-               rlang::quo_is_null(user_arg)) |>
+    map(.f = rlang::quo_is_null) |>
     unlist()
 
   null_col_exists_in_df <- fn_quo_is_null & (names(fn_quos) %in% colnames(.df))
@@ -74,10 +80,27 @@ use_occurrences <- function(
       purrr::keep(!names(fn_quos) %in% names(which(null_col_exists_in_df)))
   }
 
+  # check whether `composite_id()` is called within `occurrenceID`
+  # and if so, parse with .keep = .keep_composite
+  occurrenceID_check <- names(fn_quos) == "occurrenceID"
+  if(any(occurrenceID_check)){
+    occurrenceID_quo <- fn_quos[which(occurrenceID_check)]
+    if(!rlang::quo_is_null(occurrenceID_quo[[1]])){
+      if(grepl("composite_id\\(", as_label(occurrenceID_quo[[1]]))){
+        .df <- .df |> mutate(!!!occurrenceID_quo, .keep = .keep_composite)
+        # now remove occurrenceID_quo from consideration
+        fn_quos <- fn_quos[-which(occurrenceID_check)]
+      }
+    }
+  }
+
   # Update df
-  result <- .df |>
-    mutate(!!!fn_quos,
-           .keep = .keep)
+  if(length(fn_quos) > 0){
+    result <- .df |>
+      mutate(!!!fn_quos, .keep = .keep)
+  }else{
+    result <- .df
+  }
 
   check_missing_all_args(fn_call = match.call(),
                          fn_args = fn_args,
@@ -132,6 +155,7 @@ check_occurrenceID <- function(.df,
       select("occurrenceID") |>
       check_is_unique(level = level)
   }
+  .df
 }
 
 #' check occurrenceStatus
@@ -150,6 +174,5 @@ check_occurrenceStatus <- function(.df,
       check_contains_values(values = c("present", "absent"),
                             level = level)
   }
-
   .df
 }

@@ -16,17 +16,20 @@
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param eventID A unique identifier for an individual Event.
 #' @param eventType The type of Event
 #' @param parentEventID The parent event under which one or more Events sit
 #' within.
-#' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike most other `use_` functions in `corella`, this defaults to
-#' `"all"` (i.e. same behavior as `dplyr::mutate`). This is because it is common
-#' to create composite indicators from other columns (via
-#' `create_composite_id()`), and deleting these columns by default is typically
-#' unwise.
+#' @param .keep Control which columns from `.df` are retained in the output.
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults
+#' to `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used
+#' to generate them.
+#' @param .keep_composite Control which columns from `.df` are kept when
+#' [composite_id()] is used to assign values to `eventID`, defaulting to
+#' `"all"`. This has a different default from `.keep` because composite
+#' identifiers often contain information that is valuable in other contexts,
+#' meaning that deleting these columns by default is typically unwise.
 #' @returns A tibble with the requested fields added.
 #' @details
 #' Each Event requires a unique `eventID` and `eventType` (because there can
@@ -64,7 +67,8 @@ use_events <- function(
     eventID = NULL,
     eventType = NULL,
     parentEventID = NULL,
-    .keep = "all"
+    .keep = "unused",
+    .keep_composite = "all"
 ){
   if(missing(.df)){
     abort(".df is missing, with no default")
@@ -81,8 +85,7 @@ use_events <- function(
   # then remove their names before `mutate()`
   # otherwise, these DwC columns are deleted by `mutate(.keep = "unused")`
   fn_quo_is_null <- fn_quos |>
-    map(\(user_arg)
-        quo_is_null(user_arg)) |>
+    map(.f = rlang::quo_is_null) |>
     unlist()
 
   null_col_exists_in_df <- fn_quo_is_null & (names(fn_quos) %in% colnames(.df))
@@ -92,10 +95,27 @@ use_events <- function(
       keep(!names(fn_quos) %in% names(which(null_col_exists_in_df)))
   }
 
+  # check whether `composite_id()` is called within `eventID`
+  # and if so, parse with .keep = .keep_composite
+  eventID_check <- names(fn_quos) == "eventID"
+  if(any(eventID_check)){
+    eventID_quo <- fn_quos[which(eventID_check)]
+    if(!rlang::quo_is_null(eventID_quo[[1]])){
+      if(grepl("composite_id\\(", as_label(eventID_quo[[1]]))){
+        .df <- .df |> mutate(!!!eventID_quo, .keep = .keep_composite)
+        # now remove eventID_quo from consideration
+        fn_quos <- fn_quos[-which(eventID_check)]
+      }
+    }
+  }
+
   # Update df
-  result <- .df |>
-    mutate(!!!fn_quos,
-           .keep = .keep)
+  if(length(fn_quos) > 0){
+    result <- .df |>
+      mutate(!!!fn_quos, .keep = .keep)
+  }else{
+    result <- .df
+  }
 
   check_missing_all_args(fn_call = match.call(),
                          fn_args = fn_args,
@@ -107,9 +127,56 @@ use_events <- function(
 
   # run column checks
   # TODO: Uncertain exactly what these should contain given the flexibility of IDs and events
-  # check_eventID(result, level = "abort")
-  # check_eventType(result, level = "abort")
-  # check_parentEventID(result, level = "abort")
+  # for now just make them string checks
+  # later eventID should be unique for type = events, but not type = occurrences
+  check_eventID(result, level = "abort")
+  check_eventType(result, level = "abort")
+  check_parentEventID(result, level = "abort")
 
   result
+}
+
+#' check eventID
+#' @noRd
+#' @keywords Internal
+check_eventID <- function(.df,
+                          level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "eventID")){
+    .df |>
+      select("eventID") |>
+      check_is_string(level = level)
+  }
+  .df
+}
+
+#' check eventType
+#' @noRd
+#' @keywords Internal
+check_eventType <- function(.df,
+                            level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "eventType")){
+    .df |>
+      select("eventType") |>
+      check_is_string(level = level)
+  }
+  .df
+}
+
+#' check parentEventID
+#' @noRd
+#' @keywords Internal
+check_parentEventID <- function(.df,
+                                level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "parentEventID")){
+    .df |>
+      select("parentEventID") |>
+      check_is_string(level = level)
+  }
+  .df
 }

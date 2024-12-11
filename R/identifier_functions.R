@@ -6,13 +6,13 @@
 #' within [use_events()], [use_occurrences()], or (equivalently)
 #' [dplyr::mutate()]. Generally speaking, it is best practice to use existing
 #' information from a dataset to generate identifiers; for this reason we
-#' recomment using `create_composite_id()` to aggregate existing fields, if no
+#' recomment using `composite_id()` to aggregate existing fields, if no
 #' such composite is already present within the dataset. It is possible to call
-#' `create_sequential_id()` or `create_random_id()` within
-#' `create_composite_id()` to combine existing and new columns.
-#' @rdname create_id
+#' `sequential_id()` or `random_id()` within
+#' `composite_id()` to combine existing and new columns.
+#' @rdname identifier_functions
 #' @param ... Zero or more variable names from the tibble being
-#' mutated (unquoted), and/or zero or more `create_` functions, separated by
+#' mutated (unquoted), and/or zero or more `_id` functions, separated by
 #' commas.
 #' @param sep Character used to separate field values. Defaults to `"-"`
 #' @returns An amended tibble, containing a field with the requested information.
@@ -22,12 +22,12 @@
 #'              basisOfRecord = "humanObservation",
 #'              site = rep(c("A01", "A02", "A03"), each = 5))
 #' df |>
-#'     use_occurrences(occurrenceID = create_composite_id(create_sequential_id(),
-#'                                                        site,
-#'                                                        eventDate))
+#'     use_occurrences(occurrenceID = composite_id(sequential_id(),
+#'                                                 site,
+#'                                                 eventDate))
 #' @order 1
 #' @export
-create_composite_id <- function(...,
+composite_id <- function(...,
                               sep = "-"){
   x <- enquos(...)
   string_result <- purrr::map(x, switch_expr_type)
@@ -100,12 +100,12 @@ parse_call <- function(x, ...){
   eval_tidy(x)
 }
 
-#' @rdname create_id
+#' @rdname identifier_functions
 #' @param width (Integer) how many characters should the resulting string be?
 #' Defaults to one plus the order of magnitude of the largest number.
 #' @order 2
 #' @export
-create_sequential_id <- function(width){
+sequential_id <- function(width){
   row_count <- dplyr::n()
   result <- seq_len(row_count)
   max_digits <- max(floor(log10(result)) + 1)
@@ -118,9 +118,9 @@ create_sequential_id <- function(width){
           flag = "0")
 }
 
-#' @rdname create_id
+#' @rdname identifier_functions
 #' @order 3
 #' @export
-create_random_id <- function(){
+random_id <- function(){
   uuid::UUIDgenerate(use.time = TRUE, dplyr::n())
 }

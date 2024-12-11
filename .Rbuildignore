@@ -4,4 +4,5 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-/data-raw
+^data-raw$
+^.github$

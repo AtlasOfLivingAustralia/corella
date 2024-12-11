@@ -162,7 +162,7 @@ For example, after using one of the suggested functions `use_occurrences()`, if 
 #| warning: false
 df_edited <- df |>
   use_occurrences(
-    occurrenceID = create_random_id(),
+    occurrenceID = random_id(),
     basisOfRecord = "humanObservation"
     )
 ```

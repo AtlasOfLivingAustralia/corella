@@ -55,7 +55,7 @@ in columns with matching Darwin Core terms.
 These functions are called within \code{use_} (or \code{mutate()} functions), and
 assist in common problems.
 \itemize{
-\item \code{\link[=create_composite_id]{create_composite_id()}} Supply a combination of variables to concatenate into a unique identifier, optionally incorporating \code{\link[=create_sequential_id]{create_sequential_id()}} or \code{\link[=create_random_id]{create_random_id()}}.
+\item \code{\link[=composite_id]{composite_id()}} Supply a combination of variables to concatenate into a unique identifier, optionally incorporating \code{\link[=sequential_id]{sequential_id()}} or \code{\link[=random_id]{random_id()}}.
 \item \code{\link[=occurrence_terms]{occurrence_terms()}} and \code{\link[=event_terms]{event_terms()}} return a vector of accepted terms for different use cases.
 \item \code{\link[=basisOfRecord_values]{basisOfRecord_values()}} and \code{\link[=countryCode_values]{countryCode_values()}} return a vector of accepted values for \code{basisOfRecord} and \code{countryCode} (respectively)
 }

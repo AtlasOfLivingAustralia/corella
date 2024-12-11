@@ -9,10 +9,13 @@ use_events(
   eventID = NULL,
   eventType = NULL,
   parentEventID = NULL,
-  .keep = "all"
+  .keep = "unused",
+  .keep_composite = "all"
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{eventID}{A unique identifier for an individual Event.}
 
 \item{eventType}{The type of Event}
@@ -20,14 +23,16 @@ use_events(
 \item{parentEventID}{The parent event under which one or more Events sit
 within.}
 
-\item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike most other \code{use_} functions in \code{corella}, this defaults to
-\code{"all"} (i.e. same behavior as \code{dplyr::mutate}). This is because it is common
-to create composite indicators from other columns (via
-\code{create_composite_id()}), and deleting these columns by default is typically
-unwise.}
+\item{.keep}{Control which columns from \code{.df} are retained in the output.
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults
+to \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used
+to generate them.}
 
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.keep_composite}{Control which columns from \code{.df} are kept when
+\code{\link[=composite_id]{composite_id()}} is used to assign values to \code{eventID}, defaulting to
+\code{"all"}. This has a different default from \code{.keep} because composite
+identifiers often contain information that is valuable in other contexts,
+meaning that deleting these columns by default is typically unwise.}
 }
 \value{
 A tibble with the requested fields added.

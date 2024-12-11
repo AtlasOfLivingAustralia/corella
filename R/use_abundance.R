@@ -116,7 +116,9 @@ check_individualCount <- function(.df,
           mutate(match = individualCount == 0 & occurrenceStatus == "absent")
 
         if(any(absences$match == FALSE)) {
-          n_unmatched = absences |> filter(match == FALSE) |> nrow()
+          n_unmatched <- absences |>
+            filter(match == FALSE) |>
+            nrow()
           bullets <- c(
             "{.field individualCount} values do not match {.field occurrenceStatus}.",
             x = "Found {n_unmatched} row{?s} where individualCount = 0 but occurrenceStatus = \"present\"."
@@ -124,8 +126,7 @@ check_individualCount <- function(.df,
             cli_bullets() |>
             cli_fmt()
 
-          switch_check(level,
-                       bullets)
+          switch_check(level, bullets)
         }
       } else {
 
@@ -134,12 +135,12 @@ check_individualCount <- function(.df,
           "{.field individualCount} of 0 detected but not marked as absence.",
           i = "Must use {.field occurrenceStatus} to mark counts of 0 as \"absent\".",
           i = "Use {.code use_occurrences(occurrenceStatus = ifelse(individualCount == 0, \"absent\", \"present\"))}."
-        ) |> cli_bullets() |> cli_fmt()
-        switch_check(level,
-                     bullets,
-                     call = call)
+        ) |>
+          cli_bullets() |>
+          cli_fmt()
+        switch_check(level, bullets)
       }
-      }
+    }
   }
 
   .df

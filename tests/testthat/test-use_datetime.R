@@ -89,12 +89,14 @@ test_that("use_datetime checks eventDate format", {
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("eventDate", "col2"))
-  expect_warning(
-    suppressMessages(
-    correct |> use_datetime()
-    ),
-    "eventDate defaults to UTC standard"
-    )
+  ## TODO: The code to generate this warning is commented out in `use_datetime()`
+  ## Check whether to reinstate
+  # expect_warning(
+  #   suppressMessages(
+  #   correct |> use_datetime()
+  #   ),
+  #   "eventDate defaults to UTC standard"
+  # )
   expect_error(
     suppressWarnings(suppressMessages(
     not_a_date |> use_datetime(eventDate = eventDate)
