@@ -4,13 +4,19 @@
 \alias{use_measurements}
 \title{Add measurement data for an individual or event to a \code{tibble}}
 \usage{
-use_measurements(.df, cols = NULL, type = NULL, unit = NULL, .keep = "unused")
+use_measurements(.df, cols = NULL, unit = NULL, type = NULL, .keep = "unused")
 }
 \arguments{
 \item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 
+\item{cols}{vector of column names to be included as 'measurements'. Unquoted.}
+
+\item{unit}{vector of strings giving units for each variable}
+
+\item{type}{vector of strings giving a description for each variable}
+
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
 }

@@ -10,7 +10,7 @@
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
 #'
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param individualID An identifier for an individual or named group of
 #' individual organisms represented in the Occurrence. Meant to accommodate
 #' resampling of the same individual or group for monitoring purposes. May
@@ -23,7 +23,7 @@
 #' @param reproductiveCondition The reproductive condition of the biological
 #' individual.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.

@@ -32,7 +32,7 @@ check_dataset <- function(.df){
   fields <- colnames(.df)
   available_checks <- fn_to_term_table() |>
     bind_rows() |>
-    select(dwc_term) |>
+    select("dwc_term") |>
     pull()
   checkable_fields <- fields[fields %in% available_checks]
 
@@ -63,11 +63,9 @@ check_dataset <- function(.df){
   summary_message(check_results, checkable_fields)
   cat_line()
 
-
   ## Darwin Core compliance
   # dwc_spinny_message(c("Meets minimum requirements for Darwin Core terms"))
   check_min_req_dwc(checkable_fields)
-
 
   ## Error Messages
 
@@ -81,11 +79,11 @@ check_dataset <- function(.df){
 
   # split messages by function for message formatting
     results_split <- check_results |>
-      unnest(messages) |>
+      unnest(.data$messages) |>
       mutate(
         term = factor(term, levels = unique(term)) # maintain original term order
         ) |>
-      group_split(term)
+      group_split(.data$term)
 
   # print preserved errors in a nice format
     results_split |>
@@ -114,9 +112,10 @@ check_dataset <- function(.df){
 #' @importFrom cli cli_progress_update
 #' @importFrom cli ansi_align
 #' @importFrom cli ansi_nchar
-#' @importFrom stringr str_remove_all
 #' @importFrom rlang cnd_muffle
 #' @importFrom rlang exec
+#' @importFrom stringr str_remove_all
+#' @importFrom tibble tibble
 #' @noRd
 #' @keywords Internal
 check_all <- function(fn, .df, checkable_fields) {

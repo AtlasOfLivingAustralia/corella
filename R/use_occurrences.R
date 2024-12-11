@@ -19,6 +19,7 @@
 #' Accepted `basisOfRecord` values are one of:
 #' * `"humanObservation"`, `"machineObservation"`, `"livingSpecimen"`,
 #' `"preservedSpecimen"`, `"fossilSpecimen"`, `"materialCitation"`
+#' @param occurrenceStatus Either `"present"` or `"absent"`.
 #' @param .keep Control which columns from `.df` are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults
 #' to `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used
@@ -31,7 +32,7 @@
 #' @param .messages Logical: Should progress bar be shown? Defaults to `TRUE`.
 #' @returns A tibble with the requested fields added.
 #' @seealso [basisOfRecord_values()] for accepted values for the `basisOfRecord`
-#' field.
+#' field'; [use_abundance()] for occurrence-level counts.
 #' @details
 #' Examples of `occurrenceID` values:
 #' * `000866d2-c177-4648-a200-ead4007051b9`
@@ -40,7 +41,6 @@
 #' Accepted `basisOfRecord` values are one of:
 #' * `"humanObservation"`, `"machineObservation"`, `"livingSpecimen"`,
 #' `"preservedSpecimen"`, `"fossilSpecimen"`, `"materialCitation"`
-#'
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort

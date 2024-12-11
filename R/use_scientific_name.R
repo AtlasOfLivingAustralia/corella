@@ -2,13 +2,13 @@
 #'
 #' Format the field `scientificName`, the lowest identified taxonomic name of an
 #' occurrence, along with the rank and authorship of the provided name.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param scientificName The full scientific name in the lower level taxonomic
 #' rank that can be determined.
 #' @param taxonRank The taxonomic rank of `scientificName`.
 #' @param scientificNameAuthorship The authorship information for `scientificName`.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.

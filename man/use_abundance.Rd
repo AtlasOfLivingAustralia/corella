@@ -20,7 +20,13 @@ use_abundance(
 \item{organismQuantity}{A number or enumeration value for the quantity of
 organisms. Used together with \code{organismQuantityType} to provide context.}
 
-\item{organismQuantityType}{The type of quantification system used for \code{organismQuantity}}
+\item{organismQuantityType}{The type of quantification system used for
+\code{organismQuantity}.}
+
+\item{.keep}{Control which columns from .data are retained in the output.
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
+\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+generate them.}
 }
 \value{
 A tibble with the requested fields (see details).

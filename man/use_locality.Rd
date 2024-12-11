@@ -15,6 +15,8 @@ use_locality(
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{continent}{(string) Valid continent. See details.}
 
 \item{country}{Valid country name. See \code{country_codes}.}
@@ -26,11 +28,9 @@ use_locality(
 \item{locality}{A specific location, such as a property or address.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields.

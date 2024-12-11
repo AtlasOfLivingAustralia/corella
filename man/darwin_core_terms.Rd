@@ -29,7 +29,7 @@ acronym 'TDWG'. This tibble is the full list of supported terms,
 current as at 2024-12-10.
 }
 \seealso{
-\code{\link[=occurrence_fields]{occurrence_fields()}} and \code{\link[=event_fields]{event_fields()}} to get terms for use in
-\verb{[dplyr::select()]}
+\code{\link[=occurrence_terms]{occurrence_terms()}} and \code{\link[=event_terms]{event_terms()}} to get terms for use in
+\code{\link[dplyr:select]{dplyr::select()}}
 }
 \keyword{datasets}

@@ -13,6 +13,8 @@ use_collection(
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{datasetID}{An identifier for the set of data. May be a global unique
 identifier or an identifier specific to a collection or institution.}
 
@@ -23,11 +25,9 @@ was derived.}
 or collection.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields added.

@@ -2,7 +2,12 @@
 title: "Checking your dataset"
 author: "Dax Kellie"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Checking your dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 A Darwin Core Archive consists of several pieces to ensure a dataset is structured correctly (and can be restructured correctly in the future). These pieces include the dataset, a metadata statement, and an xml file detailing how the columns in the data relate to each other. 

@@ -15,6 +15,8 @@ use_coordinates(
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{decimalLatitude}{The latitude in decimal degrees}
 
 \item{decimalLongitude}{The longitude in decimal degrees}
@@ -34,11 +36,9 @@ recorded with a GPS after 2000, or \code{100} before that year.}
 than 0.00001 if data were collected using GPS.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields added.
@@ -47,8 +47,7 @@ A tibble with the requested fields added.
 This function helps format standard location fields to a \code{tibble}.
 }
 \details{
-In
-practice this is no different from using \code{mutate()}, but gives some
+In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for how spatial fields are
 represented in the Darwin Core Standard.
 

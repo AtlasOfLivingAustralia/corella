@@ -9,7 +9,12 @@
 #' @param individualCount The number of individuals present
 #' @param organismQuantity A number or enumeration value for the quantity of
 #' organisms. Used together with `organismQuantityType` to provide context.
-#' @param organismQuantityType The type of quantification system used for `organismQuantity`
+#' @param organismQuantityType The type of quantification system used for
+#' `organismQuantity`.
+#' @param .keep Control which columns from .data are retained in the output.
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
+#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' generate them.
 #' @returns A tibble with the requested fields (see details).
 #'
 #' @details

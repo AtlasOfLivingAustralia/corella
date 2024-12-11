@@ -2,11 +2,10 @@
 #'
 #' This function helps format standard location fields to a `tibble`.
 #'
-#' In
-#' practice this is no different from using `mutate()`, but gives some
+#' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for how spatial fields are
 #' represented in the Darwin Core Standard.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param decimalLatitude The latitude in decimal degrees
 #' @param decimalLongitude The longitude in decimal degrees
 #' @param geodeticDatum The datum or spatial reference system that coordinates
@@ -21,7 +20,7 @@
 #' `decimalLongitude` are supplied to. `coordinatePrecision` should be no less
 #' than 0.00001 if data were collected using GPS.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.

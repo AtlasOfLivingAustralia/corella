@@ -7,6 +7,8 @@
 use_observer(.df, recordedBy = NULL, recordedByID = NULL, .keep = "unused")
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{recordedBy}{Names of people, groups, or organizations responsible for
 recording the original occurrence. The primary collector or observer should
 be listed first.}
@@ -15,11 +17,9 @@ be listed first.}
 groups, or organizations responsible for recording the original occurrence.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields added.

@@ -12,7 +12,7 @@ use_sf(.df, geometry = NULL, .keep = "unused")
 \item{geometry}{the latitude/longitude coordinates in decimal degrees as \code{sf} \code{POINT} class}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
 }

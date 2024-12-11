@@ -7,7 +7,7 @@
 #' practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for taxonomic names in
 #' the Darwin Core Standard.
-#' @param df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param kingdom The kingdom name of identified taxon.
 #' @param phylum The phylum name of identified taxon.
 #' @param class The class name of identified taxon.
@@ -19,7 +19,7 @@
 #' [See documentation](https://dwc.tdwg.org/list/#dwc_specificEpithet)
 #' @param vernacularName The common or vernacular name of the identified taxon.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.

@@ -26,15 +26,15 @@ use_datetime(
 
 \item{day}{The day of the observation/event.}
 
+\item{eventTime}{The time of the observation/event.}
+
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
 
 \item{.messages}{(logical) Should informative messages be shown? Defaults to
 \code{TRUE}.}
-
-\item{time}{The time of the observation/event.}
 }
 \value{
 A tibble with the requested fields added.
@@ -43,8 +43,7 @@ A tibble with the requested fields added.
 This function helps format standard date/time fields to a \code{tibble}.
 }
 \details{
-In
-practice this is no different from using \code{mutate()}, but gives some
+In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for how spatial fields are
 represented in the Darwin Core Standard.
 

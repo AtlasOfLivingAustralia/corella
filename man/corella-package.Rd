@@ -31,7 +31,7 @@ fields, to an existing \code{tibble}.
 \itemize{
 \item \code{\link[=use_events]{use_events()}} basic information on observation events (\code{eventID}, \code{parentEventID}, \code{eventType})
 \item \code{\link[=use_occurrences]{use_occurrences()}} basic information on observations (\code{occurrenceID}, \code{basisOfRecord})
-\item \code{\link[=use_scientificName]{use_scientificName()}} record the highest level of taxonomic specificity in the dataset (\code{scientificName}, \code{scientificNameAuthorship}, \code{taxonRank})
+\item \code{\link[=use_scientific_name]{use_scientific_name()}} record the highest level of taxonomic specificity in the dataset (\code{scientificName}, \code{scientificNameAuthorship}, \code{taxonRank})
 \item \code{\link[=use_taxonomy]{use_taxonomy()}} to specify higher taxonomic columns (\code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{specificEpithet}, \code{vernacularName})
 \item \code{\link[=use_coordinates]{use_coordinates()}} for spatial data (\code{decimalLatitude}, \code{decimalLongitude}, \code{geodeticDatum}, \code{coordinateUncertaintyInMeters}, \code{coordinatePrecision})
 \item \code{\link[=use_sf]{use_sf()}} for spatial data in \code{sf} format

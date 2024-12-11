@@ -15,8 +15,8 @@
 #'   \item{comments}{Further information from TDWG.}
 #'   \item{examples}{Examples of how the field should be populated.}
 #' }
-#' @seealso [occurrence_fields()] and [event_fields()] to get terms for use in
-#' `[dplyr::select()]`
+#' @seealso [occurrence_terms()] and [event_terms()] to get terms for use in
+#' [dplyr::select()]
 #' @source Slightly modified version of a table supplied by TDWG at
 #' [this link](https://github.com/tdwg/dwc/blob/master/vocabulary/term_versions.csv).
 "darwin_core_terms"

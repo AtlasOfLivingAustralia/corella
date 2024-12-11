@@ -1,6 +1,9 @@
 ---
 title: "Quick start guide"
-output: rmarkdown::html_vignette
+author: "Dax Kellie"
+date: '2024-12-12'
+output: 
+  rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Quick start guide}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of what organisms were observered in a location and time---in the Atlas of Living Australia, other Living Atlases and GBIF. The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
+corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of what organisms were observed in a location and time---in the Atlas of Living Australia, other Living Atlases and GBIF. The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
 
 The main tasks to standardise data to comply with Darwin Core standards is to 
 
@@ -160,9 +163,10 @@ For example, after using one of the suggested functions `use_occurrences()`, if 
 ```{r}
 #| message: false
 #| warning: false
+#| error: false
 df_edited <- df |>
   use_occurrences(
-    occurrenceID = random_id(),
+    occurrenceID = seq_len(nrow(df)),
     basisOfRecord = "humanObservation"
     )
 ```

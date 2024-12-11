@@ -30,6 +30,8 @@ Accepted \code{basisOfRecord} values are one of:
 \code{"preservedSpecimen"}, \code{"fossilSpecimen"}, \code{"materialCitation"}
 }}
 
+\item{occurrenceStatus}{Either \code{"present"} or \code{"absent"}.}
+
 \item{.keep}{Control which columns from \code{.df} are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults
 to \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used
@@ -71,5 +73,5 @@ Accepted \code{basisOfRecord} values are one of:
 }
 \seealso{
 \code{\link[=basisOfRecord_values]{basisOfRecord_values()}} for accepted values for the \code{basisOfRecord}
-field.
+field'; \code{\link[=use_abundance]{use_abundance()}} for occurrence-level counts.
 }

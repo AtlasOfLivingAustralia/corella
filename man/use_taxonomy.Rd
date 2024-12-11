@@ -18,6 +18,8 @@ use_taxonomy(
 )
 }
 \arguments{
+\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+
 \item{kingdom}{The kingdom name of identified taxon.}
 
 \item{phylum}{The phylum name of identified taxon.}
@@ -37,11 +39,9 @@ the \code{scientificName}.
 \item{vernacularName}{The common or vernacular name of the identified taxon.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
-Note that unlike \code{dplyr::mutate}, which defaults to \code{"all"} this defaults to
+Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
 \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
 generate them.}
-
-\item{df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
 }
 \value{
 A tibble with the requested fields added.

@@ -29,7 +29,7 @@
 #'
 #'   * [use_events()] basic information on observation events (`eventID`, `parentEventID`, `eventType`)
 #'   * [use_occurrences()] basic information on observations (`occurrenceID`, `basisOfRecord`)
-#'   * [use_scientificName()] record the highest level of taxonomic specificity in the dataset (`scientificName`, `scientificNameAuthorship`, `taxonRank`)
+#'   * [use_scientific_name()] record the highest level of taxonomic specificity in the dataset (`scientificName`, `scientificNameAuthorship`, `taxonRank`)
 #'   * [use_taxonomy()] to specify higher taxonomic columns (`kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `specificEpithet`, `vernacularName`)
 #'   * [use_coordinates()] for spatial data (`decimalLatitude`, `decimalLongitude`, `geodeticDatum`, `coordinateUncertaintyInMeters`, `coordinatePrecision`)
 #'   * [use_sf()] for spatial data in `sf` format

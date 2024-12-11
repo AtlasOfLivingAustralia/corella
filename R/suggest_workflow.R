@@ -69,15 +69,15 @@ check_dataframe <- function(.df,
 #'
 #' @param .df vector of values
 #' @param dwc_terms vector of valid Darwin Core terms against which .df should be compared
-#' @importFrom dplyr pull
-#' @importFrom dplyr filter
-#' @importFrom dplyr distinct
-#' @importFrom rlang is_empty
 #' @importFrom cli cli_div
 #' @importFrom cli cli_h1
 #' @importFrom cli cli_h2
 #' @importFrom cli cli_h3
 #' @importFrom cli cli_end
+#' @importFrom dplyr pull
+#' @importFrom dplyr filter
+#' @importFrom dplyr distinct
+#' @importFrom rlang is_empty
 #' @noRd
 #' @keywords Internal
 check_contains_terms <- function(.df,
@@ -106,7 +106,6 @@ check_contains_terms <- function(.df,
   # retrieve required term match results
   req_terms_results <- check_required_terms(user_column_names)
 
-
   ## Suggested workflow & Additional functions
 
   # Function matching for suggested workflow
@@ -114,15 +113,14 @@ check_contains_terms <- function(.df,
   other_functions <- fn_to_term_table()$optional
 
   suggested_functions <- main_functions |>
-    filter(!dwc_term %in% matched_values) |>
-    distinct(use_function) |>
-    pull(use_function)
+    filter(!.data$dwc_term %in% matched_values) |>
+    distinct(.data$use_function) |>
+    pull("use_function")
 
   optional_functions <- other_functions |>
-    filter(dwc_term %in% matched_values) |>
-    distinct(use_function) |>
-    pull(use_function)
-
+    filter(.data$dwc_term %in% matched_values) |>
+    distinct(.data$use_function) |>
+    pull("use_function")
 
   # this wraps text (which might not be optimal for this table)
   # withr::with_options(
@@ -385,18 +383,8 @@ fn_to_term_table <- function() {
 }
 
 
-
-
 #' Build table for messaging about minimum required terms
 #'
-#' @importFrom tidyr unnest
-#' @importFrom dplyr case_when
-#' @importFrom dplyr group_by
-#' @importFrom dplyr select
-#' @importFrom dplyr full_join
-#' @importFrom dplyr join_by
-#' @importFrom tidyr replace_na
-#' @importFrom tidyr unnest
 #' @importFrom cli ansi_align
 #' @importFrom cli ansi_collapse
 #' @importFrom cli ansi_nchar
@@ -404,24 +392,32 @@ fn_to_term_table <- function() {
 #' @importFrom cli col_green
 #' @importFrom cli col_red
 #' @importFrom cli symbol
+#' @importFrom dplyr case_when
+#' @importFrom dplyr group_by
+#' @importFrom dplyr select
+#' @importFrom dplyr full_join
+#' @importFrom dplyr join_by
+#' @importFrom rlang .data
+#' @importFrom tidyr replace_na
+#' @importFrom tidyr unnest
 #' @noRd
 #' @keywords Internal
 build_req_terms_table <- function(req_terms) {
 
   # Unnest & concatenate terms by group
   missing_results <- req_terms |>
-    select(-matched) |>
+    select(-"matched") |>
     unnest(cols = c(missing)) |>
-    group_by(term_group) |>
+    group_by(.data$term_group) |>
     mutate( # glue names
       missing = ansi_collapse(missing, sep = ", ", last = ", ")
     ) |>
     unique()
 
   matched_results <- req_terms |>
-    select(-missing) |>
+    select(-"missing") |>
     unnest(cols = c(matched)) |>
-    group_by(term_group) |>
+    group_by(.data$term_group) |>
     mutate( # glue names
       matched = ansi_collapse(matched, sep = ", ", last = ", ")
     ) |>

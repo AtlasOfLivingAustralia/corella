@@ -4,8 +4,11 @@
 #' This function is a work in progress, and should be used with caution.
 #'
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param cols vector of column names to be included as 'measurements'. Unquoted.
+#' @param unit vector of strings giving units for each variable
+#' @param type vector of strings giving a description for each variable
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.
@@ -19,8 +22,8 @@
 use_measurements <- function(
     .df,
     cols = NULL,
-    type = NULL,
     unit = NULL,
+    type = NULL,
     .keep = "unused"
 ){
   if(missing(.df)){

@@ -1,13 +1,31 @@
-# test_that("check_basisOfRecord() works", {
-#   x <- tibble(basisOfRecord = "humanObservation")
-#   # no error
-#   x |>
-#     check_basisOfRecord() |>
-#     expect_no_error()
-#   result <- check_basisOfRecord(x)
-#   expect_equal(x, result)
-#   # with error
-# })
+no_error_check <- function(df){
+  quiet_sw <- purrr::quietly(suggest_workflow)
+  df |>
+    quiet_sw() |>
+    testthat::expect_no_error()
+}
+
+test_that("suggest_workflow() doesn't error for common use cases", {
+  # simple example
+  tibble(basisOfRecord = "humanObservation") |>
+    no_error_check()
+
+  # example from quick start guide
+  tibble(
+    latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+    longitude = c(149.125, 149.133),
+    date = c("14-01-2023", "15-01-2023"),
+    time = c("10:23:00", "11:25:00"),
+    month = c("January", "February"),
+    day = c(100, 101),
+    species = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+    n = c(2, 3),
+    crs = c("WGS84", "WGS8d"),
+    country = c("Australia", "Denmark"),
+    continent = c("Oceania", "Europe")
+  ) |>
+    no_error_check()
+})
 
 # test_that("use_basisOfRecord() works", {
 #   x <- tibble(x = 1)

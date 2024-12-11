@@ -22,7 +22,6 @@ Imports:
   cli,
   dplyr,
   glue,
-  here,
   hms,
   lubridate,
   purrr,
@@ -31,19 +30,21 @@ Imports:
   stringr,
   tibble,
   tidyr,
-  nanoparquet,
   uuid
 Suggests:
   gt,
+  here,
   knitr,
+  nanoparquet,
+  ozmaps,
   readr,
   rmarkdown,
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://corella.ala.org.au
 Encoding: UTF-8
+VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3
-VignetteBuilder: knitr
 LazyData: true

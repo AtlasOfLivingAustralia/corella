@@ -2,8 +2,7 @@
 #'
 #' This function helps format standard date/time fields to a `tibble`.
 #'
-#' In
-#' practice this is no different from using `mutate()`, but gives some
+#' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for how spatial fields are
 #' represented in the Darwin Core Standard.
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
@@ -11,9 +10,9 @@
 #' @param year The year of the observation/event.
 #' @param month The month of the observation/event.
 #' @param day The day of the observation/event.
-#' @param time The time of the observation/event.
+#' @param eventTime The time of the observation/event.
 #' @param .keep Control which columns from .data are retained in the output.
-#' Note that unlike `dplyr::mutate`, which defaults to `"all"` this defaults to
+#' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @param .messages (logical) Should informative messages be shown? Defaults to
