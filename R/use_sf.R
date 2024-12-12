@@ -39,8 +39,7 @@ use_sf <- function(
   names(fn_quos) <- fn_args
 
   fn_quo_is_null <- fn_quos |>
-    purrr::map(\(user_arg)
-               rlang::quo_is_null(user_arg)) |>
+    map(.f = rlang::quo_is_null) |>
     unlist()
 
   # detect sf and handle sf objects
@@ -59,28 +58,28 @@ use_sf <- function(
 
     } else {
 
-    # if geometry arg has been named, save the name
-    if(!any(fn_quo_is_null)) {
+      # if geometry arg has been named, save the name
+      if(!any(fn_quo_is_null)) {
 
-      col_name_sfc <- paste0(get_expr(fn_quos$geometry)) # save name
+        col_name_sfc <- paste0(get_expr(fn_quos$geometry)) # save name
 
-      # check if column name is in the dataframe
-      if(!col_name_sfc %in% colnames(.df)) {
-        bullets <- c(
-          "Must specify an existing 'geometry' column.",
-          x = "Column '{col_name_sfc}' doesn't exist."
-        ) |> cli_bullets() |> cli_fmt()
+        # check if column name is in the dataframe
+        if(!col_name_sfc %in% colnames(.df)) {
+          bullets <- c(
+            "Must specify an existing 'geometry' column.",
+            x = "Column '{col_name_sfc}' doesn't exist."
+          ) |> cli_bullets() |> cli_fmt()
 
-        cli_abort(bullets)
+          cli_abort(bullets)
+        }
+
+      } else {
+
+        # get column name that holds 'geometry'
+        col_name_sfc <- .df |>
+          select(which(sapply(.df, class) == 'sfc_POINT')) |> # might be overcomplicating `select(geometry)`
+          colnames()
       }
-
-    } else {
-
-      # get column name that holds 'geometry'
-      col_name_sfc <- .df |>
-        select(which(sapply(.df, class) == 'sfc_POINT')) |> # might be overcomplicating `select(geometry)`
-        colnames()
-    }
     }
   }
 
@@ -94,7 +93,10 @@ use_sf <- function(
   # Add sf coords if valid
   check_coords(.df, level = "abort")
 
-  result <- col_sf_to_dwc(.df, col_name_sfc, level = level) |>
+  result <- col_sf_to_dwc(.df,
+                          col_name_sfc
+                          # level = level
+                          ) |>
     st_drop_geometry()
 
   cli_warn("{.field {col_name_sfc}} dropped from data frame.")
@@ -133,7 +135,7 @@ check_is_sf <- function(.df,
       "No geometry detected.",
       i = "Must supply {.code use_sf()} a dataframe with an {.pkg sf} geometry (i.e. {.code st_POINT})."
     ) |> cli_bullets() |> cli_fmt()
-    cli_abort(bullets)
+    cli_abort(bullets) # FIXME: this ignores 'level' argument
   }
   .df
 }
@@ -150,8 +152,7 @@ check_is_point <- function(.df,
   # enforce POINT geometry
   if (any(st_geometry_type(.df, by_geometry = FALSE) != "POINT")) {
     sf_type <- st_geometry_type(.df, by_geometry = FALSE)
-    cli_abort(".df geometry must be of type 'POINT', not '{sf_type}'.")
-
+    cli_abort(".df geometry must be of type 'POINT', not '{sf_type}'.") # FIXME: this ignores 'level' argument
   }
   .df
 }
@@ -193,7 +194,7 @@ check_has_crs <- function(.df,
 #' @keywords Internal
 col_sf_to_dwc <- function(.df,
                           col_name,
-                          level = c("inform", "warn", "abort"),
+                          # level = c("inform", "warn", "abort"), # unused
                           call = caller_env()
                           ){
   result <- .df |>

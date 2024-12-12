@@ -218,7 +218,8 @@ suggest_functions_message <- function(suggested_functions,
 
   # add pipe when there are multiple suggested functions
   if(length(suggested_functions) > 1) {
-    suggested_functions_piped <- c(paste0(head(suggested_functions, -1), " |> "), tail(suggested_functions, 1))
+    suggested_functions_piped <- c(paste0(utils::head(suggested_functions, -1), " |> "),
+                                   utils::tail(suggested_functions, 1))
   } else {
     suggested_functions_piped <- suggested_functions
   }
@@ -273,7 +274,7 @@ additional_functions_message <- function(optional_functions,
     cli_text(paste0("Based on your matched terms, you can also add to your pipe: ", "\n"))
     cli_bullets(c("*" = optional_functions_message))
   }
-  cli_bullets(c("i" = col_grey("See all `use_` functions at {.url https://galaxias.ala.org.au/reference/index.html#add-darin-core-terms}")))
+  cli_bullets(c("i" = col_grey("See all `use_` functions at http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms")))
 }
 
 
@@ -407,30 +408,30 @@ build_req_terms_table <- function(req_terms) {
   # Unnest & concatenate terms by group
   missing_results <- req_terms |>
     select(-"matched") |>
-    unnest(cols = c(missing)) |>
+    unnest(cols = c(.data$missing)) |>
     group_by(.data$term_group) |>
     mutate( # glue names
-      missing = ansi_collapse(missing, sep = ", ", last = ", ")
+      missing = ansi_collapse(.data$missing, sep = ", ", last = ", ")
     ) |>
     unique()
 
   matched_results <- req_terms |>
     select(-"missing") |>
-    unnest(cols = c(matched)) |>
+    unnest(cols = c(.data$matched)) |>
     group_by(.data$term_group) |>
     mutate( # glue names
-      matched = ansi_collapse(matched, sep = ", ", last = ", ")
+      matched = ansi_collapse(.data$matched, sep = ", ", last = ", ")
     ) |>
     unique()
 
   req_terms_message <- missing_results |>
     full_join(matched_results,
-              join_by(term_group, result)) |>
+              join_by("term_group", "result")) |>
     # remove other Identifier terms if one or more are matched
     mutate(
       missing = case_when(
-        term_group == "Identifier (at least one)" & !is.na(matched) ~ NA,
-        .default = missing
+        .data$term_group == "Identifier (at least one)" & !is.na(.data$matched) ~ NA,
+        .default = .data$missing
         )) |>
     # add blank space for correct message formatting
     tidyr::replace_na(list(missing = stringr::str_pad("-", width = 16, side = "right"),
@@ -438,10 +439,10 @@ build_req_terms_table <- function(req_terms) {
 
   # Group terms found vs missing
   pass <- req_terms_message |>
-    filter(result == "pass")
+    filter(.data$result == "pass")
 
   failed <- req_terms_message |>
-    filter(result == "fail")
+    filter(.data$result == "fail")
 
   pass_group <- glue("{pass$term_group}")
   pass_matched <- glue("{pass$matched}")
@@ -576,8 +577,8 @@ check_required_terms <- function(user_column_names) {
   # convert empty row value to NULL
   result <- all_terms |>
     mutate(
-      missing = lapply(missing, function(x) if(identical(x, character(0))) NULL else x),
-      matched = lapply(matched, function(x) if(identical(x, character(0))) NULL else x)
+      missing = lapply(.data$missing, function(x) if(identical(x, character(0))) NULL else x),
+      matched = lapply(.data$matched, function(x) if(identical(x, character(0))) NULL else x)
     )
 
   return(result)

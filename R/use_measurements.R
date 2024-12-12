@@ -38,11 +38,9 @@ use_measurements <- function(
 
   nested_df <- .df |>
     # add row number for id
-    mutate(
-      padded_row_number = stringr::str_pad(row_number(), floor(log10(row_number())) + 1, pad = '0')
-      ) |>
+    mutate(padded_row_number = sequential_id()) |>
     # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
-    group_split(row_number(), .keep = FALSE) |>
+    group_split(dplyr::row_number(), .keep = FALSE) |>
     purrr::map_dfr( ~ .x |>
                       nest(measurementOrFact = c(padded_row_number, !!!fn_quos)))
 
@@ -53,7 +51,7 @@ use_measurements <- function(
   result <- nested_df |>
     dplyr::mutate(
       measurementOrFact = purrr::map(
-        measurementOrFact,
+        .data$measurementOrFact,
         ~ .x |>
           pivot_longer(names_to = "column_name",
                        values_to = "measurementValue",

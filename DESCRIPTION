@@ -33,7 +33,6 @@ Imports:
   uuid
 Suggests:
   gt,
-  here,
   knitr,
   nanoparquet,
   ozmaps,

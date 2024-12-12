@@ -54,8 +54,7 @@ check_dataset <- function(.df){
   invisible() # prevent df results from printing with headers
 
   # check all checkable fields, save fields & error messages
-  check_results <-
-    check_functions_names |>
+  check_results <- check_functions_names |>
     map(~ check_all(.x, .df, checkable_fields)) |>
     bind_rows()
 
@@ -81,7 +80,7 @@ check_dataset <- function(.df){
     results_split <- check_results |>
       unnest(.data$messages) |>
       mutate(
-        term = factor(term, levels = unique(term)) # maintain original term order
+        term = factor(.data$term, levels = unique(.data$term)) # maintain original term order
         ) |>
       group_split(.data$term)
 
@@ -264,13 +263,14 @@ check_min_req_dwc <- function(checkable_fields) {
   # message
   dwc_spinny_message(glue("Data meets minimum Darwin Core requirements"))
 
-  complies_text <- "Data meets minimum Darwin Core requirements"
   if(isTRUE(is_dwc_compliant)) {
+    complies_text <- "Data meets minimum Darwin Core requirements"
     cli::cli_status_clear()
     cat_line(glue("{col_green(symbol$tick)} {complies_text}"))
   } else {
+    noncomplies_text <- "Data does not meet minimum Darwin Core requirements"
     cli::cli_status_clear()
-    cat_line(glue("{col_red(symbol$cross)} {complies_text}"))
+    cat_line(glue("{col_red(symbol$cross)} {noncomplies_text}"))
     cli_bullets(c(i = "Use `suggest_workflow()` to see more information."))
   }
 

@@ -102,7 +102,6 @@ What happens when we add a column with an error in it? In our `df`, the `latitud
 ```{r}
 #| eval: true
 #| error: true
-# is it possible to print this error?
 df |>
   use_scientific_name(scientificName = species) |>
   use_coordinates(decimalLongitude = longitude,
@@ -207,10 +206,12 @@ library(tibble)
 library(readr)
 library(dplyr)
 library(tidyr)
-library(here)
 
 # take a small sample
-df_filtered <- read_csv(here("inst", "examples", "data", "westerband_2022_wdate.csv")) |>
+df_filtered <- system.file("extdata", 
+                           "westerband_2022_wdate.csv",
+                           package = "corella") |>
+  read_csv() |>
   select(Site, Species, Latitude, Longitude, LMA_g.m2, LeafN_area_g.m2, PNUE)
 
 df_filtered

@@ -435,11 +435,9 @@ check_mismatch_code_country <- function(.df,
   #   cli::cli_warn(bullets)
   # }
 
-
-
   lookup_country <- country_codes$country_name[country_codes$code %in% x]
   correct_country <- country_codes$country_name
-  if(lookup_country != df$countryCode[1]){
+  if(lookup_country != .df$countryCode[1]){
     bullets <- c("Country code in {.field {x}} does not correspond to country.",
                  i = "Did you mean {lookup_country}?"
     )

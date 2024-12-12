@@ -116,9 +116,9 @@ check_individualCount <- function(.df,
 
         # make sure 0s are tagged as absences in occurrenceStatus
         absences <- .df |>
-          select(individualCount, occurrenceStatus) |>
-          filter(individualCount == 0) |>
-          mutate(match = individualCount == 0 & occurrenceStatus == "absent")
+          select("individualCount", "occurrenceStatus") |>
+          filter(.data$individualCount == 0) |>
+          mutate(match = .data$individualCount == 0 & .data$occurrenceStatus == "absent")
 
         if(any(absences$match == FALSE)) {
           n_unmatched <- absences |>
@@ -186,7 +186,7 @@ check_organismQuantityType <- function(.df,
   level <- match.arg(level)
   if(any(colnames(.df) == "organismQuantityType")){
     .df |>
-      select(organismQuantityType) |>
+      select("organismQuantityType") |>
       check_is_string(level = level)
 
     if (!any(colnames(.df) == "organismQuantity")) {

@@ -12,14 +12,14 @@
 #' @rdname accepted_terms
 #' @export
 occurrence_terms <- function(){
-  darwin_core_terms |>
+  corella::darwin_core_terms |>
     dplyr::pull(.data$term)
 }
 
 #' @rdname accepted_terms
 #' @export
 event_terms <- function(){
-  darwin_core_terms |>
+  corella::darwin_core_terms |>
     dplyr::filter(.data$class %in% c("Generic", "Event", "Location")) |>
     dplyr::pull(.data$term)
 }

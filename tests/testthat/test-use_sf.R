@@ -1,7 +1,7 @@
 
 #---
 # load small dataset of occurrence records
-occs <- nanoparquet::read_parquet(here::here("tests", "testthat", "testdata", "bandicoots.parquet"))
+occs <- nanoparquet::read_parquet("testdata/bandicoots.parquet")
 
 # set lat/lon to sf `geometry`
 occs_clean <- occs |>
