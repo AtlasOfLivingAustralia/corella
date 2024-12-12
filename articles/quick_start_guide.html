@@ -151,7 +151,7 @@ name) in our data is in the <code>species</code> column by using
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_scientific_name.html">use_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[335ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[333ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   latitude longitude date       time   month   day     n crs   country continent</span></span>
@@ -175,16 +175,15 @@ class <code>character</code> column, when it should be a
 <code><a href="../reference/use_coordinates.html">use_coordinates()</a></code>, an error will tell us something is
 wrong.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># is it possible to print this error?</span></span>
-<span><span class="va">df</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_scientific_name.html">use_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="va">latitude</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[316ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[315ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[621ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_decimalLatitude()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">decimalLatitude</span> must be a numeric vector, not character.</span></span></code></pre></div>
@@ -207,7 +206,7 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[621ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -235,7 +234,7 @@ them automatically.</p>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_locality.html">use_locality</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
@@ -307,7 +306,7 @@ dataframe <code>df</code>.</p>
 <span><span class="co">#&gt; Based on your matched terms, you can also add to your pipe:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `use_locality()` and `use_datetime()`</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #555555;">See all `use_` functions at</span></span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB; font-style: italic;">&lt;https://galaxias.ala.org.au/reference/index.html#add-darin-core-terms&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   <span style="color: #555555;">http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span></span></code></pre></div>
 <p><code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code> will update the suggested function
 pipe to only suggest functions that are necessary to standardise your
 data correctly.</p>
@@ -352,7 +351,7 @@ suggests <code><a href="../reference/use_occurrences.html">use_occurrences()</a>
 <span><span class="co">#&gt; Based on your matched terms, you can also add to your pipe:</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `use_locality()` and `use_datetime()`</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #555555;">See all `use_` functions at</span></span></span>
-<span><span class="co">#&gt;   <span style="color: #0000BB; font-style: italic;">&lt;https://galaxias.ala.org.au/reference/index.html#add-darin-core-terms&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   <span style="color: #555555;">http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="test-your-data">Test your data<a class="anchor" aria-label="anchor" href="#test-your-data"></a>
@@ -381,16 +380,16 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[52ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[47ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[25ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[24ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [ <span style="color: #BBBB00;">Errors</span>: 2 | <span style="color: #00BB00;">Pass</span>: 0 ]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Data meets minimum Darwin Core requirements</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Data does not meet minimum Darwin Core requirements</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `suggest_workflow()` to see more information.</span></span>
 <span><span class="co">#&gt; ── <span style="color: #BBBB00; font-weight: bold;">Error</span> in individualCount ────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -416,10 +415,12 @@ measurement columns: <code>LMA_g.m2</code>,
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/" class="external-link">here</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># take a small sample</span></span>
-<span><span class="va">df_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"inst"</span>, <span class="st">"examples"</span>, <span class="st">"data"</span>, <span class="st">"westerband_2022_wdate.csv"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="va">df_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
+<span>                           <span class="st">"westerband_2022_wdate.csv"</span>,</span>
+<span>                           package <span class="op">=</span> <span class="st">"corella"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Site</span>, <span class="va">Species</span>, <span class="va">Latitude</span>, <span class="va">Longitude</span>, <span class="va">LMA_g.m2</span>, <span class="va">LeafN_area_g.m2</span>, <span class="va">PNUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df_filtered</span></span>
@@ -484,16 +485,16 @@ occurrence, held in a nested column called
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 153 × 8</span></span></span>
 <span><span class="co">#&gt;    Site           Species      Latitude Longitude measurementValue measurementID</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.           156.   LMA_g.m2|1   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.           156.   LMA_g.m2|001 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             1.54 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             2.70 PNUE|1       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.           116.   LMA_g.m2|2   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             2.70 PNUE|001     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.           116.   LMA_g.m2|002 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             1.73 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             3.93 PNUE|2       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.            99.9  LMA_g.m2|3   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             3.93 PNUE|002     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.            99.9  LMA_g.m2|003 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             1.84 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             2.27 PNUE|3       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Downfall Creek Pseudoweinm…    -<span style="color: #BB0000;">17.2</span>      146.           128.   LMA_g.m2|4   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             2.27 PNUE|003     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Downfall Creek Pseudoweinm…    -<span style="color: #BB0000;">17.2</span>      146.           128.   LMA_g.m2|004 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 143 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: measurementUnit &lt;chr&gt;, measurementType &lt;chr&gt;</span></span></span></code></pre></div>
 </div>
