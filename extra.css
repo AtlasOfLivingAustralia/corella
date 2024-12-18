@@ -4,11 +4,11 @@
 h1, h2, h3, h4, .h1, .h2, .h3, .main-title, .main-subtitle {
   font-family: Lato;
   font-weight: normal;
-  color: #134348;
+  color: #076064;
 }
 
 a {
-    color: #82c8d0;
+    color: #47a3a9;
     text-decoration: none;
 }
 
@@ -27,7 +27,7 @@ body { font-family: Roboto; }
 }
 
 .navbar.bg-primary {
-  background-image: linear-gradient(to bottom, #ffffff, #d7eaf7) !important;
+  background-image: linear-gradient(to bottom, #ffffff, #ffffff) !important;
   /*background-image: linear-gradient(#93d6d6, #78CCCC 60%, #6cb7b7);*/
 }
 
@@ -52,7 +52,8 @@ body { font-family: Roboto; }
 }
 
 .navbar-nav .nav-link:focus {
-    color: #134348;
+    color: #d7eaf7;
+    background-color: #076064!important;
 }
 
 .navbar-nav .active>.nav-link {
