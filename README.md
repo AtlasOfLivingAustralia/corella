@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# corella <img src="man/figures/corella-logo.png" align="right" style="margin: 0px 10px 0px 10px;" alt="" width="120"/><br>
+# corella <img src="man/figures/logo.png" align="right" style="margin: 0px 10px 0px 10px;" alt="" width="120"/><br>
 
 <!-- badges: start -->
 
@@ -149,7 +149,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [71ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [355ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
