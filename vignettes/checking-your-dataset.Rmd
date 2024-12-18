@@ -56,7 +56,7 @@ corella contains internal `check_` functions for all individual Darwin Core term
 # generate table
 # fn_to_term_table() |>
 #   dplyr::bind_rows() |>
-#   write.csv("inst/supported-terms.csv")
+#   write.csv("vignettes/supported-terms.csv")
 ```
 
 
@@ -67,7 +67,7 @@ corella contains internal `check_` functions for all individual Darwin Core term
 library(gt)
 library(dplyr)
 
-readr::read_csv(system.file("supported-terms.csv",
+readr::read_csv(system.file("./supported-terms.csv",
                             package = "corella")) |>
   select(-1) |> # remove reference column
   mutate(
@@ -105,6 +105,7 @@ readr::read_csv(system.file("supported-terms.csv",
     container.height = "450px"
   )
 ```
+
 <br> 
 
 When a user specifies a column to a matching Darwin Core term (or the column/term is detected by corella automatically) in a `use_` function, the `use_` function triggers that matching term's `check_` function. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. 
