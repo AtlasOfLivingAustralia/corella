@@ -18,6 +18,9 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @importFrom rlang enquos
+#' @importFrom cli cli_progress_step
+#' @importFrom dplyr row_number
+#' @importFrom purrr map_dfr
 #' @export
 use_measurements <- function(
     .df,
@@ -34,19 +37,27 @@ use_measurements <- function(
   fn_quos <- enquos(cols)
 
   # Creates measurementOrFact column, nests measurement columns
-  cli::cli_progress_step("Adding measurement columns")
+  cli_progress_step("Adding measurement columns")
 
-  nested_df <- .df |>
+  df_split <- .df |>
     # add row number for id
-    mutate(padded_row_number = sequential_id()) |>
+    mutate(
+      padded_row_number = stringr::str_pad(row_number(),
+                                           floor(log10(row_number())) + 1,
+                                           pad = '0')
+      ) |>
+    group_split(dplyr::row_number(), .keep = FALSE)
     # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
-    group_split(dplyr::row_number(), .keep = FALSE) |>
-    purrr::map_dfr( ~ .x |>
-                      nest(measurementOrFact = c(padded_row_number, !!!fn_quos)))
+
+
+  nested_df <- purrr::map_dfr(df_split,
+                 ~ .x |>
+                   nest(measurementOrFact = c(padded_row_number, !!!fn_quos))
+                 )
 
   # Pivots each row's data to long
   # Adds rowwise `unit` and `type` information to each nested tibble
-  cli::cli_progress_step("Converting measurements to Darwin Core")
+  cli_progress_step("Converting measurements to Darwin Core")
 
   result <- nested_df |>
     dplyr::mutate(
@@ -78,6 +89,8 @@ use_measurements <- function(
   # }
   #
   # check_eventDate(result, level = "abort")
+
+  cli::cli_progress_step("Successfully nested measurements in column {.field measurementOrFact}.")
 
   return(result)
 }
