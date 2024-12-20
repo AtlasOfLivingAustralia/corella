@@ -102,7 +102,9 @@ names.</p>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AtlasOfLivingAustralia/corella"</span><span class="op">)</span></span></code></pre></div>
 <p>To load the package:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://corella.ala.org.au">corella</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://corella.ala.org.au">corella</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="rename-add-or-edit-columns">Rename, add or edit columns<a class="anchor" aria-label="anchor" href="#rename-add-or-edit-columns"></a>
@@ -156,7 +158,7 @@ name) in our data is in the <code>species</code> column by using
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_scientific_name.html">use_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[333ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[334ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   latitude longitude date       time   month   day     n crs   country continent</span></span>
@@ -185,7 +187,7 @@ wrong.</p>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="va">latitude</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[317ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[316ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
@@ -208,10 +210,10 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[621ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -239,13 +241,13 @@ them automatically.</p>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_locality.html">use_locality</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[311ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[619ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[617ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[618ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -385,7 +387,8 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[50ms]</span></span></span>
+<span><span class="co">#&gt; ⠹ | 1 <span style="color: #BB0000;">✖</span> | individualCount</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[60ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[24ms]</span></span></span>
@@ -490,16 +493,16 @@ occurrence, held in a nested column called
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 153 × 8</span></span></span>
 <span><span class="co">#&gt;    Site           Species      Latitude Longitude measurementValue measurementID</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.           156.   LMA_g.m2|001 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.           156.   LMA_g.m2|1   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             1.54 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             2.70 PNUE|001     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.           116.   LMA_g.m2|002 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             2.70 PNUE|1       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.           116.   LMA_g.m2|2   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             1.73 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             3.93 PNUE|002     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.            99.9  LMA_g.m2|003 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             3.93 PNUE|2       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.            99.9  LMA_g.m2|3   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             1.84 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             2.27 PNUE|003     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Downfall Creek Pseudoweinm…    -<span style="color: #BB0000;">17.2</span>      146.           128.   LMA_g.m2|004 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             2.27 PNUE|3       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Downfall Creek Pseudoweinm…    -<span style="color: #BB0000;">17.2</span>      146.           128.   LMA_g.m2|4   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 143 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: measurementUnit &lt;chr&gt;, measurementType &lt;chr&gt;</span></span></span></code></pre></div>
 </div>

@@ -65,7 +65,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Checking your dataset</h1>
                         <h4 data-toc-skip class="author">Dax Kellie</h4>
             
-            <h4 data-toc-skip class="date">2024-12-18</h4>
+            <h4 data-toc-skip class="date">2024-12-20</h4>
       
 
       <div class="d-none name"><code>checking-your-dataset.Rmd</code></div>
@@ -95,8 +95,11 @@ their latitude and longitude coordinates (class <code>numeric</code>),
 and a location description in the column <code>place</code> (class
 <code>character</code>).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://corella.ala.org.au">corella</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://corella.ala.org.au">corella</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">##   object 'type_sum.accel' not found</span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Eolophus roseicapilla"</span>, <span class="st">"Eolophus roseicapilla"</span><span class="op">)</span>,</span>
@@ -120,7 +123,7 @@ intentionally added the wrong column <code>place</code> as
 must be numeric in Darwin Core standard. This error comes from a small
 internal checking function called
 <code>check_decimalLatitude()</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/use_coordinates.html">use_coordinates</a></span><span class="op">(</span>decimalLatitude <span class="op">=</span> <span class="va">place</span>, <span class="co"># wrong column</span></span>
 <span>                  decimalLongitude <span class="op">=</span> <span class="va">longitude</span><span class="op">)</span></span></code></pre></div>
@@ -856,7 +859,7 @@ columns that match valid Darwin Core terms, and runs all matching
 of whether each matching column’s check passed or failed * The number of
 errors and passed columns * Whether the data meets minimum Darwin Core
 requirements * The first 5 error messages returned by checks</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.310</span>, <span class="st">"-35.273"</span><span class="op">)</span>, <span class="co"># deliberate error for demonstration purposes</span></span>
 <span>  decimalLongitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.125</span>, <span class="fl">149.133</span><span class="op">)</span>,</span>
@@ -872,19 +875,20 @@ requirements * The first 5 error messages returned by checks</p>
 <pre><code><span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Testing data</span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span></code></pre>
 <pre><code><span><span class="co">## ⠙ | 0  decimalLatitude</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 3 <span style="color: #BB0000;">✖</span> | decimalLatitude   <span style="color: #B2B2B2;">[49ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 3 <span style="color: #BB0000;">✖</span> | decimalLatitude   <span style="color: #B2B2B2;">[51ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## ⠙ | 0  decimalLongitude</span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 0 <span style="color: #00BB00;">✔</span> | decimalLongitude  <span style="color: #B2B2B2;">[9ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## ⠙ | 0  individualCount</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount   <span style="color: #B2B2B2;">[29ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## ⠹ | 1 <span style="color: #BB0000;">✖</span> | individualCount</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount   <span style="color: #B2B2B2;">[33ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## ⠙ | 0  scientificName</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 0 <span style="color: #00BB00;">✔</span> | scientificName    <span style="color: #B2B2B2;">[12ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 0 <span style="color: #00BB00;">✔</span> | scientificName    <span style="color: #B2B2B2;">[9ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## ⠙ | 0  country</span></span></code></pre>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country           <span style="color: #B2B2B2;">[24ms]</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country           <span style="color: #B2B2B2;">[25ms]</span></span></span></code></pre>
 <pre><code><span><span class="co">## </span></span></code></pre>
 <pre><code><span><span class="co">## ══ Results ═════════════════════════════════════════════════════════════════════</span></span></code></pre>
 <pre><code><span><span class="co">## </span></span>
