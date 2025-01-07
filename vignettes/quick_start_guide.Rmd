@@ -8,6 +8,8 @@ vignette: >
   %\VignetteIndexEntry{Quick start guide}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - './westerband_2022_wdate.csv'
 ---
 
 ```{r, include = FALSE}
@@ -208,10 +210,7 @@ library(dplyr)
 library(tidyr)
 
 # take a small sample
-df_filtered <- system.file("extdata", 
-                           "westerband_2022_wdate.csv",
-                           package = "corella") |>
-  read_csv() |>
+df_filtered <- read.csv("./westerband_2022_wdate.csv") |>
   select(Site, Species, Latitude, Longitude, LMA_g.m2, LeafN_area_g.m2, PNUE)
 
 df_filtered
@@ -220,7 +219,7 @@ df_filtered
 
 The way that Darwin Core handles measurement fields is slightly different to how they are organised in these data. In `df_filtered`, lots of information about what data the column contains is in the abbreviated column name. This includes the type of measure, the unit it is measured in, and the value itself. In Darwin Core, this information needs to be documented individually for each measurement, which requires multiple columns and multiple rows (ie a 'long' data format). 
 
-corella can convert measurement columns into Darwin Core standard with `use_measurements()`. This function requires the column, unit and measure type are specified for each respective measurement, after which `use_measurements()` assigns this information to the correct Darwin Core columns. `use_measurements()` then nests them so that they information is linked to each species occurrence, held in a nested column called `measurementOrFact`.
+corella can convert measurement columns into Darwin Core standard with `use_measurements()`. This function requires users to specify the column, unit and measure type for each respective measurement. `use_measurements()` then assigns this information to the correct Darwin Core columns, and nests these columns into a nested column called `measurementOrFact`. 
 
 ```{r, message=FALSE, warning=FALSE}
 df_nested <- df_filtered |>
@@ -241,7 +240,7 @@ df_nested |> slice(1:3)
 ```
 
 
-To view or access this data, you can use `dplyr::unnest()`, which will extract the information into a 'long' data format.
+This nested structure allows the newly formatted information (now in long format) to still link correctly to each species occurrence. To view or access this now-standardised long-format data, use `dplyr::unnest()`.
 
 ```{r}
 df_nested |>

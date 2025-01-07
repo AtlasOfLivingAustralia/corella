@@ -8,6 +8,8 @@ vignette: >
   %\VignetteIndexEntry{Checking your dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - 'supported-terms.csv'
 ---
 
 A Darwin Core Archive consists of several pieces to ensure a dataset is structured correctly (and can be restructured correctly in the future). These pieces include the dataset, a metadata statement, and an xml file detailing how the columns in the data relate to each other. 
@@ -67,8 +69,9 @@ corella contains internal `check_` functions for all individual Darwin Core term
 library(gt)
 library(dplyr)
 
-readr::read_csv(system.file("./supported-terms.csv",
-                            package = "corella")) |>
+object <- read.csv("./supported-terms.csv") 
+
+object |>
   select(-1) |> # remove reference column
   mutate(
     check_function = glue::glue("check_{dwc_term}()")

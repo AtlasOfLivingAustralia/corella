@@ -19,6 +19,7 @@
 #' @importFrom rlang abort
 #' @importFrom rlang enquos
 #' @importFrom cli cli_progress_step
+#' @importFrom cli cli_progress_done
 #' @importFrom dplyr row_number
 #' @importFrom purrr map_dfr
 #' @export
@@ -55,6 +56,8 @@ use_measurements <- function(
                    nest(measurementOrFact = c(padded_row_number, !!!fn_quos))
                  )
 
+  cli_progress_done()
+
   # Pivots each row's data to long
   # Adds rowwise `unit` and `type` information to each nested tibble
   cli_progress_step("Converting measurements to Darwin Core")
@@ -74,6 +77,8 @@ use_measurements <- function(
           ) |>
           select(-column_name, -padded_row_number)
       ))
+
+  cli_progress_done()
 
   # if(!is.null(result$measurementOrFact)) {
   #   matched_cols = result |>
