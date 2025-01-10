@@ -1,7 +1,7 @@
-#' Add a sampling, collection or image-capture Event to a `tibble`
+#' Set, create or modify columns with Event information using Darwin Core
 #'
 #' @description
-#' Format fields that contain information about an
+#' Format columns that contain information about an
 #' [Event](https://dwc.tdwg.org/list/#dwc_Event). An "Event" in Darwin Core
 #' standard refers to an action that occurs at a place and time. Examples
 #' include:
@@ -62,7 +62,7 @@
 #' @importFrom purrr map
 #' @importFrom purrr keep
 #' @export
-use_events <- function(
+set_events <- function(
     .df,
     eventID = NULL,
     eventType = NULL,

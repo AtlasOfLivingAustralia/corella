@@ -1,4 +1,4 @@
-#' Add occurrence-specific information to a `tibble`
+#' Set, create or modify columns with occurrence-specific information using Darwin Core
 #'
 #' @description
 #' Format fields uniquely identify each occurrence record and specify the type
@@ -45,7 +45,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_occurrences <- function(
+set_occurrences <- function(
     .df,
     occurrenceID = NULL,
     basisOfRecord = NULL,

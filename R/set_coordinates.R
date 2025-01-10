@@ -1,4 +1,4 @@
-#' Add spatial fields to a `tibble`
+#' Set, create or modify columns with spatial information using Darwin Core
 #'
 #' This function helps format standard location fields to a `tibble`.
 #'
@@ -31,7 +31,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_coordinates <- function(
+set_coordinates <- function(
     .df,
     decimalLatitude = NULL,
     decimalLongitude = NULL,

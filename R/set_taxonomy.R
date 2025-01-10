@@ -1,5 +1,6 @@
-#' Add taxonomic information to a `tibble`
+#' Set, create or modify columns with taxonomic information using Darwin Core
 #'
+#' @description
 #' Format fields that contain taxonomic name information from kingdom to
 #' species, as well as the common/vernacular name, to a `tibble`.
 #'
@@ -32,7 +33,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_taxonomy <- function(
+set_taxonomy <- function(
     .df,
     kingdom = NULL,
     phylum = NULL,

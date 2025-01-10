@@ -1,10 +1,10 @@
-test_that("use_events() keeps fields when composite_id() is called, but only for occurrenceID fields", {
-  quiet_use_events <- purrr::quietly(use_events)
+test_that("set_events() keeps fields when composite_id() is called, but only for occurrenceID fields", {
+  quiet_set_events <- purrr::quietly(set_events)
   df <- tibble(obs_type = "survey",
                site = seq_len(10),
                year = 2024)
   result <- df |>
-    quiet_use_events(eventID = composite_id(sequential_id(),
+    quiet_set_events(eventID = composite_id(sequential_id(),
                                             site,
                                             year),
                eventType = obs_type)
@@ -14,8 +14,8 @@ test_that("use_events() keeps fields when composite_id() is called, but only for
   # i.e. components of `eventID` are retained, but `obs_type` is not
 })
 
-test_that("setting .keep_composite = 'unused' affects use_occurrences()", {
-  quiet_use_events <- purrr::quietly(use_events)
+test_that("setting .keep_composite = 'unused' affects set_occurrences()", {
+  quiet_set_events <- purrr::quietly(set_events)
   df <- tibble(user_col = "humanObservation",
                site = seq_len(10),
                year = 2024)
@@ -23,7 +23,7 @@ test_that("setting .keep_composite = 'unused' affects use_occurrences()", {
                site = seq_len(10),
                year = 2024)
   result <- df |>
-    quiet_use_events(eventID = composite_id(sequential_id(),
+    quiet_set_events(eventID = composite_id(sequential_id(),
                                             site,
                                             year),
                      eventType = obs_type,
@@ -33,13 +33,13 @@ test_that("setting .keep_composite = 'unused' affects use_occurrences()", {
                c("eventID", "eventType"))
 })
 
-test_that("sequential_id() works with use_events()", {
+test_that("sequential_id() works with set_events()", {
   input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
                   basisOfRecord = "humanObservation",
                   site = rep(c("A01", "A02", "A03"), each = 5))
   suppressMessages(
     result <- input |>
-      use_events(eventID = sequential_id())
+      set_events(eventID = sequential_id())
   )
   expect_equal(colnames(result),
                c("eventDate", "basisOfRecord", "site", "eventID"))
@@ -48,22 +48,22 @@ test_that("sequential_id() works with use_events()", {
   expect_true(all(nchar(result$eventID) == 3))
 })
 
-test_that("sequential_id() accepts `width` argument works with use_events()", {
+test_that("sequential_id() accepts `width` argument works with set_events()", {
   input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
                   basisOfRecord = "humanObservation",
                   site = rep(c("A01", "A02", "A03"), each = 5))
   suppressMessages(result <- input |>
-    use_events(eventID = sequential_id(width = 10))
+    set_events(eventID = sequential_id(width = 10))
   )
   expect_true(all(nchar(result$eventID) == 10))
 })
 
-test_that("random_id() works with use_events()", {
+test_that("random_id() works with set_events()", {
   input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
                   basisOfRecord = "humanObservation",
                   site = rep(c("A01", "A02", "A03"), each = 5))
   suppressMessages(result <- input |>
-    use_events(eventID = random_id()))
+    set_events(eventID = random_id()))
 
   expect_equal(colnames(result),
                c("eventDate", "basisOfRecord", "site", "eventID"))
@@ -71,12 +71,12 @@ test_that("random_id() works with use_events()", {
                nrow(result))
 })
 
-test_that("composite_id() works with use_events()", {
+test_that("composite_id() works with set_events()", {
   input <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
                   basisOfRecord = "humanObservation",
                   site = rep(c("A01", "A02", "A03"), each = 5))
   suppressMessages(result <- input |>
-    use_events(eventID = composite_id(site, eventDate))
+    set_events(eventID = composite_id(site, eventDate))
   )
   expect_equal(colnames(result),
                c("eventDate", "basisOfRecord", "site", "eventID"))
@@ -89,7 +89,7 @@ test_that("sequential_id() works within composite_id()", {
                   basisOfRecord = "humanObservation",
                   site = rep(c("A01", "A02", "A03"), each = 5))
   suppressMessages(result <- input |>
-    use_events(eventID = composite_id(sequential_id(),
+    set_events(eventID = composite_id(sequential_id(),
                                       site,
                                       eventDate))
   )

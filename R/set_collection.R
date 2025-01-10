@@ -1,46 +1,49 @@
-#' Add who made an observation to a `tibble`
+#' Set, create or modify columns with museum- or collection-specific information using Darwin Core
 #'
-#' Format fields that contain information about who made a specific observation
-#' of an organism.
+#' @description
+#' Format fields that specify the collection or catalog number of a
+#' specimen or occurrence record.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
+#'
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
-#' @param recordedBy Names of people, groups, or organizations responsible for
-#' recording the original occurrence. The primary collector or observer should
-#' be listed first.
-#' @param recordedByID The globally unique identifier for the person, people,
-#' groups, or organizations responsible for recording the original occurrence.
+#' @param datasetID An identifier for the set of data. May be a global unique
+#' identifier or an identifier specific to a collection or institution.
+#' @param datasetName The name identifying the data set from which the record
+#' was derived.
+#' @param catalogNumber A unique identifier for the record within the data set
+#' or collection.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.
 #' @details
-#' Examples of `recordedBy` values:
-#' * `José E. Crespo`
+#' Examples of `datasetID` values:
+#' * `b15d4952-7d20-46f1-8a3e-556a512b04c5`
 #'
-#' Examples of `recordedByID` values:
-#' * 	`c("https://orcid.org/0000-0002-1825-0097", "https://orcid.org/0000-0002-1825-0098")`
+#' Examples of `datasetName` values:
+#' * `Grinnell Resurvey Mammals`
+#' * `Lacey Ctenomys Recaptures`
+#'
+#' Examples of `catalogNumber` values:
+#' * `145732`
+#' * `145732a`
+#' * `2008.1334`
+#' * `R-4313`
 #'
 #' @importFrom dplyr mutate
-#' @importFrom purrr map
-#' @importFrom purrr pluck
 #' @importFrom rlang abort
-#' @importFrom rlang quo_is_null
-#' @importFrom rlang enquos
-#' @importFrom rlang zap
-#' @importFrom purrr map
-#' @importFrom purrr keep
 #' @export
-use_observer <- function(
+set_collection <- function(
     .df,
-    recordedBy = NULL,
-    recordedByID = NULL,
+    datasetID = NULL,
+    datasetName = NULL,
+    catalogNumber = NULL,
     .keep = "unused"
 ){
-
   if(missing(.df)){
     abort(".df is missing, with no default")
   }
@@ -49,7 +52,7 @@ use_observer <- function(
 
   # capture arguments as a list of quosures
   # NOTE: enquos() must be listed alphabetically
-  fn_quos <- enquos(recordedBy, recordedByID)
+  fn_quos <- enquos(catalogNumber, datasetID, datasetName)
   names(fn_quos) <- fn_args
 
   # find arguments that are NULL but exist already in `df`
@@ -81,45 +84,30 @@ use_observer <- function(
   col_progress_bar(cols = matched_cols)
 
   # run column checks
-  check_recordedBy(result, level = "abort")
-  check_recordedByID(result, level = "abort")
+  check_datasetName(result, level = "abort")
 
-  result
+  # NOTE: Unsure of what checks are useful for columns below
+  # check_catalogNumber(result, level = "abort")
+  # check_datasetID(result, level = "abort")
+
+  return(result)
 }
 
 
-#' Check recordedBy
+
 #' @param level what action should the function take for non-conformance?
 #' Defaults to `"inform"`.
 #' @noRd
 #' @keywords Internal
-check_recordedBy <- function(.df,
-                             level = c("inform", "warn", "abort")
+check_datasetName <- function(.df,
+                              level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
-  if(any(colnames(.df) == "recordedBy")){
+  if(any(colnames(.df) == "datasetName")){
     .df |>
-      select("recordedBy") |>
+      select("datasetName") |>
       check_is_string(level = level)
   }
   .df
 }
 
-
-#' check recordedByID
-#' @param level what action should the function take for non-conformance?
-#' Defaults to `"inform"`.
-#' @noRd
-#' @keywords Internal
-check_recordedByID <- function(.df,
-                             level = c("inform", "warn", "abort")
-){
-  level <- match.arg(level)
-  if(any(colnames(.df) == "recordedByID")){
-    .df |>
-      select("recordedByID") |>
-      check_is_string(level = level)
-    # could check if contains "orchid.org"?
-  }
-  .df
-}

@@ -1,4 +1,4 @@
-#' Add information of individual organisms to a `tibble`
+#' Set, create or modify columns with information of individual organisms using Darwin Core
 #'
 #' @description
 #' Format fields that contain measurements or attributes of individual

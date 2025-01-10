@@ -27,19 +27,19 @@
 #'  The following functions add single DwC fields, or collections of related
 #'  fields, to an existing `tibble`.
 #'
-#'   * [use_events()] basic information on observation events (`eventID`, `parentEventID`, `eventType`)
-#'   * [use_occurrences()] basic information on observations (`occurrenceID`, `basisOfRecord`)
-#'   * [use_scientific_name()] record the highest level of taxonomic specificity in the dataset (`scientificName`, `scientificNameAuthorship`, `taxonRank`)
-#'   * [use_taxonomy()] to specify higher taxonomic columns (`kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `specificEpithet`, `vernacularName`)
-#'   * [use_coordinates()] for spatial data (`decimalLatitude`, `decimalLongitude`, `geodeticDatum`, `coordinateUncertaintyInMeters`, `coordinatePrecision`)
-#'   * [use_sf()] for spatial data in `sf` format
-#'   * [use_locality()] for spatial descriptions (`continent`, `country`, `countryCode`, `stateProvince`, `locality`)
-#'   * [use_datetime()] for temporal data (`eventDate`, `year`, `month`, `day`, `eventTime`)
-#'   * [use_collection()] to give museum- or collection- specific information (`datasetID`, `datasetName`, `catalogNumber`)
-#'   * [use_observer()] to specify who made the observation (`recordedByID`, `recordedBy`)
-#'   * [use_abundance()] to state how many animals were seen during the observation (`individualCount`, `organismQuantity`, `organismQuantityType`)
-#'   * [use_individual_traits()] attributes of individuals measured (`individualID`, `lifeStage`, `sex`, `vitality`, `reproductiveCondition`)
-#'   * [use_measurements()] for 'Measurement or Fact' data (optional)
+#'   * [set_events()] basic information on observation events (`eventID`, `parentEventID`, `eventType`)
+#'   * [set_occurrences()] basic information on observations (`occurrenceID`, `basisOfRecord`)
+#'   * [set_scientific_name()] record the highest level of taxonomic specificity in the dataset (`scientificName`, `scientificNameAuthorship`, `taxonRank`)
+#'   * [set_taxonomy()] to specify higher taxonomic columns (`kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `specificEpithet`, `vernacularName`)
+#'   * [set_coordinates()] for spatial data (`decimalLatitude`, `decimalLongitude`, `geodeticDatum`, `coordinateUncertaintyInMeters`, `coordinatePrecision`)
+#'   * [set_coordinates_sf()] for spatial data in `sf` format
+#'   * [set_locality()] for spatial descriptions (`continent`, `country`, `countryCode`, `stateProvince`, `locality`)
+#'   * [set_datetime()] for temporal data (`eventDate`, `year`, `month`, `day`, `eventTime`)
+#'   * [set_collection()] to give museum- or collection- specific information (`datasetID`, `datasetName`, `catalogNumber`)
+#'   * [set_observer()] to specify who made the observation (`recordedByID`, `recordedBy`)
+#'   * [set_abundance()] to state how many animals were seen during the observation (`individualCount`, `organismQuantity`, `organismQuantityType`)
+#'   * [set_individual_traits()] attributes of individuals measured (`individualID`, `lifeStage`, `sex`, `vitality`, `reproductiveCondition`)
+#'   * [set_measurements()] for 'Measurement or Fact' data (optional)
 #'
 #'  **Checking data for Darwin Core compliance**
 #'

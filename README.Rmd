@@ -59,25 +59,25 @@ df <- tibble(
 df
 ```
 
-One of the most important aspects of Darwin Core standard is using standard column names (Darwin Core *terms*). We can update column names in our data to match Darwin Core terms with `use_` functions. 
+One of the most important aspects of Darwin Core standard is using standard column names (Darwin Core *terms*). We can update column names in our data to match Darwin Core terms with `set_` functions. 
 
-Each `use_` function name corresponds to the type of data, and argument names correspond to the available Darwin Core terms to use as column names. `use_` functions support data wrangling operations & `dplyr::mutate()` functionality, meaning columns can be changed or fixed in your pipe. `use_` functions will indicate if anything needs fixing because they also automatically run checks on each column data to make sure each column is in the correct format.
+Each `set_` function name corresponds to the type of data, and argument names correspond to the available Darwin Core terms to use as column names. `set_` functions support data wrangling operations & `dplyr::mutate()` functionality, meaning columns can be changed or fixed in your pipe. `set_` functions will indicate if anything needs fixing because they also automatically run checks on each column data to make sure each column is in the correct format.
 
 ```{r}
 suppressMessages( # for readability
 
 df |>
-  use_coordinates(
+  set_coordinates(
     decimalLatitude = as.numeric(latitude), # fix latitude
     decimalLongitude = longitude
     ) |>
-  use_scientific_name(
+  set_scientific_name(
     scientificName = species
     ) |>
-  use_datetime(
+  set_datetime(
     eventDate = lubridate::dmy(eventDate) # specify date format
     ) |>
-  use_occurrences(occurrenceStatus = status)
+  set_occurrences(occurrenceStatus = status)
 
 )
 ```

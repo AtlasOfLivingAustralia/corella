@@ -29,19 +29,19 @@ the Little Corella (\emph{Cacatua sanguinea}), and was drawn by Dax Kellie.
 The following functions add single DwC fields, or collections of related
 fields, to an existing \code{tibble}.
 \itemize{
-\item \code{\link[=use_events]{use_events()}} basic information on observation events (\code{eventID}, \code{parentEventID}, \code{eventType})
-\item \code{\link[=use_occurrences]{use_occurrences()}} basic information on observations (\code{occurrenceID}, \code{basisOfRecord})
-\item \code{\link[=use_scientific_name]{use_scientific_name()}} record the highest level of taxonomic specificity in the dataset (\code{scientificName}, \code{scientificNameAuthorship}, \code{taxonRank})
-\item \code{\link[=use_taxonomy]{use_taxonomy()}} to specify higher taxonomic columns (\code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{specificEpithet}, \code{vernacularName})
-\item \code{\link[=use_coordinates]{use_coordinates()}} for spatial data (\code{decimalLatitude}, \code{decimalLongitude}, \code{geodeticDatum}, \code{coordinateUncertaintyInMeters}, \code{coordinatePrecision})
-\item \code{\link[=use_sf]{use_sf()}} for spatial data in \code{sf} format
-\item \code{\link[=use_locality]{use_locality()}} for spatial descriptions (\code{continent}, \code{country}, \code{countryCode}, \code{stateProvince}, \code{locality})
-\item \code{\link[=use_datetime]{use_datetime()}} for temporal data (\code{eventDate}, \code{year}, \code{month}, \code{day}, \code{eventTime})
-\item \code{\link[=use_collection]{use_collection()}} to give museum- or collection- specific information (\code{datasetID}, \code{datasetName}, \code{catalogNumber})
-\item \code{\link[=use_observer]{use_observer()}} to specify who made the observation (\code{recordedByID}, \code{recordedBy})
-\item \code{\link[=use_abundance]{use_abundance()}} to state how many animals were seen during the observation (\code{individualCount}, \code{organismQuantity}, \code{organismQuantityType})
-\item \code{\link[=use_individual_traits]{use_individual_traits()}} attributes of individuals measured (\code{individualID}, \code{lifeStage}, \code{sex}, \code{vitality}, \code{reproductiveCondition})
-\item \code{\link[=use_measurements]{use_measurements()}} for 'Measurement or Fact' data (optional)
+\item \code{\link[=set_events]{set_events()}} basic information on observation events (\code{eventID}, \code{parentEventID}, \code{eventType})
+\item \code{\link[=set_occurrences]{set_occurrences()}} basic information on observations (\code{occurrenceID}, \code{basisOfRecord})
+\item \code{\link[=set_scientific_name]{set_scientific_name()}} record the highest level of taxonomic specificity in the dataset (\code{scientificName}, \code{scientificNameAuthorship}, \code{taxonRank})
+\item \code{\link[=set_taxonomy]{set_taxonomy()}} to specify higher taxonomic columns (\code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{specificEpithet}, \code{vernacularName})
+\item \code{\link[=set_coordinates]{set_coordinates()}} for spatial data (\code{decimalLatitude}, \code{decimalLongitude}, \code{geodeticDatum}, \code{coordinateUncertaintyInMeters}, \code{coordinatePrecision})
+\item \code{\link[=set_coordinates_sf]{set_coordinates_sf()}} for spatial data in \code{sf} format
+\item \code{\link[=set_locality]{set_locality()}} for spatial descriptions (\code{continent}, \code{country}, \code{countryCode}, \code{stateProvince}, \code{locality})
+\item \code{\link[=set_datetime]{set_datetime()}} for temporal data (\code{eventDate}, \code{year}, \code{month}, \code{day}, \code{eventTime})
+\item \code{\link[=set_collection]{set_collection()}} to give museum- or collection- specific information (\code{datasetID}, \code{datasetName}, \code{catalogNumber})
+\item \code{\link[=set_observer]{set_observer()}} to specify who made the observation (\code{recordedByID}, \code{recordedBy})
+\item \code{\link[=set_abundance]{set_abundance()}} to state how many animals were seen during the observation (\code{individualCount}, \code{organismQuantity}, \code{organismQuantityType})
+\item \code{\link[=set_individual_traits]{set_individual_traits()}} attributes of individuals measured (\code{individualID}, \code{lifeStage}, \code{sex}, \code{vitality}, \code{reproductiveCondition})
+\item \code{\link[=set_measurements]{set_measurements()}} for 'Measurement or Fact' data (optional)
 }
 
 \strong{Checking data for Darwin Core compliance}

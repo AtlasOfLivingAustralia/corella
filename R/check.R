@@ -49,7 +49,7 @@ wait <- function(seconds = 1) {
 #'
 #' @description
 #' Informs users which columns will be checked by `check_` functions. This includes
-#' columns that have been specified in a `use_` function by the user, or columns
+#' columns that have been specified in a `set_` function by the user, or columns
 #' that exist in the user dataframe that already match Darwin Core terms.
 #'
 #' @importFrom cli cli_progress_step

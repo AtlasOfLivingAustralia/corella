@@ -1,7 +1,8 @@
-#' Add spatial fields to a `tibble` using `sf` `POINT` coordinates
+#' Set, create or modify columns with `sf` spatial information using Darwin Core
 #'
+#' @description
 #' This function helps format standard location fields to a `tibble`. It differs
-#' from `use_coordinates()` by accepting `sf` geometry columns of class `POINT`
+#' from `set_coordinates()` by accepting `sf` geometry columns of class `POINT`
 #' as coordinates (rather than `numeric` lat/lon coordinates). The advantage
 #' of using an `sf` geometry is that the Coordinate Reference System (CRS) is
 #' automatically formatted into the required `geodeticDatum` column.
@@ -13,8 +14,8 @@
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @returns A tibble with the requested fields added.
-#' @seealso [use_coordinates()] for providing numeric coordinates,
-#' [use_locality()] for providing text-based spatial information
+#' @seealso [set_coordinates()] for providing numeric coordinates,
+#' [set_locality()] for providing text-based spatial information
 #' @importFrom rlang abort
 #' @importFrom rlang get_expr
 #' @importFrom sf st_drop_geometry
@@ -22,7 +23,7 @@
 #' @importFrom cli cli_warn
 #' @importFrom cli cli_abort
 #' @export
-use_sf <- function(
+set_coordinates_sf <- function(
     .df,
     geometry = NULL,
     .keep = "unused"

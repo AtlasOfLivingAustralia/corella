@@ -114,13 +114,13 @@ check_contains_terms <- function(.df,
 
   suggested_functions <- main_functions |>
     filter(!.data$dwc_term %in% matched_values) |>
-    distinct(.data$use_function) |>
-    pull("use_function")
+    distinct(.data$set_function) |>
+    pull("set_function")
 
   optional_functions <- other_functions |>
     filter(.data$dwc_term %in% matched_values) |>
-    distinct(.data$use_function) |>
-    pull("use_function")
+    distinct(.data$set_function) |>
+    pull("set_function")
 
   # this wraps text (which might not be optimal for this table)
   # withr::with_options(
@@ -210,10 +210,10 @@ suggest_functions_message <- function(suggested_functions,
                                       is_sf,
                                       .envir = parent.frame()) {
 
-  # if POINT sf class, suggest `use_coordinates_sf()`
+  # if POINT sf class, suggest `set_coordinates_sf()`
   if(isTRUE(is_sf)) {
     # add
-    suggested_functions <- c("use_sf()", suggested_functions)
+    suggested_functions <- c("set_coordinates_sf()", suggested_functions)
   }
 
   # add pipe when there are multiple suggested functions
@@ -274,7 +274,7 @@ additional_functions_message <- function(optional_functions,
     cli_text(paste0("Based on your matched terms, you can also add to your pipe: ", "\n"))
     cli_bullets(c("*" = optional_functions_message))
   }
-  cli_bullets(c("i" = col_grey("See all `use_` functions at http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms")))
+  cli_bullets(c("i" = col_grey("See all `set_` functions at http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms")))
 }
 
 
@@ -318,64 +318,64 @@ full_workflow_message <- function(matched_values,
 }
 
 
-#' Table of Darwin Core terms and their corresponding `use_` function
+#' Table of Darwin Core terms and their corresponding `set_` function
 #'
 #' @importFrom tibble lst
 #' @noRd
 #' @keywords Internal
 fn_to_term_table <- function() {
   main <- tibble::tribble(
-    ~"use_function", ~"dwc_term",
-    "use_occurrences()", "basisOfRecord",
-    "use_occurrences()", "occurrenceID",
-    "use_scientific_name()", "scientificName",
-    "use_coordinates()", "decimalLatitude",
-    "use_coordinates()", "decimalLongitude",
-    "use_coordinates()", "geodeticDatum",
-    "use_coordinates()", "coordinateUncertaintyInMeters",
-    "use_datetime()", "eventDate"
+    ~"set_function", ~"dwc_term",
+    "set_occurrences()", "basisOfRecord",
+    "set_occurrences()", "occurrenceID",
+    "set_scientific_name()", "scientificName",
+    "set_coordinates()", "decimalLatitude",
+    "set_coordinates()", "decimalLongitude",
+    "set_coordinates()", "geodeticDatum",
+    "set_coordinates()", "coordinateUncertaintyInMeters",
+    "set_datetime()", "eventDate"
   )
 
   optional <- tibble::tribble(
-    ~"use_function", ~"dwc_term",
-    "use_locality()", "continent",
-    "use_locality()", "country",
-    "use_locality()", "countryCode",
-    "use_locality()", "stateProvince",
-    "use_locality()", "locality",
-    "use_taxonomy()", "kingdom",
-    "use_taxonomy()", "phylum",
-    "use_taxonomy()", "class",
-    "use_taxonomy()", "order",
-    "use_taxonomy()", "family",
-    "use_taxonomy()", "genus",
-    # "use_taxonomy()", "species",
-    "use_taxonomy()", "specificEpithet",
-    "use_taxonomy()", "vernacularName",
-    "use_abundance()", "individualCount",
-    "use_abundance()", "organismQuantity",
-    "use_abundance()", "organismQuantityType",
-    "use_abundance()", "organismQuantity",
-    "use_collection()", "datasetID",
-    "use_collection()", "datasetName",
-    "use_collection()", "catalogNumber",
-    "use_coordinates()", "coordinatePrecision",
-    "use_scientific_name()", "taxonRank",
-    "use_scientific_name()", "scientificNameAuthorship",
-    "use_datetime()", "year",
-    "use_datetime()", "month",
-    "use_datetime()", "day",
-    "use_datetime()", "eventTime",
-    "use_individual_traits()", "individualID",
-    "use_individual_traits()", "lifeStage",
-    "use_individual_traits()", "sex",
-    "use_individual_traits()", "vitality",
-    "use_individual_traits()", "reproductiveCondition",
-    "use_observer()", "recordedBy",
-    "use_observer()", "recordedByID",
-    "use_events()", "eventID",
-    "use_events()", "eventType",
-    "use_events()", "parentEventID"
+    ~"set_function", ~"dwc_term",
+    "set_locality()", "continent",
+    "set_locality()", "country",
+    "set_locality()", "countryCode",
+    "set_locality()", "stateProvince",
+    "set_locality()", "locality",
+    "set_taxonomy()", "kingdom",
+    "set_taxonomy()", "phylum",
+    "set_taxonomy()", "class",
+    "set_taxonomy()", "order",
+    "set_taxonomy()", "family",
+    "set_taxonomy()", "genus",
+    # "set_taxonomy()", "species",
+    "set_taxonomy()", "specificEpithet",
+    "set_taxonomy()", "vernacularName",
+    "set_abundance()", "individualCount",
+    "set_abundance()", "organismQuantity",
+    "set_abundance()", "organismQuantityType",
+    "set_abundance()", "organismQuantity",
+    "set_collection()", "datasetID",
+    "set_collection()", "datasetName",
+    "set_collection()", "catalogNumber",
+    "set_coordinates()", "coordinatePrecision",
+    "set_scientific_name()", "taxonRank",
+    "set_scientific_name()", "scientificNameAuthorship",
+    "set_datetime()", "year",
+    "set_datetime()", "month",
+    "set_datetime()", "day",
+    "set_datetime()", "eventTime",
+    "set_individual_traits()", "individualID",
+    "set_individual_traits()", "lifeStage",
+    "set_individual_traits()", "sex",
+    "set_individual_traits()", "vitality",
+    "set_individual_traits()", "reproductiveCondition",
+    "set_observer()", "recordedBy",
+    "set_observer()", "recordedByID",
+    "set_events()", "eventID",
+    "set_events()", "eventType",
+    "set_events()", "parentEventID"
   )
 
   table <- lst(main, optional) # named list

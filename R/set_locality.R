@@ -1,7 +1,13 @@
-#' Add `locality` data to a `tibble`
+#' Set, create or modify columns with locality information using Darwin Core
 #'
+#' @description
 #' Locality information refers to a description of a place, rather than a
-#' spatial coordinate.
+#' spatial coordinate. This function helps specify or modify columns
+#' with locality information in a flexible way.
+#'
+#' In practice this is no different from using `mutate()`, but gives some
+#' informative errors, and serves as a useful lookup for fields in
+#' the Darwin Core Standard.
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param continent (string) Valid continent. See details.
 #' @param country Valid country name. See `country_codes`.
@@ -30,7 +36,7 @@
 #' @importFrom purrr map
 #' @importFrom purrr pluck
 #' @export
-use_locality <- function(.df,
+set_locality <- function(.df,
                          continent = NULL,
                          country = NULL,
                          countryCode = NULL,

@@ -27,19 +27,19 @@ test_that("suggest_workflow() doesn't error for common use cases", {
     no_error_check()
 })
 
-# test_that("use_basisOfRecord() works", {
+# test_that("basisOfRecord() works", {
 #   x <- tibble(x = 1)
 #   # no error
 #   x |>
-#     use_basisOfRecord("humanObservation") |>
+#     basisOfRecord("humanObservation") |>
 #     expect_no_error()
-#   result <- use_basisOfRecord(x, "humanObservation")
+#   result <- basisOfRecord(x, "humanObservation")
 #   expect_s3_class(result, c("tbl_df", "tbl", "data.frame")) # dwc_df case?
 #   expect_equal(ncol(result), 2)
 #   expect_equal(colnames(result), c("x", "basisOfRecord"))
 #   # with error
 #   x |>
-#     use_basisOfRecord("something") |>
+#     basisOfRecord("something") |>
 #     expect_error(regexp = "basisOfRecord")
 #   # ideally this would check for `Error in check_basisOfRecord()`;
 #   # but this isn't a message, so it doesn't work. May need to snapshot?

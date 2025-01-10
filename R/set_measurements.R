@@ -1,7 +1,20 @@
-#' Add measurement data for an individual or event to a `tibble`
+#' Convert columns with measurement data for an individual or event to Darwin Core standard
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' This function is a work in progress, and should be used with caution.
+#'
+#' In raw collected data, many types of information can be captured in one
+#' column. For example, the column name `LMA_g.m2` contains the measured trait
+#' (Leaf Mass per Area, LMA) and the unit of measurement (grams per meter
+#' squared, g/m2), and recorded in that column are the values themselves. In
+#' Darwin Core, these different types of information must be separated into
+#' multiple columns so that they can be ingested correctly and aggregated with
+#' sources of data accurately.
+#'
+#' This function converts information preserved in a single measurement column
+#' into multiple columns (`measurementID`, `measurementUnit`, and
+#' `measurementType`) as per Darwin Core standard.
 #'
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param cols vector of column names to be included as 'measurements'. Unquoted.
@@ -13,7 +26,13 @@
 #' generate them.
 #' @returns A tibble with the requested fields added.
 #' @details
-#' add examples
+#' Columns are nested in a
+#' single column `measurementOrFact` that contains Darwin Core standard
+#' measurement fields. By nesting three measurement columns within the
+#' `measurementOrFact`, despite measurement columns converting to long format
+#' (one row per measurement, per occurrence),
+#' data will remain organised by occurrences (one row per occurrences). Data
+#' can be unnested into long format using `dplyr::unnest()`
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
@@ -23,7 +42,7 @@
 #' @importFrom dplyr row_number
 #' @importFrom purrr map_dfr
 #' @export
-use_measurements <- function(
+set_measurements <- function(
     .df,
     cols = NULL,
     unit = NULL,

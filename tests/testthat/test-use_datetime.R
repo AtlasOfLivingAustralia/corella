@@ -1,71 +1,71 @@
 library(tibble)
 
 # create quiet function that captures side-effects
-# NOTE: This must be re-run if changes are made to `use_datetime()` for bug-fixing
-quiet_use_datetime <- purrr::quietly(use_datetime)
+# NOTE: This must be re-run if changes are made to `set_datetime()` for bug-fixing
+quiet_set_datetime <- purrr::quietly(set_datetime)
 
-test_that("use_datetime errors when missing .df", {
+test_that("set_datetime errors when missing .df", {
   expect_error(
-    use_datetime(eventDate = eventDate),
+    set_datetime(eventDate = eventDate),
     ".df is missing")
 })
 
-test_that("use_datetime errors when no dwc columns are named, or exist in the df", {
+test_that("set_datetime errors when no dwc columns are named, or exist in the df", {
   df <- tibble(col1 = "value")
 
-  expect_warning(df |> use_datetime(),
+  expect_warning(df |> set_datetime(),
                "No Darwin Core terms detected")
 })
 
-test_that("use_datetime returns tibble with updated dwc column names", {
+test_that("set_datetime returns tibble with updated dwc column names", {
   df <- tibble(user_col = lubridate::dmy(c("14-01-2023", "15-01-2023")))
 
   suppressWarnings(suppressMessages(
   result <- df |>
-    use_datetime(eventDate = user_col)
+    set_datetime(eventDate = user_col)
   ))
 
   expect_s3_class(result, c("tbl_df", "tbl", "data.frame"))
   expect_match(colnames(result), c("eventDate"))
 })
 
-test_that("use_datetime detects unnamed but existing dwc column names in df", {
+test_that("set_datetime detects unnamed but existing dwc column names in df", {
   df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
   df2 <- tibble(eventDate = "borp",
                 col2 = 1:2)
 
-  result <- df |> quiet_use_datetime()
+  result <- df |> quiet_set_datetime()
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("eventDate", "col2"))
   expect_error(
     suppressWarnings(suppressMessages(
-    df2 |> use_datetime()
+    df2 |> set_datetime()
     )),
     "eventDate must be a Date vector"
     )
 })
 
-test_that("use_datetime has progress messages", {
+test_that("set_datetime has progress messages", {
   df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
 
-  result <- df |> quiet_use_datetime()
+  result <- df |> quiet_set_datetime()
 
   expect_false(is.null(result$messages))
 
 })
 
-test_that("use_datetime detects correct number of existing fields", {
+test_that("set_datetime detects correct number of existing fields", {
   df <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                col2 = 1:2)
   df2 <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                 year = c(2023, 2023),
                 col2 = 1:2)
 
-  result <- df |> quiet_use_datetime()
-  result2 <- df2 |> quiet_use_datetime()
+  result <- df |> quiet_set_datetime()
+  result2 <- df2 |> quiet_set_datetime()
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("eventDate", "col2"))
@@ -76,7 +76,7 @@ test_that("use_datetime detects correct number of existing fields", {
 
 })
 
-test_that("use_datetime checks eventDate format", {
+test_that("set_datetime checks eventDate format", {
   correct <- tibble(eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
                     col2 = 1:2)
   not_a_date <- tibble(eventDate = "borp",
@@ -85,33 +85,33 @@ test_that("use_datetime checks eventDate format", {
                 col2 = 1:2)
 
   result <- correct |>
-    quiet_use_datetime()
+    quiet_set_datetime()
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("eventDate", "col2"))
-  ## TODO: The code to generate this warning is commented out in `use_datetime()`
+  ## TODO: The code to generate this warning is commented out in `set_datetime()`
   ## Check whether to reinstate
   # expect_warning(
   #   suppressMessages(
-  #   correct |> use_datetime()
+  #   correct |> set_datetime()
   #   ),
   #   "eventDate defaults to UTC standard"
   # )
   expect_error(
     suppressWarnings(suppressMessages(
-    not_a_date |> use_datetime(eventDate = eventDate)
+    not_a_date |> set_datetime(eventDate = eventDate)
     )),
     "eventDate must be a Date vector"
     )
   expect_error(
     suppressWarnings(suppressMessages(
-    not_a_time |> use_datetime(eventDate = eventDate)
+    not_a_time |> set_datetime(eventDate = eventDate)
     )),
     "eventDate must be a Date vector"
     )
 })
 
-test_that("use_datetime checks time format", {
+test_that("set_datetime checks time format", {
   correct_date <- tibble(eventTime = lubridate::hms(c("10:23:00", "11:25:32")),
                     col2 = 1:2)
   correct_chr <- tibble(eventTime = c("10:23", "11:25"),
@@ -122,9 +122,9 @@ test_that("use_datetime checks time format", {
                        col2 = 1:2)
 
   result1 <- correct_date |>
-    quiet_use_datetime()
+    quiet_set_datetime()
   result2 <- correct_chr |>
-    quiet_use_datetime()
+    quiet_set_datetime()
 
   expect_s3_class(result1$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result1$result), c("eventTime", "col2"))
@@ -136,19 +136,19 @@ test_that("use_datetime checks time format", {
 
   expect_error(
     suppressMessages(
-      chr_not_a_time |> use_datetime(eventTime = eventTime)
+      chr_not_a_time |> set_datetime(eventTime = eventTime)
     ),
     "Invalid time format"
   )
   expect_error(
     suppressMessages(
-      date_and_time |> use_datetime(eventTime = eventTime)
+      date_and_time |> set_datetime(eventTime = eventTime)
     ),
     "Must format"
   )
 })
 
-test_that("use_datetime checks year format", {
+test_that("set_datetime checks year format", {
   correct_year <- tibble(year = c(2021, 105),
                          col2 = 1:2)
   wrong_year <- tibble(year = c(2021, 2100),
@@ -157,7 +157,7 @@ test_that("use_datetime checks year format", {
                         col2 = 1:2)
 
   result <- correct_year |>
-    quiet_use_datetime(year = year)
+    quiet_set_datetime(year = year)
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("year", "col2"))
@@ -165,27 +165,27 @@ test_that("use_datetime checks year format", {
 
   expect_error(
     suppressMessages(
-      wrong_year |> use_datetime(year = year)
+      wrong_year |> set_datetime(year = year)
     ),
     "Value is outside"
   )
 
   expect_error(
     suppressMessages(
-      wrong_class |> use_datetime(year = year)
+      wrong_class |> set_datetime(year = year)
     ),
     "year must be a numeric"
   )
 })
 
-test_that("use_datetime checks month numeric range", {
+test_that("set_datetime checks month numeric range", {
   correct_month <- tibble(month = c(1, 11),
                          col2 = 1:2)
   wrong_month <- tibble(month = c(1, 13),
                        col2 = 1:2)
 
   result <- correct_month |>
-    quiet_use_datetime(month = month)
+    quiet_set_datetime(month = month)
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("month", "col2"))
@@ -193,20 +193,20 @@ test_that("use_datetime checks month numeric range", {
 
   expect_error(
     suppressMessages(
-      wrong_month |> use_datetime(month = month)
+      wrong_month |> set_datetime(month = month)
     ),
     "Value is outside"
   )
 })
 
-test_that("use_datetime checks month abbreviations", {
+test_that("set_datetime checks month abbreviations", {
   correct_month <- tibble(month = c("Jan", "Nov"),
                           col2 = 1:2)
   wrong_month <- tibble(month = c("Jan", "borp"),
                         col2 = 1:2)
 
   result <- correct_month |>
-    quiet_use_datetime(month = month)
+    quiet_set_datetime(month = month)
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("month", "col2"))
@@ -214,20 +214,20 @@ test_that("use_datetime checks month abbreviations", {
 
   expect_warning(
     suppressMessages(
-      wrong_month |> use_datetime(month = month)
+      wrong_month |> set_datetime(month = month)
     ),
     "month contains 1 unrecognised month"
   )
 })
 
-test_that("use_datetime checks month names", {
+test_that("set_datetime checks month names", {
   correct_month <- tibble(month = c("January", "September"),
                           col2 = 1:2)
   wrong_month <- tibble(month = c("September", "borp"),
                         col2 = 1:2)
 
   result <- correct_month |>
-    quiet_use_datetime(month = month)
+    quiet_set_datetime(month = month)
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("month", "col2"))
@@ -235,13 +235,13 @@ test_that("use_datetime checks month names", {
 
   expect_warning(
     suppressMessages(
-      wrong_month |> use_datetime(month = month)
+      wrong_month |> set_datetime(month = month)
     ),
     "month contains 1 unrecognised month"
   )
 })
 
-test_that("use_datetime checks day format", {
+test_that("set_datetime checks day format", {
   correct_day <- tibble(day = c(1, 30),
                           col2 = 1:2)
   wrong_day <- tibble(day = c(13, 50),
@@ -250,7 +250,7 @@ test_that("use_datetime checks day format", {
                         col2 = 1:2)
 
   result <- correct_day |>
-    quiet_use_datetime(day = day)
+    quiet_set_datetime(day = day)
 
   expect_s3_class(result$result, c("tbl_df", "tbl", "data.frame"))
   expect_equal(colnames(result$result), c("day", "col2"))
@@ -258,14 +258,14 @@ test_that("use_datetime checks day format", {
 
   expect_error(
     suppressMessages(
-      wrong_day |> use_datetime(day = day)
+      wrong_day |> set_datetime(day = day)
     ),
     "Value is outside"
   )
 
   expect_error(
     suppressMessages(
-      wrong_class |> use_datetime(day = day)
+      wrong_class |> set_datetime(day = day)
     ),
     "day must be a numeric"
   )

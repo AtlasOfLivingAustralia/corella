@@ -1,4 +1,4 @@
-#' Add scientific name and authorship to a `tibble`
+#' Set, create or modify columns with scientific name and authorship information using Darwin Core
 #'
 #' Format the field `scientificName`, the lowest identified taxonomic name of an
 #' occurrence, along with the rank and authorship of the provided name.
@@ -36,7 +36,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_scientific_name <- function(
+set_scientific_name <- function(
     .df,
     scientificName = NULL,
     scientificNameAuthorship = NULL,

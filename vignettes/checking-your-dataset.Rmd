@@ -40,12 +40,12 @@ df <- tibble::tibble(
 df
 ```
 
-I can use the function `use_coordinates()` to specify which of my columns refer to the valid Darwin Core terms `decimalLatitude` and `decimalLongitude`. I have intentionally added the wrong column `place` as `decimalLatitude`. corella will return an error because `decimalLatitude` and `decimalLatitude` fields must be numeric in Darwin Core standard. This error comes from a small internal checking function called `check_decimalLatitude()`.
+I can use the function `set_coordinates()` to specify which of my columns refer to the valid Darwin Core terms `decimalLatitude` and `decimalLongitude`. I have intentionally added the wrong column `place` as `decimalLatitude`. corella will return an error because `decimalLatitude` and `decimalLatitude` fields must be numeric in Darwin Core standard. This error comes from a small internal checking function called `check_decimalLatitude()`.
 
 ```{r}
 #| error: true
 df |>
-  use_coordinates(decimalLatitude = place, # wrong column
+  set_coordinates(decimalLatitude = place, # wrong column
                   decimalLongitude = longitude)
 ```
 
@@ -58,7 +58,7 @@ corella contains internal `check_` functions for all individual Darwin Core term
 # generate table
 # fn_to_term_table() |>
 #   dplyr::bind_rows() |>
-#   write.csv("vignettes/supported-terms.csv")
+#   write.csv("supported-terms.csv")
 ```
 
 
@@ -80,7 +80,7 @@ object |>
   dplyr::rename(
     "Term" = dwc_term,
     "check function" = check_function,
-    "use function" = use_function
+    "set function" = set_function
   ) |> 
   gt() |>
   cols_align(
@@ -102,7 +102,7 @@ object |>
       cell_borders(sides = c("l"), color = "gray50", weight = px(3)),
       cell_text(font = c(google_font(name = "Fira Mono")))
     ),
-    locations = cells_body(columns = c("check function", "use function"))
+    locations = cells_body(columns = c("check function", "set function"))
   ) |>
   tab_options(
     container.height = "450px"
@@ -111,7 +111,7 @@ object |>
 
 <br> 
 
-When a user specifies a column to a matching Darwin Core term (or the column/term is detected by corella automatically) in a `use_` function, the `use_` function triggers that matching term's `check_` function. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. 
+When a user specifies a column to a matching Darwin Core term (or the column/term is detected by corella automatically) in a `set_` function, the `set_` function triggers that matching term's `check_` function. This process ensures that the data is correctly formatted prior to being saved in a Darwin Core Archive. 
 
 It's useful to know that these internal, individual `check_` functions exist because they are the building blocks of a full suite of checks, which users can run with `check_dataset()`.
 
@@ -146,4 +146,4 @@ Note that `check_dataset()` currently only accepts occurrence-level datasets. Da
 
 ## Users have options
 
-corella offers two options for checking a dataset, which we have detailed above: Running individual checks through `use_` functions, or running a "test suite" with `check_dataset()`. We hope that these alternative options provide users with different options for their workflow, allowing them to choose their favourite method or switch between methods as they standardise their data.
+corella offers two options for checking a dataset, which we have detailed above: Running individual checks through `set_` functions, or running a "test suite" with `check_dataset()`. We hope that these alternative options provide users with different options for their workflow, allowing them to choose their favourite method or switch between methods as they standardise their data.

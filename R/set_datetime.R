@@ -1,6 +1,7 @@
-#' Add date and time fields to a `tibble`
+#' Set, create or modify columns with date and time information using Darwin Core
 #'
-#' This function helps format standard date/time fields to a `tibble`.
+#' @description
+#' This function helps format standard date/time columns in a `tibble`.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for how spatial fields are
@@ -27,7 +28,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_datetime <- function(
+set_datetime <- function(
     .df,
     eventDate = NULL,
     year = NULL,

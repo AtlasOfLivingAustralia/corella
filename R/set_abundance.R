@@ -1,10 +1,15 @@
-#' Add abundance fields to a `tibble`
+#' Set, create or modify columns with abundance information using Darwin Core
 #'
+#' @description
 #' In some field methods, it is common to observe more than one individual
 #' per observation; to observe abundance using non-integer measures such as
 #' mass or area; or to seek individuals but not find them (abundance of zero).
-#' As these approaches use different DwC terms, this function assists in
+#' As these approaches use different Darwin Core terms, this function assists in
 #' specifying abundances in a flexible way.
+#'
+#' In practice this is no different from using `mutate()`, but gives some
+#' informative errors, and serves as a useful lookup for how columns with
+#' abundance information are represented in the Darwin Core Standard.
 #' @param .df a `data.frame` or `tibble` that the column should be appended to.
 #' @param individualCount The number of individuals present
 #' @param organismQuantity A number or enumeration value for the quantity of
@@ -33,12 +38,12 @@
 #'   )
 #'
 #' df |>
-#'   use_abundance(individualCount = n_obs)
+#'   set_abundance(individualCount = n_obs)
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_abundance <- function(.df,
+set_abundance <- function(.df,
                           individualCount = NULL,
                           organismQuantity = NULL,
                           organismQuantityType = NULL,

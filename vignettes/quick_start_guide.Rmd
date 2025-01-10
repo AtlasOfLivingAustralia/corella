@@ -85,55 +85,55 @@ df <- tibble(
 df
 ```
 
-We can standardise our data with `use_` functions. These functions a prefix of `use_`, and a suffix named to suggest what type of data they are used to standardise. For example, `use_coordinates` or `use_datetime`. The argument names in `use_` functions are valid Darwin Core terms. Our hope is that by grouping Darwin Core terms into groups based on their data type, corella makes it easier for users to know which Darwin Core terms to use as column names (which is one of the most confusing parts of Darwin Core).
+We can standardise our data with `set_` functions. These functions a prefix of `set_`, and a suffix named to suggest what type of data they are used to standardise. For example, `set_coordinates` or `set_datetime`. The argument names in `set_` functions are valid Darwin Core terms. Our hope is that by grouping Darwin Core terms into groups based on their data type, corella makes it easier for users to know which Darwin Core terms to use as column names (which is one of the most confusing parts of Darwin Core).
 
-Let's specify that the scientific name (i.e. genus & species name) in our data is in the `species` column by using `use_scientific_name()` to update our dataframe.
+Let's specify that the scientific name (i.e. genus & species name) in our data is in the `species` column by using `set_scientific_name()` to update our dataframe.
 
 ```{r}
 df |>
-  use_scientific_name(scientificName = species)
+  set_scientific_name(scientificName = species)
 ```
 
 You'll notice 2 things happen:
 
   1. The `species` column in our dataframe has been renamed to `scientificName`.
-  2. `use_scientific_name()` ran a check on our `species` column to make sure it was formatted correctly.
+  2. `set_scientific_name()` ran a check on our `species` column to make sure it was formatted correctly.
 
-What happens when we add a column with an error in it? In our `df`, the `latitude` column is "accidentally" a class `character` column, when it should be a `numeric` column. When we try to add it using `use_coordinates()`, an error will tell us something is wrong.
+What happens when we add a column with an error in it? In our `df`, the `latitude` column is "accidentally" a class `character` column, when it should be a `numeric` column. When we try to add it using `set_coordinates()`, an error will tell us something is wrong.
 
 ```{r}
 #| eval: true
 #| error: true
 df |>
-  use_scientific_name(scientificName = species) |>
-  use_coordinates(decimalLongitude = longitude,
+  set_scientific_name(scientificName = species) |>
+  set_coordinates(decimalLongitude = longitude,
                   decimalLatitude = latitude)
 ```
 
 
 ## Fix or update columns
 
-How do we fix the column that caused an error? One way is to edit the column within the `use_` function containing our problematic column.
+How do we fix the column that caused an error? One way is to edit the column within the `set_` function containing our problematic column.
 
-Each `use_` function is essentially a specialised [`mutate()`]() function from [dplyr](). This means you can edit columns using the same process you would use with `mutate()`. Let's fix the `latitude` column so that it is class `numeric`, which will fix the error.
+Each `set_` function is essentially a specialised [`mutate()`]() function from [dplyr](). This means you can edit columns using the same process you would use with `mutate()`. Let's fix the `latitude` column so that it is class `numeric`, which will fix the error.
 
 ```{r}
 df |>
-  use_scientific_name(scientificName = species) |>
-  use_coordinates(decimalLongitude = longitude,
+  set_scientific_name(scientificName = species) |>
+  set_coordinates(decimalLongitude = longitude,
                   decimalLatitude = as.numeric(latitude))
 ```
 
 ## Auto-detect columns
 
-corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, `df` contains columns with locality information. We can add `use_locality()` to our pipe to specify and check these columns. Some of our columns already have valid Darwin Core terms as column names (`country` and `continent`). If we add `use_locality()` to our pipe without any arguments, it will detect these valid Darwin Core columns in `df` and check them automatically.
+corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, `df` contains columns with locality information. We can add `set_locality()` to our pipe to specify and check these columns. Some of our columns already have valid Darwin Core terms as column names (`country` and `continent`). If we add `set_locality()` to our pipe without any arguments, it will detect these valid Darwin Core columns in `df` and check them automatically.
 
 ```{r}
 df |>
-  use_scientific_name(scientificName = species) |>
-  use_coordinates(decimalLongitude = longitude,
+  set_scientific_name(scientificName = species) |>
+  set_coordinates(decimalLongitude = longitude,
                   decimalLatitude = as.numeric(latitude)) |>
-  use_locality()
+  set_locality()
 ```
 
 By auto-detecting columns, corella prevents users from having to specify every single column when they are already named correctly in their dataset. This functionality will definitely help reduce the workload on datasets with lots of columns!
@@ -159,14 +159,14 @@ df |>
 
 `suggest_workflow()` will update the suggested function pipe to only suggest functions that are necessary to standardise your data correctly. 
 
-For example, after using one of the suggested functions `use_occurrences()`, if we run `suggest_workflow()` again, the output message no longer suggests `use_occurrences()`. 
+For example, after using one of the suggested functions `set_occurrences()`, if we run `suggest_workflow()` again, the output message no longer suggests `set_occurrences()`. 
 
 ```{r}
 #| message: false
 #| warning: false
 #| error: false
 df_edited <- df |>
-  use_occurrences(
+  set_occurrences(
     occurrenceID = seq_len(nrow(df)),
     basisOfRecord = "humanObservation"
     )
@@ -179,7 +179,7 @@ df_edited |>
 
 # Test your data
 
-If your dataset already uses valid Darwin Core terms as column names, instead of working through each `use_` function, you might wish to run tests on your entire dataset. To run checks on your data like a test suite, use `check_dataset()`. Much like `devtools::test()` or `devtools::check()`, `check_dataset()` runs the relevant check on each matching Darwin Core column and returns a summary of the results, along with any error messages returned by those checks.
+If your dataset already uses valid Darwin Core terms as column names, instead of working through each `set_` function, you might wish to run tests on your entire dataset. To run checks on your data like a test suite, use `check_dataset()`. Much like `devtools::test()` or `devtools::check()`, `check_dataset()` runs the relevant check on each matching Darwin Core column and returns a summary of the results, along with any error messages returned by those checks.
 
 ```{r}
 df <- tibble(
@@ -197,7 +197,7 @@ df |>
 ```
 
 
-# `use_measurements`: a work in progress
+# `set_measurements`: a work in progress
 
 Let's use a small sample of a real dataset of Australian native plant species, including Eucalypts and Acacias. The dataset contains lots of columns containing measurements that capture the traits or environment of each species occurrence. I have extracted 3 examples of these measurement columns: `LMA_g.m2`, `LeafN_area_g.m2`, `PNUE`.
 
@@ -213,18 +213,18 @@ library(tidyr)
 df_filtered <- read.csv("./westerband_2022_wdate.csv") |>
   select(Site, Species, Latitude, Longitude, LMA_g.m2, LeafN_area_g.m2, PNUE)
 
-df_filtered
+df_filtered |> print(n = 10) # see first 10 rows
 ```
 
 
 The way that Darwin Core handles measurement fields is slightly different to how they are organised in these data. In `df_filtered`, lots of information about what data the column contains is in the abbreviated column name. This includes the type of measure, the unit it is measured in, and the value itself. In Darwin Core, this information needs to be documented individually for each measurement, which requires multiple columns and multiple rows (ie a 'long' data format). 
 
-corella can convert measurement columns into Darwin Core standard with `use_measurements()`. This function requires users to specify the column, unit and measure type for each respective measurement. `use_measurements()` then assigns this information to the correct Darwin Core columns, and nests these columns into a nested column called `measurementOrFact`. 
+corella can convert measurement columns into Darwin Core standard with `set_measurements()`. This function requires users to specify the column, unit and measure type for each respective measurement. `set_measurements()` then assigns this information to the correct Darwin Core columns, and nests these columns into a nested column called `measurementOrFact`. 
 
 ```{r, message=FALSE, warning=FALSE}
 df_nested <- df_filtered |>
   slice(220:270) |>
-  use_measurements(cols = c(LMA_g.m2, 
+  set_measurements(cols = c(LMA_g.m2, 
                             LeafN_area_g.m2, 
                             PNUE),
                    unit = c("g/m2", 
