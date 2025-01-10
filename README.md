@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# corella <img src="man/figures/logo.png" align="right" style="margin: 0px 10px 0px 10px;" alt="" width="120"/><br>
+# corella <a href="https://corella.ala.org.au"><img src="man/figures/logo.png" align="right" height="139" alt="corella website" /></a>
 
 <!-- badges: start -->
 
@@ -70,13 +70,13 @@ df
 
 One of the most important aspects of Darwin Core standard is using
 standard column names (Darwin Core *terms*). We can update column names
-in our data to match Darwin Core terms with `use_` functions.
+in our data to match Darwin Core terms with `set_` functions.
 
-Each `use_` function name corresponds to the type of data, and argument
+Each `set_` function name corresponds to the type of data, and argument
 names correspond to the available Darwin Core terms to use as column
-names. `use_` functions support data wrangling operations &
+names. `set_` functions support data wrangling operations &
 `dplyr::mutate()` functionality, meaning columns can be changed or fixed
-in your pipe. `use_` functions will indicate if anything needs fixing
+in your pipe. `set_` functions will indicate if anything needs fixing
 because they also automatically run checks on each column data to make
 sure each column is in the correct format.
 
@@ -84,17 +84,17 @@ sure each column is in the correct format.
 suppressMessages( # for readability
 
 df |>
-  use_coordinates(
+  set_coordinates(
     decimalLatitude = as.numeric(latitude), # fix latitude
     decimalLongitude = longitude
     ) |>
-  use_scientific_name(
+  set_scientific_name(
     scientificName = species
     ) |>
-  use_datetime(
+  set_datetime(
     eventDate = lubridate::dmy(eventDate) # specify date format
     ) |>
-  use_occurrences(occurrenceStatus = status)
+  set_occurrences(occurrenceStatus = status)
 
 )
 #> # A tibble: 2 × 5
@@ -129,13 +129,13 @@ df |>
 #> 
 #> To make your data Darwin Core compliant, use the following workflow:
 #> df |>
-#>   use_occurrences() |>
-#>   use_scientific_name() |>
-#>   use_coordinates()
+#>   set_occurrences() |>
+#>   set_scientific_name() |>
+#>   set_coordinates()
 #> 
 #> ── Additional functions
-#> ℹ See all `use_` functions at
-#>   <https://galaxias.ala.org.au/reference/index.html#add-darin-core-terms>
+#> ℹ See all `set_` functions at
+#>   http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms
 ```
 
 Or, if your data is nearly ready and you want to run checks over all
@@ -149,12 +149,12 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [355ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [248ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
 #> 
-#> ✖ Data meets minimum Darwin Core requirements
+#> ✖ Data does not meet minimum Darwin Core requirements
 #> ℹ Use `suggest_workflow()` to see more information.
 #> ── Error in eventDate ──────────────────────────────────────────────────────────
 #> 
