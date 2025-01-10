@@ -57,5 +57,5 @@ Example values are:
 }
 }
 \seealso{
-\code{\link[=use_locality]{use_locality()}} for provided text-based spatial information
+\code{\link[=set_locality]{set_locality()}} for provided text-based spatial information
 }

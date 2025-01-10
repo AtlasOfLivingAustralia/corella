@@ -63,5 +63,5 @@ Examples of \code{specificEphithet}:
 }
 }
 \seealso{
-\code{\link[=use_scientific_name]{use_scientific_name()}} for adding \code{scientificName} and authorship information.
+\code{\link[=set_scientific_name]{set_scientific_name()}} for adding \code{scientificName} and authorship information.
 }

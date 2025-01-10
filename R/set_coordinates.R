@@ -27,7 +27,7 @@
 #' @details
 #' Example values are:
 #' * `geodeticDatum` should be a valid EPSG code
-#' @seealso [use_locality()] for provided text-based spatial information
+#' @seealso [set_locality()] for provided text-based spatial information
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

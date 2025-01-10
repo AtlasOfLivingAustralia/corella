@@ -34,19 +34,19 @@ reference:
   - suggest_workflow
 - title: Add, rename or edit columns to match Darwin Core terms
   contents:
-  - use_events
-  - use_occurrences
-  - use_scientific_name
-  - use_taxonomy
-  - use_coordinates
-  - use_sf
-  - use_locality
-  - use_datetime
-  - use_collection
-  - use_observer
-  - use_abundance
-  - use_individual_traits
-  - use_measurements
+  - set_events
+  - set_occurrences
+  - set_scientific_name
+  - set_taxonomy
+  - set_coordinates
+  - set_coordinates_sf
+  - set_locality
+  - set_datetime
+  - set_collection
+  - set_observer
+  - set_abundance
+  - set_individual_traits
+  - set_measurements
 - title: Run checks on a dataset for Darwin Core conformance
   contents:
   - check_dataset

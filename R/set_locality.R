@@ -26,7 +26,7 @@
 #' * `countryCode` should be supplied according to the
 #' [ISO 3166-1 ALPHA-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 #' standard, [as per TDWG advice](https://dwc.tdwg.org/list/#dwc_countryCode).
-#' @seealso [use_coordinates()] for numeric spatial data
+#' @seealso [set_coordinates()] for numeric spatial data
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @importFrom rlang warn

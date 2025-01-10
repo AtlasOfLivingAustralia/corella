@@ -47,7 +47,7 @@ set_coordinates_sf <- function(
   if (!inherits(.df, "sf")) {
     bullets <- c(
       "No geometry detected.",
-      i = "Must supply {.code use_sf()} a dataframe with an {.pkg sf} geometry (i.e. {.code st_POINT})."
+      i = "Must supply {.code set_coordinates_sf()} a dataframe with an {.pkg sf} geometry (i.e. {.code st_POINT})."
     ) |> cli_bullets() |> cli_fmt()
     cli_abort(bullets)
   } else {
@@ -134,7 +134,7 @@ check_is_sf <- function(.df,
   if (!inherits(.df, "sf")) {
     bullets <- c(
       "No geometry detected.",
-      i = "Must supply {.code use_sf()} a dataframe with an {.pkg sf} geometry (i.e. {.code st_POINT})."
+      i = "Must supply {.code set_coordinates_sf()} a dataframe with an {.pkg sf} geometry (i.e. {.code st_POINT})."
     ) |> cli_bullets() |> cli_fmt()
     cli_abort(bullets) # FIXME: this ignores 'level' argument
   }

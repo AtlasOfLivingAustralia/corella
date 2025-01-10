@@ -32,7 +32,7 @@
 #' @param .messages Logical: Should progress bar be shown? Defaults to `TRUE`.
 #' @returns A tibble with the requested fields added.
 #' @seealso [basisOfRecord_values()] for accepted values for the `basisOfRecord`
-#' field'; [use_abundance()] for occurrence-level counts.
+#' field'; [set_abundance()] for occurrence-level counts.
 #' @details
 #' Examples of `occurrenceID` values:
 #' * `000866d2-c177-4648-a200-ead4007051b9`

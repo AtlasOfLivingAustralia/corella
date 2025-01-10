@@ -46,11 +46,11 @@
 #' * `in bloom`
 #' * `fruit bearing`
 #'
-#' @seealso [use_scientific_name()] for adding `scientificName` and authorship information.
+#' @seealso [set_scientific_name()] for adding `scientificName` and authorship information.
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export
-use_individual_traits <- function(
+set_individual_traits <- function(
     .df,
     individualID = NULL,
     lifeStage = NULL,

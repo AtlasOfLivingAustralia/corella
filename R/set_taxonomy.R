@@ -29,7 +29,7 @@
 #' * If `scientificName` is `Abies concolor`, the `specificEpithet` is `concolor`.
 #' * If `scientificName` is `Semisulcospira gottschei`, the `specificEpithet` is `gottschei`.
 #'
-#' @seealso [use_scientific_name()] for adding `scientificName` and authorship information.
+#' @seealso [set_scientific_name()] for adding `scientificName` and authorship information.
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

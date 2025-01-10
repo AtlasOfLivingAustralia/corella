@@ -144,7 +144,7 @@ check_individualCount <- function(.df,
         bullets <- c(
           "{.field individualCount} of 0 detected but not marked as absence.",
           i = "Must use {.field occurrenceStatus} to mark counts of 0 as \"absent\".",
-          i = "Use {.code use_occurrences(occurrenceStatus = ifelse(individualCount == 0, \"absent\", \"present\"))}."
+          i = "Use {.code set_occurrences(occurrenceStatus = ifelse(individualCount == 0, \"absent\", \"present\"))}."
         ) |>
           cli_bullets() |>
           cli_fmt()
@@ -170,7 +170,7 @@ check_organismQuantity <- function(.df,
     if (!any(colnames(.df) == "organismQuantityType")) {
       bullets <- cli_bullets(c(
         "Missing {.field organismQuantityType} in dataframe.",
-        i = "Must include {.field organismQuantityType} to give context to quantity. See {.code ?use_abundance}."
+        i = "Must include {.field organismQuantityType} to give context to quantity. See {.code ?set_abundance}."
       )) |> cli_fmt()
       switch_check(level,
                    bullets)
@@ -197,7 +197,7 @@ check_organismQuantityType <- function(.df,
     if (!any(colnames(.df) == "organismQuantity")) {
       bullets <- cli_bullets(c(
         "Missing {.field organismQuantity} in dataframe.",
-        i = "Must include {.field organismQuantity} to give a quantity to measurement type. See {.code ?use_abundance}."
+        i = "Must include {.field organismQuantity} to give a quantity to measurement type. See {.code ?set_abundance}."
       )) |> cli_fmt()
       switch_check(level,
                    bullets)

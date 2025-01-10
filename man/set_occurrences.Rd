@@ -73,5 +73,5 @@ Accepted \code{basisOfRecord} values are one of:
 }
 \seealso{
 \code{\link[=basisOfRecord_values]{basisOfRecord_values()}} for accepted values for the \code{basisOfRecord}
-field'; \code{\link[=use_abundance]{use_abundance()}} for occurrence-level counts.
+field'; \code{\link[=set_abundance]{set_abundance()}} for occurrence-level counts.
 }

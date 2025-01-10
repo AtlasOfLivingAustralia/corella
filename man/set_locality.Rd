@@ -55,5 +55,5 @@ standard, \href{https://dwc.tdwg.org/list/#dwc_countryCode}{as per TDWG advice}.
 }
 }
 \seealso{
-\code{\link[=use_coordinates]{use_coordinates()}} for numeric spatial data
+\code{\link[=set_coordinates]{set_coordinates()}} for numeric spatial data
 }

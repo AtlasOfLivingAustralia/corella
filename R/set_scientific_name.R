@@ -32,7 +32,7 @@
 #' * `subspecies`
 #' * `infraspecies`
 #'
-#' @seealso [use_taxonomy()] for taxonomic name information.
+#' @seealso [set_taxonomy()] for taxonomic name information.
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

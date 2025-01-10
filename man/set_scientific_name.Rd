@@ -61,5 +61,5 @@ Examples of \code{taxonRank}:
 }
 }
 \seealso{
-\code{\link[=use_taxonomy]{use_taxonomy()}} for taxonomic name information.
+\code{\link[=set_taxonomy]{set_taxonomy()}} for taxonomic name information.
 }
