@@ -213,7 +213,7 @@ library(tidyr)
 df_filtered <- read.csv("./westerband_2022_wdate.csv") |>
   select(Site, Species, Latitude, Longitude, LMA_g.m2, LeafN_area_g.m2, PNUE)
 
-df_filtered |> print(n = 10) # see first 10 rows
+df_filtered |> head(10L) # see first 10 rows
 ```
 
 
