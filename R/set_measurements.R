@@ -47,7 +47,8 @@ set_measurements <- function(
     cols = NULL,
     unit = NULL,
     type = NULL,
-    .keep = "unused"
+    .keep = "unused",
+    .messages = TRUE
 ){
   if(missing(.df)){
     abort(".df is missing, with no default")
@@ -68,7 +69,6 @@ set_measurements <- function(
       ) |>
     group_split(dplyr::row_number(), .keep = FALSE)
     # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
-
 
   nested_df <- purrr::map_dfr(df_split,
                  ~ .x |>
@@ -99,39 +99,93 @@ set_measurements <- function(
 
   cli_progress_done()
 
-  # if(!is.null(result$measurementOrFact)) {
-  #   matched_cols = result |>
-  #     select(measurementOrFact) |>
-  #     unnest(measurementOrFact) |>
-  #     colnames()
-  # }
-  #
-  # if(isTRUE(.messages)) {
-  #   if(length(matched_cols > 0)) {
-  #     col_progress_bar(cols = matched_cols)
-  #   }
-  # }
-  #
-  # check_eventDate(result, level = "abort")
+  # inform user which columns will be checked
+  # if they've made it this far, these columns should exist (and be checked)
+  matched_cols <- c("measurementID", "measurementUnit", "measurementType")
 
-  cli::cli_progress_step("Successfully nested measurements in column {.field measurementOrFact}.")
+  if(isTRUE(.messages)) {
+    if(length(matched_cols > 0)) {
+      col_progress_bar(cols = matched_cols)
+    }
+  }
+
+  check_measurementID(result, level = "abort")
+  check_measurementUnit(result, level = "abort")
+  check_measurementType(result, level = "abort")
+
+  cli::cli_progress_step("Successfully nested measurement columns in column {.field measurementOrFact}.")
 
   return(result)
 }
 
 #' TODO: select & unnest nested columns, then run normal individual term/column checks like other use functions
 
+#' Check measurementID
+#' @importFrom tidyr unnest
+#' @noRd
+#' @keywords Internal
+check_measurementID <- function(.df,
+                                  level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "measurementOrFact")) {
+    #unnest columns
+    result <- .df |>
+      unnest(cols = measurementOrFact)
+
+
+    if(any(colnames(.df) == "measurementID")){
+      .df |>
+        select("measurementID") |>
+        check_is_string(level = level)
+      # add check that column isn't empty or only NA?
+    }
+  }
+}
+
 #' Check measurementUnit
+#' @importFrom tidyr unnest
 #' @noRd
 #' @keywords Internal
 check_measurementUnit <- function(.df,
                                   level = c("inform", "warn", "abort")
 ){
   level <- match.arg(level)
-  if(any(colnames(.df) == "measurement")){
-    .df |>
-      select("eventTime") |>
-      check_is_time(level = level)
+  if(any(colnames(.df) == "measurementOrFact")) {
+    #unnest columns
+    result <- .df |>
+      unnest(cols = measurementOrFact)
+
+
+    if(any(colnames(.df) == "measurementUnit")){
+      .df |>
+        select("measurementUnit") |>
+        check_is_string(level = level)
+      # add check that column isn't empty or only NA?
+    }
+  }
+}
+
+#' Check measurementType
+#' @importFrom tidyr unnest
+#' @noRd
+#' @keywords Internal
+check_measurementType <- function(.df,
+                                  level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "measurementOrFact")) {
+    # unnest columns
+    result_unnested <- .df |>
+      unnest(cols = measurementOrFact)
+
+
+    if(any(colnames(result_unnested) == "measurementType")){
+      result_unnested |>
+        select("measurementType") |>
+        check_is_string(level = level)
+      # add check that column isn't empty or only NA?
+    }
   }
 }
 
