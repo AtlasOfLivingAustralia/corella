@@ -64,7 +64,8 @@ check_dataset <- function(.df){
 
   ## Darwin Core compliance
   # dwc_spinny_message(c("Meets minimum requirements for Darwin Core terms"))
-  check_min_req_dwc(checkable_fields)
+  dwc_compliant <- check_min_req_dwc(checkable_fields)
+  min_req_dwc_message(dwc_compliant)
 
   ## Error Messages
 
@@ -89,10 +90,13 @@ check_dataset <- function(.df){
       map(~ format_messages_from_checks(.x))
 
   } else {
-    # celebrate
-    cat_line(paste0("\n", add_emoji(), " ", col_green("All column checks pass!"), "\n"))
+    if(isTRUE(dwc_compliant)) {
+      # celebrate
+      cat_line(paste0("\n", add_emoji(), " ", col_green("All column checks pass!"), "\n"))
+    }
   }
 
+  # TODO: check_dataset() should only celebrate when Data meets minimum requirements AND column checks pass
   invisible(.df)
 }
 
@@ -248,6 +252,20 @@ summary_message <- function(results, checkable_fields) {
 #' Simple check for whether data meets minimum requirements to be accepted as a
 #' Darwin Core archive. The check is a simplifed version of the underlying check
 #' in `suggest_workflow()`.
+#' @noRd
+#' @keywords Internal
+check_min_req_dwc <- function(checkable_fields) {
+
+  # message
+  dwc_spinny_message(glue("Data meets minimum Darwin Core requirements"))
+
+  # check matching user columns with minimum required DwC terms
+  req_terms_results <- check_required_terms(checkable_fields)
+  is_dwc_compliant <- all(req_terms_results$result == "pass")
+  return(is_dwc_compliant)
+}
+
+#' Build message about results of `check_min_req_dwc()`
 #'
 #' @importFrom cli cat_line
 #' @importFrom cli col_red
@@ -255,13 +273,7 @@ summary_message <- function(results, checkable_fields) {
 #' @importFrom cli cli_progress_step
 #' @noRd
 #' @keywords Internal
-check_min_req_dwc <- function(checkable_fields) {
-  # check matching user columns with minimum required DwC terms
-  req_terms_results <- check_required_terms(checkable_fields)
-  is_dwc_compliant <- all(req_terms_results$result == "pass")
-
-  # message
-  dwc_spinny_message(glue("Data meets minimum Darwin Core requirements"))
+min_req_dwc_message <- function(is_dwc_compliant) {
 
   if(isTRUE(is_dwc_compliant)) {
     complies_text <- "Data meets minimum Darwin Core requirements"
@@ -273,9 +285,10 @@ check_min_req_dwc <- function(checkable_fields) {
     cat_line(glue("{col_red(symbol$cross)} {noncomplies_text}"))
     cli_bullets(c(i = "Use `suggest_workflow()` to see more information."))
   }
-
   cat_line()
+
 }
+
 
 #' Truncate list of messages
 #'
