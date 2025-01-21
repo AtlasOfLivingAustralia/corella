@@ -4,7 +4,14 @@
 \alias{set_measurements}
 \title{Convert columns with measurement data for an individual or event to Darwin Core standard}
 \usage{
-set_measurements(.df, cols = NULL, unit = NULL, type = NULL, .keep = "unused")
+set_measurements(
+  .df,
+  cols = NULL,
+  unit = NULL,
+  type = NULL,
+  .keep = "unused",
+  .messages = TRUE
+)
 }
 \arguments{
 \item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}

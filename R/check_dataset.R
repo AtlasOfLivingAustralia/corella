@@ -36,6 +36,12 @@ check_dataset <- function(.df){
     pull()
   checkable_fields <- fields[fields %in% available_checks]
 
+  # If measurementOrFact is a column, add nested column names
+  if(any(fields %in% "measurementOrFact")) {
+    checkable_fields <- c(checkable_fields,
+                          "measurementValue", "measurementID", "measurementUnit", "measurementType")
+  }
+
   # find fields in .df with available checks
   check_functions_names <- c(glue("check_{checkable_fields}"))
   check_functions <- as.list(check_functions_names)
@@ -53,6 +59,7 @@ check_dataset <- function(.df){
   add_table_headers(checkable_fields)
   invisible() # prevent df results from printing with headers
 
+  # browser()
   # check all checkable fields, save fields & error messages
   check_results <- check_functions_names |>
     map(~ check_all(.x, .df, checkable_fields)) |>
@@ -63,7 +70,12 @@ check_dataset <- function(.df){
   cat_line()
 
   ## Darwin Core compliance
-  # dwc_spinny_message(c("Meets minimum requirements for Darwin Core terms"))
+  # inform user
+  cli::cli_alert_info("Checking Darwin Core compliance")
+  for(i in 1:100) {
+    wait(0.001)
+  }
+
   dwc_compliant <- check_min_req_dwc(checkable_fields)
   min_req_dwc_message(dwc_compliant)
 
@@ -75,7 +87,7 @@ check_dataset <- function(.df){
 
   if(length(check_results$messages) > 0) {
 
-    dwc_spinny_message(paste0("Collecting error messages"))
+    dwc_spinny_message(paste0("Collecting error messages..."))
 
   # split messages by function for message formatting
     results_split <- check_results |>
@@ -96,7 +108,6 @@ check_dataset <- function(.df){
     }
   }
 
-  # TODO: check_dataset() should only celebrate when Data meets minimum requirements AND column checks pass
   invisible(.df)
 }
 
@@ -257,7 +268,7 @@ summary_message <- function(results, checkable_fields) {
 check_min_req_dwc <- function(checkable_fields) {
 
   # message
-  dwc_spinny_message(glue("Data meets minimum Darwin Core requirements"))
+  dwc_spinny_message(glue("Data meets minimum Darwin Core column requirements"))
 
   # check matching user columns with minimum required DwC terms
   req_terms_results <- check_required_terms(checkable_fields)
@@ -276,11 +287,11 @@ check_min_req_dwc <- function(checkable_fields) {
 min_req_dwc_message <- function(is_dwc_compliant) {
 
   if(isTRUE(is_dwc_compliant)) {
-    complies_text <- "Data meets minimum Darwin Core requirements"
+    complies_text <- "Data meets minimum Darwin Core column requirements"
     cli::cli_status_clear()
     cat_line(glue("{col_green(symbol$tick)} {complies_text}"))
   } else {
-    noncomplies_text <- "Data does not meet minimum Darwin Core requirements"
+    noncomplies_text <- "Data does not meet minimum Darwin Core column requirements"
     cli::cli_status_clear()
     cat_line(glue("{col_red(symbol$cross)} {noncomplies_text}"))
     cli_bullets(c(i = "Use `suggest_workflow()` to see more information."))

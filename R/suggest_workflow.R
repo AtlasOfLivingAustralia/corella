@@ -190,7 +190,7 @@ minreq_terms_message <- function(req_terms_results) {
   cat_line(req_terms_table)
   if(isTRUE(all_req_terms_found)) {
     # celebrate
-    cat_line(paste0("\n", add_emoji(), " ", col_green("All minimum requirements met!"), "\n"))
+    cat_line(paste0("\n", add_emoji(), " ", col_green("All minimum column requirements met!"), "\n"))
   }
 }
 
@@ -375,7 +375,11 @@ fn_to_term_table <- function() {
     "set_observer()", "recordedByID",
     "set_events()", "eventID",
     "set_events()", "eventType",
-    "set_events()", "parentEventID"
+    "set_events()", "parentEventID",
+    "set_measurements()", "measurementValue",
+    "set_measurements()", "measurementID",
+    "set_measurements()", "measurementUnit",
+    "set_measurements()", "measurementType"
   )
 
   table <- lst(main, optional) # named list

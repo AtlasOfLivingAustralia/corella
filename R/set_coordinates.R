@@ -84,6 +84,7 @@ set_coordinates <- function(
   # run column checks
   check_decimalLatitude(result, level = "abort")
   check_decimalLongitude(result, level = "abort")
+  check_coordinateUncertaintyInMeters(result, level = "abort")
   check_geodeticDatum(result, level = "abort")
 
   return(result)
@@ -121,6 +122,20 @@ check_decimalLongitude <- function(.df,
       check_within_range(level = level,
                          lower = -180,
                          upper = 180)
+  }
+}
+
+#' Check coordinateUncertaintyInMeters
+#' @noRd
+#' @keywords Internal
+check_coordinateUncertaintyInMeters <- function(.df,
+                                                level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "coordinateUncertaintyInMeters")){
+    .df |>
+      select("coordinateUncertaintyInMeters") |>
+      check_is_numeric(level = level)
   }
 }
 

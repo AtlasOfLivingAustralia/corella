@@ -101,7 +101,7 @@ set_measurements <- function(
 
   # inform user which columns will be checked
   # if they've made it this far, these columns should exist (and be checked)
-  matched_cols <- c("measurementID", "measurementUnit", "measurementType")
+  matched_cols <- c("measurementValue", "measurementID", "measurementUnit", "measurementType")
 
   if(isTRUE(.messages)) {
     if(length(matched_cols > 0)) {
@@ -109,16 +109,42 @@ set_measurements <- function(
     }
   }
 
+  check_measurementValue(result, level = "abort")
   check_measurementID(result, level = "abort")
   check_measurementUnit(result, level = "abort")
   check_measurementType(result, level = "abort")
 
   cli::cli_progress_step("Successfully nested measurement columns in column {.field measurementOrFact}.")
 
+  # To fix 'reached time limit' error:
+  # could set time limit, but needs testing how long? From: https://stackoverflow.com/questions/51247102/reached-elapsed-time-limit-errors-in-r
+  setTimeLimit(1)
+  # clear memory (NOTE: Can we do this?)
+  gc()
   return(result)
 }
 
-#' TODO: select & unnest nested columns, then run normal individual term/column checks like other use functions
+#' Check measurementValue
+#' @importFrom tidyr unnest
+#' @noRd
+#' @keywords Internal
+check_measurementValue <- function(.df,
+                                  level = c("inform", "warn", "abort")
+){
+  level <- match.arg(level)
+  if(any(colnames(.df) == "measurementOrFact")) {
+    #unnest columns
+    result <- .df |>
+      unnest(cols = measurementOrFact)
+
+
+    if(any(colnames(.df) == "measurementValue")){
+      .df |>
+        select("measurementValue")
+        check_is_numeric(level = level) # NOTE: Is this always true?
+    }
+  }
+}
 
 #' Check measurementID
 #' @importFrom tidyr unnest
