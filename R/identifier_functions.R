@@ -1,7 +1,12 @@
-#' Create identifier columns
+#' Create unique identifier columns
 #'
-#' Identifiers are columns that uniquely identify a single record within a
-#' dataset. These are helper functions, designed to make it easier to
+#' A unique identifier is a pattern of words, letters and/or numbers that is
+#' unique to a single record within a dataset.
+#' Unique identifiers are useful because they identify unique observations,
+#' even when more than one record contains the same information
+#' (and would otherwise be considered a duplicate).
+#'
+#' The identifier functions in corella, designed to make it easier to
 #' generate such columns from a given dataset. They are designed to be called
 #' within [use_events()], [use_occurrences()], or (equivalently)
 #' [dplyr::mutate()]. Generally speaking, it is best practice to use existing
