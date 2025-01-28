@@ -1,31 +1,54 @@
 
+# NOTE: This solution to testing works, but some messages to the console
+#       There is another solution implemented by {cli} which is saved at the
+#       bottom of this test script.
+
 test_that("check_dataset prints table and results", {
+  skip_on_cran()
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  suppressWarnings(testthat::local_reproducible_output())
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla")
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset errors in table and results", {
+  skip_on_cran()
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", 2)
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset handles multiple rows with errors", {
+  skip_on_cran()
+  suppressWarnings(testthat::local_reproducible_output())
+  withr::local_options(cli.dynamic = TRUE,
+                       cli.ansi = TRUE,
+                       cli.unicode = TRUE,
+                       cli.width = 80,
+                       width = 80,
+                       cli.num_colors = 1)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
     occurrenceStatus = c("present", "present"),
     decimalLatitude = c(-35.310, "-35.273")
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset only checks columns that match DwC terms", {
+  skip_on_cran()
+  suppressWarnings(testthat::local_reproducible_output())
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
     occurrenceStatus = c("present", "present"),
@@ -33,10 +56,19 @@ test_that("check_dataset only checks columns that match DwC terms", {
     longitude = c(149.125, 149.133)
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset prints a maximum of 5 error messages", {
+  skip_on_cran()
+  suppressWarnings(testthat::local_reproducible_output())
+  withr::local_options(cli.dynamic = TRUE,
+                       cli.ansi = TRUE,
+                       cli.unicode = TRUE,
+                       cli.width = 80,
+                       width = 80,
+                       cli.num_colors = 1)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", 2),
     occurrenceStatus = c("present", "blop"),
@@ -46,10 +78,14 @@ test_that("check_dataset prints a maximum of 5 error messages", {
     genus = 1:2
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset notifies when data meets minimum Darwin Core column requirements", {
+  skip_on_cran()
+  suppressWarnings(testthat::local_reproducible_output())
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
     decimalLatitude = c(-35.310, -35.273), # deliberate error for demonstration purposes
@@ -62,10 +98,19 @@ test_that("check_dataset notifies when data meets minimum Darwin Core column req
     geodeticDatum = "WGS84"
   )
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
 
 test_that("check_dataset handles `set_measurements()`", {
+  skip_on_cran()
+  suppressWarnings(testthat::local_reproducible_output())
+  withr::local_options(cli.dynamic = TRUE,
+                       cli.ansi = TRUE,
+                       cli.unicode = TRUE,
+                       cli.width = 80,
+                       width = 80,
+                       cli.num_colors = 1)
   df <- tibble::tibble(
     Species = c("Toechima", "Callicoma serratifolia"),
     Latitude = c(-17.1, -30.3),
@@ -78,5 +123,46 @@ test_that("check_dataset handles `set_measurements()`", {
     tidyr::nest(measurementOrFact = c(measurementValue, measurementID,
                                       measurementUnit, measurementType))
 
-  expect_snapshot(cat(check_dataset(df)))
+  msgs <- fix_times(capture_cli_messages(check_dataset(df)))
+  expect_snapshot(msgs)
 })
+
+
+
+### Alternative test structure: ###
+
+# NOTES:
+#
+# - This works too, but callr cannot use `load_all()` for some reason,
+#   so we expect this will fail on CRAN
+# - To make it run, atest test version must be installed locally (using devtools)
+# - I don't know what the app does, but Jenny Bryan suggests adding it to any
+#   cli test that calls cli and has expections about the cli output
+#   See: https://github.com/r-lib/cli/issues/210
+
+# cli::start_app()
+# on.exit(cli::stop_app(), add = TRUE)
+
+# test_that("check_dataset errors in table and results", {
+#   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+#   fun <- function() {
+#     suppressWarnings(testthat::local_reproducible_output())
+#     options(
+#       cli.dynamic = FALSE,
+#       cli.ansi = FALSE,
+#       cli.unicode = FALSE,
+#       cli.width = 80,
+#       width = 80,
+#       cli.num_colors = 1
+#     )
+#     df <- tibble::tibble(
+#       scientificName = c("Callocephalon fimbriatum", 2)
+#     )
+#     corella::check_dataset(df)
+#   }
+#
+#   outfile <- tempfile()
+#   on.exit(unlink(outfile), add = TRUE)
+#   callr::r(fun, stdout = outfile, stderr = outfile)
+#   expect_snapshot(fix_emojis(fix_times(readLines(outfile)))) # this shouldn't have emojis
+# })

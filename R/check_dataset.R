@@ -91,7 +91,7 @@ check_dataset <- function(.df){
 
   # split messages by function for message formatting
     results_split <- check_results |>
-      unnest(.data$messages) |>
+      unnest(messages) |>
       mutate(
         term = factor(.data$term, levels = unique(.data$term)) # maintain original term order
         ) |>
