@@ -120,3 +120,82 @@ test_that("check_within_range() works", {
   expect_error(check_within_range(x, level = "abort", lower = 4, upper = 20),
                regexp = " must be a numeric vector, not character.")
 })
+
+
+
+test_that("col_progress_bar() works", {
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  suppressWarnings(testthat::local_reproducible_output())
+  col_name <- tibble("scientificName")
+  expect_no_error(col_progress_bar(col_name))
+
+  msgs <- fix_times(capture_cli_messages(col_progress_bar(col_name)))
+  expect_snapshot(msgs)
+})
+
+test_that("check_is_date() works", {
+  df <- tibble::tibble(variable = lubridate::ymd(c("2023-10-23", "2023-11-24")))
+  df_datetime <- tibble::tibble(variable = lubridate::ymd_hms(c("2023-10-23 22:10:22", "2023-11-24 08:10:00")))
+  df_string <- tibble::tibble(variable = c("2023-10-23", "2023-11-24"))
+  df_num <- tibble(variable = 1:2)
+
+  expect_no_error(check_is_date(df))
+  expect_no_error(check_is_date(df_datetime))
+  expect_warning(
+    check_is_date(df_string),
+    "must be a Date vector, not a character"
+    )
+  expect_warning(
+    check_is_date(df_num),
+    "must be a Date vector, not a integer"
+    )
+})
+
+test_that("check_is_date_time() works", {
+  df_datetime <- tibble::tibble(variable = ymd_hms(c("2023-10-23 22:10:22", "2023-11-24 08:10:00")))
+  suppressWarnings(
+    df_datetime_wrong <- tibble::tibble(variable = ymd_hms(c("2023-10-23 22:10:223", "2023-11-24 08:10:00")))
+  )
+
+  expect_no_error(check_is_date_time(df_datetime))
+  expect_warning(
+    check_is_date(df_datetime_wrong),
+    "eventDate contains invalid date/time format"
+  )
+})
+
+test_that("check_is_time() works", {
+  df_time <- tibble::tibble(variable = lubridate::hms(c("22:10:22", "08:10:00")))
+  df_time2 <- tibble::tibble(variable = lubridate::hm(c("22:10", "08:10")))
+  suppressWarnings(
+    df_time_wrong <- tibble::tibble(variable = c("222:10:22333", "08:10:00"))
+    )
+
+  expect_no_error(check_is_time(df_time))
+  expect_no_error(check_is_time(df_time2))
+  expect_warning(
+    check_is_time(df_time_wrong),
+    "Invalid time format in variable"
+    )
+})
+
+test_that("check_missing_all_args() works", {
+  fn_call <- c("set_scientific_name", "df")
+  fn_args <- c("scientificName", "taxa")
+  user_cols <- c("scientificName", "bing", "Boom")
+  user_cols_no_matches <- c("scientific_name", "bing", "Boom")
+
+  expect_no_error(
+    check_missing_all_args(fn_call, fn_args, user_cols)
+  )
+
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  suppressWarnings(testthat::local_reproducible_output())
+  expect_warning(
+    check_missing_all_args(fn_call, fn_args, user_cols_no_matches),
+    "No Darwin Core terms detected by `set_scientific_name\\(\\)`" # writing it this way could cause problems?
+    )
+})
+
+# test check_mismatch_code_country
+# test check_word_number
