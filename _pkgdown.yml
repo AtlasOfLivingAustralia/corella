@@ -46,6 +46,7 @@ reference:
   - set_observer
   - set_abundance
   - set_individual_traits
+  - set_license
   - set_measurements
 - title: Run checks on a dataset for Darwin Core conformance
   contents:
