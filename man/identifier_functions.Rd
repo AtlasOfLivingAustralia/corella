@@ -4,7 +4,7 @@
 \alias{composite_id}
 \alias{sequential_id}
 \alias{random_id}
-\title{Create identifier columns}
+\title{Create unique identifier columns}
 \usage{
 composite_id(..., sep = "-")
 
@@ -26,8 +26,14 @@ Defaults to one plus the order of magnitude of the largest number.}
 An amended tibble, containing a field with the requested information.
 }
 \description{
-Identifiers are columns that uniquely identify a single record within a
-dataset. These are helper functions, designed to make it easier to
+A unique identifier is a pattern of words, letters and/or numbers that is
+unique to a single record within a dataset.
+Unique identifiers are useful because they identify unique observations,
+even when more than one record contains the same information
+(and would otherwise be considered a duplicate).
+}
+\details{
+The identifier functions in corella, designed to make it easier to
 generate such columns from a given dataset. They are designed to be called
 within \code{\link[=use_events]{use_events()}}, \code{\link[=use_occurrences]{use_occurrences()}}, or (equivalently)
 \code{\link[dplyr:mutate]{dplyr::mutate()}}. Generally speaking, it is best practice to use existing

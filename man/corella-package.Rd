@@ -30,7 +30,7 @@ The following functions add single DwC fields, or collections of related
 fields, to an existing \code{tibble}.
 \itemize{
 \item \code{\link[=set_events]{set_events()}} basic information on observation events (\code{eventID}, \code{parentEventID}, \code{eventType})
-\item \code{\link[=set_occurrences]{set_occurrences()}} basic information on observations (\code{occurrenceID}, \code{basisOfRecord})
+\item \code{\link[=set_occurrences]{set_occurrences()}} basic information on observations (\code{occurrenceID}, \code{basisOfRecord}, \code{occurrencesStatus})
 \item \code{\link[=set_scientific_name]{set_scientific_name()}} record the highest level of taxonomic specificity in the dataset (\code{scientificName}, \code{scientificNameAuthorship}, \code{taxonRank})
 \item \code{\link[=set_taxonomy]{set_taxonomy()}} to specify higher taxonomic columns (\code{kingdom}, \code{phylum}, \code{class}, \code{order}, \code{family}, \code{genus}, \code{species}, \code{specificEpithet}, \code{vernacularName})
 \item \code{\link[=set_coordinates]{set_coordinates()}} for spatial data (\code{decimalLatitude}, \code{decimalLongitude}, \code{geodeticDatum}, \code{coordinateUncertaintyInMeters}, \code{coordinatePrecision})
@@ -41,10 +41,11 @@ fields, to an existing \code{tibble}.
 \item \code{\link[=set_observer]{set_observer()}} to specify who made the observation (\code{recordedByID}, \code{recordedBy})
 \item \code{\link[=set_abundance]{set_abundance()}} to state how many animals were seen during the observation (\code{individualCount}, \code{organismQuantity}, \code{organismQuantityType})
 \item \code{\link[=set_individual_traits]{set_individual_traits()}} attributes of individuals measured (\code{individualID}, \code{lifeStage}, \code{sex}, \code{vitality}, \code{reproductiveCondition})
-\item \code{\link[=set_measurements]{set_measurements()}} for 'Measurement or Fact' data (optional)
+\item \code{\link[=set_license]{set_license()}} to specify license and rights information (\code{license}, \code{rightsHolder}, \code{accessRights})
+\item \code{\link[=set_measurements]{set_measurements()}} for measurement columns, i.e. 'Measurement or Fact' data (optional)
 }
 
-\strong{Checking data for Darwin Core compliance}
+\strong{Check data for Darwin Core compliance}
 
 The wrapper function for checking tibbles for Darwin Core compliance is
 \code{\link[=check_dataset]{check_dataset()}}. It calls all internal check functions for checking data

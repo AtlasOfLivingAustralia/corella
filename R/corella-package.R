@@ -20,7 +20,7 @@
 #'
 #' **Suggest where to start**
 #'
-#'  * [suggest_workflow()] for a summary of what column names match Darwin Core terms in your data, and a workflow for adding or editing more.
+#'   * [suggest_workflow()] for a summary of what column names match Darwin Core terms in your data, and a workflow for adding or editing more.
 #'
 #' **Add Darwin Core Terms**
 #'
@@ -28,7 +28,7 @@
 #'  fields, to an existing `tibble`.
 #'
 #'   * [set_events()] basic information on observation events (`eventID`, `parentEventID`, `eventType`)
-#'   * [set_occurrences()] basic information on observations (`occurrenceID`, `basisOfRecord`)
+#'   * [set_occurrences()] basic information on observations (`occurrenceID`, `basisOfRecord`, `occurrencesStatus`)
 #'   * [set_scientific_name()] record the highest level of taxonomic specificity in the dataset (`scientificName`, `scientificNameAuthorship`, `taxonRank`)
 #'   * [set_taxonomy()] to specify higher taxonomic columns (`kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, `specificEpithet`, `vernacularName`)
 #'   * [set_coordinates()] for spatial data (`decimalLatitude`, `decimalLongitude`, `geodeticDatum`, `coordinateUncertaintyInMeters`, `coordinatePrecision`)
@@ -39,9 +39,10 @@
 #'   * [set_observer()] to specify who made the observation (`recordedByID`, `recordedBy`)
 #'   * [set_abundance()] to state how many animals were seen during the observation (`individualCount`, `organismQuantity`, `organismQuantityType`)
 #'   * [set_individual_traits()] attributes of individuals measured (`individualID`, `lifeStage`, `sex`, `vitality`, `reproductiveCondition`)
-#'   * [set_measurements()] for 'Measurement or Fact' data (optional)
+#'   * [set_license()] to specify license and rights information (`license`, `rightsHolder`, `accessRights`)
+#'   * [set_measurements()] for measurement columns, i.e. 'Measurement or Fact' data (optional)
 #'
-#'  **Checking data for Darwin Core compliance**
+#'  **Check data for Darwin Core compliance**
 #'
 #'  The wrapper function for checking tibbles for Darwin Core compliance is
 #'  [check_dataset()]. It calls all internal check functions for checking data
