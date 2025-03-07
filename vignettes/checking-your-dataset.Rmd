@@ -12,6 +12,13 @@ resource_files:
   - 'supported-terms.csv'
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 A Darwin Core Archive consists of several pieces to ensure a dataset is structured correctly (and can be restructured correctly in the future). These pieces include the dataset, a metadata statement, and an xml file detailing how the columns in the data relate to each other. 
 
 corella is designed to check whether a dataset conforms to Darwin Core standard. This involves two main steps:

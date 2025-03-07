@@ -19,15 +19,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of what organisms were observed in a location and time---in the Atlas of Living Australia, other Living Atlases and GBIF. The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
+corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of organisms observed in a location and time---in the [Atlas of Living Australia (ALA)](https://ala.org.au/), other [Living Atlases](https://living-atlases.gbif.org/) and the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/). The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
 
-The main tasks to standardise data to comply with Darwin Core standards is to 
+The main tasks to standardise data with Darwin Core standard are:
 
   1. Ensure columns use valid Darwin Core terms as column names
   2. Include all required information (e.g. scientific name, unique observation ID, valid date)
   3. Ensure columns contain valid data
 
-If this sounds daunting, corella is designed to reduce confusion of how to get started and which Darwin Core terms might match your column names.
+This process can be daunting. corella is designed to reduce confusion of how to get started, and help determine which Darwin Core terms might match your column names.
 
 # Install
 
@@ -57,7 +57,7 @@ library(corella)
 
 # Rename, add or edit columns
 
-Here is a minimal example dataset of [some species] observations. In our dataframe `df` there are columns that contain information that we would like standardised using Darwin Core.
+Here is a minimal example dataset of cockatoo observations. In our dataframe `df` there are columns that contain information that we would like to standardise using Darwin Core.
 
 ```{r}
 #| code-fold: true
@@ -85,21 +85,20 @@ df <- tibble(
 df
 ```
 
-We can standardise our data with `set_` functions. These functions a prefix of `set_`, and a suffix named to suggest what type of data they are used to standardise. For example, `set_coordinates` or `set_datetime`. The argument names in `set_` functions are valid Darwin Core terms. Our hope is that by grouping Darwin Core terms into groups based on their data type, corella makes it easier for users to know which Darwin Core terms to use as column names (which is one of the most confusing parts of Darwin Core).
+We can standardise our data with `set_` functions. The `set_` functions possess a suffix name to identify what type of data they are used to standardise (e.g. `set_coordinates`, `set_datetime`), and arguments in `set_` functions are valid Darwin Core *terms* (ie column names). By grouping Darwin Core terms based on their data type, corella makes it easier for users to find relevant Darwin Core terms to use as column names (one of the most onerous parts of Darwin Core for new users).
 
-Let's specify that the scientific name (i.e. genus & species name) in our data is in the `species` column by using `set_scientific_name()` to update our dataframe.
+Let's specify that the scientific name (i.e. genus + species name) in our data is in the `species` column by using `set_scientific_name()`. You'll notice 2 things happen:
+
+  1. The `species` column in our dataframe is renamed to `scientificName`
+  2. `set_scientific_name()` runs a check on our `species` column to make sure it is formatted correctly
 
 ```{r}
 df |>
   set_scientific_name(scientificName = species)
 ```
 
-You'll notice 2 things happen:
 
-  1. The `species` column in our dataframe has been renamed to `scientificName`.
-  2. `set_scientific_name()` ran a check on our `species` column to make sure it was formatted correctly.
-
-What happens when we add a column with an error in it? In our `df`, the `latitude` column is "accidentally" a class `character` column, when it should be a `numeric` column. When we try to add it using `set_coordinates()`, an error will tell us something is wrong.
+What happens when we add a column with an error in it? The `latitude` column in `df` is a class `character` column, instead of a `numeric` column as it should be. When we try to update the column name using `set_coordinates()`, an error tells us the class is wrong.
 
 ```{r}
 #| eval: true
@@ -113,20 +112,22 @@ df |>
 
 ## Fix or update columns
 
-How do we fix the column that caused an error? One way is to edit the column within the `set_` function containing our problematic column.
+To change, edit or fix a column, users can edit the column within the `set_` function.
 
-Each `set_` function is essentially a specialised [`mutate()`]() function from [dplyr](). This means you can edit columns using the same process you would use with `mutate()`. Let's fix the `latitude` column so that it is class `numeric`, which will fix the error.
+Each `set_` function is essentially a specialised [`dplyr::mutate()`](https://dplyr.tidyverse.org/reference/mutate.html), meaning users can edit columns using the same processes they would when using `dplyr::mutate()`. We can fix the `latitude` column so that it is class `numeric` within the `set_coordinates()` function.
 
 ```{r}
-df |>
+df_darwincore <- df |>
   set_scientific_name(scientificName = species) |>
   set_coordinates(decimalLongitude = longitude,
                   decimalLatitude = as.numeric(latitude))
+
+df_darwincore
 ```
 
 ## Auto-detect columns
 
-corella is also able to detect when columns already contain valid Darwin Core terms as column names. For example, `df` contains columns with locality information. We can add `set_locality()` to our pipe to specify and check these columns. Some of our columns already have valid Darwin Core terms as column names (`country` and `continent`). If we add `set_locality()` to our pipe without any arguments, it will detect these valid Darwin Core columns in `df` and check them automatically.
+corella is also able to detect when a column exists in a data frame that already has a valid Darwin Core term as a column name. For example, `df` contains columns with locality information. We can add `set_locality()` to our pipe to identify these columns, but because several columns already have valid Darwin Core terms as column names (`country` and `continent`), `set_locality()` will detect these valid Darwin Core columns in `df` and check them automatically.
 
 ```{r}
 df |>
@@ -134,23 +135,25 @@ df |>
   set_coordinates(decimalLongitude = longitude,
                   decimalLatitude = as.numeric(latitude)) |>
   set_locality()
+
+df_darwincore
 ```
 
-By auto-detecting columns, corella prevents users from having to specify every single column when they are already named correctly in their dataset. This functionality will definitely help reduce the workload on datasets with lots of columns!
+corella's auto-detection prevents users from needing to specify every single column, reducing the amount of typing for users when they have already have valid Darwin Core column names!
 
 
 # Suggest a workflow
 
-Unsure where to start? Confused about the minimum requirements to share your data? Try using `suggest_workflow()`.
+Unsure where to start? Confused about the minimum requirements to share your data? Using `suggest_workflow()` is the easiest way to get started in corella.
 
 `suggest_workflow()` provides a high level summary designed to show:
 
   1. Which column names match valid Darwin Core terms
-  2. The minimum requirements for data to be shared, and which columns are present in your dataframe.
+  2. The minimum requirements for data in a [Darwin Core Archive](https://support.ala.org.au/support/solutions/articles/6000261427-sharing-a-dataset-with-the-ala#create-archive) (i.e. a completed data resource in Darwin Core standard).
   3. A suggested workflow to help you add the minimum required columns
-  4. Additional functions you could add to your piped workflow (based on column names in your dataset that match other Darwin Core terms)
+  4. Additional functions that could be added to a piped workflow (based the provided dataset's matching Darwin Core column names)
   
-The intention of `suggest_workflow()` is to provide a general help function whenever users feel uncertain about what to do next. Let's see what it says about what to do with our original dataframe `df`.
+The intention of `suggest_workflow()` is to provide a general help function whenever users feel uncertain about what to do next. Let's see what the output says about our original dataframe `df`.
 
 ```{r}
 df |>
@@ -199,7 +202,7 @@ df |>
 
 # `set_measurements`: a work in progress
 
-Let's use a small sample of a real dataset of Australian native plant species, including Eucalypts and Acacias. The dataset contains lots of columns containing measurements that capture the traits or environment of each species occurrence. I have extracted 3 examples of these measurement columns: `LMA_g.m2`, `LeafN_area_g.m2`, `PNUE`.
+Let's use a small sample of a real dataset of Australian native plant species (e.g. Eucalypts and Acacias). The dataset contains lots of columns containing measurements that capture the traits or environment of each species occurrence. I have extracted 3 examples of these measurement columns: `LMA_g.m2`, `LeafN_area_g.m2`, `PNUE`.
 
 ```{r}
 #| warning: false
