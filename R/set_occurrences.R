@@ -1,4 +1,4 @@
-#' Set, create or modify columns with occurrence-specific information using Darwin Core
+#' Set, create or modify columns with occurrence-specific information
 #'
 #' @description
 #' Format fields uniquely identify each occurrence record and specify the type
@@ -30,9 +30,10 @@
 #' identifiers often contain information that is valuable in other contexts,
 #' meaning that deleting these columns by default is typically unwise.
 #' @param .messages Logical: Should progress bar be shown? Defaults to `TRUE`.
-#' @returns A tibble with the requested fields added.
+#' @returns A tibble with the requested columns added/reformatted.
 #' @seealso [basisOfRecord_values()] for accepted values for the `basisOfRecord`
-#' field'; [set_abundance()] for occurrence-level counts.
+#' field'; [random_id()], [composite_id()] or [sequential_id()] for formatting
+#' ID columns; [set_abundance()] for occurrence-level counts.
 #' @details
 #' Examples of `occurrenceID` values:
 #' * `000866d2-c177-4648-a200-ead4007051b9`
@@ -41,6 +42,23 @@
 #' Accepted `basisOfRecord` values are one of:
 #' * `"humanObservation"`, `"machineObservation"`, `"livingSpecimen"`,
 #' `"preservedSpecimen"`, `"fossilSpecimen"`, `"materialCitation"`
+#'
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+#' )
+#'
+#' # Add occurrence information
+#' df_dwc <- df |>
+#'   set_occurrences(
+#'     occurrenceID = random_id(), # add random UUID
+#'     basisOfRecord = "humanObservation"
+#'   )
+#'
+#' df_dwc
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort

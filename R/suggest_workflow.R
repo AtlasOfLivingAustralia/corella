@@ -1,15 +1,29 @@
-#' Suggest workflow to make data compliant with Darwin Core
+#' Suggest a workflow to make data Darwin Core compliant
 #'
 #' @description
-#' Function to check whether a `data.frame` or `tibble` conforms to Darwin
-#' Core standards. While most users will only want to call `suggest_workflow()`,
-#' the underlying check functions are exported for detailed work, or for
-#' debugging.
-#' @param .df A tibble against which checks should be run
-#' @importFrom rlang inform
-#' @importFrom cli cli_bullets
-#' @returns Invisibly returns the input, but primarily called for the
-#' side-effect of running check functions on that input.
+#' Checks whether a `data.frame` or `tibble` conforms to Darwin
+#' Core standards and suggests how to standardise a data frame that is not
+#' standardised to minimum Darwin Core requirements.
+#'
+#' Output provides a summary to users about which column names
+#' match valid Darwin Core terms, the minimum required
+#' column names/terms (and which ones are missing), and a suggested workflow to
+#' add any missing terms.
+#' @param .df A `data.frame`/`tibble` against which checks should be run
+#' @returns Invisibly returns the input `data.frame`/`tibble`, but primarily
+#' called for the side-effect of running check functions on that input.
+#' @examples
+#' # A simple example of species occurrence data
+#' df <- tibble(
+#'   scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+#'   latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+#'   longitude = c(149.125, 149.133),
+#'   eventDate = c("14-01-2023", "15-01-2023"),
+#'   status = c("present", "present")
+#' )
+#'
+#' suggest_workflow(df)
+#'
 #' @order 1
 #' @export
 suggest_workflow <- function(.df){
@@ -94,7 +108,7 @@ check_contains_terms <- function(.df,
     sort()
   name_lookup <- user_column_names %in% dwc_terms$term
 
-  ## Matching column names to darwin core terms ---
+  ## Matching column names to darwin core terms
 
   # matches
   matched_values <- user_column_names[name_lookup]

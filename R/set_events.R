@@ -1,7 +1,7 @@
-#' Set, create or modify columns with Event information using Darwin Core
+#' Set, create or modify columns with Event information
 #'
 #' @description
-#' Format columns that contain information about an
+#' Identify or format columns that contain information about an
 #' [Event](https://dwc.tdwg.org/list/#dwc_Event). An "Event" in Darwin Core
 #' standard refers to an action that occurs at a place and time. Examples
 #' include:
@@ -13,10 +13,10 @@
 #'  * A camera trap deployment event
 #'  * A camera trap burst image event (with many images for one observation)
 #'
-#' In practice this is no different from using `mutate()`, but gives some
-#' informative errors, and serves as a useful lookup for fields in
+#' In practice this function is used no differently from `mutate()`, but gives
+#' users some informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param eventID A unique identifier for an individual Event.
 #' @param eventType The type of Event
 #' @param parentEventID The parent event under which one or more Events sit
@@ -51,6 +51,27 @@
 #'
 #' Examples of `parentEventID`
 #' `A1` (To identify the parent event in nested samples, each with their own `eventID` - `A1_1`, `A1_2`)
+#'
+#' @examples
+#' # example Event dataframe
+#' df <- tibble::tibble(
+#'   site_code = c("AMA100", "AMA100", "AMH100"),
+#"   year = c(2004, 2005, 2005),
+#'   scientificName = c("Crinia signifera", "Crinia signifera", "Crinia signifera"),
+#'   latitude = c(35.275, 35.274, 35.101),
+#'   longitue = c(149.001, 149.004, 149.274),
+#' )
+#'
+#' # Add event information
+#' df_dwc <- df |>
+#'   set_events(
+#'     eventID = composite_id(sequential_id(),
+#'                            site_code,
+#'                            year),
+#'     eventType = "Survey"
+#'   )
+#'
+#' df_dwc
 #'
 #' @importFrom dplyr mutate
 #' @importFrom purrr map
