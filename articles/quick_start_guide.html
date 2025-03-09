@@ -75,21 +75,23 @@
     
 <p>corella is a tool for standardising data in R to use the <a href="https://www.gbif.org/darwin-core" class="external-link"><em>Darwin Core
 standard</em></a>. Darwin Core standard is the primary data standard for
-species occurrence data—records of what organisms were observed in a
-location and time—in the Atlas of Living Australia, other Living Atlases
-and GBIF. The standard allows the ability to compile data from a variety
-of sources, improving the ease to share, use and reuse data.</p>
-<p>The main tasks to standardise data to comply with Darwin Core
-standards is to</p>
+species occurrence data—records of organisms observed in a location and
+time—in the <a href="https://ala.org.au/" class="external-link">Atlas of Living Australia
+(ALA)</a>, other <a href="https://living-atlases.gbif.org/" class="external-link">Living
+Atlases</a> and the <a href="https://www.gbif.org/" class="external-link">Global Biodiversity
+Information Facility (GBIF)</a>. The standard allows the ability to
+compile data from a variety of sources, improving the ease to share, use
+and reuse data.</p>
+<p>The main tasks to standardise data with Darwin Core standard are:</p>
 <ol style="list-style-type: decimal">
 <li>Ensure columns use valid Darwin Core terms as column names</li>
 <li>Include all required information (e.g. scientific name, unique
 observation ID, valid date)</li>
 <li>Ensure columns contain valid data</li>
 </ol>
-<p>If this sounds daunting, corella is designed to reduce confusion of
-how to get started and which Darwin Core terms might match your column
-names.</p>
+<p>This process can be daunting. corella is designed to reduce confusion
+of how to get started, and help determine which Darwin Core terms might
+match your column names.</p>
 <div class="section level2">
 <h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
 </h2>
@@ -107,9 +109,9 @@ names.</p>
 <div class="section level2">
 <h2 id="rename-add-or-edit-columns">Rename, add or edit columns<a class="anchor" aria-label="anchor" href="#rename-add-or-edit-columns"></a>
 </h2>
-<p>Here is a minimal example dataset of [some species] observations. In
-our dataframe <code>df</code> there are columns that contain information
-that we would like standardised using Darwin Core.</p>
+<p>Here is a minimal example dataset of cockatoo observations. In our
+dataframe <code>df</code> there are columns that contain information
+that we would like to standardise using Darwin Core.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
@@ -140,23 +142,30 @@ that we would like standardised using Darwin Core.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -35.31        149. 14-01-2023 10:23:00 Janu…   100 Calloc…     2 WGS84 Austra…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -35.273       149. 15-01-2023 11:25:00 Febr…   101 Eoloph…     3 WGS8d Denmark</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: continent &lt;chr&gt;</span></span></span></code></pre></div>
-<p>We can standardise our data with <code>set_</code> functions. These
-functions a prefix of <code>set_</code>, and a suffix named to suggest
-what type of data they are used to standardise. For example,
-<code>set_coordinates</code> or <code>set_datetime</code>. The argument
-names in <code>set_</code> functions are valid Darwin Core terms. Our
-hope is that by grouping Darwin Core terms into groups based on their
-data type, corella makes it easier for users to know which Darwin Core
-terms to use as column names (which is one of the most confusing parts
-of Darwin Core).</p>
-<p>Let’s specify that the scientific name (i.e. genus &amp; species
-name) in our data is in the <code>species</code> column by using
-<code><a href="../reference/set_scientific_name.html">set_scientific_name()</a></code> to update our dataframe.</p>
+<p>We can standardise our data with <code>set_</code> functions. The
+<code>set_</code> functions possess a suffix name to identify what type
+of data they are used to standardise (e.g. <code>set_coordinates</code>,
+<code>set_datetime</code>), and arguments in <code>set_</code> functions
+are valid Darwin Core <em>terms</em> (ie column names). By grouping
+Darwin Core terms based on their data type, corella makes it easier for
+users to find relevant Darwin Core terms to use as column names (one of
+the most onerous parts of Darwin Core for new users).</p>
+<p>Let’s specify that the scientific name (i.e. genus + species name) in
+our data is in the <code>species</code> column by using
+<code><a href="../reference/set_scientific_name.html">set_scientific_name()</a></code>. You’ll notice 2 things happen:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>species</code> column in our dataframe is renamed to
+<code>scientificName</code>
+</li>
+<li>
+<code><a href="../reference/set_scientific_name.html">set_scientific_name()</a></code> runs a check on our
+<code>species</code> column to make sure it is formatted correctly</li>
+</ol>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/set_scientific_name.html">set_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[334ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[333ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   latitude longitude date       time   month   day     n crs   country continent</span></span>
@@ -164,20 +173,11 @@ name) in our data is in the <code>species</code> column by using
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> -35.31        149. 14-01-2023 10:23… Janu…   100     2 WGS84 Austra… Oceania  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> -35.273       149. 15-01-2023 11:25… Febr…   101     3 WGS8d Denmark Europe   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: scientificName &lt;chr&gt;</span></span></span></code></pre></div>
-<p>You’ll notice 2 things happen:</p>
-<ol style="list-style-type: decimal">
-<li>The <code>species</code> column in our dataframe has been renamed to
-<code>scientificName</code>.</li>
-<li>
-<code><a href="../reference/set_scientific_name.html">set_scientific_name()</a></code> ran a check on our
-<code>species</code> column to make sure it was formatted
-correctly.</li>
-</ol>
-<p>What happens when we add a column with an error in it? In our
-<code>df</code>, the <code>latitude</code> column is “accidentally” a
-class <code>character</code> column, when it should be a
-<code>numeric</code> column. When we try to add it using
-<code><a href="../reference/set_coordinates.html">set_coordinates()</a></code>, an error will tell us something is
+<p>What happens when we add a column with an error in it? The
+<code>latitude</code> column in <code>df</code> is a class
+<code>character</code> column, instead of a <code>numeric</code> column
+as it should be. When we try to update the column name using
+<code><a href="../reference/set_coordinates.html">set_coordinates()</a></code>, an error tells us the class is
 wrong.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
@@ -195,25 +195,26 @@ wrong.</p>
 <div class="section level3">
 <h3 id="fix-or-update-columns">Fix or update columns<a class="anchor" aria-label="anchor" href="#fix-or-update-columns"></a>
 </h3>
-<p>How do we fix the column that caused an error? One way is to edit the
-column within the <code>set_</code> function containing our problematic
-column.</p>
-<p>Each <code>set_</code> function is essentially a specialised <a href=""><code>mutate()</code></a> function from <a href="">dplyr</a>.
-This means you can edit columns using the same process you would use
-with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>. Let’s fix the <code>latitude</code> column
-so that it is class <code>numeric</code>, which will fix the error.</p>
+<p>To change, edit or fix a column, users can edit the column within the
+<code>set_</code> function.</p>
+<p>Each <code>set_</code> function is essentially a specialised <a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link"><code>dplyr::mutate()</code></a>,
+meaning users can edit columns using the same processes they would when
+using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>. We can fix the <code>latitude</code>
+column so that it is class <code>numeric</code> within the
+<code><a href="../reference/set_coordinates.html">set_coordinates()</a></code> function.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">df_darwincore</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/set_scientific_name.html">set_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/set_coordinates.html">set_coordinates</a></span><span class="op">(</span>decimalLongitude <span class="op">=</span> <span class="va">longitude</span>,</span>
 <span>                  decimalLatitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">latitude</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; ⠹ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[315ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
+<span></span>
+<span><span class="va">df_darwincore</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
@@ -224,15 +225,14 @@ so that it is class <code>numeric</code>, which will fix the error.</p>
 <div class="section level3">
 <h3 id="auto-detect-columns">Auto-detect columns<a class="anchor" aria-label="anchor" href="#auto-detect-columns"></a>
 </h3>
-<p>corella is also able to detect when columns already contain valid
-Darwin Core terms as column names. For example, <code>df</code> contains
-columns with locality information. We can add
-<code><a href="../reference/set_locality.html">set_locality()</a></code> to our pipe to specify and check these
-columns. Some of our columns already have valid Darwin Core terms as
-column names (<code>country</code> and <code>continent</code>). If we
-add <code><a href="../reference/set_locality.html">set_locality()</a></code> to our pipe without any arguments, it
-will detect these valid Darwin Core columns in <code>df</code> and check
-them automatically.</p>
+<p>corella is also able to detect when a column exists in a data frame
+that already has a valid Darwin Core term as a column name. For example,
+<code>df</code> contains columns with locality information. We can add
+<code><a href="../reference/set_locality.html">set_locality()</a></code> to our pipe to identify these columns, but
+because several columns already have valid Darwin Core terms as column
+names (<code>country</code> and <code>continent</code>),
+<code><a href="../reference/set_locality.html">set_locality()</a></code> will detect these valid Darwin Core columns
+in <code>df</code> and check them automatically.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/set_scientific_name.html">set_scientific_name</a></span><span class="op">(</span>scientificName <span class="op">=</span> <span class="va">species</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -253,33 +253,42 @@ them automatically.</p>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 14-01-2023 10:23:00 January   100     2 WGS84 Austra… Oceania   Callocephalon…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 15-01-2023 11:25:00 Februa…   101     3 WGS8d Denmark Europe    Eolophus rose…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: decimalLatitude &lt;dbl&gt;, decimalLongitude &lt;dbl&gt;</span></span></span>
+<span></span>
+<span><span class="va">df_darwincore</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
+<span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 14-01-2023 10:23:00 January   100     2 WGS84 Austra… Oceania   Callocephalon…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 15-01-2023 11:25:00 Februa…   101     3 WGS8d Denmark Europe    Eolophus rose…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: decimalLatitude &lt;dbl&gt;, decimalLongitude &lt;dbl&gt;</span></span></span></code></pre></div>
-<p>By auto-detecting columns, corella prevents users from having to
-specify every single column when they are already named correctly in
-their dataset. This functionality will definitely help reduce the
-workload on datasets with lots of columns!</p>
+<p>corella’s auto-detection prevents users from needing to specify every
+single column, reducing the amount of typing for users when they have
+already have valid Darwin Core column names!</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="suggest-a-workflow">Suggest a workflow<a class="anchor" aria-label="anchor" href="#suggest-a-workflow"></a>
 </h2>
 <p>Unsure where to start? Confused about the minimum requirements to
-share your data? Try using <code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code>.</p>
+share your data? Using <code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code> is the easiest
+way to get started in corella.</p>
 <p><code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code> provides a high level summary
 designed to show:</p>
 <ol style="list-style-type: decimal">
 <li>Which column names match valid Darwin Core terms</li>
-<li>The minimum requirements for data to be shared, and which columns
-are present in your dataframe.</li>
+<li>The minimum requirements for data in a <a href="https://support.ala.org.au/support/solutions/articles/6000261427-sharing-a-dataset-with-the-ala#create-archive" class="external-link">Darwin
+Core Archive</a> (i.e. a completed data resource in Darwin Core
+standard).</li>
 <li>A suggested workflow to help you add the minimum required
 columns</li>
-<li>Additional functions you could add to your piped workflow (based on
-column names in your dataset that match other Darwin Core terms)</li>
+<li>Additional functions that could be added to a piped workflow (based
+the provided dataset’s matching Darwin Core column names)</li>
 </ol>
 <p>The intention of <code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code> is to provide a
 general help function whenever users feel uncertain about what to do
-next. Let’s see what it says about what to do with our original
-dataframe <code>df</code>.</p>
+next. Let’s see what the output says about our original dataframe
+<code>df</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/suggest_workflow.html">suggest_workflow</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -310,7 +319,7 @@ dataframe <code>df</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="color: #555555;">Additional functions</span></span></span>
 <span><span class="co">#&gt; Based on your matched terms, you can also add to your pipe:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `set_locality()` and `set_datetime()`</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `set_locality()` `set_datetime()`</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #555555;">See all `set_` functions at</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555;">http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span></span></code></pre></div>
 <p><code><a href="../reference/suggest_workflow.html">suggest_workflow()</a></code> will update the suggested function
@@ -355,7 +364,7 @@ suggests <code><a href="../reference/set_occurrences.html">set_occurrences()</a>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="color: #555555;">Additional functions</span></span></span>
 <span><span class="co">#&gt; Based on your matched terms, you can also add to your pipe:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `set_locality()` and `set_datetime()`</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `set_locality()` `set_datetime()`</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #555555;">See all `set_` functions at</span></span></span>
 <span><span class="co">#&gt;   <span style="color: #555555;">http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span></span></code></pre></div>
 </div>
@@ -386,10 +395,11 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[47ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[48ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[24ms]</span></span></span>
+<span><span class="co">#&gt; ⠹ | 1 <span style="color: #BB0000;">✖</span> | country</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[26ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -411,7 +421,7 @@ error messages returned by those checks.</p>
 <code>set_measurements</code>: a work in progress<a class="anchor" aria-label="anchor" href="#set_measurements-a-work-in-progress"></a>
 </h2>
 <p>Let’s use a small sample of a real dataset of Australian native plant
-species, including Eucalypts and Acacias. The dataset contains lots of
+species (e.g. Eucalypts and Acacias). The dataset contains lots of
 columns containing measurements that capture the traits or environment
 of each species occurrence. I have extracted 3 examples of these
 measurement columns: <code>LMA_g.m2</code>,
