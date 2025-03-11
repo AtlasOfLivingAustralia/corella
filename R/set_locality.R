@@ -1,32 +1,68 @@
-#' Set, create or modify columns with locality information using Darwin Core
+#' Set, create or modify columns with locality information
 #'
 #' @description
 #' Locality information refers to a description of a place, rather than a
-#' spatial coordinate. This function helps specify or modify columns
-#' with locality information in a flexible way.
+#' spatial coordinate. This function helps to format columns
+#' with locality information to a `tibble` using Darwin Core Standard.
 #'
-#' In practice this is no different from using `mutate()`, but gives some
+#' In practice this is used no differently from `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param continent (string) Valid continent. See details.
 #' @param country Valid country name. See `country_codes`.
 #' @param countryCode Valid country code. See `country_codes`.
 #' @param stateProvince A sub-national region.
-#' @param locality A specific location, such as a property or address.
+#' @param locality A specific description of a location or place.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @details
-#' Example values are:
-#' * `continent` should be one of `"Africa"`, `"Antarctica"`, `"Asia"`,
+#' Values of `continent` should be one of `"Africa"`, `"Antarctica"`, `"Asia"`,
 #' `"Europe"`, `"North America"`, `"Oceania"` or `"South America"`.
-#' * `countryCode` should be supplied according to the
+#'
+#' `countryCode` should be supplied according to the
 #' [ISO 3166-1 ALPHA-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 #' standard, [as per TDWG advice](https://dwc.tdwg.org/list/#dwc_countryCode).
-#' @seealso [set_coordinates()] for numeric spatial data
+#' Examples of `countryCode`:
+#' *  `AUS`
+#' *  `NZ`
+#' *  `BRA`
+#'
+#' Examples of `locality`:
+#' *  `Bariloche, 25 km NNE via Ruta Nacional 40 (=Ruta 237)`
+#' *  `Queets Rainforest, Olympic National Park`
+#'
+#' @seealso [set_coordinates()] for numeric spatial data.
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   countryCode = c("AUS", "AUS", "AUS"),
+#'   state = c("New South Wales", "New South Wales", "New South Wales"),
+#'   locality = c("Melville Caves", "Melville Caves", "Bryans Swamp about 3km away")
+#' )
+#'
+#' # Reformat columns to Darwin Core Standard terms
+#' df |>
+#'   set_locality(
+#'     countryCode = countryCode,
+#'     stateProvince = state,
+#'     locality = locality
+#'   )
+#'
+#' # Columns with valid Darwin Core terms as names are automatically detected
+#' # and checked. This will do the same as above.
+#' df |>
+#'   set_locality(
+#'     stateProvince = state
+#'   )
+#'
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @importFrom rlang warn

@@ -27,12 +27,41 @@
 #' @returns A tibble with the requested fields added.
 #' @details
 #' Columns are nested in a
-#' single column `measurementOrFact` that contains Darwin Core standard
+#' single column `measurementOrFact` that contains Darwin Core Standard
 #' measurement fields. By nesting three measurement columns within the
-#' `measurementOrFact`, despite measurement columns converting to long format
-#' (one row per measurement, per occurrence),
-#' data will remain organised by occurrences (one row per occurrences). Data
-#' can be unnested into long format using `dplyr::unnest()`
+#' `measurementOrFact` column, nested measurement columns can be converted to
+#' long format (one row per measurement, per occurrence) while the original
+#' data frame remains organised by one row per occurrence. Data
+#' can be unnested into long format using `dplyr::unnest()`.
+#'
+#' @examples
+#' # Example data of plant species observations and measurements
+#' df <- tibble::tibble(
+#'   Site = c("Adelaide River", "Adelaide River", "AgnesBanks")
+#'   Species = c("Corymbia latifolia", "Banksia aemula", "Acacia aneura"),
+#'   Latitude = c(-13.04, -13.04, -33.60),
+#'   Longitude = c(131.07, 131.07, 150.72),
+#'   LMA_g.m2 = c(NA, 180.07, 159.01),
+#'   LeafN_area_g.m2 = c(1.100, 0.913, 2.960)
+#' )
+#'
+#' # Reformat columns to Darwin Core Standard
+#' df_dwc <- df |>
+#'   set_measurements(
+#'     cols = c(LMA_g.m2,
+#'              LeafN_area_g.m2),
+#'     unit = c("g/m2",
+#'              "g/m2"),
+#'     type = c("leaf mass per area",
+#'              "leaf nitrogen per area")
+#'   )
+#'
+#' # Formatted data frame nests measurements in `measurementOrFact` column
+#' df_dwc
+#'
+#' # Unnest to view full long format data frame
+#' df_dwc |>
+#'   dplyr::unnest(measurementOrFact)
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort

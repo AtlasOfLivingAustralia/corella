@@ -2,13 +2,12 @@
 #'
 #' @description
 #' Format fields that contain information on permissions for use, sharing or
-#' access to a record.
+#' access to a record to a `tibble` using Darwin Core Standard.
 #'
 #' In practice this function is no different from using `mutate()`, but gives
 #' some informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#'
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param license A legal document giving official permission to do something
 #' with the resource. Must be provided as a url to a valid license.
 #' @param rightsHolder Person or organisation owning or managing rights to
@@ -16,9 +15,9 @@
 #' @param accessRights Access or restrictions based on privacy or security.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested fields added/reformatted.
 #' @details
 #' Examples of `license` values:
 #' * `http://creativecommons.org/publicdomain/zero/1.0/legalcode`
@@ -34,6 +33,21 @@
 #' * `https://www.fieldmuseum.org/field-museum-natural-history-conditions-and-suggested-norms-use-collections-data-and-images` (URI example)
 #'
 #' @seealso [set_observer()] for adding observer information.
+#' @examples
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   attributed_license = c("CC-BY-NC 4.0 (Int)", "CC-BY-NC 4.0 (Int)", "CC-BY-NC 4.0 (Int)")
+#'   )
+#'
+#' # Reformat columns to Darwin Core Standard
+#' df |>
+#'   set_license(
+#'     license = attributed_license
+#'     )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

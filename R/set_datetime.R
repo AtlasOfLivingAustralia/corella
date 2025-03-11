@@ -1,30 +1,49 @@
-#' Set, create or modify columns with date and time information using Darwin Core
+#' Set, create or modify columns with date and time information
 #'
 #' @description
-#' This function helps format standard date/time columns in a `tibble`.
+#' This function helps format standard date/time columns in a `tibble` using
+#' Darwin Core Standard. Users should make use of the [lubridate package] to
+#' format their dates so corella can read them correctly.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for how spatial fields are
 #' represented in the Darwin Core Standard.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param eventDate The date or date + time that the observation/event occurred.
 #' @param year The year of the observation/event.
 #' @param month The month of the observation/event.
 #' @param day The day of the observation/event.
-#' @param eventTime The time of the observation/event.
+#' @param eventTime The time of the event. Use this term for Event data.
+#' Date + time information for observations is accepted in `eventDate`.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
 #' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
 #' generate them.
 #' @param .messages (logical) Should informative messages be shown? Defaults to
 #' `TRUE`.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @details
 #' Example values are:
 #' * `eventDate` should be class `Date` or `POSITct`. We suggest using the
 #' lubridate package to define define your date format using functions like
 #' `ymd()`, `mdy`, `dmy()`, or if including date + time, `ymd_hms()`,
 #' `ymd_hm()`, or `ymd_h()`.
+#' @examples
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   date = c("2010-10-14", "2010-10-14", "2010-10-14")
+#'   time = c("10:08:12", "13:01:45", "14:02:33")
+#' )
+#'
+#' # Use the lubridate package to format date + time information
+#' # eventDate accepts date + time
+#' df |>
+#'   set_datetime(
+#'     eventDate = lubridate::ymd_hms(paste(date, time))
+#'   )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

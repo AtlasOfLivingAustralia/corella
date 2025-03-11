@@ -1,10 +1,40 @@
 #' Check a dataset for Darwin Core conformance
 #'
-#' Function to check whether a `data.frame` or `tibble` conforms to Darwin
-#' Core standards. While most users will only want to call `suggest_workflow()`,
+#' @description
+#' Run a test suite of checks to test whether a `data.frame` or `tibble`
+#' conforms to Darwin Core Standard.
+#'
+#' While most users will only want to call `suggest_workflow()`,
 #' the underlying check functions are exported for detailed work, or for
-#' debugging.
+#' debugging. This function is useful for users experienced with
+#' Darwin Core Standard or for final dataset checks.
 #' @param .df A tibble against which checks should be run
+#' @returns Invisibly returns the input data frame, but primarily called for the
+#' side-effect of running check functions on that input.
+#' @details
+#' `check_dataset()` is modelled after [devtools::test()]. It runs a
+#' series of checks, then supplies a summary of passed/failed checks and
+#' error messages.
+#'
+#' Checks run by `check_dataset()` are the same that would
+#' be run automatically by various `set_` functions in a piped workflow. This
+#' function allows users with only minor expected updates to check their entire
+#' dataset without the need for `set_` functions.
+#'
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   status = c("present", "present", "present")
+#'   )
+#'
+#' # Run a test suite of checks for Darwin Core Standard conformance
+#' # Checks are only run on columns with names that match Darwin Core terms
+#' df |>
+#'   check_dataset()
+#'
 #' @importFrom rlang inform
 #' @importFrom purrr map
 #' @importFrom cli cli_bullets
@@ -22,8 +52,6 @@
 #' @importFrom dplyr slice_head
 #' @importFrom dplyr group_split
 #' @importFrom tidyr unnest
-#' @returns Invisibly returns the input, but primarily called for the
-#' side-effect of running check functions on that input.
 #' @order 1
 #' @export
 check_dataset <- function(.df){
@@ -119,8 +147,8 @@ check_dataset <- function(.df){
 #' detecting and matching matched Darwin Core terms to their associated `check_` function.
 #'
 #' `check_all()` runs in a similar way to `devtools::test()`, whereby it will run and
-#' report the results of checks "live". `check_all()` will then return a summary table and
-#' any error messages returned by data checks.
+#' report the results of checks "live", then return a summary table and
+#' any error messages returned.
 #'
 #' @importFrom cli cli_progress_step
 #' @importFrom cli cli_progress_update

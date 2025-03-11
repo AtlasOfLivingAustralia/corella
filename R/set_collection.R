@@ -1,14 +1,14 @@
-#' Set, create or modify columns with museum- or collection-specific information using Darwin Core
+#' Set, create or modify columns with museum- or collection-specific information
 #'
 #' @description
 #' Format fields that specify the collection or catalog number of a
-#' specimen or occurrence record.
+#' specimen or occurrence record to a `tibble` using Darwin Core Standard.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
 #'
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param datasetID An identifier for the set of data. May be a global unique
 #' identifier or an identifier specific to a collection or institution.
 #' @param datasetName The name identifying the data set from which the record
@@ -17,9 +17,9 @@
 #' or collection.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested fields added/reformatted.
 #' @details
 #' Examples of `datasetID` values:
 #' * `b15d4952-7d20-46f1-8a3e-556a512b04c5`
@@ -33,6 +33,21 @@
 #' * `145732a`
 #' * `2008.1334`
 #' * `R-4313`
+#'
+#' @examples
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   catalog_num = c("16789a", "16789c", "08742f")
+#'   dataset = c("Frog search", "Frog search", "Frog search")
+#'   )
+#'
+#' # Reformat columns to Darwin Core terms
+#' df |>
+#'   set_collection(
+#'     catalogNumber = catalog_num,
+#'     datasetName = dataset
+#'     )
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort

@@ -41,6 +41,8 @@ Suggests:
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://corella.ala.org.au
+BugReports: https://github.com/AtlasOfLivingAustralia/galaxias/issues
+Maintainer: Dax Kellie <dax.kellie@csiro.au>
 Encoding: UTF-8
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)

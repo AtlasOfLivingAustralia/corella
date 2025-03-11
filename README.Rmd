@@ -41,7 +41,7 @@ devtools::install_github("AtlasOfLivingAustralia/corella")
 
 ## Usage
 
-Here we have a small sample of some example data. We'd like to convert our data to use Darwin Core standards.
+Here we have a small sample of example data containing observations of cockatoos. Using corella we can convert our data to use Darwin Core Standard.
 
 ```{r}
 library(corella)
@@ -59,7 +59,7 @@ df <- tibble(
 df
 ```
 
-One of the most important aspects of Darwin Core standard is using standard column names (Darwin Core *terms*). We can update column names in our data to match Darwin Core terms with `set_` functions. 
+One of the most important aspects of Darwin Core Standard is using standard column names (Darwin Core *terms*). We can update column names in our data to match Darwin Core terms with `set_` functions. 
 
 Each `set_` function name corresponds to the type of data, and argument names correspond to the available Darwin Core terms to use as column names. `set_` functions support data wrangling operations & `dplyr::mutate()` functionality, meaning columns can be changed or fixed in your pipe. `set_` functions will indicate if anything needs fixing because they also automatically run checks on each column data to make sure each column is in the correct format.
 

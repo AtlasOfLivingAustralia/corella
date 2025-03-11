@@ -1,5 +1,6 @@
 #' Create unique identifier columns
 #'
+#' @description
 #' A unique identifier is a pattern of words, letters and/or numbers that is
 #' unique to a single record within a dataset.
 #' Unique identifiers are useful because they identify unique observations,
@@ -22,10 +23,12 @@
 #' @param sep Character used to separate field values. Defaults to `"-"`
 #' @returns An amended tibble, containing a field with the requested information.
 #' @examples
-#' library(tibble)
-#' df <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
-#'              basisOfRecord = "humanObservation",
-#'              site = rep(c("A01", "A02", "A03"), each = 5))
+#' df <- tibble::tibble(
+#'   eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+#'   basisOfRecord = "humanObservation",
+#'   site = rep(c("A01", "A02", "A03"), each = 5)
+#'   )
+#'
 #' df |>
 #'     use_occurrences(occurrenceID = composite_id(sequential_id(),
 #'                                                 site,

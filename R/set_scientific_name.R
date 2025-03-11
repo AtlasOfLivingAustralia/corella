@@ -1,17 +1,22 @@
-#' Set, create or modify columns with scientific name and authorship information using Darwin Core
+#' Set, create or modify columns with scientific name & authorship information
 #'
 #' Format the field `scientificName`, the lowest identified taxonomic name of an
-#' occurrence, along with the rank and authorship of the provided name.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' occurrence, along with the rank and authorship of the provided name to a
+#' `tibble` using Darwin Core Standard.
+#'
+#' In practice this function is used no differently from `mutate()`, but gives
+#' users some informative errors, and serves as a useful lookup for accepted
+#' column names in the Darwin Core Standard.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param scientificName The full scientific name in the lower level taxonomic
 #' rank that can be determined.
 #' @param taxonRank The taxonomic rank of `scientificName`.
 #' @param scientificNameAuthorship The authorship information for `scientificName`.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A tibble with the requested columns added/reformatted.
 #' @details
 #' Examples of `scientificName` values (we specify the rank in parentheses, but
 #' users should not include this information):
@@ -33,6 +38,20 @@
 #' * `infraspecies`
 #'
 #' @seealso [set_taxonomy()] for taxonomic name information.
+#' @examples
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+#'   )
+#'
+#' # Reformat columns to Darwin Core Standard terms
+#' df |>
+#'   set_scientific_name(
+#'     scientificName = name
+#'     )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

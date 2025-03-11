@@ -9,7 +9,7 @@
 #' build 'Darwin Core Archives' using the `{galaxias}` package.
 #'
 #' The package is named for a genus of Australian birds. The logo image is of
-#' the Little Corella (_Cacatua sanguinea_), and was drawn by Dax Kellie.
+#' the Little Corella (_Cacatua sanguinea_), and was designed by Dax Kellie.
 #'
 #' @name corella-package
 #' @docType package

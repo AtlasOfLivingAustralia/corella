@@ -22,15 +22,15 @@
 #' @param occurrenceStatus Either `"present"` or `"absent"`.
 #' @param .keep Control which columns from `.df` are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults
-#' to `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used
+#' to `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used
 #' to generate them.
 #' @param .keep_composite Control which columns from `.df` are kept when
 #' [composite_id()] is used to assign values to `occurrenceID`, defaulting to
 #' `"all"`. This has a different default from `.keep` because composite
 #' identifiers often contain information that is valuable in other contexts,
 #' meaning that deleting these columns by default is typically unwise.
-#' @param .messages Logical: Should progress bar be shown? Defaults to `TRUE`.
-#' @returns A tibble with the requested columns added/reformatted.
+#' @param .messages Logical: Should progress message be shown? Defaults to `TRUE`.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @seealso [basisOfRecord_values()] for accepted values for the `basisOfRecord`
 #' field'; [random_id()], [composite_id()] or [sequential_id()] for formatting
 #' ID columns; [set_abundance()] for occurrence-level counts.
@@ -49,16 +49,14 @@
 #'   longitude = c(35.27, 35.24, 35.83),
 #'   latitude = c(149.33, 149.34, 149.34),
 #'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
-#' )
+#'   )
 #'
 #' # Add occurrence information
-#' df_dwc <- df |>
+#' df |>
 #'   set_occurrences(
 #'     occurrenceID = random_id(), # add random UUID
 #'     basisOfRecord = "humanObservation"
-#'   )
-#'
-#' df_dwc
+#'     )
 #'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort

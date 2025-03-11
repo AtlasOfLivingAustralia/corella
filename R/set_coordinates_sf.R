@@ -1,21 +1,40 @@
-#' Set, create or modify columns with `sf` spatial information using Darwin Core
+#' Set, create or modify columns with `sf` spatial information
 #'
 #' @description
-#' This function helps format standard location fields to a `tibble`. It differs
-#' from `set_coordinates()` by accepting `sf` geometry columns of class `POINT`
-#' as coordinates (rather than `numeric` lat/lon coordinates). The advantage
+#' This function helps format standard location fields like longitude and
+#' latitude point coordinates to a `tibble` using Darwin Core standards.
+#'
+#' It differs from `set_coordinates()` by accepting `sf` geometry columns of
+#' class `POINT`as coordinates (rather than `numeric` lat/lon coordinates).
+#' The advantage
 #' of using an `sf` geometry is that the Coordinate Reference System (CRS) is
 #' automatically formatted into the required `geodeticDatum` column.
 #'
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
-#' @param geometry the latitude/longitude coordinates in decimal degrees as `sf` `POINT` class
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
+#' @param geometry The latitude/longitude coordinates as `sf` `POINT` class
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @seealso [set_coordinates()] for providing numeric coordinates,
-#' [set_locality()] for providing text-based spatial information
+#' [set_locality()] for providing text-based spatial information.
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+#'   ) |>
+#'   sf::st_as_sf(coords = c("longitude", "latitude")) |>
+#'   sf::st_set_crs(4326)
+#'
+#' # Reformat columns to Darwin Core Standard terms.
+#' # Coordinates and CRS are automatically detected and reformatted.
+#' df |>
+#'   set_coordinates_sf()
+#'
+#'
 #' @importFrom rlang abort
 #' @importFrom rlang get_expr
 #' @importFrom sf st_drop_geometry

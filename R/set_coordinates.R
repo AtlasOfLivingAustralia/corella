@@ -1,13 +1,15 @@
-#' Set, create or modify columns with spatial information using Darwin Core
+#' Set, create or modify columns with spatial information
 #'
-#' This function helps format standard location fields to a `tibble`.
+#' This function helps format standard location fields like
+#' latitude and longitude point coordinates to a `tibble` using Darwin Core
+#' Standard.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
-#' informative errors, and serves as a useful lookup for how spatial fields are
+#' informative errors, and serves as a useful lookup for how spatial columns are
 #' represented in the Darwin Core Standard.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
-#' @param decimalLatitude The latitude in decimal degrees
-#' @param decimalLongitude The longitude in decimal degrees
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
+#' @param decimalLatitude The latitude in decimal degrees.
+#' @param decimalLongitude The longitude in decimal degrees.
 #' @param geodeticDatum The datum or spatial reference system that coordinates
 #' are recorded against (usually "WGS84" or "EPSG:4326"). This is often known
 #' as the Coordinate Reference System (CRS). If your coordinates are from a GPS
@@ -19,15 +21,30 @@
 #' @param coordinatePrecision (numeric) The precision that `decimalLatitude` and
 #' `decimalLongitude` are supplied to. `coordinatePrecision` should be no less
 #' than 0.00001 if data were collected using GPS.
-#' @param .keep Control which columns from .data are retained in the output.
+#' @param .keep Control which columns from `.df` are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @details
 #' Example values are:
 #' * `geodeticDatum` should be a valid EPSG code
-#' @seealso [set_locality()] for provided text-based spatial information
+#' @seealso [set_locality()] for provided text-based spatial information.
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+#'   )
+#'
+#' # Reformat columns to Darwin Core Standard terms
+#' df |>
+#'   set_coordinates(
+#'     decimalLongitude = longitude,
+#'     decimalLatitude = latitude
+#'     )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

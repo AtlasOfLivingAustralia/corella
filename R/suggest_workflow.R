@@ -1,9 +1,11 @@
-#' Suggest a workflow to make data Darwin Core compliant
+#' Suggest a workflow to make data comply with Darwin Core Standard
 #'
 #' @description
 #' Checks whether a `data.frame` or `tibble` conforms to Darwin
 #' Core standards and suggests how to standardise a data frame that is not
-#' standardised to minimum Darwin Core requirements.
+#' standardised to minimum Darwin Core requirements. This is intended as
+#' users' go-to function for figuring out how to get started standardising
+#' their data.
 #'
 #' Output provides a summary to users about which column names
 #' match valid Darwin Core terms, the minimum required
@@ -13,7 +15,6 @@
 #' @returns Invisibly returns the input `data.frame`/`tibble`, but primarily
 #' called for the side-effect of running check functions on that input.
 #' @examples
-#' # A simple example of species occurrence data
 #' df <- tibble(
 #'   scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
 #'   latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
@@ -22,7 +23,10 @@
 #'   status = c("present", "present")
 #' )
 #'
-#' suggest_workflow(df)
+#' # Summarise whether your data conforms to Darwin Core Standard.
+#' # See a suggested workflow to amend or add missing information.
+#' df |>
+#'   suggest_workflow()
 #'
 #' @order 1
 #' @export

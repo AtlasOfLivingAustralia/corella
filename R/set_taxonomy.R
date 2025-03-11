@@ -1,14 +1,14 @@
-#' Set, create or modify columns with taxonomic information using Darwin Core
+#' Set, create or modify columns with taxonomic information
 #'
 #' @description
 #' Format fields that contain taxonomic name information from kingdom to
-#' species, as well as the common/vernacular name, to a `tibble`.
+#' species, as well as the common/vernacular name, to a `tibble` using
+#' Darwin Core Standard.
 #'
-#' In
-#' practice this is no different from using `mutate()`, but gives some
-#' informative errors, and serves as a useful lookup for taxonomic names in
+#' In practice this is no different from using `mutate()`, but gives some
+#' informative errors, and serves as a useful lookup for accepted column names in
 #' the Darwin Core Standard.
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param kingdom The kingdom name of identified taxon.
 #' @param phylum The phylum name of identified taxon.
 #' @param class The class name of identified taxon.
@@ -21,15 +21,35 @@
 #' @param vernacularName The common or vernacular name of the identified taxon.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested columns added/reformatted.
 #' @details
 #' Examples of `specificEphithet`:
 #' * If `scientificName` is `Abies concolor`, the `specificEpithet` is `concolor`.
 #' * If `scientificName` is `Semisulcospira gottschei`, the `specificEpithet` is `gottschei`.
 #'
 #' @seealso [set_scientific_name()] for adding `scientificName` and authorship information.
+#' @examples
+#' df <- tibble::tibble(
+#'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   fam = c("Myobatrachidae", "Myobatrachidae", "Hylidae"),
+#'   ord = c("Anura", "Anura", "Anura"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+#'   )
+#'
+#' # Reformat columns to Darwin Core terms
+#' df |>
+#'   set_scientific_name(
+#'     scientificName = scientificName
+#'     ) |>
+#'   set_taxonomy(
+#'     family = fam,
+#'     order = ord
+#'     )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

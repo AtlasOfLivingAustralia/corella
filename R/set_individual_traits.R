@@ -1,16 +1,15 @@
-#' Set, create or modify columns with information of individual organisms using Darwin Core
+#' Set, create or modify columns with information of individual organisms
 #'
 #' @description
 #' Format fields that contain measurements or attributes of individual
-#' organisms to a `tibble`. Fields include those that specify sex, life stage
-#' or condition. Individuals can be identified by an `individualID` if data
-#' contains resampling.
+#' organisms to a `tibble` using Darwin Core Standard. Fields include those
+#' that specify sex, life stage or condition. Individuals can be identified by
+#' an `individualID` if data contains resampling.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
 #' informative errors, and serves as a useful lookup for fields in
 #' the Darwin Core Standard.
-#'
-#' @param .df a `data.frame` or `tibble` that the column should be appended to.
+#' @param .df A `data.frame` or `tibble` that the column should be appended to.
 #' @param individualID An identifier for an individual or named group of
 #' individual organisms represented in the Occurrence. Meant to accommodate
 #' resampling of the same individual or group for monitoring purposes. May
@@ -24,9 +23,9 @@
 #' individual.
 #' @param .keep Control which columns from .data are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults to
-#' `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used to
+#' `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used to
 #' generate them.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested fields added/reformatted.
 #' @details
 #' Examples of `lifeStage` values:
 #' * `zygote`
@@ -47,6 +46,23 @@
 #' * `fruit bearing`
 #'
 #' @seealso [set_scientific_name()] for adding `scientificName` and authorship information.
+#' @examples
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   id = c(4421, 4422, 3311),
+#'   life_stage = c("juvenile", "adult", "adult")
+#'   )
+#'
+#' # Reformat columns to Darwin Core Standard
+#' df |>
+#'   set_individual_traits(
+#'     individualID = id,
+#'     lifeStage = life_stage
+#'     )
+#'
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @export

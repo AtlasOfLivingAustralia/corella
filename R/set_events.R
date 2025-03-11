@@ -23,14 +23,14 @@
 #' within.
 #' @param .keep Control which columns from `.df` are retained in the output.
 #' Note that unlike [dplyr::mutate()], which defaults to `"all"` this defaults
-#' to `"unused"`; i.e. only keeps Darwin Core fields, and not those fields used
+#' to `"unused"`; i.e. only keeps Darwin Core columns, and not those columns used
 #' to generate them.
 #' @param .keep_composite Control which columns from `.df` are kept when
 #' [composite_id()] is used to assign values to `eventID`, defaulting to
 #' `"all"`. This has a different default from `.keep` because composite
 #' identifiers often contain information that is valuable in other contexts,
 #' meaning that deleting these columns by default is typically unwise.
-#' @returns A tibble with the requested fields added.
+#' @returns A `tibble` with the requested fields added/reformatted.
 #' @details
 #' Each Event requires a unique `eventID` and `eventType` (because there can
 #' be several types of Events in a single dataset), along with a
@@ -60,18 +60,16 @@
 #'   scientificName = c("Crinia signifera", "Crinia signifera", "Crinia signifera"),
 #'   latitude = c(35.275, 35.274, 35.101),
 #'   longitue = c(149.001, 149.004, 149.274),
-#' )
+#'   )
 #'
 #' # Add event information
-#' df_dwc <- df |>
+#' df |>
 #'   set_events(
 #'     eventID = composite_id(sequential_id(),
 #'                            site_code,
 #'                            year),
 #'     eventType = "Survey"
-#'   )
-#'
-#' df_dwc
+#'     )
 #'
 #' @importFrom dplyr mutate
 #' @importFrom purrr map

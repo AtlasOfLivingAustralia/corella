@@ -9,6 +9,24 @@
 #' use case.
 #' @seealso [basisOfRecord_values()] or [countryCode_values()] for valid entries
 #' _within_ a field.
+#'
+#' @examples
+#' # Return a vector of accepted terms in an Occurrence-based dataset
+#' occurrence_terms()
+#'
+#' # Use this vector to filter a data frame
+#' df <- tibble::tibble(
+#'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+#'   longitude = c(35.27, 35.24, 35.83),
+#'   latitude = c(149.33, 149.34, 149.34),
+#'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+#'   measurement1 = c(24.3, 24.9, 20.1), # example measurement column
+#'   measurement2 = c(0.92, 1.03, 1.09)  # example measurement column
+#'   )
+#'
+#' df |>
+#'   select(any_of(occurrence_terms()))
+#'
 #' @rdname accepted_terms
 #' @export
 occurrence_terms <- function(){
@@ -26,13 +44,17 @@ event_terms <- function(){
 
 #' Accepted value functions
 #'
+#' @description
 #' When creating a Darwin Core Archive, several fields have a vocabulary of
 #' acceptable values. These functions provide a vector of terms that can be used
 #' to fill or validate those fields.
-#' @returns A vector of values that are acceptable (but not mandatory) for that
-#' use case.
+#' @returns A vector of accepted values for that use case.
 #' @seealso [occurrence_terms()] or [event_terms()] for valid Darwin Core
 #' _terms_ (i.e. column names).
+#' @examples
+#' # See all valid basis of record values
+#' basisOfRecord_values()
+#'
 #' @rdname accepted_values
 #' @export
 basisOfRecord_values <- function(){
