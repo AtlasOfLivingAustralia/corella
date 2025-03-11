@@ -50,6 +50,7 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AtlasOfLivingAustralia/galaxias/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -65,9 +66,9 @@
       <img src="../logo.png" class="logo" alt=""><h1>Checking your dataset</h1>
                         <h4 data-toc-skip class="author">Dax Kellie</h4>
             
-            <h4 data-toc-skip class="date">2025-03-09</h4>
+            <h4 data-toc-skip class="date">2025-03-11</h4>
       
-
+      <small class="dont-index">Source: <a href="https://github.com/AtlasOfLivingAustralia/galaxias/blob/main/vignettes/checking-your-dataset.Rmd" class="external-link"><code>vignettes/checking-your-dataset.Rmd</code></a></small>
       <div class="d-none name"><code>checking-your-dataset.Rmd</code></div>
     </div>
 
@@ -125,7 +126,7 @@ internal checking function called
 <span>  <span class="fu"><a href="../reference/set_coordinates.html">set_coordinates</a></span><span class="op">(</span>decimalLatitude <span class="op">=</span> <span class="va">place</span>, <span class="co"># wrong column</span></span>
 <span>                  decimalLongitude <span class="op">=</span> <span class="va">longitude</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[644ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[643ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_decimalLatitude()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">decimalLatitude</span> must be a numeric vector, not character.</span></span></code></pre></div>
@@ -907,7 +908,7 @@ requirements * The first 5 error messages returned by checks</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  decimalLatitude</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 3 <span style="color: #BB0000;">✖</span> | decimalLatitude   <span style="color: #B2B2B2;">[51ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 3 <span style="color: #BB0000;">✖</span> | decimalLatitude   <span style="color: #B2B2B2;">[50ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  decimalLongitude</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 0 <span style="color: #00BB00;">✔</span> | decimalLongitude  <span style="color: #B2B2B2;">[12ms]</span></span></span>

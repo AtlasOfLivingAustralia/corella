@@ -50,6 +50,7 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/AtlasOfLivingAustralia/galaxias/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -67,7 +68,7 @@
             
             <h4 data-toc-skip class="date">2024-12-12</h4>
       
-
+      <small class="dont-index">Source: <a href="https://github.com/AtlasOfLivingAustralia/galaxias/blob/main/vignettes/quick_start_guide.Rmd" class="external-link"><code>vignettes/quick_start_guide.Rmd</code></a></small>
       <div class="d-none name"><code>quick_start_guide.Rmd</code></div>
     </div>
 
@@ -188,7 +189,7 @@ wrong.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[315ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[622ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `check_decimalLatitude()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="color: #00BB00;">decimalLatitude</span> must be a numeric vector, not character.</span></span></code></pre></div>
@@ -243,10 +244,10 @@ in <code>df</code> and check them automatically.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[619ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[620ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[616ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">country</span> and <span style="color: #00BB00;">continent</span> <span style="color: #B2B2B2;">[617ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 11</span></span></span>
 <span><span class="co">#&gt;   date       time     month     day     n crs   country continent scientificName</span></span>
@@ -395,11 +396,10 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Testing data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | <span style="color: #BBBB00;">E</span> <span style="color: #00BB00;">P</span> | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0  individualCount</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[48ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | individualCount  <span style="color: #B2B2B2;">[50ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ⠙ | 0  country</span></span>
-<span><span class="co">#&gt; ⠹ | 1 <span style="color: #BB0000;">✖</span> | country</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[26ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> | 1 <span style="color: #BB0000;">✖</span> | country          <span style="color: #B2B2B2;">[24ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -415,108 +415,9 @@ error messages returned by those checks.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Unexpected value in <span style="color: #00BB00;">country</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Invalid value: "AU"</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="set_measurements-a-work-in-progress">
-<code>set_measurements</code>: a work in progress<a class="anchor" aria-label="anchor" href="#set_measurements-a-work-in-progress"></a>
-</h2>
-<p>Let’s use a small sample of a real dataset of Australian native plant
-species (e.g. Eucalypts and Acacias). The dataset contains lots of
-columns containing measurements that capture the traits or environment
-of each species occurrence. I have extracted 3 examples of these
-measurement columns: <code>LMA_g.m2</code>,
-<code>LeafN_area_g.m2</code>, <code>PNUE</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org" class="external-link">readr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># take a small sample</span></span>
-<span><span class="va">df_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="st">"./westerband_2022_wdate.csv"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Site</span>, <span class="va">Species</span>, <span class="va">Latitude</span>, <span class="va">Longitude</span>, <span class="va">LMA_g.m2</span>, <span class="va">LeafN_area_g.m2</span>, <span class="va">PNUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df_filtered</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10L</span><span class="op">)</span> <span class="co"># see first 10 rows</span></span>
-<span><span class="co">#&gt;              Site                 Species Latitude Longitude LMA_g.m2</span></span>
-<span><span class="co">#&gt; 1  Adelaide River      Corymbia latifolia   -13.04    131.07       NA</span></span>
-<span><span class="co">#&gt; 2  Adelaide River    Eucalyptus tectifica   -13.04    131.07       NA</span></span>
-<span><span class="co">#&gt; 3      AgnesBanks          Banksia aemula   -33.60    150.72 180.0714</span></span>
-<span><span class="co">#&gt; 4      AgnesBanks Eucalyptus sclerophylla   -33.60    150.72 198.6294</span></span>
-<span><span class="co">#&gt; 5      AgnesBanks       Persoonia laurina   -33.60    150.72 159.0128</span></span>
-<span><span class="co">#&gt; 6     Alice Mulga           Acacia aneura   -22.35    133.33       NA</span></span>
-<span><span class="co">#&gt; 7     Alice Mulga         Acacia cambagei   -22.35    133.33       NA</span></span>
-<span><span class="co">#&gt; 8     Alice Mulga     Acacia dictyophleba   -22.35    133.33 177.8256</span></span>
-<span><span class="co">#&gt; 9     Alice Mulga    Acacia estrophiolata   -22.35    133.33       NA</span></span>
-<span><span class="co">#&gt; 10    Alice Mulga         Acacia kempeana   -22.35    133.33       NA</span></span>
-<span><span class="co">#&gt;    LeafN_area_g.m2      PNUE</span></span>
-<span><span class="co">#&gt; 1        1.1000000        NA</span></span>
-<span><span class="co">#&gt; 2        1.4900000        NA</span></span>
-<span><span class="co">#&gt; 3        0.9128675 4.9302064</span></span>
-<span><span class="co">#&gt; 4        1.4792920 2.9401538</span></span>
-<span><span class="co">#&gt; 5        0.6996562 4.4460770</span></span>
-<span><span class="co">#&gt; 6               NA        NA</span></span>
-<span><span class="co">#&gt; 7               NA        NA</span></span>
-<span><span class="co">#&gt; 8        2.9686667 0.3447114</span></span>
-<span><span class="co">#&gt; 9               NA        NA</span></span>
-<span><span class="co">#&gt; 10              NA        NA</span></span></code></pre></div>
-<p>The way that Darwin Core handles measurement fields is slightly
-different to how they are organised in these data. In
-<code>df_filtered</code>, lots of information about what data the column
-contains is in the abbreviated column name. This includes the type of
-measure, the unit it is measured in, and the value itself. In Darwin
-Core, this information needs to be documented individually for each
-measurement, which requires multiple columns and multiple rows (ie a
-‘long’ data format).</p>
-<p>corella can convert measurement columns into Darwin Core standard
-with <code><a href="../reference/set_measurements.html">set_measurements()</a></code>. This function requires users to
-specify the column, unit and measure type for each respective
-measurement. <code><a href="../reference/set_measurements.html">set_measurements()</a></code> then assigns this
-information to the correct Darwin Core columns, and nests these columns
-into a nested column called <code>measurementOrFact</code>.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_nested</span> <span class="op">&lt;-</span> <span class="va">df_filtered</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">220</span><span class="op">:</span><span class="fl">270</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/set_measurements.html">set_measurements</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">LMA_g.m2</span>, </span>
-<span>                            <span class="va">LeafN_area_g.m2</span>, </span>
-<span>                            <span class="va">PNUE</span><span class="op">)</span>,</span>
-<span>                   unit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"g/m2"</span>, </span>
-<span>                            <span class="st">"g/m2"</span>, </span>
-<span>                            <span class="st">"co2/s"</span><span class="op">)</span>,</span>
-<span>                   type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"leaf mass per area"</span>, </span>
-<span>                            <span class="st">"leaf nitrogen per area"</span>, </span>
-<span>                            <span class="st">"photosynthetic nitrogen use efficiency"</span><span class="op">)</span></span>
-<span>                   <span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="va">df_nested</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span></span>
-<span><span class="co">#&gt;   Site           Species                 Latitude Longitude measurementOrFact</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Downfall Creek Gossia hillii              -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Downfall Creek Homalium circumpinnatum    -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Downfall Creek Polyalthia nitidissima     -<span style="color: #BB0000;">17.2</span>      146. <span style="color: #949494;">&lt;tibble [3 × 4]&gt;</span></span></span></code></pre></div>
-<p>This nested structure allows the newly formatted information (now in
-long format) to still link correctly to each species occurrence. To view
-or access this now-standardised long-format data, use
-<code>dplyr::unnest()</code>.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_nested</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measurementOrFact</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 153 × 8</span></span></span>
-<span><span class="co">#&gt;    Site           Species      Latitude Longitude measurementValue measurementID</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.           156.   LMA_g.m2|1   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             1.54 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Downfall Creek Gossia hill…    -<span style="color: #BB0000;">17.2</span>      146.             2.70 PNUE|1       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.           116.   LMA_g.m2|2   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             1.73 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Downfall Creek Homalium ci…    -<span style="color: #BB0000;">17.2</span>      146.             3.93 PNUE|2       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.            99.9  LMA_g.m2|3   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             1.84 LeafN_area_g…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Downfall Creek Polyalthia …    -<span style="color: #BB0000;">17.2</span>      146.             2.27 PNUE|3       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Downfall Creek Pseudoweinm…    -<span style="color: #BB0000;">17.2</span>      146.           128.   LMA_g.m2|4   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 143 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: measurementUnit &lt;chr&gt;, measurementType &lt;chr&gt;</span></span></span></code></pre></div>
+<p>The goal of <code><a href="../reference/check_dataset.html">check_dataset()</a></code> is to make running many
+checks more efficient, and to cater to users who prefer a
+test-suite-like workflow.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
