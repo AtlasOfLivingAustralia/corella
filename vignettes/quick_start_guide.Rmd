@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-corella is a tool for standardising data in R to use the [*Darwin Core standard*](https://www.gbif.org/darwin-core). Darwin Core standard is the primary data standard for species occurrence data---records of organisms observed in a location and time---in the [Atlas of Living Australia (ALA)](https://ala.org.au/), other [Living Atlases](https://living-atlases.gbif.org/) and the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/). The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
+corella is a tool for standardising data in R to use the [*Darwin Core Standard*](https://www.gbif.org/darwin-core). Darwin Core Standard is the primary data standard for species occurrence data---records of organisms observed in a location and time---in the [Atlas of Living Australia (ALA)](https://ala.org.au/), other [Living Atlases](https://living-atlases.gbif.org/) and the [Global Biodiversity Information Facility (GBIF)](https://www.gbif.org/). The standard allows the ability to compile data from a variety of sources, improving the ease to share, use and reuse data.
 
-The main tasks to standardise data with Darwin Core standard are:
+The main tasks to standardise data with Darwin Core Standard are:
 
   1. Ensure columns use valid Darwin Core terms as column names
   2. Include all required information (e.g. scientific name, unique observation ID, valid date)
@@ -60,8 +60,8 @@ library(corella)
 Here is a minimal example dataset of cockatoo observations. In our dataframe `df` there are columns that contain information that we would like to standardise using Darwin Core.
 
 ```{r}
-#| code-fold: true
-#| 
+#| warning: false
+#| message: false
 library(tibble)
 library(lubridate)
 
@@ -78,10 +78,7 @@ df <- tibble(
   country = c("Australia", "Denmark"),
   continent = c("Oceania", "Europe")
   )
-```
 
-
-```{r}
 df
 ```
 

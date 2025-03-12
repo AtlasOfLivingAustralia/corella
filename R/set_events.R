@@ -3,7 +3,7 @@
 #' @description
 #' Identify or format columns that contain information about an
 #' [Event](https://dwc.tdwg.org/list/#dwc_Event). An "Event" in Darwin Core
-#' standard refers to an action that occurs at a place and time. Examples
+#' Standard refers to an action that occurs at a place and time. Examples
 #' include:
 #'
 #'  * A specimen collecting event

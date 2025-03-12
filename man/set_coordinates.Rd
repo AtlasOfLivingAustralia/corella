@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_coordinates.R
 \name{set_coordinates}
 \alias{set_coordinates}
-\title{Set, create or modify columns with spatial information using Darwin Core}
+\title{Set, create or modify columns with spatial information}
 \usage{
 set_coordinates(
   .df,
@@ -15,11 +15,11 @@ set_coordinates(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
-\item{decimalLatitude}{The latitude in decimal degrees}
+\item{decimalLatitude}{The latitude in decimal degrees.}
 
-\item{decimalLongitude}{The longitude in decimal degrees}
+\item{decimalLongitude}{The longitude in decimal degrees.}
 
 \item{geodeticDatum}{The datum or spatial reference system that coordinates
 are recorded against (usually "WGS84" or "EPSG:4326"). This is often known
@@ -35,20 +35,22 @@ recorded with a GPS after 2000, or \code{100} before that year.}
 \code{decimalLongitude} are supplied to. \code{coordinatePrecision} should be no less
 than 0.00001 if data were collected using GPS.}
 
-\item{.keep}{Control which columns from .data are retained in the output.
+\item{.keep}{Control which columns from \code{.df} are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
-This function helps format standard location fields to a \code{tibble}.
+This function helps format standard location fields like
+latitude and longitude point coordinates to a \code{tibble} using Darwin Core
+Standard.
 }
 \details{
 In practice this is no different from using \code{mutate()}, but gives some
-informative errors, and serves as a useful lookup for how spatial fields are
+informative errors, and serves as a useful lookup for how spatial columns are
 represented in the Darwin Core Standard.
 
 Example values are:
@@ -56,6 +58,22 @@ Example values are:
 \item \code{geodeticDatum} should be a valid EPSG code
 }
 }
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+  )
+
+# Reformat columns to Darwin Core Standard terms
+df |>
+  set_coordinates(
+    decimalLongitude = longitude,
+    decimalLatitude = latitude
+    )
+
+}
 \seealso{
-\code{\link[=set_locality]{set_locality()}} for provided text-based spatial information
+\code{\link[=set_locality]{set_locality()}} for provided text-based spatial information.
 }

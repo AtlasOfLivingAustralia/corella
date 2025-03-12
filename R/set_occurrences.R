@@ -54,7 +54,7 @@
 #' # Add occurrence information
 #' df |>
 #'   set_occurrences(
-#'     occurrenceID = random_id(), # add random UUID
+#'     occurrenceID = composite_id(c(random_id(), eventDate)), # add composite ID
 #'     basisOfRecord = "humanObservation"
 #'     )
 #'

@@ -2,20 +2,41 @@
 % Please edit documentation in R/suggest_workflow.R
 \name{suggest_workflow}
 \alias{suggest_workflow}
-\title{Suggest workflow to make data compliant with Darwin Core}
+\title{Suggest a workflow to make data comply with Darwin Core Standard}
 \usage{
 suggest_workflow(.df)
 }
 \arguments{
-\item{.df}{A tibble against which checks should be run}
+\item{.df}{A \code{data.frame}/\code{tibble} against which checks should be run}
 }
 \value{
-Invisibly returns the input, but primarily called for the
-side-effect of running check functions on that input.
+Invisibly returns the input \code{data.frame}/\code{tibble}, but primarily
+called for the side-effect of running check functions on that input.
 }
 \description{
-Function to check whether a \code{data.frame} or \code{tibble} conforms to Darwin
-Core standards. While most users will only want to call \code{suggest_workflow()},
-the underlying check functions are exported for detailed work, or for
-debugging.
+Checks whether a \code{data.frame} or \code{tibble} conforms to Darwin
+Core Standard and suggests how to standardise a data frame that is not
+standardised to minimum Darwin Core requirements. This is intended as
+users' go-to function for figuring out how to get started standardising
+their data.
+
+Output provides a summary to users about which column names
+match valid Darwin Core terms, the minimum required
+column names/terms (and which ones are missing), and a suggested workflow to
+add any missing terms.
+}
+\examples{
+df <- tibble(
+  scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+  latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
+  longitude = c(149.125, 149.133),
+  eventDate = c("14-01-2023", "15-01-2023"),
+  status = c("present", "present")
+)
+
+# Summarise whether your data conforms to Darwin Core Standard.
+# See a suggested workflow to amend or add missing information.
+df |>
+  suggest_workflow()
+
 }

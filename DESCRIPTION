@@ -1,5 +1,5 @@
 Package: corella
-Title: Prepare, manipulate and check data to comply with Darwin Core standards
+Title: Prepare, manipulate and check data to comply with Darwin Core Standard
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Dax",
@@ -14,7 +14,7 @@ Authors@R:
              family = "Westgate",
              email = "martin.westgate@csiro.au",
              role = c("aut")))
-Description: Helps users standardize their data using the "Darwin Core" data 
+Description: Helps users standardize their data using the Darwin Core data 
     standard, used for biodiversity data like species occurrences.
 Depends: 
   R (>= 4.3.0)
@@ -41,7 +41,7 @@ Suggests:
   testthat (>= 3.0.0)
 License: GPL-3 + file LICENSE
 URL: https://corella.ala.org.au
-BugReports: https://github.com/AtlasOfLivingAustralia/galaxias/issues
+BugReports: https://github.com/AtlasOfLivingAustralia/corella/issues
 Maintainer: Dax Kellie <dax.kellie@csiro.au>
 Encoding: UTF-8
 VignetteBuilder: knitr

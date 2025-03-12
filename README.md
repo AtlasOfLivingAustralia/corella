@@ -9,6 +9,8 @@
 status](https://www.r-pkg.org/badges/version/corella)](https://CRAN.R-project.org/package=corella)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test
+coverage](https://codecov.io/gh/AtlasOfLivingAustralia/corella/graph/badge.svg)](https://app.codecov.io/gh/AtlasOfLivingAustralia/corella)
 <!-- badges: end -->
 
 ## Overview
@@ -44,8 +46,9 @@ devtools::install_github("AtlasOfLivingAustralia/corella")
 
 ## Usage
 
-Here we have a small sample of some example data. We’d like to convert
-our data to use Darwin Core standards.
+Here we have a small sample of example data containing observations of
+cockatoos. Using corella we can convert our data to use Darwin Core
+Standard.
 
 ``` r
 library(corella)
@@ -68,7 +71,7 @@ df
 #> 2 Eolophus roseicapilla    -35.273       149. 15-01-2023 present
 ```
 
-One of the most important aspects of Darwin Core standard is using
+One of the most important aspects of Darwin Core Standard is using
 standard column names (Darwin Core *terms*). We can update column names
 in our data to match Darwin Core terms with `set_` functions.
 
@@ -140,8 +143,6 @@ df |>
 
 Or, if your data is nearly ready and you want to run checks over all
 columns that match Darwin Core terms, run `check_dataset()`.
-`check_dataset()` checks all columns with valid Darwin Core terms as
-column names.
 
 ``` r
 df |>
@@ -149,12 +150,12 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [248ms]
+#> ✔ | 1 ✖ | eventDate  [97ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
-#> 
-#> ✖ Data does not meet minimum Darwin Core requirements
+#> ℹ Checking Darwin Core compliance
+#> ✖ Data does not meet minimum Darwin Core column requirements
 #> ℹ Use `suggest_workflow()` to see more information.
 #> ── Error in eventDate ──────────────────────────────────────────────────────────
 #> 

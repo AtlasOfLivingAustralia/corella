@@ -32,12 +32,14 @@
 #' `measurementOrFact` column, nested measurement columns can be converted to
 #' long format (one row per measurement, per occurrence) while the original
 #' data frame remains organised by one row per occurrence. Data
-#' can be unnested into long format using `dplyr::unnest()`.
+#' can be unnested into long format using [tidyr::unnest()].
 #'
-#' @examples
+#' @examples \dontrun{
+#' library(tidyr)
+#'
 #' # Example data of plant species observations and measurements
 #' df <- tibble::tibble(
-#'   Site = c("Adelaide River", "Adelaide River", "AgnesBanks")
+#'   Site = c("Adelaide River", "Adelaide River", "AgnesBanks"),
 #'   Species = c("Corymbia latifolia", "Banksia aemula", "Acacia aneura"),
 #'   Latitude = c(-13.04, -13.04, -33.60),
 #'   Longitude = c(131.07, 131.07, 150.72),
@@ -46,6 +48,7 @@
 #' )
 #'
 #' # Reformat columns to Darwin Core Standard
+#' # Measurement columns are reformatted and nested in column `measurementOrFact`
 #' df_dwc <- df |>
 #'   set_measurements(
 #'     cols = c(LMA_g.m2,
@@ -56,19 +59,21 @@
 #'              "leaf nitrogen per area")
 #'   )
 #'
-#' # Formatted data frame nests measurements in `measurementOrFact` column
 #' df_dwc
 #'
 #' # Unnest to view full long format data frame
 #' df_dwc |>
-#'   dplyr::unnest(measurementOrFact)
+#'   tidyr::unnest(measurementOrFact)
 #'
+#' }
 #' @importFrom dplyr mutate
 #' @importFrom rlang abort
 #' @importFrom rlang enquos
 #' @importFrom cli cli_progress_step
 #' @importFrom cli cli_progress_done
 #' @importFrom dplyr row_number
+#' @importFrom tidyr pivot_longer
+#' @importFrom tidyr nest
 #' @importFrom purrr map_dfr
 #' @export
 set_measurements <- function(
@@ -101,7 +106,7 @@ set_measurements <- function(
 
   nested_df <- purrr::map_dfr(df_split,
                  ~ .x |>
-                   nest(measurementOrFact = c(padded_row_number, !!!fn_quos))
+                   tidyr::nest(measurementOrFact = c(padded_row_number, !!!fn_quos))
                  )
 
   cli_progress_done()

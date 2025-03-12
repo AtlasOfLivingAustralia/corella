@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_events.R
 \name{set_events}
 \alias{set_events}
-\title{Set, create or modify columns with Event information using Darwin Core}
+\title{Set, create or modify columns with Event information}
 \usage{
 set_events(
   .df,
@@ -14,7 +14,7 @@ set_events(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{eventID}{A unique identifier for an individual Event.}
 
@@ -25,7 +25,7 @@ within.}
 
 \item{.keep}{Control which columns from \code{.df} are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults
-to \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used
+to \code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used
 to generate them.}
 
 \item{.keep_composite}{Control which columns from \code{.df} are kept when
@@ -35,12 +35,12 @@ identifiers often contain information that is valuable in other contexts,
 meaning that deleting these columns by default is typically unwise.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested fields added/reformatted.
 }
 \description{
-Format columns that contain information about an
+Identify or format columns that contain information about an
 \href{https://dwc.tdwg.org/list/#dwc_Event}{Event}. An "Event" in Darwin Core
-standard refers to an action that occurs at a place and time. Examples
+Standard refers to an action that occurs at a place and time. Examples
 include:
 \itemize{
 \item A specimen collecting event
@@ -51,8 +51,8 @@ include:
 \item A camera trap burst image event (with many images for one observation)
 }
 
-In practice this is no different from using \code{mutate()}, but gives some
-informative errors, and serves as a useful lookup for fields in
+In practice this function is used no differently from \code{mutate()}, but gives
+users some informative errors, and serves as a useful lookup for fields in
 the Darwin Core Standard.
 }
 \details{
@@ -79,4 +79,23 @@ See more examples on \href{https://dwc.tdwg.org/list/#dwc_eventType}{dwc.tdwg.or
 
 Examples of \code{parentEventID}
 \code{A1} (To identify the parent event in nested samples, each with their own \code{eventID} - \code{A1_1}, \code{A1_2})
+}
+\examples{
+# example Event dataframe
+df <- tibble::tibble(
+  site_code = c("AMA100", "AMA100", "AMH100"),
+  scientificName = c("Crinia signifera", "Crinia signifera", "Crinia signifera"),
+  latitude = c(35.275, 35.274, 35.101),
+  longitue = c(149.001, 149.004, 149.274),
+  )
+
+# Add event information
+df |>
+  set_events(
+    eventID = composite_id(sequential_id(),
+                           site_code,
+                           year),
+    eventType = "Survey"
+    )
+
 }

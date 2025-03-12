@@ -1,12 +1,12 @@
 #' Build shareable biodiversity datasets
 #'
 #' @description
-#' `{corella}` is for data preparation, editing and checking of data to
-#' follow 'Darwin Core standards'; a global data standard to store, document,
+#' corella is for data preparation, editing and checking of data to
+#' follow the [Darwin Core Standard](https://dwc.tdwg.org/), a global data standard to store, document,
 #' and share biodiversity information. The package provides tools to manipulate
-#' data to conform with, and check validity against, Darwin Core standards.
-#' Using `{corella}` will allow users to verify that their data can be used to
-#' build 'Darwin Core Archives' using the `{galaxias}` package.
+#' data to conform with, and check validity against, the Darwin Core Standard.
+#' Using corella will allow users to verify that their data can be used to
+#' build 'Darwin Core Archives' using the [galaxias package](https://galaxias.ala.org.au/).
 #'
 #' The package is named for a genus of Australian birds. The logo image is of
 #' the Little Corella (_Cacatua sanguinea_), and was designed by Dax Kellie.

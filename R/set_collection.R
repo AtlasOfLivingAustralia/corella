@@ -38,7 +38,7 @@
 #' df <- tibble::tibble(
 #'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
 #'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
-#'   catalog_num = c("16789a", "16789c", "08742f")
+#'   catalog_num = c("16789a", "16789c", "08742f"),
 #'   dataset = c("Frog search", "Frog search", "Frog search")
 #'   )
 #'

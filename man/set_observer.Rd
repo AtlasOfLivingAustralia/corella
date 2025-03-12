@@ -2,12 +2,12 @@
 % Please edit documentation in R/set_observer.R
 \name{set_observer}
 \alias{set_observer}
-\title{Set, create or modify columns with information of who made an observation (using Darwin Core)}
+\title{Set, create or modify columns with information of who made an observation}
 \usage{
 set_observer(.df, recordedBy = NULL, recordedByID = NULL, .keep = "unused")
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{recordedBy}{Names of people, groups, or organizations responsible for
 recording the original occurrence. The primary collector or observer should
@@ -18,15 +18,15 @@ groups, or organizations responsible for recording the original occurrence.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested fields added/reformatted.
 }
 \description{
 Format fields that contain information about who made a specific observation
-of an organism.
+of an organism to a \code{tibble} using Darwin Core Standard.
 
 In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for fields in
@@ -42,4 +42,20 @@ Examples of \code{recordedByID} values:
 \itemize{
 \item \code{c("https://orcid.org/0000-0002-1825-0097", "https://orcid.org/0000-0002-1825-0098")}
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  observer = c("David Attenborough", "David Attenborough", "David Attenborough")
+  )
+
+# Reformat columns to Darwin Core terms
+df |>
+  set_observer(
+    recordedBy = observer
+    )
+
 }

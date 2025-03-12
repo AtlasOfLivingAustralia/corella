@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_individual_traits.R
 \name{set_individual_traits}
 \alias{set_individual_traits}
-\title{Set, create or modify columns with information of individual organisms using Darwin Core}
+\title{Set, create or modify columns with information of individual organisms}
 \usage{
 set_individual_traits(
   .df,
@@ -15,7 +15,7 @@ set_individual_traits(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{individualID}{An identifier for an individual or named group of
 individual organisms represented in the Occurrence. Meant to accommodate
@@ -35,17 +35,17 @@ individual.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested fields added/reformatted.
 }
 \description{
 Format fields that contain measurements or attributes of individual
-organisms to a \code{tibble}. Fields include those that specify sex, life stage
-or condition. Individuals can be identified by an \code{individualID} if data
-contains resampling.
+organisms to a \code{tibble} using Darwin Core Standard. Fields include those
+that specify sex, life stage or condition. Individuals can be identified by
+an \code{individualID} if data contains resampling.
 
 In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for fields in
@@ -75,6 +75,24 @@ Examples of \code{reproductiveCondition} values:
 \item \verb{in bloom}
 \item \verb{fruit bearing}
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  id = c(4421, 4422, 3311),
+  life_stage = c("juvenile", "adult", "adult")
+  )
+
+# Reformat columns to Darwin Core Standard
+df |>
+  set_individual_traits(
+    individualID = id,
+    lifeStage = life_stage
+    )
+
 }
 \seealso{
 \code{\link[=set_scientific_name]{set_scientific_name()}} for adding \code{scientificName} and authorship information.

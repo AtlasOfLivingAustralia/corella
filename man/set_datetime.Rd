@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_datetime.R
 \name{set_datetime}
 \alias{set_datetime}
-\title{Set, create or modify columns with date and time information using Darwin Core}
+\title{Set, create or modify columns with date and time information}
 \usage{
 set_datetime(
   .df,
@@ -16,7 +16,7 @@ set_datetime(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{eventDate}{The date or date + time that the observation/event occurred.}
 
@@ -26,7 +26,8 @@ set_datetime(
 
 \item{day}{The day of the observation/event.}
 
-\item{eventTime}{The time of the observation/event.}
+\item{eventTime}{The time of the event. Use this term for Event data.
+Date + time information for observations is accepted in \code{eventDate}.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
@@ -37,10 +38,12 @@ generate them.}
 \code{TRUE}.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
-This function helps format standard date/time columns in a \code{tibble}.
+This function helps format standard date/time columns in a \code{tibble} using
+Darwin Core Standard. Users should make use of the \link{lubridate package} to
+format their dates so corella can read them correctly.
 
 In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for how spatial fields are
@@ -54,4 +57,21 @@ lubridate package to define define your date format using functions like
 \code{ymd()}, \code{mdy}, \code{dmy()}, or if including date + time, \code{ymd_hms()},
 \code{ymd_hm()}, or \code{ymd_h()}.
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  date = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  time = c("10:08:12", "13:01:45", "14:02:33")
+)
+
+# Use the lubridate package to format date + time information
+# eventDate accepts date + time
+df |>
+  set_datetime(
+    eventDate = lubridate::ymd_hms(paste(date, time))
+  )
+
 }

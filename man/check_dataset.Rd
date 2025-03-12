@@ -10,12 +10,40 @@ check_dataset(.df)
 \item{.df}{A tibble against which checks should be run}
 }
 \value{
-Invisibly returns the input, but primarily called for the
+Invisibly returns the input data frame, but primarily called for the
 side-effect of running check functions on that input.
 }
 \description{
-Function to check whether a \code{data.frame} or \code{tibble} conforms to Darwin
-Core standards. While most users will only want to call \code{suggest_workflow()},
+Run a test suite of checks to test whether a \code{data.frame} or \code{tibble}
+conforms to Darwin Core Standard.
+
+While most users will only want to call \code{suggest_workflow()},
 the underlying check functions are exported for detailed work, or for
-debugging.
+debugging. This function is useful for users experienced with
+Darwin Core Standard or for final dataset checks.
+}
+\details{
+\code{check_dataset()} is modelled after \code{\link[devtools:test]{devtools::test()}}. It runs a
+series of checks, then supplies a summary of passed/failed checks and
+error messages.
+
+Checks run by \code{check_dataset()} are the same that would
+be run automatically by various \code{set_} functions in a piped workflow. This
+function allows users with only minor expected updates to check their entire
+dataset without the need for \code{set_} functions.
+}
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  status = c("present", "present", "present")
+  )
+
+# Run a test suite of checks for Darwin Core Standard conformance
+# Checks are only run on columns with names that match Darwin Core terms
+df |>
+  check_dataset()
+
 }

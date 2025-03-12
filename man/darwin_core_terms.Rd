@@ -5,7 +5,8 @@
 \alias{darwin_core_terms}
 \title{Dataset of supported Darwin Core terms}
 \format{
-A tibble with 206 rows and 6 columns:
+A \code{tibble} containing valid Darwin Core Standard terms (206 rows x 6 columns).
+Column descriptions are as follows:
 \describe{
 \item{class}{TDWG group that a term belongs to.}
 \item{term}{Column header names that can be used in Darwin Core}
@@ -16,8 +17,8 @@ A tibble with 206 rows and 6 columns:
 }
 }
 \source{
-Slightly modified version of a table supplied by TDWG at
-\href{https://github.com/tdwg/dwc/blob/master/vocabulary/term_versions.csv}{this link}.
+Slightly modified version of a
+\href{https://github.com/tdwg/dwc/blob/master/vocabulary/term_versions.csv}{table supplied by TDWG}.
 }
 \usage{
 darwin_core_terms
@@ -25,8 +26,11 @@ darwin_core_terms
 \description{
 The Darwin Core Standard is maintained by Biodiversity Information Standards,
 previously known as the Taxonomic Databases Working Group and known by the
-acronym 'TDWG'. This tibble is the full list of supported terms,
-current as at 2024-12-10.
+acronym 'TDWG'. This \code{tibble} is the full list of supported terms,
+current as of 2024-12-10.
+
+Users can use \code{\link[=occurrence_terms]{occurrence_terms()}} and \code{\link[=event_terms]{event_terms()}} as convenience
+functions to access these terms.
 }
 \seealso{
 \code{\link[=occurrence_terms]{occurrence_terms()}} and \code{\link[=event_terms]{event_terms()}} to get terms for use in

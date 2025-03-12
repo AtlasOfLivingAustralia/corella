@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_collection.R
 \name{set_collection}
 \alias{set_collection}
-\title{Set, create or modify columns with museum- or collection-specific information using Darwin Core}
+\title{Set, create or modify columns with museum- or collection-specific information}
 \usage{
 set_collection(
   .df,
@@ -13,7 +13,7 @@ set_collection(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{datasetID}{An identifier for the set of data. May be a global unique
 identifier or an identifier specific to a collection or institution.}
@@ -26,15 +26,15 @@ or collection.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested fields added/reformatted.
 }
 \description{
 Format fields that specify the collection or catalog number of a
-specimen or occurrence record.
+specimen or occurrence record to a \code{tibble} using Darwin Core Standard.
 
 In practice this is no different from using \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for fields in
@@ -59,4 +59,20 @@ Examples of \code{catalogNumber} values:
 \item \code{2008.1334}
 \item \code{R-4313}
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  catalog_num = c("16789a", "16789c", "08742f"),
+  dataset = c("Frog search", "Frog search", "Frog search")
+  )
+
+# Reformat columns to Darwin Core terms
+df |>
+  set_collection(
+    catalogNumber = catalog_num,
+    datasetName = dataset
+    )
+
 }

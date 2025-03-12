@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_locality.R
 \name{set_locality}
 \alias{set_locality}
-\title{Set, create or modify columns with locality information using Darwin Core}
+\title{Set, create or modify columns with locality information}
 \usage{
 set_locality(
   .df,
@@ -15,7 +15,7 @@ set_locality(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{continent}{(string) Valid continent. See details.}
 
@@ -25,35 +25,73 @@ set_locality(
 
 \item{stateProvince}{A sub-national region.}
 
-\item{locality}{A specific location, such as a property or address.}
+\item{locality}{A specific description of a location or place.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
 Locality information refers to a description of a place, rather than a
-spatial coordinate. This function helps specify or modify columns
-with locality information in a flexible way.
+spatial coordinate. This function helps to format columns
+with locality information to a \code{tibble} using Darwin Core Standard.
 
-In practice this is no different from using \code{mutate()}, but gives some
+In practice this is used no differently from \code{mutate()}, but gives some
 informative errors, and serves as a useful lookup for fields in
 the Darwin Core Standard.
 }
 \details{
-Example values are:
-\itemize{
-\item \code{continent} should be one of \code{"Africa"}, \code{"Antarctica"}, \code{"Asia"},
+Values of \code{continent} should be one of \code{"Africa"}, \code{"Antarctica"}, \code{"Asia"},
 \code{"Europe"}, \code{"North America"}, \code{"Oceania"} or \code{"South America"}.
-\item \code{countryCode} should be supplied according to the
+
+\code{countryCode} should be supplied according to the
 \href{https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2}{ISO 3166-1 ALPHA-2}
 standard, \href{https://dwc.tdwg.org/list/#dwc_countryCode}{as per TDWG advice}.
+Examples of \code{countryCode}:
+\itemize{
+\item \code{AUS}
+\item \code{NZ}
+\item \code{BRA}
 }
+
+Examples of \code{locality}:
+\itemize{
+\item \verb{Bariloche, 25 km NNE via Ruta Nacional 40 (=Ruta 237)}
+\item \verb{Queets Rainforest, Olympic National Park}
+}
+}
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  countryCode = c("AUS", "AUS", "AUS"),
+  state = c("New South Wales", "New South Wales", "New South Wales"),
+  locality = c("Melville Caves", "Melville Caves", "Bryans Swamp about 3km away")
+)
+
+# Reformat columns to Darwin Core Standard terms
+df |>
+  set_locality(
+    countryCode = countryCode,
+    stateProvince = state,
+    locality = locality
+  )
+
+# Columns with valid Darwin Core terms as names are automatically detected
+# and checked. This will do the same as above.
+df |>
+  set_locality(
+    stateProvince = state
+  )
+
+
 }
 \seealso{
-\code{\link[=set_coordinates]{set_coordinates()}} for numeric spatial data
+\code{\link[=set_coordinates]{set_coordinates()}} for numeric spatial data.
 }

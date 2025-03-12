@@ -2,7 +2,7 @@
 #'
 #' @description
 #' This function helps format standard location fields like longitude and
-#' latitude point coordinates to a `tibble` using Darwin Core standards.
+#' latitude point coordinates to a `tibble` using Darwin Core Standard.
 #'
 #' It differs from `set_coordinates()` by accepting `sf` geometry columns of
 #' class `POINT`as coordinates (rather than `numeric` lat/lon coordinates).

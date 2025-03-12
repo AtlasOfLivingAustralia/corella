@@ -10,8 +10,7 @@ occurrence_terms()
 event_terms()
 }
 \value{
-A vector of terms that are acceptable (but not mandatory) for that
-use case.
+A vector of accepted (but not mandatory) values for that use case.
 }
 \description{
 When creating a Darwin Core archive, it is often useful to select only those
@@ -19,6 +18,24 @@ fields that conform to the standard. These functions provide a vector of
 terms that can be used in combination with \code{\link[dplyr:select]{dplyr::select()}} and
 \code{\link[dplyr:reexports]{dplyr::any_of()}} to quickly select Darwin Core terms for the relevant
 data type (events, occurrences, media).
+}
+\examples{
+# Return a vector of accepted terms in an Occurrence-based dataset
+occurrence_terms()
+
+# Use this vector to filter a data frame
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  measurement1 = c(24.3, 24.9, 20.1), # example measurement column
+  measurement2 = c(0.92, 1.03, 1.09)  # example measurement column
+  )
+
+df |>
+  select(any_of(occurrence_terms()))
+
 }
 \seealso{
 \code{\link[=basisOfRecord_values]{basisOfRecord_values()}} or \code{\link[=countryCode_values]{countryCode_values()}} for valid entries

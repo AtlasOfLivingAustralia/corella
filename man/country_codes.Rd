@@ -5,7 +5,8 @@
 \alias{country_codes}
 \title{Dataset of supported Country Codes}
 \format{
-A tibble with 249 rows and 3 columns:
+A \code{tibble} containing valid country codes (249 rows x 3 columns).
+Column descriptions are as follows:
 \describe{
 \item{name}{ISO 3166-1 alpha-2 code, pointing to its ISO 3166-2 article.}
 \item{code}{English short name officially used by the ISO 3166 Maintenance Agency (ISO 3166/MA).}
@@ -19,8 +20,8 @@ A tibble with 249 rows and 3 columns:
 country_codes
 }
 \description{
-This tibble gives the ISO 3166-1 alpha-2 codes for countries, which are
-the standard for supplying the Darwin Core term \code{countryCode}.
+A \code{tibble} of ISO 3166-1 alpha-2 codes for countries, which are
+the accepted standard for supplying \code{countryCode} in Darwin Core Standard.
 }
 \seealso{
 \code{\link[=use_locality]{use_locality()}} for assigning \code{countryCode} within a tibble;

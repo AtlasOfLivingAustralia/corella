@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_occurrences.R
 \name{set_occurrences}
 \alias{set_occurrences}
-\title{Set, create or modify columns with occurrence-specific information using Darwin Core}
+\title{Set, create or modify columns with occurrence-specific information}
 \usage{
 set_occurrences(
   .df,
@@ -34,7 +34,7 @@ Accepted \code{basisOfRecord} values are one of:
 
 \item{.keep}{Control which columns from \code{.df} are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults
-to \code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used
+to \code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used
 to generate them.}
 
 \item{.keep_composite}{Control which columns from \code{.df} are kept when
@@ -43,10 +43,10 @@ to generate them.}
 identifiers often contain information that is valuable in other contexts,
 meaning that deleting these columns by default is typically unwise.}
 
-\item{.messages}{Logical: Should progress bar be shown? Defaults to \code{TRUE}.}
+\item{.messages}{Logical: Should progress message be shown? Defaults to \code{TRUE}.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
 Format fields uniquely identify each occurrence record and specify the type
@@ -71,7 +71,24 @@ Accepted \code{basisOfRecord} values are one of:
 \code{"preservedSpecimen"}, \code{"fossilSpecimen"}, \code{"materialCitation"}
 }
 }
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+  )
+
+# Add occurrence information
+df |>
+  set_occurrences(
+    occurrenceID = composite_id(c(random_id(), eventDate)), # add composite ID
+    basisOfRecord = "humanObservation"
+    )
+
+}
 \seealso{
 \code{\link[=basisOfRecord_values]{basisOfRecord_values()}} for accepted values for the \code{basisOfRecord}
-field'; \code{\link[=set_abundance]{set_abundance()}} for occurrence-level counts.
+field'; \code{\link[=random_id]{random_id()}}, \code{\link[=composite_id]{composite_id()}} or \code{\link[=sequential_id]{sequential_id()}} for formatting
+ID columns; \code{\link[=set_abundance]{set_abundance()}} for occurrence-level counts.
 }

@@ -10,13 +10,17 @@ basisOfRecord_values()
 countryCode_values()
 }
 \value{
-A vector of values that are acceptable (but not mandatory) for that
-use case.
+A vector of accepted values for that use case.
 }
 \description{
 When creating a Darwin Core Archive, several fields have a vocabulary of
 acceptable values. These functions provide a vector of terms that can be used
 to fill or validate those fields.
+}
+\examples{
+# See all valid basis of record values
+basisOfRecord_values()
+
 }
 \seealso{
 \code{\link[=occurrence_terms]{occurrence_terms()}} or \code{\link[=event_terms]{event_terms()}} for valid Darwin Core

@@ -32,7 +32,7 @@ reference:
 - title: Suggest how to get started
   contents:
   - suggest_workflow
-- title: Add, rename or edit columns to match Darwin Core terms
+- title: Assign, create or modify columns to match Darwin Core terms
   contents:
   - set_events
   - set_occurrences
@@ -48,7 +48,7 @@ reference:
   - set_individual_traits
   - set_license
   - set_measurements
-- title: Run checks on a dataset for Darwin Core conformance
+- title: Check data for Darwin Core conformance
   contents:
   - check_dataset
 - title: Helper functions

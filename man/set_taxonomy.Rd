@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_taxonomy.R
 \name{set_taxonomy}
 \alias{set_taxonomy}
-\title{Set, create or modify columns with taxonomic information using Darwin Core}
+\title{Set, create or modify columns with taxonomic information}
 \usage{
 set_taxonomy(
   .df,
@@ -18,7 +18,7 @@ set_taxonomy(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{kingdom}{The kingdom name of identified taxon.}
 
@@ -40,19 +40,19 @@ the \code{scientificName}.
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
 Format fields that contain taxonomic name information from kingdom to
-species, as well as the common/vernacular name, to a \code{tibble}.
+species, as well as the common/vernacular name, to a \code{tibble} using
+Darwin Core Standard.
 
-In
-practice this is no different from using \code{mutate()}, but gives some
-informative errors, and serves as a useful lookup for taxonomic names in
+In practice this is no different from using \code{mutate()}, but gives some
+informative errors, and serves as a useful lookup for accepted column names in
 the Darwin Core Standard.
 }
 \details{
@@ -61,6 +61,27 @@ Examples of \code{specificEphithet}:
 \item If \code{scientificName} is \verb{Abies concolor}, the \code{specificEpithet} is \code{concolor}.
 \item If \code{scientificName} is \verb{Semisulcospira gottschei}, the \code{specificEpithet} is \code{gottschei}.
 }
+}
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  fam = c("Myobatrachidae", "Myobatrachidae", "Hylidae"),
+  ord = c("Anura", "Anura", "Anura"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+  )
+
+# Reformat columns to Darwin Core terms
+df |>
+  set_scientific_name(
+    scientificName = scientificName
+    ) |>
+  set_taxonomy(
+    family = fam,
+    order = ord
+    )
+
 }
 \seealso{
 \code{\link[=set_scientific_name]{set_scientific_name()}} for adding \code{scientificName} and authorship information.

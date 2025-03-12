@@ -6,15 +6,15 @@
 \alias{corella-package}
 \title{Build shareable biodiversity datasets}
 \description{
-\code{{corella}} is for data preparation, editing and checking of data to
-follow 'Darwin Core standards'; a global data standard to store, document,
+corella is for data preparation, editing and checking of data to
+follow the \href{https://dwc.tdwg.org/}{Darwin Core Standard}, a global data standard to store, document,
 and share biodiversity information. The package provides tools to manipulate
-data to conform with, and check validity against, Darwin Core standards.
-Using \code{{corella}} will allow users to verify that their data can be used to
-build 'Darwin Core Archives' using the \code{{galaxias}} package.
+data to conform with, and check validity against, the Darwin Core Standard.
+Using corella will allow users to verify that their data can be used to
+build 'Darwin Core Archives' using the \href{https://galaxias.ala.org.au/}{galaxias package}.
 
 The package is named for a genus of Australian birds. The logo image is of
-the Little Corella (\emph{Cacatua sanguinea}), and was drawn by Dax Kellie.
+the Little Corella (\emph{Cacatua sanguinea}), and was designed by Dax Kellie.
 }
 \section{Functions}{
 
@@ -78,6 +78,7 @@ If you have any questions, comments or suggestions, please email
 Useful links:
 \itemize{
   \item \url{https://corella.ala.org.au}
+  \item Report bugs at \url{https://github.com/AtlasOfLivingAustralia/corella/issues}
 }
 
 }

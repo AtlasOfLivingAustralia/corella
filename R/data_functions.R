@@ -1,12 +1,12 @@
 #' Select support functions
 #'
+#' @description
 #' When creating a Darwin Core archive, it is often useful to select only those
 #' fields that conform to the standard. These functions provide a vector of
 #' terms that can be used in combination with [dplyr::select()] and
 #' [dplyr::any_of()] to quickly select Darwin Core terms for the relevant
 #' data type (events, occurrences, media).
-#' @returns A vector of terms that are acceptable (but not mandatory) for that
-#' use case.
+#' @returns A vector of accepted (but not mandatory) values for that use case.
 #' @seealso [basisOfRecord_values()] or [countryCode_values()] for valid entries
 #' _within_ a field.
 #'

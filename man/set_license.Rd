@@ -13,7 +13,7 @@ set_license(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{license}{A legal document giving official permission to do something
 with the resource. Must be provided as a url to a valid license.}
@@ -25,15 +25,15 @@ resource.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested fields added/reformatted.
 }
 \description{
 Format fields that contain information on permissions for use, sharing or
-access to a record.
+access to a record to a \code{tibble} using Darwin Core Standard.
 
 In practice this function is no different from using \code{mutate()}, but gives
 some informative errors, and serves as a useful lookup for fields in
@@ -58,6 +58,22 @@ Examples of \code{accessRights} values:
 \item \verb{not-for-profit use only} (string example)
 \item \verb{https://www.fieldmuseum.org/field-museum-natural-history-conditions-and-suggested-norms-use-collections-data-and-images} (URI example)
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
+  attributed_license = c("CC-BY-NC 4.0 (Int)", "CC-BY-NC 4.0 (Int)", "CC-BY-NC 4.0 (Int)")
+  )
+
+# Reformat columns to Darwin Core Standard
+df |>
+  set_license(
+    license = attributed_license
+    )
+
 }
 \seealso{
 \code{\link[=set_observer]{set_observer()}} for adding observer information.

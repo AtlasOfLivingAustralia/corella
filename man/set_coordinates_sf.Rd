@@ -2,31 +2,51 @@
 % Please edit documentation in R/set_coordinates_sf.R
 \name{set_coordinates_sf}
 \alias{set_coordinates_sf}
-\title{Set, create or modify columns with \code{sf} spatial information using Darwin Core}
+\title{Set, create or modify columns with \code{sf} spatial information}
 \usage{
 set_coordinates_sf(.df, geometry = NULL, .keep = "unused")
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
-\item{geometry}{the latitude/longitude coordinates in decimal degrees as \code{sf} \code{POINT} class}
+\item{geometry}{The latitude/longitude coordinates as \code{sf} \code{POINT} class}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A \code{tibble} with the requested columns added/reformatted.
 }
 \description{
-This function helps format standard location fields to a \code{tibble}. It differs
-from \code{set_coordinates()} by accepting \code{sf} geometry columns of class \code{POINT}
-as coordinates (rather than \code{numeric} lat/lon coordinates). The advantage
+This function helps format standard location fields like longitude and
+latitude point coordinates to a \code{tibble} using Darwin Core Standard.
+
+It differs from \code{set_coordinates()} by accepting \code{sf} geometry columns of
+class \code{POINT}as coordinates (rather than \code{numeric} lat/lon coordinates).
+The advantage
 of using an \code{sf} geometry is that the Coordinate Reference System (CRS) is
 automatically formatted into the required \code{geodeticDatum} column.
 }
+\examples{
+df <- tibble::tibble(
+  scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+  ) |>
+  sf::st_as_sf(coords = c("longitude", "latitude")) |>
+  sf::st_set_crs(4326)
+
+# Reformat columns to Darwin Core Standard terms.
+# Coordinates and CRS are automatically detected and reformatted.
+df |>
+  set_coordinates_sf()
+
+
+}
 \seealso{
 \code{\link[=set_coordinates]{set_coordinates()}} for providing numeric coordinates,
-\code{\link[=set_locality]{set_locality()}} for providing text-based spatial information
+\code{\link[=set_locality]{set_locality()}} for providing text-based spatial information.
 }

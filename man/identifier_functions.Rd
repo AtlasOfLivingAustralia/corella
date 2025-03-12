@@ -23,33 +23,53 @@ commas.}
 Defaults to one plus the order of magnitude of the largest number.}
 }
 \value{
-An amended tibble, containing a field with the requested information.
+An amended \code{tibble} containing a column with identifiers in the
+requested format.
 }
 \description{
 A unique identifier is a pattern of words, letters and/or numbers that is
 unique to a single record within a dataset.
-Unique identifiers are useful because they identify unique observations,
-even when more than one record contains the same information
-(and would otherwise be considered a duplicate).
+Unique identifiers are useful because they identify individual observations,
+and make it possible to change, amend or delete observations over time. They
+also prevent accidental deletion when when more than one record contains the
+same information(and would otherwise be considered a duplicate).
+
+The identifier functions in corella make it easier to
+generate columns with unique identifiers in a dataset. These functions can
+be used within \code{\link[=use_events]{use_events()}}, \code{\link[=use_occurrences]{use_occurrences()}}, or (equivalently)
+\code{\link[dplyr:mutate]{dplyr::mutate()}}.
 }
 \details{
-The identifier functions in corella, designed to make it easier to
-generate such columns from a given dataset. They are designed to be called
-within \code{\link[=use_events]{use_events()}}, \code{\link[=use_occurrences]{use_occurrences()}}, or (equivalently)
-\code{\link[dplyr:mutate]{dplyr::mutate()}}. Generally speaking, it is best practice to use existing
-information from a dataset to generate identifiers; for this reason we
-recomment using \code{composite_id()} to aggregate existing fields, if no
-such composite is already present within the dataset. It is possible to call
+Generally speaking, it is better to use existing
+information from a dataset to generate identifiers. For this reason we
+recommend using \code{composite_id()} to aggregate existing fields, if no
+such composite is already present within the dataset. Composite IDs are
+more meaningful and stable; they are easier to check and harder to overwrite.
+
+It is possible to call
 \code{sequential_id()} or \code{random_id()} within
 \code{composite_id()} to combine existing and new columns.
 }
 \examples{
-library(tibble)
-df <- tibble(eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
-             basisOfRecord = "humanObservation",
-             site = rep(c("A01", "A02", "A03"), each = 5))
+df <- tibble::tibble(
+  eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
+  basisOfRecord = "humanObservation",
+  site = rep(c("A01", "A02", "A03"), each = 5)
+  )
+
+# Add composite ID using a random ID, site name and eventDate
 df |>
-    use_occurrences(occurrenceID = composite_id(sequential_id(),
-                                                site,
-                                                eventDate))
+  set_occurrences(
+    occurrenceID = composite_id(random_id(),
+                                site,
+                                eventDate)
+    )
+
+# Add composite ID using a sequential number, site name and eventDate
+df |>
+  set_occurrences(
+    occurrenceID = composite_id(sequential_id(),
+                                site,
+                                eventDate)
+    )
 }

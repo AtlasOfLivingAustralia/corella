@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Checks whether a `data.frame` or `tibble` conforms to Darwin
-#' Core standards and suggests how to standardise a data frame that is not
+#' Core Standard and suggests how to standardise a data frame that is not
 #' standardised to minimum Darwin Core requirements. This is intended as
 #' users' go-to function for figuring out how to get started standardising
 #' their data.

@@ -3,25 +3,32 @@
 #' @description
 #' A unique identifier is a pattern of words, letters and/or numbers that is
 #' unique to a single record within a dataset.
-#' Unique identifiers are useful because they identify unique observations,
-#' even when more than one record contains the same information
-#' (and would otherwise be considered a duplicate).
+#' Unique identifiers are useful because they identify individual observations,
+#' and make it possible to change, amend or delete observations over time. They
+#' also prevent accidental deletion when when more than one record contains the
+#' same information(and would otherwise be considered a duplicate).
 #'
-#' The identifier functions in corella, designed to make it easier to
-#' generate such columns from a given dataset. They are designed to be called
-#' within [use_events()], [use_occurrences()], or (equivalently)
-#' [dplyr::mutate()]. Generally speaking, it is best practice to use existing
-#' information from a dataset to generate identifiers; for this reason we
-#' recomment using `composite_id()` to aggregate existing fields, if no
-#' such composite is already present within the dataset. It is possible to call
-#' `sequential_id()` or `random_id()` within
-#' `composite_id()` to combine existing and new columns.
-#' @rdname identifier_functions
+#' The identifier functions in corella make it easier to
+#' generate columns with unique identifiers in a dataset. These functions can
+#' be used within [use_events()], [use_occurrences()], or (equivalently)
+#' [dplyr::mutate()].
 #' @param ... Zero or more variable names from the tibble being
 #' mutated (unquoted), and/or zero or more `_id` functions, separated by
 #' commas.
 #' @param sep Character used to separate field values. Defaults to `"-"`
-#' @returns An amended tibble, containing a field with the requested information.
+#' @details
+#' Generally speaking, it is better to use existing
+#' information from a dataset to generate identifiers. For this reason we
+#' recommend using `composite_id()` to aggregate existing fields, if no
+#' such composite is already present within the dataset. Composite IDs are
+#' more meaningful and stable; they are easier to check and harder to overwrite.
+#'
+#' It is possible to call
+#' `sequential_id()` or `random_id()` within
+#' `composite_id()` to combine existing and new columns.
+#'
+#' @returns An amended `tibble` containing a column with identifiers in the
+#' requested format.
 #' @examples
 #' df <- tibble::tibble(
 #'   eventDate = paste0(rep(c(2020:2024), 3), "-01-01"),
@@ -29,11 +36,23 @@
 #'   site = rep(c("A01", "A02", "A03"), each = 5)
 #'   )
 #'
+#' # Add composite ID using a random ID, site name and eventDate
 #' df |>
-#'     use_occurrences(occurrenceID = composite_id(sequential_id(),
-#'                                                 site,
-#'                                                 eventDate))
+#'   set_occurrences(
+#'     occurrenceID = composite_id(random_id(),
+#'                                 site,
+#'                                 eventDate)
+#'     )
+#'
+#' # Add composite ID using a sequential number, site name and eventDate
+#' df |>
+#'   set_occurrences(
+#'     occurrenceID = composite_id(sequential_id(),
+#'                                 site,
+#'                                 eventDate)
+#'     )
 #' @order 1
+#' @rdname identifier_functions
 #' @export
 composite_id <- function(...,
                               sep = "-"){
@@ -127,8 +146,9 @@ sequential_id <- function(width){
 }
 
 #' @rdname identifier_functions
+#' @importFrom uuid UUIDgenerate
 #' @order 3
 #' @export
 random_id <- function(){
-  uuid::UUIDgenerate(use.time = TRUE, dplyr::n())
+  UUIDgenerate(use.time = TRUE, dplyr::n())
 }

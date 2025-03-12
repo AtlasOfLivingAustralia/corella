@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_scientific_name.R
 \name{set_scientific_name}
 \alias{set_scientific_name}
-\title{Set, create or modify columns with scientific name and authorship information using Darwin Core}
+\title{Set, create or modify columns with scientific name & authorship information}
 \usage{
 set_scientific_name(
   .df,
@@ -13,7 +13,7 @@ set_scientific_name(
 )
 }
 \arguments{
-\item{.df}{a \code{data.frame} or \code{tibble} that the column should be appended to.}
+\item{.df}{A \code{data.frame} or \code{tibble} that the column should be appended to.}
 
 \item{scientificName}{The full scientific name in the lower level taxonomic
 rank that can be determined.}
@@ -24,17 +24,22 @@ rank that can be determined.}
 
 \item{.keep}{Control which columns from .data are retained in the output.
 Note that unlike \code{\link[dplyr:mutate]{dplyr::mutate()}}, which defaults to \code{"all"} this defaults to
-\code{"unused"}; i.e. only keeps Darwin Core fields, and not those fields used to
+\code{"unused"}; i.e. only keeps Darwin Core columns, and not those columns used to
 generate them.}
 }
 \value{
-A tibble with the requested fields added.
+A tibble with the requested columns added/reformatted.
 }
 \description{
 Format the field \code{scientificName}, the lowest identified taxonomic name of an
-occurrence, along with the rank and authorship of the provided name.
+occurrence, along with the rank and authorship of the provided name to a
+\code{tibble} using Darwin Core Standard.
 }
 \details{
+In practice this function is used no differently from \code{mutate()}, but gives
+users some informative errors, and serves as a useful lookup for accepted
+column names in the Darwin Core Standard.
+
 Examples of \code{scientificName} values (we specify the rank in parentheses, but
 users should not include this information):
 \itemize{
@@ -59,6 +64,21 @@ Examples of \code{taxonRank}:
 \item \code{subspecies}
 \item \code{infraspecies}
 }
+}
+\examples{
+df <- tibble::tibble(
+  name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
+  longitude = c(35.27, 35.24, 35.83),
+  latitude = c(149.33, 149.34, 149.34),
+  eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
+  )
+
+# Reformat columns to Darwin Core Standard terms
+df |>
+  set_scientific_name(
+    scientificName = name
+    )
+
 }
 \seealso{
 \code{\link[=set_taxonomy]{set_taxonomy()}} for taxonomic name information.
