@@ -73,227 +73,30 @@ data type (events, occurrences, media).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return a vector of accepted terms in an Occurrence-based dataset</span></span></span>
-<span class="r-in"><span><span class="fu">occurrence_terms</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "type"                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [2] "modified"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [3] "language"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [4] "license"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [5] "rightsHolder"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "accessRights"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] "bibliographicCitation"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [8] "references"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [9] "institutionID"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [10] "collectionID"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "datasetID"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [12] "institutionCode"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] "collectionCode"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [14] "datasetName"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [15] "ownerInstitutionCode"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "basisOfRecord"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [17] "informationWithheld"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [18] "dataGeneralizations"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] "dynamicProperties"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [20] "occurrenceID"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "catalogNumber"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [22] "recordNumber"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [23] "recordedBy"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [24] "recordedByID"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "individualCount"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "organismQuantity"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [27] "organismQuantityType"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [28] "sex"                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [29] "lifeStage"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [30] "reproductiveCondition"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "caste"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [32] "behavior"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [33] "vitality"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [34] "establishmentMeans"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [35] "degreeOfEstablishment"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "pathway"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] "georeferenceVerificationStatus"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [38] "occurrenceStatus"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [39] "associatedMedia"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [40] "associatedOccurrences"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "associatedReferences"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [42] "associatedTaxa"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "otherCatalogNumbers"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [44] "occurrenceRemarks"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [45] "organismID"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "organismName"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [47] "organismScope"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [48] "associatedOrganisms"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "previousIdentifications"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [50] "organismRemarks"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "materialEntityID"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [52] "preparations"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [53] "disposition"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [54] "verbatimLabel"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "associatedSequences"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "materialEntityRemarks"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57] "materialSampleID"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [58] "eventID"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [59] "parentEventID"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [60] "eventType"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "fieldNumber"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [62] "eventDate"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [63] "eventTime"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [64] "startDayOfYear"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [65] "endDayOfYear"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "year"                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "month"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [68] "day"                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [69] "verbatimEventDate"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [70] "habitat"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "samplingProtocol"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [72] "sampleSizeValue"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "sampleSizeUnit"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [74] "samplingEffort"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [75] "fieldNotes"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "eventRemarks"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [77] "locationID"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [78] "higherGeographyID"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "higherGeography"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [80] "continent"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "waterBody"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [82] "islandGroup"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [83] "island"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [84] "country"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "countryCode"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "stateProvince"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [87] "county"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [88] "municipality"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [89] "locality"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [90] "verbatimLocality"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "minimumElevationInMeters"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [92] "maximumElevationInMeters"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [93] "verbatimElevation"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [94] "verticalDatum"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [95] "minimumDepthInMeters"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "maximumDepthInMeters"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "verbatimDepth"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [98] "minimumDistanceAboveSurfaceInMeters"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [99] "maximumDistanceAboveSurfaceInMeters"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [100] "locationAccordingTo"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "locationRemarks"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [102] "decimalLatitude"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "decimalLongitude"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [104] "geodeticDatum"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [105] "coordinateUncertaintyInMeters"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "coordinatePrecision"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [107] "pointRadiusSpatialFit"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [108] "verbatimCoordinates"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109] "verbatimLatitude"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [110] "verbatimLongitude"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "verbatimCoordinateSystem"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [112] "verbatimSRS"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [113] "footprintWKT"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [114] "footprintSRS"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [115] "footprintSpatialFit"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [116] "georeferencedBy"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [117] "georeferencedDate"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [118] "georeferenceProtocol"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [119] "georeferenceSources"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [120] "georeferenceRemarks"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "geologicalContextID"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [122] "earliestEonOrLowestEonothem"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [123] "latestEonOrHighestEonothem"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [124] "earliestEraOrLowestErathem"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [125] "latestEraOrHighestErathem"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [126] "earliestPeriodOrLowestSystem"       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127] "latestPeriodOrHighestSystem"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [128] "earliestEpochOrLowestSeries"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [129] "latestEpochOrHighestSeries"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [130] "earliestAgeOrLowestStage"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] "latestAgeOrHighestStage"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [132] "lowestBiostratigraphicZone"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [133] "highestBiostratigraphicZone"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [134] "lithostratigraphicTerms"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [135] "group"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [136] "formation"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [137] "member"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [138] "bed"                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [139] "identificationID"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [140] "verbatimIdentification"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141] "identificationQualifier"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [142] "typeStatus"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [143] "identifiedBy"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [144] "identifiedByID"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145] "dateIdentified"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [146] "identificationReferences"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [147] "identificationVerificationStatus"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [148] "identificationRemarks"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [149] "taxonID"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [150] "scientificNameID"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "acceptedNameUsageID"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [152] "parentNameUsageID"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [153] "originalNameUsageID"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [154] "nameAccordingToID"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [155] "namePublishedInID"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [156] "taxonConceptID"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [157] "scientificName"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [158] "acceptedNameUsage"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [159] "parentNameUsage"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [160] "originalNameUsage"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161] "nameAccordingTo"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [162] "namePublishedIn"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [163] "namePublishedInYear"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [164] "higherClassification"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [165] "kingdom"                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [166] "phylum"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [167] "class"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [168] "order"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169] "superfamily"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [170] "family"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] "subfamily"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [172] "tribe"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [173] "subtribe"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [174] "genus"                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [175] "genericName"                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176] "subgenus"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [177] "infragenericEpithet"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [178] "specificEpithet"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [179] "infraspecificEpithet"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [180] "cultivarEpithet"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181] "taxonRank"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [182] "verbatimTaxonRank"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [183] "scientificNameAuthorship"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [184] "vernacularName"                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [185] "nomenclaturalCode"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [186] "taxonomicStatus"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [187] "nomenclaturalStatus"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [188] "taxonRemarks"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [189] "measurementID"                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [190] "parentMeasurementID"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [191] "measurementType"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [192] "measurementValue"                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [193] "measurementAccuracy"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [194] "measurementUnit"                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [195] "measurementDeterminedBy"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [196] "measurementDeterminedDate"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [197] "measurementMethod"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [198] "measurementRemarks"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [199] "resourceRelationshipID"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [200] "resourceID"                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [201] "relationshipOfResourceID"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [202] "relatedResourceID"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [203] "relationshipOfResource"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [204] "relationshipAccordingTo"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [205] "relationshipEstablishedDate"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [206] "relationshipRemarks"                </span>
+<span class="r-in"><span><span class="fu">occurrence_terms</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10L</span><span class="op">)</span> <span class="co"># first 10 terms</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "type"                  "modified"              "language"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "license"               "rightsHolder"          "accessRights"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "bibliographicCitation" "references"            "institutionID"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "collectionID"         </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Use this vector to filter a data frame</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Crinia Signifera"</span>, <span class="st">"Crinia Signifera"</span>, <span class="st">"Litoria peronii"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35.27</span>, <span class="fl">35.24</span>, <span class="fl">35.83</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.27</span>, <span class="op">-</span><span class="fl">35.24</span>, <span class="op">-</span><span class="fl">35.83</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  eventDate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  measurement1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">24.3</span>, <span class="fl">24.9</span>, <span class="fl">20.1</span><span class="op">)</span>, <span class="co"># example measurement column</span></span></span>
 <span class="r-in"><span>  measurement2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.92</span>, <span class="fl">1.03</span>, <span class="fl">1.09</span><span class="op">)</span>  <span class="co"># example measurement column</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">select</span><span class="op">(</span><span class="fu">any_of</span><span class="op">(</span><span class="fu">occurrence_terms</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in select(df, any_of(occurrence_terms())):</span> could not find function "select"</span>
+<span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">any_of</span><span class="op">(</span><span class="fu">occurrence_terms</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 1</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   eventDate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2010-10-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2010-10-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2010-10-14</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

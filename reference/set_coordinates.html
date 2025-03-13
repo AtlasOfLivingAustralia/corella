@@ -123,8 +123,8 @@ represented in the Darwin Core Standard.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  scientificName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Crinia Signifera"</span>, <span class="st">"Crinia Signifera"</span>, <span class="st">"Litoria peronii"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35.27</span>, <span class="fl">35.24</span>, <span class="fl">35.83</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.27</span>, <span class="op">-</span><span class="fl">35.24</span>, <span class="op">-</span><span class="fl">35.83</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  eventDate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -137,8 +137,12 @@ represented in the Darwin Core Standard.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">decimalLatitude</span> and <span style="color: #00BB00;">decimalLongitude</span> <span style="color: #B2B2B2;">[617ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in check_decimalLatitude(result, level = "abort"):</span> Value is outside of expected range in <span style="color: #00BB00;">decimalLatitude</span>.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Column contains values outside of -90 &lt;= x &lt;= 90.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scientificName   eventDate  decimalLatitude decimalLongitude</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Crinia Signifera 2010-10-14           -<span style="color: #BB0000;">35.3</span>             149.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Crinia Signifera 2010-10-14           -<span style="color: #BB0000;">35.2</span>             149.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Litoria peronii  2010-10-14           -<span style="color: #BB0000;">35.8</span>             149.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

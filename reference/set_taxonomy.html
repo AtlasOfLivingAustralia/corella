@@ -141,8 +141,8 @@ generate them.</p></dd>
 <span class="r-in"><span>  scientificName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Crinia Signifera"</span>, <span class="st">"Crinia Signifera"</span>, <span class="st">"Litoria peronii"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  fam <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Myobatrachidae"</span>, <span class="st">"Myobatrachidae"</span>, <span class="st">"Hylidae"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  ord <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Anura"</span>, <span class="st">"Anura"</span>, <span class="st">"Anura"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35.27</span>, <span class="fl">35.24</span>, <span class="fl">35.83</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.27</span>, <span class="op">-</span><span class="fl">35.24</span>, <span class="op">-</span><span class="fl">35.83</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.33</span>, <span class="fl">149.34</span>, <span class="fl">149.34</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  eventDate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span>, <span class="st">"2010-10-14"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -156,17 +156,17 @@ generate them.</p></dd>
 <span class="r-in"><span>    order <span class="op">=</span> <span class="va">ord</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 1 column: <span style="color: #00BB00;">scientificName</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[310ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 1 column: <span style="color: #00BB00;">scientificName</span> <span style="color: #B2B2B2;">[315ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 2 columns: <span style="color: #00BB00;">family</span> and <span style="color: #00BB00;">order</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">family</span> and <span style="color: #00BB00;">order</span> <span style="color: #B2B2B2;">[616ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">family</span> and <span style="color: #00BB00;">order</span> <span style="color: #B2B2B2;">[617ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   scientificName   longitude latitude eventDate  family         order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Crinia Signifera      35.3     149. 2010-10-14 Myobatrachidae Anura</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Crinia Signifera      35.2     149. 2010-10-14 Myobatrachidae Anura</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Litoria peronii       35.8     149. 2010-10-14 Hylidae        Anura</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   scientificName   latitude longitude eventDate  family         order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Crinia Signifera    -<span style="color: #BB0000;">35.3</span>      149. 2010-10-14 Myobatrachidae Anura</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Crinia Signifera    -<span style="color: #BB0000;">35.2</span>      149. 2010-10-14 Myobatrachidae Anura</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Litoria peronii     -<span style="color: #BB0000;">35.8</span>      149. 2010-10-14 Hylidae        Anura</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

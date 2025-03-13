@@ -156,7 +156,7 @@ See more examples on <a href="https://dwc.tdwg.org/list/#dwc_eventType" class="e
 <span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  site_code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AMA100"</span>, <span class="st">"AMA100"</span>, <span class="st">"AMH100"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  scientificName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Crinia signifera"</span>, <span class="st">"Crinia signifera"</span>, <span class="st">"Crinia signifera"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35.275</span>, <span class="fl">35.274</span>, <span class="fl">35.101</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.275</span>, <span class="op">-</span><span class="fl">35.274</span>, <span class="op">-</span><span class="fl">35.101</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  longitue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.001</span>, <span class="fl">149.004</span>, <span class="fl">149.274</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -169,14 +169,15 @@ See more examples on <a href="https://dwc.tdwg.org/list/#dwc_eventType" class="e
 <span class="r-in"><span>    eventType <span class="op">=</span> <span class="st">"Survey"</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 2 columns: <span style="color: #00BB00;">eventID</span> and <span style="color: #00BB00;">eventType</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">eventID</span> and <span style="color: #00BB00;">eventType</span> <span style="color: #B2B2B2;">[617ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Checking 2 columns: <span style="color: #00BB00;">eventID</span> and <span style="color: #00BB00;">eventType</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">eventID</span> and <span style="color: #00BB00;">eventType</span> <span style="color: #B2B2B2;">[630ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   site_code scientificName   latitude longitue eventID        eventType</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> AMA100    Crinia signifera     35.3     149. 01-AMA100-year Survey   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> AMA100    Crinia signifera     35.3     149. 02-AMA100-year Survey   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> AMH100    Crinia signifera     35.1     149. 03-AMH100-year Survey   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> AMA100    Crinia signifera    -<span style="color: #BB0000;">35.3</span>     149. 01-AMA100-year Survey   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> AMA100    Crinia signifera    -<span style="color: #BB0000;">35.3</span>     149. 02-AMA100-year Survey   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> AMH100    Crinia signifera    -<span style="color: #BB0000;">35.1</span>     149. 03-AMH100-year Survey   </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

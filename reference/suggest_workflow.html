@@ -86,20 +86,47 @@ called for the side-effect of running check functions on that input.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  scientificName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Callocephalon fimbriatum"</span>, <span class="st">"Eolophus roseicapilla"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  latitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35.310</span>, <span class="st">"-35.273"</span><span class="op">)</span>, <span class="co"># deliberate error for demonstration purposes</span></span></span>
 <span class="r-in"><span>  longitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">149.125</span>, <span class="fl">149.133</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  eventDate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"14-01-2023"</span>, <span class="st">"15-01-2023"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"present"</span>, <span class="st">"present"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in tibble(scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),     latitude = c(-35.31, "-35.273"), longitude = c(149.125, 149.133),     eventDate = c("14-01-2023", "15-01-2023"), status = c("present",         "present")):</span> could not find function "tibble"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Summarise whether your data conforms to Darwin Core Standard.</span></span></span>
 <span class="r-in"><span><span class="co"># See a suggested workflow to amend or add missing information.</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">suggest_workflow</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in colnames(.df)[[1]]:</span> subscript out of bounds</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Matching Darwin Core terms</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Matched 2 of 5 column names to DwC terms:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Matched: <span style="color: #00BB00;">eventDate scientificName</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Unmatched: <span style="color: #BB0000;">latitude, longitude, status</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Minimum required Darwin Core terms</span> <span style="color: #00BBBB;">──────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">Type</span>                      <span style="color: #0000BB;">Matched term(s)</span>  <span style="color: #0000BB;">Missing term(s)</span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Scientific name           <span style="color: #00BB00;">scientificName</span>   <span style="color: #BB0000;">-               </span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Date/Time                 <span style="color: #00BB00;">eventDate</span>        <span style="color: #BB0000;">-               </span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Identifier (at least one) <span style="color: #00BB00;">-               </span> <span style="color: #BB0000;">occurrenceID, catalogNumber, recordNumber</span>                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Record type               <span style="color: #00BB00;">-               </span> <span style="color: #BB0000;">basisOfRecord</span>                                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Location                  <span style="color: #00BB00;">-               </span> <span style="color: #BB0000;">decimalLatitude, decimalLongitude, geodeticDatum, coordinateUncertaintyInMeters</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Suggested workflow</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-style: italic;">To make your data Darwin Core compliant, use the following workflow:</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> df |&gt;</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   set_occurrences() |&gt; </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   set_coordinates()</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="color: #555555;">Additional functions</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #555555;">See all `set_` functions at</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

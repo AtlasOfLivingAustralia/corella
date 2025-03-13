@@ -7,7 +7,7 @@ also prevent accidental deletion when when more than one record contains the
 same information(and would otherwise be considered a duplicate).
 The identifier functions in corella make it easier to
 generate columns with unique identifiers in a dataset. These functions can
-be used within use_events(), use_occurrences(), or (equivalently)
+be used within set_events(), set_occurrences(), or (equivalently)
 dplyr::mutate()."><meta property="og:description" content="A unique identifier is a pattern of words, letters and/or numbers that is
 unique to a single record within a dataset.
 Unique identifiers are useful because they identify individual observations,
@@ -16,7 +16,7 @@ also prevent accidental deletion when when more than one record contains the
 same information(and would otherwise be considered a duplicate).
 The identifier functions in corella make it easier to
 generate columns with unique identifiers in a dataset. These functions can
-be used within use_events(), use_occurrences(), or (equivalently)
+be used within set_events(), set_occurrences(), or (equivalently)
 dplyr::mutate()."><meta property="og:image" content="https://corella.ala.org.au/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -64,7 +64,7 @@ also prevent accidental deletion when when more than one record contains the
 same information(and would otherwise be considered a duplicate).</p>
 <p>The identifier functions in corella make it easier to
 generate columns with unique identifiers in a dataset. These functions can
-be used within <code>use_events()</code>, <code>use_occurrences()</code>, or (equivalently)
+be used within <code><a href="set_events.html">set_events()</a></code>, <code><a href="set_occurrences.html">set_occurrences()</a></code>, or (equivalently)
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code>.</p>
     </div>
 
@@ -129,26 +129,26 @@ more meaningful and stable; they are easier to check and harder to overwrite.</p
 <span class="r-in"><span>                                <span class="va">eventDate</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span> <span style="color: #B2B2B2;">[623ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span> <span style="color: #B2B2B2;">[627ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    eventDate  basisOfRecord    site  occurrenceID                               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2020-01-01 humanObservation A01   243a1758-ff9b-11ef-be05-6045bdef1795-A01-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-01-01 humanObservation A01   243a176c-ff9b-11ef-be05-6045bdef1795-A01-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-01-01 humanObservation A01   243a176d-ff9b-11ef-be05-6045bdef1795-A01-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-01-01 humanObservation A01   243a1776-ff9b-11ef-be05-6045bdef1795-A01-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2024-01-01 humanObservation A01   243a1777-ff9b-11ef-be05-6045bdef1795-A01-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2020-01-01 humanObservation A02   243a1780-ff9b-11ef-be05-6045bdef1795-A02-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-01-01 humanObservation A02   243a1781-ff9b-11ef-be05-6045bdef1795-A02-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-01-01 humanObservation A02   243a1782-ff9b-11ef-be05-6045bdef1795-A02-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-01-01 humanObservation A02   243a178a-ff9b-11ef-be05-6045bdef1795-A02-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2024-01-01 humanObservation A02   243a178b-ff9b-11ef-be05-6045bdef1795-A02-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 2020-01-01 humanObservation A03   243a178c-ff9b-11ef-be05-6045bdef1795-A03-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 2021-01-01 humanObservation A03   243a1794-ff9b-11ef-be05-6045bdef1795-A03-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 2022-01-01 humanObservation A03   243a1795-ff9b-11ef-be05-6045bdef1795-A03-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 2023-01-01 humanObservation A03   243a1796-ff9b-11ef-be05-6045bdef1795-A03-2…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 2024-01-01 humanObservation A03   243a179e-ff9b-11ef-be05-6045bdef1795-A03-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2020-01-01 humanObservation A01   13c91702-ffdc-11ef-8730-7c1e52257d87-A01-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2021-01-01 humanObservation A01   13c91716-ffdc-11ef-8730-7c1e52257d87-A01-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-01-01 humanObservation A01   13c91717-ffdc-11ef-8730-7c1e52257d87-A01-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-01-01 humanObservation A01   13c91718-ffdc-11ef-8730-7c1e52257d87-A01-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2024-01-01 humanObservation A01   13c91720-ffdc-11ef-8730-7c1e52257d87-A01-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2020-01-01 humanObservation A02   13c91721-ffdc-11ef-8730-7c1e52257d87-A02-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2021-01-01 humanObservation A02   13c9172a-ffdc-11ef-8730-7c1e52257d87-A02-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-01-01 humanObservation A02   13c9172b-ffdc-11ef-8730-7c1e52257d87-A02-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-01-01 humanObservation A02   13c9172c-ffdc-11ef-8730-7c1e52257d87-A02-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2024-01-01 humanObservation A02   13c91734-ffdc-11ef-8730-7c1e52257d87-A02-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 2020-01-01 humanObservation A03   13c91735-ffdc-11ef-8730-7c1e52257d87-A03-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 2021-01-01 humanObservation A03   13c91736-ffdc-11ef-8730-7c1e52257d87-A03-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 2022-01-01 humanObservation A03   13c9173e-ffdc-11ef-8730-7c1e52257d87-A03-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 2023-01-01 humanObservation A03   13c9173f-ffdc-11ef-8730-7c1e52257d87-A03-2…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 2024-01-01 humanObservation A03   13c91740-ffdc-11ef-8730-7c1e52257d87-A03-2…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Add composite ID using a sequential number, site name and eventDate</span></span></span>
 <span class="r-in"><span><span class="va">df</span> <span class="op">|&gt;</span></span></span>
@@ -158,7 +158,7 @@ more meaningful and stable; they are easier to check and harder to overwrite.</p
 <span class="r-in"><span>                                <span class="va">eventDate</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span> <span style="color: #B2B2B2;">[617ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 2 columns: <span style="color: #00BB00;">basisOfRecord</span> and <span style="color: #00BB00;">occurrenceID</span> <span style="color: #B2B2B2;">[618ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    eventDate  basisOfRecord    site  occurrenceID      </span>
