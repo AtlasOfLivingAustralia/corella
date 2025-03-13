@@ -81,8 +81,7 @@ set_measurements <- function(
     cols = NULL,
     unit = NULL,
     type = NULL,
-    .keep = "unused",
-    .messages = TRUE
+    .keep = "unused"
 ){
   if(missing(.df)){
     abort(".df is missing, with no default")
@@ -137,10 +136,8 @@ set_measurements <- function(
   # if they've made it this far, these columns should exist (and be checked)
   matched_cols <- c("measurementValue", "measurementID", "measurementUnit", "measurementType")
 
-  if(isTRUE(.messages)) {
-    if(length(matched_cols > 0)) {
-      col_progress_bar(cols = matched_cols)
-    }
+  if(length(matched_cols > 0)) {
+    col_progress_bar(cols = matched_cols)
   }
 
   check_measurementValue(result, level = "abort")
@@ -169,7 +166,7 @@ check_measurementValue <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      unnest(cols = measurementOrFact)
+      tidyr::unnest(cols = .df$measurementOrFact)
 
 
     if(any(colnames(.df) == "measurementValue")){
@@ -191,7 +188,7 @@ check_measurementID <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      unnest(cols = measurementOrFact)
+      tidyr::unnest(cols = .data$measurementOrFact)
 
 
     if(any(colnames(.df) == "measurementID")){
@@ -214,7 +211,7 @@ check_measurementUnit <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      unnest(cols = measurementOrFact)
+      tidyr::unnest(cols = .data$measurementOrFact)
 
 
     if(any(colnames(.df) == "measurementUnit")){
@@ -237,7 +234,7 @@ check_measurementType <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     # unnest columns
     result_unnested <- .df |>
-      unnest(cols = measurementOrFact)
+      unnest(cols = .data$measurementOrFact)
 
 
     if(any(colnames(result_unnested) == "measurementType")){

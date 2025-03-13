@@ -85,7 +85,7 @@ Examples of \code{parentEventID}
 df <- tibble::tibble(
   site_code = c("AMA100", "AMA100", "AMH100"),
   scientificName = c("Crinia signifera", "Crinia signifera", "Crinia signifera"),
-  latitude = c(35.275, 35.274, 35.101),
+  latitude = c(-35.275, -35.274, -35.101),
   longitue = c(149.001, 149.004, 149.274),
   )
 

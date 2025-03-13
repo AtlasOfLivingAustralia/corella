@@ -12,7 +12,7 @@
 #'   \item{code}{English short name officially used by the ISO 3166 Maintenance Agency (ISO 3166/MA).}
 #'   \item{year}{Year when alpha-2 code was first officially assigned.}
 #' }
-#' @seealso [use_locality()] for assigning `countryCode` within a tibble;
+#' @seealso [set_locality()] for assigning `countryCode` within a tibble;
 #' [countryCode_values()] to return valid codes as a vector.
 #' @source
 #' [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).

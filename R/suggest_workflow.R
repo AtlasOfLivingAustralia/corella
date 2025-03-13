@@ -15,7 +15,7 @@
 #' @returns Invisibly returns the input `data.frame`/`tibble`, but primarily
 #' called for the side-effect of running check functions on that input.
 #' @examples
-#' df <- tibble(
+#' df <- tibble::tibble(
 #'   scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
 #'   latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
 #'   longitude = c(149.125, 149.133),
@@ -131,12 +131,12 @@ check_contains_terms <- function(.df,
   other_functions <- fn_to_term_table()$optional
 
   suggested_functions <- main_functions |>
-    filter(!.data$dwc_term %in% matched_values) |>
+    filter(!.data$term %in% matched_values) |>
     distinct(.data$set_function) |>
     pull("set_function")
 
   optional_functions <- other_functions |>
-    filter(.data$dwc_term %in% matched_values) |>
+    filter(.data$term %in% matched_values) |>
     distinct(.data$set_function) |>
     pull("set_function")
 
@@ -339,69 +339,87 @@ full_workflow_message <- function(matched_values,
 #' Table of Darwin Core terms and their corresponding `set_` function
 #'
 #' @importFrom tibble lst
+#' @importFrom dplyr filter
+#' @importFrom dplyr select
 #' @noRd
 #' @keywords Internal
 fn_to_term_table <- function() {
-  main <- tibble::tribble(
-    ~"set_function", ~"dwc_term",
-    "set_occurrences()", "basisOfRecord",
-    "set_occurrences()", "occurrenceID",
-    "set_scientific_name()", "scientificName",
-    "set_coordinates()", "decimalLatitude",
-    "set_coordinates()", "decimalLongitude",
-    "set_coordinates()", "geodeticDatum",
-    "set_coordinates()", "coordinateUncertaintyInMeters",
-    "set_datetime()", "eventDate"
-  )
 
-  optional <- tibble::tribble(
-    ~"set_function", ~"dwc_term",
-    "set_locality()", "continent",
-    "set_locality()", "country",
-    "set_locality()", "countryCode",
-    "set_locality()", "stateProvince",
-    "set_locality()", "locality",
-    "set_taxonomy()", "kingdom",
-    "set_taxonomy()", "phylum",
-    "set_taxonomy()", "class",
-    "set_taxonomy()", "order",
-    "set_taxonomy()", "family",
-    "set_taxonomy()", "genus",
-    # "set_taxonomy()", "species",
-    "set_taxonomy()", "specificEpithet",
-    "set_taxonomy()", "vernacularName",
-    "set_abundance()", "individualCount",
-    "set_abundance()", "organismQuantity",
-    "set_abundance()", "organismQuantityType",
-    "set_abundance()", "organismQuantity",
-    "set_collection()", "datasetID",
-    "set_collection()", "datasetName",
-    "set_collection()", "catalogNumber",
-    "set_coordinates()", "coordinatePrecision",
-    "set_scientific_name()", "taxonRank",
-    "set_scientific_name()", "scientificNameAuthorship",
-    "set_datetime()", "year",
-    "set_datetime()", "month",
-    "set_datetime()", "day",
-    "set_datetime()", "eventTime",
-    "set_individual_traits()", "individualID",
-    "set_individual_traits()", "lifeStage",
-    "set_individual_traits()", "sex",
-    "set_individual_traits()", "vitality",
-    "set_individual_traits()", "reproductiveCondition",
-    "set_observer()", "recordedBy",
-    "set_observer()", "recordedByID",
-    "set_events()", "eventID",
-    "set_events()", "eventType",
-    "set_events()", "parentEventID",
-    "set_license()", "license",
-    "set_license()", "rightsHolder",
-    "set_license()", "accessRights",
-    "set_measurements()", "measurementValue",
-    "set_measurements()", "measurementID",
-    "set_measurements()", "measurementUnit",
-    "set_measurements()", "measurementType"
-  )
+  main_terms <- c("basisOfRecord", "occurrenceID", "scientificName",
+                  "occurrenceID", "scientificName", "decimalLatitude",
+                  "decimalLongitude", "geodeticDatum",
+                  "coordinateUncertaintyInMeters", "eventDate")
+
+  terms_table <- darwin_core_terms |>
+    select(.data$set_function, .data$term)
+
+  main <- terms_table |>
+    filter(.data$term %in% main_terms)
+
+  optional <- terms_table |>
+    filter(!.data$term %in% main_terms) |>
+    filter(!is.na(.data$set_function))
+
+  # main <- tibble::tribble(
+  #   ~"set_function", ~"dwc_term",
+  #   "set_occurrences()", "basisOfRecord",
+  #   "set_occurrences()", "occurrenceID",
+  #   "set_scientific_name()", "scientificName",
+  #   "set_coordinates()", "decimalLatitude",
+  #   "set_coordinates()", "decimalLongitude",
+  #   "set_coordinates()", "geodeticDatum",
+  #   "set_coordinates()", "coordinateUncertaintyInMeters",
+  #   "set_datetime()", "eventDate"
+  # )
+
+  # optional <- tibble::tribble(
+  #   ~"set_function", ~"dwc_term",
+  #   "set_locality()", "continent",
+  #   "set_locality()", "country",
+  #   "set_locality()", "countryCode",
+  #   "set_locality()", "stateProvince",
+  #   "set_locality()", "locality",
+  #   "set_taxonomy()", "kingdom",
+  #   "set_taxonomy()", "phylum",
+  #   "set_taxonomy()", "class",
+  #   "set_taxonomy()", "order",
+  #   "set_taxonomy()", "family",
+  #   "set_taxonomy()", "genus",
+  #   # "set_taxonomy()", "species",
+  #   "set_taxonomy()", "specificEpithet",
+  #   "set_taxonomy()", "vernacularName",
+  #   "set_abundance()", "individualCount",
+  #   "set_abundance()", "organismQuantity",
+  #   "set_abundance()", "organismQuantityType",
+  #   "set_abundance()", "organismQuantity",
+  #   "set_collection()", "datasetID",
+  #   "set_collection()", "datasetName",
+  #   "set_collection()", "catalogNumber",
+  #   "set_coordinates()", "coordinatePrecision",
+  #   "set_scientific_name()", "taxonRank",
+  #   "set_scientific_name()", "scientificNameAuthorship",
+  #   "set_datetime()", "year",
+  #   "set_datetime()", "month",
+  #   "set_datetime()", "day",
+  #   "set_datetime()", "eventTime",
+  #   "set_individual_traits()", "individualID",
+  #   "set_individual_traits()", "lifeStage",
+  #   "set_individual_traits()", "sex",
+  #   "set_individual_traits()", "vitality",
+  #   "set_individual_traits()", "reproductiveCondition",
+  #   "set_observer()", "recordedBy",
+  #   "set_observer()", "recordedByID",
+  #   "set_events()", "eventID",
+  #   "set_events()", "eventType",
+  #   "set_events()", "parentEventID",
+  #   "set_license()", "license",
+  #   "set_license()", "rightsHolder",
+  #   "set_license()", "accessRights",
+  #   "set_measurements()", "measurementValue",
+  #   "set_measurements()", "measurementID",
+  #   "set_measurements()", "measurementUnit",
+  #   "set_measurements()", "measurementType"
+  # )
 
   table <- lst(main, optional) # named list
 

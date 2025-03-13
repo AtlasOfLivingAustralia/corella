@@ -1,9 +1,9 @@
 test_that("darwin_core_terms loads properly", {
   x <- corella::darwin_core_terms
   expect_s3_class(x, c("tbl_df", "tbl", "data.frame"))
-  expect_equal(dim(x), c(206, 6))
+  expect_equal(dim(x), c(208, 7)) # with individualID
   expect_equal(colnames(x),
-               c("class", "term", "url", "definition", "comments", "examples"))
+               c("class", "term", "url", "definition", "comments", "examples", "set_function"))
 })
 
 test_that("country_codes loads properly", {
@@ -47,3 +47,4 @@ test_that("occurrence_terms() works as expected", {
                  "decimalLatitude",
                  "decimalLongitude"))
 })
+

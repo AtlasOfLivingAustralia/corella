@@ -24,8 +24,8 @@
 #' @examples
 #' df <- tibble::tibble(
 #'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
-#'   longitude = c(35.27, 35.24, 35.83),
-#'   latitude = c(149.33, 149.34, 149.34),
+#'   latitude = c(-35.27, -35.24, -35.83),
+#'   longitude = c(149.33, 149.34, 149.34),
 #'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
 #'   status = c("present", "present", "present")
 #'   )
@@ -60,7 +60,7 @@ check_dataset <- function(.df){
   fields <- colnames(.df)
   available_checks <- fn_to_term_table() |>
     bind_rows() |>
-    select("dwc_term") |>
+    select("term") |>
     pull()
   checkable_fields <- fields[fields %in% available_checks]
 
@@ -119,7 +119,7 @@ check_dataset <- function(.df){
 
   # split messages by function for message formatting
     results_split <- check_results |>
-      unnest(messages) |>
+      tidyr::unnest(cols = .data$messages) |>
       mutate(
         term = factor(.data$term, levels = unique(.data$term)) # maintain original term order
         ) |>

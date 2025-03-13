@@ -39,10 +39,10 @@
 #' @examples
 #' df <- tibble::tibble(
 #'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
-#'   longitude = c(35.27, 35.24, 35.83),
-#'   latitude = c(149.33, 149.34, 149.34),
+#'   latitude = c(-35.27, -35.24, -35.83),
+#'   longitude = c(149.33, 149.34, 149.34),
 #'   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
-#'   countryCode = c("AUS", "AUS", "AUS"),
+#'   countryCode = c("AU", "AU", "AU"),
 #'   state = c("New South Wales", "New South Wales", "New South Wales"),
 #'   locality = c("Melville Caves", "Melville Caves", "Bryans Swamp about 3km away")
 #' )

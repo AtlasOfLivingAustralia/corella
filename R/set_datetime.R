@@ -2,7 +2,8 @@
 #'
 #' @description
 #' This function helps format standard date/time columns in a `tibble` using
-#' Darwin Core Standard. Users should make use of the [lubridate package] to
+#' Darwin Core Standard. Users should make use of the
+#' [lubridate package](https://lubridate.tidyverse.org/) to
 #' format their dates so corella can read them correctly.
 #'
 #' In practice this is no different from using `mutate()`, but gives some
@@ -31,8 +32,8 @@
 #' @examples
 #' df <- tibble::tibble(
 #'   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
-#'   longitude = c(35.27, 35.24, 35.83),
-#'   latitude = c(149.33, 149.34, 149.34),
+#'   latitude = c(-35.27, -35.24, -35.83),
+#'   longitude = c(149.33, 149.34, 149.34),
 #'   date = c("2010-10-14", "2010-10-14", "2010-10-14"),
 #'   time = c("10:08:12", "13:01:45", "14:02:33")
 #' )

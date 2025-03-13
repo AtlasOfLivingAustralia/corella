@@ -26,7 +26,7 @@ column names/terms (and which ones are missing), and a suggested workflow to
 add any missing terms.
 }
 \examples{
-df <- tibble(
+df <- tibble::tibble(
   scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
   latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
   longitude = c(149.125, 149.133),

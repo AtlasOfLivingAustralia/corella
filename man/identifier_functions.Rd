@@ -36,7 +36,7 @@ same information(and would otherwise be considered a duplicate).
 
 The identifier functions in corella make it easier to
 generate columns with unique identifiers in a dataset. These functions can
-be used within \code{\link[=use_events]{use_events()}}, \code{\link[=use_occurrences]{use_occurrences()}}, or (equivalently)
+be used within \code{\link[=set_events]{set_events()}}, \code{\link[=set_occurrences]{set_occurrences()}}, or (equivalently)
 \code{\link[dplyr:mutate]{dplyr::mutate()}}.
 }
 \details{

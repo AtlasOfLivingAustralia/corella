@@ -24,7 +24,7 @@ A \code{tibble} of ISO 3166-1 alpha-2 codes for countries, which are
 the accepted standard for supplying \code{countryCode} in Darwin Core Standard.
 }
 \seealso{
-\code{\link[=use_locality]{use_locality()}} for assigning \code{countryCode} within a tibble;
+\code{\link[=set_locality]{set_locality()}} for assigning \code{countryCode} within a tibble;
 \code{\link[=countryCode_values]{countryCode_values()}} to return valid codes as a vector.
 }
 \keyword{datasets}

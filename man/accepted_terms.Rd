@@ -21,20 +21,20 @@ data type (events, occurrences, media).
 }
 \examples{
 # Return a vector of accepted terms in an Occurrence-based dataset
-occurrence_terms()
+occurrence_terms() |> head(10L) # first 10 terms
 
 # Use this vector to filter a data frame
 df <- tibble::tibble(
   name = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
-  longitude = c(35.27, 35.24, 35.83),
-  latitude = c(149.33, 149.34, 149.34),
+  latitude = c(-35.27, -35.24, -35.83),
+  longitude = c(149.33, 149.34, 149.34),
   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14"),
   measurement1 = c(24.3, 24.9, 20.1), # example measurement column
   measurement2 = c(0.92, 1.03, 1.09)  # example measurement column
   )
 
 df |>
-  select(any_of(occurrence_terms()))
+  dplyr::select(any_of(occurrence_terms()))
 
 }
 \seealso{

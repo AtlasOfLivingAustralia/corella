@@ -32,8 +32,8 @@ automatically formatted into the required \code{geodeticDatum} column.
 \examples{
 df <- tibble::tibble(
   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
-  longitude = c(35.27, 35.24, 35.83),
-  latitude = c(149.33, 149.34, 149.34),
+  latitude = c(-35.27, -35.24, -35.83),
+  longitude = c(149.33, 149.34, 149.34),
   eventDate = c("2010-10-14", "2010-10-14", "2010-10-14")
   ) |>
   sf::st_as_sf(coords = c("longitude", "latitude")) |>

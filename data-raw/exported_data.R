@@ -9,7 +9,7 @@ library(glue)
 library(readr)
 library(usethis) # adding content to /data
 
-# get full Dawrin Core dataset
+# get full Darwin Core dataset
 # note given by TDWG looks about right
 terms_versions_raw <- read_csv("https://raw.githubusercontent.com/tdwg/dwc/refs/heads/master/vocabulary/term_versions.csv")
 darwin_core_terms <- terms_versions_raw |>
@@ -24,7 +24,17 @@ darwin_core_terms <- terms_versions_raw |>
                            class == "terms" ~ "Generic",
                            is.na(class) ~ "Generic",
                            .default = class)) |>
-  filter(class != "UseWithIRI")
+  filter(class != "UseWithIRI") |>
+  # add missing individualID term
+  tibble::add_row(class = "Generic",
+                  term = "individualID",
+                  url = "https://dwc.tdwg.org/list/#dwc_individualID")
+
+# add terms & functions supported by corella
+# NOTE: To add more supported terms/function, edit the supported-terms.csv file
+supported_terms <- read_csv("./data-raw/supported-terms.csv")
+darwin_core_terms <- darwin_core_terms |>
+  left_join(supported_terms, join_by(term == dwc_term))
 
 write_csv(darwin_core_terms, "./data-raw/darwin_core_terms.csv") # store on github as a backup
 

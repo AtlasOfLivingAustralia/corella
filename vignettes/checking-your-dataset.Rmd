@@ -61,12 +61,8 @@ df |>
 
 corella contains internal `check_` functions for all individual Darwin Core terms that are supported. These are as follows:
 
-```{r save-table, include=FALSE}
-# generate table
-# fn_to_term_table() |>
-#   dplyr::bind_rows() |>
-#   write.csv("supported-terms.csv")
-```
+<!-- Edit supported terms in ./data-raw/supported-terms.csv -->
+<!-- Update exported darwin_core_terms using ./data-raw/exported_data.R-->
 
 
 ```{r term-table-output, out.extra='max-height:200px;', class.output='output-scroll'}
@@ -76,16 +72,16 @@ corella contains internal `check_` functions for all individual Darwin Core term
 library(gt)
 library(dplyr)
 
-object <- read.csv("./supported-terms.csv") 
+object <- darwin_core_terms |>
+  select(set_function, term)
 
 object |>
-  select(-1) |> # remove reference column
   mutate(
-    check_function = glue::glue("check_{dwc_term}()")
+    check_function = glue::glue("check_{term}()")
   ) |>
   dplyr::select(2, 3, 1) |>
   dplyr::rename(
-    "Term" = dwc_term,
+    "Term" = term,
     "check function" = check_function,
     "set function" = set_function
   ) |> 

@@ -10,7 +10,7 @@
 #'
 #' The identifier functions in corella make it easier to
 #' generate columns with unique identifiers in a dataset. These functions can
-#' be used within [use_events()], [use_occurrences()], or (equivalently)
+#' be used within [set_events()], [set_occurrences()], or (equivalently)
 #' [dplyr::mutate()].
 #' @param ... Zero or more variable names from the tibble being
 #' mutated (unquoted), and/or zero or more `_id` functions, separated by
