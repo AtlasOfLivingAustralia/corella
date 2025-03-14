@@ -21,7 +21,7 @@
 #' function allows users with only minor expected updates to check their entire
 #' dataset without the need for `set_` functions.
 #'
-#' @examples
+#' @examples \dontrun{
 #' df <- tibble::tibble(
 #'   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
 #'   latitude = c(-35.27, -35.24, -35.83),
@@ -34,6 +34,7 @@
 #' # Checks are only run on columns with names that match Darwin Core terms
 #' df |>
 #'   check_dataset()
+#' }
 #'
 #' @importFrom rlang inform
 #' @importFrom purrr map
@@ -119,11 +120,11 @@ check_dataset <- function(.df){
 
   # split messages by function for message formatting
     results_split <- check_results |>
-      tidyr::unnest(cols = .data$messages) |>
+      tidyr::unnest(cols = "messages") |>
       mutate(
-        term = factor(.data$term, levels = unique(.data$term)) # maintain original term order
+        term = factor("term", levels = unique("term")) # maintain original term order
         ) |>
-      group_split(.data$term)
+      group_split("term")
 
   # print preserved errors in a nice format
     results_split |>

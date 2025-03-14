@@ -19,6 +19,7 @@
 #'   \item{definition}{Human-readable definition of the term.}
 #'   \item{comments}{Further information from TDWG.}
 #'   \item{examples}{Examples of how the field should be populated.}
+#'   \item{set_functions}{Function in corella that supports Darwin Core term.}
 #' }
 #' @seealso [occurrence_terms()] and [event_terms()] to get terms for use in
 #' [dplyr::select()]

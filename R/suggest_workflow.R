@@ -350,8 +350,8 @@ fn_to_term_table <- function() {
                   "decimalLongitude", "geodeticDatum",
                   "coordinateUncertaintyInMeters", "eventDate")
 
-  terms_table <- darwin_core_terms |>
-    select(.data$set_function, .data$term)
+  terms_table <- corella::darwin_core_terms |>
+    select("set_function", "term")
 
   main <- terms_table |>
     filter(.data$term %in% main_terms)

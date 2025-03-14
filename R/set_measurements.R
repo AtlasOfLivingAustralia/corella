@@ -117,7 +117,7 @@ set_measurements <- function(
   result <- nested_df |>
     dplyr::mutate(
       measurementOrFact = purrr::map(
-        .data$measurementOrFact,
+        "measurementOrFact",
         ~ .x |>
           pivot_longer(names_to = "column_name",
                        values_to = "measurementValue",
@@ -166,7 +166,7 @@ check_measurementValue <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      tidyr::unnest(cols = .df$measurementOrFact)
+      tidyr::unnest(cols = "measurementOrFact")
 
 
     if(any(colnames(.df) == "measurementValue")){
@@ -188,7 +188,7 @@ check_measurementID <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      tidyr::unnest(cols = .data$measurementOrFact)
+      tidyr::unnest(cols = "measurementOrFact")
 
 
     if(any(colnames(.df) == "measurementID")){
@@ -211,7 +211,7 @@ check_measurementUnit <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     #unnest columns
     result <- .df |>
-      tidyr::unnest(cols = .data$measurementOrFact)
+      tidyr::unnest(cols = "measurementOrFact")
 
 
     if(any(colnames(.df) == "measurementUnit")){
@@ -234,7 +234,7 @@ check_measurementType <- function(.df,
   if(any(colnames(.df) == "measurementOrFact")) {
     # unnest columns
     result_unnested <- .df |>
-      unnest(cols = .data$measurementOrFact)
+      unnest(cols = "measurementOrFact")
 
 
     if(any(colnames(result_unnested) == "measurementType")){

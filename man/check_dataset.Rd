@@ -33,6 +33,7 @@ function allows users with only minor expected updates to check their entire
 dataset without the need for \code{set_} functions.
 }
 \examples{
+\dontrun{
 df <- tibble::tibble(
   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
   latitude = c(-35.27, -35.24, -35.83),
@@ -45,5 +46,6 @@ df <- tibble::tibble(
 # Checks are only run on columns with names that match Darwin Core terms
 df |>
   check_dataset()
+}
 
 }

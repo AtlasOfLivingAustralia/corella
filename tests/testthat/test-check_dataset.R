@@ -48,7 +48,12 @@ test_that("check_dataset handles multiple rows with errors", {
 test_that("check_dataset only checks columns that match DwC terms", {
   skip_on_cran()
   suppressWarnings(testthat::local_reproducible_output())
-  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  withr::local_options(cli.dynamic = TRUE,
+                       cli.ansi = TRUE,
+                       cli.unicode = TRUE,
+                       cli.width = 80,
+                       width = 80,
+                       cli.num_colors = 1)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
     occurrenceStatus = c("present", "present"),
@@ -135,7 +140,7 @@ test_that("check_dataset handles `set_measurements()`", {
 #
 # - This works too, but callr cannot use `load_all()` for some reason,
 #   so we expect this will fail on CRAN
-# - To make it run, atest test version must be installed locally (using devtools)
+# - To make it run, a test version must be installed locally (using devtools)
 # - I don't know what the app does, but Jenny Bryan suggests adding it to any
 #   cli test that calls cli and has expections about the cli output
 #   See: https://github.com/r-lib/cli/issues/210
@@ -166,3 +171,35 @@ test_that("check_dataset handles `set_measurements()`", {
 #   callr::r(fun, stdout = outfile, stderr = outfile)
 #   expect_snapshot(fix_emojis(fix_times(readLines(outfile)))) # this shouldn't have emojis
 # })
+
+# cli::start_app()
+# on.exit(cli::stop_app(), add = TRUE)
+
+test_that("check_dataset prints a maximum of 5 error messages 2", {
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  fun <- function() {
+    suppressWarnings(testthat::local_reproducible_output())
+    options(
+      cli.dynamic = FALSE,
+      cli.ansi = FALSE,
+      cli.unicode = FALSE,
+      cli.width = 80,
+      width = 80,
+      cli.num_colors = 1
+    )
+    df <- tibble::tibble(
+      scientificName = c("Callocephalon fimbriatum", 2),
+      occurrenceStatus = c("present", "blop"),
+      decimalLatitude = c(-35.310, "-35.273"),
+      decimalLongitude = c(149.125, "149.133"),
+      coordinatePrecision = c(.0001, ".0001"),
+      genus = 1:2
+    )
+    corella::check_dataset(df)
+  }
+
+  outfile <- tempfile()
+  on.exit(unlink(outfile), add = TRUE)
+  callr::r(fun, stdout = outfile, stderr = outfile)
+  expect_snapshot(fix_emojis(fix_times(readLines(outfile)))) # this shouldn't have emojis
+})

@@ -73,7 +73,15 @@ library(gt)
 library(dplyr)
 
 object <- darwin_core_terms |>
-  select(set_function, term)
+  select(set_function, term) |>
+  filter(!is.na(set_function)) |>
+  arrange(match(term, c("basisOfRecord", "occurrenceID", "scientificName",
+                  "occurrenceID", "scientificName", "decimalLatitude",
+                  "decimalLongitude", "geodeticDatum",
+                  "coordinateUncertaintyInMeters", "eventDate")
+                ), 
+          desc(set_function)
+          )
 
 object |>
   mutate(
