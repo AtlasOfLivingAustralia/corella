@@ -65,7 +65,7 @@ test_that("set_coordinates_sf messages when successfully converted columns", {
 
   result <- df |> quiet_set_coordinates_sf()
 
-  expect_contains(result$messages[5], "* Converted geometry > decimalLongitude, decimalLatitude, and geodeticDatum.")
+  expect_contains(tail(result$messages, n = 1), "* Converted geometry > decimalLongitude, decimalLatitude, and geodeticDatum.")
 })
 
 test_that("set_coordinates_sf accepts user-renamed `geometry` column if specified", {
