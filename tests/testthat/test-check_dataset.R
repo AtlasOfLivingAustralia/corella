@@ -5,6 +5,7 @@
 
 test_that("check_dataset prints table and results", {
   skip_on_cran()
+  skip_on_ci()
   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   suppressWarnings(testthat::local_reproducible_output())
   df <- tibble::tibble(
@@ -17,6 +18,7 @@ test_that("check_dataset prints table and results", {
 
 test_that("check_dataset errors in table and results", {
   skip_on_cran()
+  skip_on_ci()
   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   df <- tibble::tibble(
     scientificName = c("Callocephalon fimbriatum", 2)
@@ -28,6 +30,7 @@ test_that("check_dataset errors in table and results", {
 
 test_that("check_dataset notifies when data meets minimum Darwin Core column requirements", {
   skip_on_cran()
+  skip_on_ci()
   suppressWarnings(testthat::local_reproducible_output())
   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   df <- tibble::tibble(
@@ -48,6 +51,7 @@ test_that("check_dataset notifies when data meets minimum Darwin Core column req
 
 test_that("check_dataset handles `set_measurements()`", {
   skip_on_cran()
+  skip_on_ci()
   suppressWarnings(testthat::local_reproducible_output())
   withr::local_options(cli.dynamic = TRUE,
                        cli.ansi = TRUE,

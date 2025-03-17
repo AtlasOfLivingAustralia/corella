@@ -36,10 +36,16 @@ us](mailto:support@ala.org.au).
 
 ## Installation
 
-You can install the development version of `corella` from
-[GitHub](https://github.com/) with:
+Install from CRAN:
 
 ``` r
+install.packages("corella")
+```
+
+Install the development version of `corella` from GitHub:
+
+``` r
+#| eval: false
 # install.packages("devtools")
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```
@@ -133,8 +139,8 @@ df |>
 #> To make your data Darwin Core compliant, use the following workflow:
 #> df |>
 #>   set_occurrences() |>
-#>   set_scientific_name() |>
-#>   set_coordinates()
+#>   set_coordinates() |>
+#>   set_scientific_name()
 #> 
 #> ── Additional functions
 #> ℹ See all `set_` functions at
@@ -150,14 +156,14 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ✔ | 1 ✖ | eventDate  [97ms]
+#> ✔ | 1 ✖ | eventDate  [94ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
 #> ℹ Checking Darwin Core compliance
 #> ✖ Data does not meet minimum Darwin Core column requirements
 #> ℹ Use `suggest_workflow()` to see more information.
-#> ── Error in eventDate ──────────────────────────────────────────────────────────
+#> ── Error in term ───────────────────────────────────────────────────────────────
 #> 
 #> eventDate must be a Date vector, not a character.
 #> ℹ Specify date format with lubridate functions e.g. `ymd()`, `mdy()`, or

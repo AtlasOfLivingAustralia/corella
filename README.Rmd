@@ -33,9 +33,18 @@ If you have any comments, questions or suggestions, please [contact us](mailto:s
 
 ## Installation
 
-You can install the development version of `corella` from [GitHub](https://github.com/) with:
+Install from CRAN:
+
+```{r}
+#| eval: false
+install.packages("corella")
+```
+
+
+Install the development version of `corella` from GitHub:
 
 ``` r
+#| eval: false
 # install.packages("devtools")
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```

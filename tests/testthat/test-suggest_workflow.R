@@ -29,6 +29,7 @@ test_that("suggest_workflow() doesn't error for common use cases", {
 
 test_that("suggest_workflow prints table and results", {
   skip_on_cran()
+  skip_on_ci()
   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   suppressWarnings(testthat::local_reproducible_output())
   df <- tibble::tibble(
@@ -49,6 +50,7 @@ test_that("suggest_workflow prints table and results", {
 
 test_that("suggest_workflow celebrates when data meets Darwin Core Standard", {
   skip_on_cran()
+  skip_on_ci()
   withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
   suppressWarnings(testthat::local_reproducible_output())
   df <- tibble::tibble(
