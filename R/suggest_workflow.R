@@ -254,7 +254,7 @@ suggest_functions_message <- function(suggested_functions,
 
     } else {
       cat_line(paste0("\n", add_emoji(), " ", col_green("Your dataframe is Darwin Core compliant!"), "\n"))
-      cat_line(paste0("Run checks, or use your dataframe to build a Darwin Core Archive:\n"))
+      cat_line(cli_text(paste0("Run checks, or use your dataframe to build a Darwin Core Archive with {.pkg galaxias}:\n")))
       cli_text("df |>")
       cli_div(theme = list(.alert = list(`margin-left` = 2, before = "")))
       lapply(paste0("check_dataset()"), cli_alert, .envir = .envir)
@@ -451,7 +451,7 @@ build_req_terms_table <- function(req_terms) {
   # Unnest & concatenate terms by group
   missing_results <- req_terms |>
     select(-"matched") |>
-    unnest(cols = c(.data$missing)) |>
+    unnest(cols = "missing") |>
     group_by(.data$term_group) |>
     mutate( # glue names
       missing = ansi_collapse(.data$missing, sep = ", ", last = ", ")
@@ -460,7 +460,7 @@ build_req_terms_table <- function(req_terms) {
 
   matched_results <- req_terms |>
     select(-"missing") |>
-    unnest(cols = c(.data$matched)) |>
+    unnest(cols = "matched") |>
     group_by(.data$term_group) |>
     mutate( # glue names
       matched = ansi_collapse(.data$matched, sep = ", ", last = ", ")

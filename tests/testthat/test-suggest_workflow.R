@@ -7,11 +7,11 @@ no_error_check <- function(df){
 
 test_that("suggest_workflow() doesn't error for common use cases", {
   # simple example
-  tibble(basisOfRecord = "humanObservation") |>
+  tibble::tibble(basisOfRecord = "humanObservation") |>
     no_error_check()
 
   # example from quick start guide
-  tibble(
+  tibble::tibble(
     latitude = c(-35.310, "-35.273"), # deliberate error for demonstration purposes
     longitude = c(149.125, 149.133),
     date = c("14-01-2023", "15-01-2023"),
@@ -25,6 +25,46 @@ test_that("suggest_workflow() doesn't error for common use cases", {
     continent = c("Oceania", "Europe")
   ) |>
     no_error_check()
+})
+
+test_that("suggest_workflow prints table and results", {
+  skip_on_cran()
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  suppressWarnings(testthat::local_reproducible_output())
+  df <- tibble::tibble(
+    decimalLatitude = c(-35.310, -35.273),
+    decimalLongitude = c(149.125, 149.133),
+    date = c("14-01-2023", "15-01-2023"),
+    time = c("10:23:00", "11:25:00"),
+    month = c("January", "February"),
+    scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+    n = c(2, 3),
+    country = c("Australia", "Denmark"),
+    continent = c("Oceania", "Europe")
+  )
+
+  msgs <- fix_times(capture_cli_messages(suggest_workflow(df)))
+  expect_snapshot(msgs)
+})
+
+test_that("suggest_workflow celebrates when data meets Darwin Core Standard", {
+  skip_on_cran()
+  withr::local_options(cli.dynamic = TRUE, cli.ansi = TRUE)
+  suppressWarnings(testthat::local_reproducible_output())
+  df <- tibble::tibble(
+    decimalLatitude = c(-35.310, -35.273),
+    decimalLongitude = c(149.125, 149.133),
+    eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
+    scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+    basisOfRecord = "humanObservation",
+    geodeticDatum = "WGS84",
+    coordinateUncertaintyInMeters = "10",
+    occurrenceID = c("92f5f704-02dc-11f0-8000-33817db453ab",
+                     "92f5f70e-02dc-11f0-8000-33817db453ab")
+  )
+
+  msgs <- fix_emojis(fix_times(capture_cli_messages(suggest_workflow(df))))
+  expect_snapshot(msgs)
 })
 
 # test_that("basisOfRecord() works", {
