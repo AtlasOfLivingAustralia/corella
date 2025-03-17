@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="index.html">corella</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,16 +79,20 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>corella</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>Install from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"corella"</span><span class="op">)</span></span></code></pre></div>
+<p>Install the development version of <code>corella</code> from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#| eval: false</span></span>
+<span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AtlasOfLivingAustralia/corella"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Here we have a small sample of example data containing observations of cockatoos. Using corella we can convert our data to use Darwin Core Standard.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://corella.ala.org.au">corella</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span></span>
 <span></span>
@@ -109,7 +113,7 @@
 <span><span class="co">#&gt; 2 Eolophus roseicapilla    -35.273       149. 15-01-2023 present</span></span></code></pre></div>
 <p>One of the most important aspects of Darwin Core Standard is using standard column names (Darwin Core <em>terms</em>). We can update column names in our data to match Darwin Core terms with <code>set_</code> functions.</p>
 <p>Each <code>set_</code> function name corresponds to the type of data, and argument names correspond to the available Darwin Core terms to use as column names. <code>set_</code> functions support data wrangling operations &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code> functionality, meaning columns can be changed or fixed in your pipe. <code>set_</code> functions will indicate if anything needs fixing because they also automatically run checks on each column data to make sure each column is in the correct format.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span> <span class="co"># for readability</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span></span>
@@ -132,7 +136,7 @@
 <span><span class="co">#&gt; 1 2023-01-14           -35.3             149. Callocephalon fi… present         </span></span>
 <span><span class="co">#&gt; 2 2023-01-15           -35.3             149. Eolophus roseica… present</span></span></code></pre></div>
 <p>Not sure where to start? Use <code><a href="reference/suggest_workflow.html">suggest_workflow()</a></code> to know what steps you need to make to make your data Darwin Core compliant.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="reference/suggest_workflow.html">suggest_workflow</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -155,27 +159,27 @@
 <span><span class="co">#&gt; To make your data Darwin Core compliant, use the following workflow:</span></span>
 <span><span class="co">#&gt; df |&gt;</span></span>
 <span><span class="co">#&gt;   set_occurrences() |&gt;</span></span>
-<span><span class="co">#&gt;   set_scientific_name() |&gt;</span></span>
-<span><span class="co">#&gt;   set_coordinates()</span></span>
+<span><span class="co">#&gt;   set_coordinates() |&gt;</span></span>
+<span><span class="co">#&gt;   set_scientific_name()</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Additional functions</span></span>
 <span><span class="co">#&gt; ℹ See all `set_` functions at</span></span>
 <span><span class="co">#&gt;   http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms</span></span></code></pre></div>
 <p>Or, if your data is nearly ready and you want to run checks over all columns that match Darwin Core terms, run <code><a href="reference/check_dataset.html">check_dataset()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/check_dataset.html">check_dataset</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Testing data</span></span>
 <span><span class="co">#&gt; ✔ | E P | Column</span></span>
 <span><span class="co">#&gt; ⠙ | 0 eventDate</span></span>
-<span><span class="co">#&gt; ✔ | 1 ✖ | eventDate  [97ms]</span></span>
+<span><span class="co">#&gt; ✔ | 1 ✖ | eventDate  [94ms]</span></span>
 <span><span class="co">#&gt; ══ Results ═════════════════════════════════════════════════════════════════════</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; [ Errors: 1 | Pass: 0 ]</span></span>
 <span><span class="co">#&gt; ℹ Checking Darwin Core compliance</span></span>
 <span><span class="co">#&gt; ✖ Data does not meet minimum Darwin Core column requirements</span></span>
 <span><span class="co">#&gt; ℹ Use `suggest_workflow()` to see more information.</span></span>
-<span><span class="co">#&gt; ── Error in eventDate ──────────────────────────────────────────────────────────</span></span>
+<span><span class="co">#&gt; ── Error in term ───────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; eventDate must be a Date vector, not a character.</span></span>
 <span><span class="co">#&gt; ℹ Specify date format with lubridate functions e.g. `ymd()`, `mdy()`, or</span></span>
@@ -185,7 +189,7 @@
 <h2 id="citing-corella">Citing corella<a class="anchor" aria-label="anchor" href="#citing-corella"></a>
 </h2>
 <p>To generate a citation for the package version you are using, you can run:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"corella"</span><span class="op">)</span></span></code></pre></div>
 <p>The current recommended citation is:</p>
 <blockquote>
