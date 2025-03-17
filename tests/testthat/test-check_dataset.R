@@ -1,6 +1,34 @@
 
-# NOTE: This solution to testing works, but some messages to the console
-#       There is another solution implemented by {cli} which is saved at the
+no_error_check <- function(df){
+  quiet_cd <- purrr::quietly(check_dataset)
+  df |>
+    quiet_cd() |>
+    testthat::expect_no_error()
+}
+
+test_that("check_dataset() doesn't error for common use cases", {
+  # simple example
+  tibble::tibble(basisOfRecord = "humanObservation") |>
+    no_error_check()
+
+  # example from quick start guide
+  tibble::tibble(
+    latitude = c(-35.310, -35.273),
+    longitude = c(149.125, 149.133),
+    date = c("14-01-2023", "15-01-2023"),
+    month = c("January", "February"),
+    scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+    n = c(2, 3),
+    geodeticDatum = c("WGS84", "WGS84"),
+    country = c("Australia", "Denmark"),
+    continent = c("Oceania", "Europe")
+  ) |>
+    no_error_check()
+})
+
+# NOTE: This snapshot solution to testing works, but it prints some messages to
+#       the console.
+#       There is another solution implemented by {cli} which is used at the
 #       bottom of this test script.
 
 test_that("check_dataset prints table and results", {
