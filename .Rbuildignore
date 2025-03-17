@@ -12,3 +12,4 @@
 ^\.github$
 ^man\figures\corella-logo.png
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
