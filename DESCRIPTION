@@ -1,5 +1,5 @@
 Package: corella
-Title: Prepare, manipulate and check data to comply with Darwin Core Standard
+Title: Prepare, Manipulate and Check Data to Comply with Darwin Core Standard
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Dax",
@@ -40,7 +40,7 @@ Suggests:
   rmarkdown,
   testthat (>= 3.0.0),
   withr
-License: GPL-3 + file LICENSE
+License: GPL-3
 URL: https://corella.ala.org.au
 BugReports: https://github.com/AtlasOfLivingAustralia/corella/issues
 Maintainer: Dax Kellie <dax.kellie@csiro.au>

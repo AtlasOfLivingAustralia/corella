@@ -7,8 +7,6 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/corella)](https://CRAN.R-project.org/package=corella)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/AtlasOfLivingAustralia/corella/graph/badge.svg)](https://app.codecov.io/gh/AtlasOfLivingAustralia/corella)
 <!-- badges: end -->
@@ -156,7 +154,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ✔ | 1 ✖ | eventDate  [94ms]
+#> ✔ | 1 ✖ | eventDate  [98ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]
