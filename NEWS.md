@@ -1,3 +1,8 @@
+# corella 0.1.2
+
+* Update package DESCRIPTION
+* Added `\donttest` to examples
+
 # corella 0.1.1
 
 * Minor fixes to DESCRIPTION file  

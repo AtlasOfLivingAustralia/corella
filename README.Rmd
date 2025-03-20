@@ -34,16 +34,14 @@ If you have any comments, questions or suggestions, please [contact us](mailto:s
 
 Install from CRAN:
 
-```{r}
-#| eval: false
+```r
 install.packages("corella")
 ```
 
 
 Install the development version of `corella` from GitHub:
 
-``` r
-#| eval: false
+```r
 # install.packages("devtools")
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```

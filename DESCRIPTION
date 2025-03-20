@@ -14,8 +14,13 @@ Authors@R:
              family = "Westgate",
              email = "martin.westgate@csiro.au",
              role = c("aut")))
-Description: Helps users standardize their data using the Darwin Core data 
-    standard, used for biodiversity data like species occurrences.
+Description: Helps users standardise data to the Darwin Core Standard, a global 
+             data standard to store, document, and share biodiversity data like 
+             species occurrence records. The package provides tools to 
+             manipulate data to conform with, and check validity against, the 
+             Darwin Core Standard. Using corella allows users to verify that 
+             their data can be used to build 'Darwin Core Archives' using the 
+             galaxias package.
 Depends: 
   R (>= 4.3.0)
 Imports:

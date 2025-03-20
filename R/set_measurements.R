@@ -34,7 +34,7 @@
 #' data frame remains organised by one row per occurrence. Data
 #' can be unnested into long format using [tidyr::unnest()].
 #'
-#' @examples \dontrun{
+#' @examples \donttest{
 #' library(tidyr)
 #'
 #' # Example data of plant species observations and measurements
@@ -117,7 +117,7 @@ set_measurements <- function(
   result <- nested_df |>
     dplyr::mutate(
       measurementOrFact = purrr::map(
-        "measurementOrFact",
+        .data$measurementOrFact,
         ~ .x |>
           pivot_longer(names_to = "column_name",
                        values_to = "measurementValue",

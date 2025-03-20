@@ -43,7 +43,6 @@ install.packages("corella")
 Install the development version of `corella` from GitHub:
 
 ``` r
-#| eval: false
 # install.packages("devtools")
 devtools::install_github("AtlasOfLivingAustralia/corella")
 ```
@@ -154,7 +153,7 @@ df |>
 #> ℹ Testing data
 #> ✔ | E P | Column
 #> ⠙ | 0 eventDate
-#> ✔ | 1 ✖ | eventDate  [98ms]
+#> ⠹ | 1 ✖ | eventDate ✔ | 1 ✖ | eventDate  [111ms]
 #> ══ Results ═════════════════════════════════════════════════════════════════════
 #> 
 #> [ Errors: 1 | Pass: 0 ]

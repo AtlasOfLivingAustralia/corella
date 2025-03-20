@@ -49,7 +49,7 @@ data frame remains organised by one row per occurrence. Data
 can be unnested into long format using \code{\link[tidyr:unnest]{tidyr::unnest()}}.
 }
 \examples{
-\dontrun{
+\donttest{
 library(tidyr)
 
 # Example data of plant species observations and measurements

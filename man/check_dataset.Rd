@@ -33,7 +33,7 @@ function allows users with only minor expected updates to check their entire
 dataset without the need for \code{set_} functions.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- tibble::tibble(
   scientificName = c("Crinia Signifera", "Crinia Signifera", "Litoria peronii"),
   latitude = c(-35.27, -35.24, -35.83),
