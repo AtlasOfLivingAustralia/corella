@@ -98,9 +98,10 @@ set_measurements <- function(
     mutate(
       padded_row_number = stringr::str_pad(row_number(),
                                            floor(log10(row_number())) + 1,
-                                           pad = '0')
+                                           pad = '0'),
+      n_row = row_number()
       ) |>
-    group_split(dplyr::row_number(), .keep = FALSE)
+    group_split(n_row, .keep = FALSE)
     # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
 
   nested_df <- purrr::map_dfr(df_split,
