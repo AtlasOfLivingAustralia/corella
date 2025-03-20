@@ -100,14 +100,17 @@ set_measurements <- function(
                                            floor(log10(row_number())) + 1,
                                            pad = '0'),
       n_row = row_number()
-      ) |>
-    group_split(n_row, .keep = FALSE)
+      )
+
+  df_split <- split(df_split, f = df_split$n_row)
     # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
 
-  nested_df <- purrr::map_dfr(df_split,
+  nested_df <- purrr::map(df_split,
                  ~ .x |>
+                   dplyr::select(-n_row) |>
                    tidyr::nest(measurementOrFact = c(padded_row_number, !!!fn_quos))
-                 )
+                 ) |>
+    dplyr::bind_rows()
 
   cli_progress_done()
 
