@@ -123,7 +123,7 @@ can be unnested into long format using <code><a href="https://tidyr.tidyverse.or
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example data of plant species observations and measurements</span></span></span>
@@ -147,14 +147,43 @@ can be unnested into long format using <code><a href="https://tidyr.tidyverse.or
 <span class="r-in"><span>    type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"leaf mass per area"</span>,</span></span>
 <span class="r-in"><span>             <span class="st">"leaf nitrogen per area"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Adding measurement columns</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding measurement columns <span style="color: #B2B2B2;">[23ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Converting measurements to Darwin Core</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Converting measurements to Darwin Core <span style="color: #B2B2B2;">[22ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Checking 4 columns: <span style="color: #00BB00;">measurementValue</span>, <span style="color: #00BB00;">measurementID</span>, <span style="color: #00BB00;">measurementUnit</span>, and <span style="color: #00BB00;">mea</span>…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Checking 4 columns: <span style="color: #00BB00;">measurementValue</span>, <span style="color: #00BB00;">measurementID</span>, <span style="color: #00BB00;">measurementUnit</span>, and <span style="color: #00BB00;">mea</span>…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Checking 4 columns: <span style="color: #00BB00;">measurementValue</span>, <span style="color: #00BB00;">measurementID</span>, <span style="color: #00BB00;">measurementUnit</span>, and <span style="color: #00BB00;">mea</span>…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Successfully nested measurement columns in column <span style="color: #00BB00;">measurementOrFact</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully nested measurement columns in column <span style="color: #00BB00;">measurementOrFact</span>. <span style="color: #B2B2B2;">[113ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">df_dwc</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Site           Species            Latitude Longitude measurementOrFact</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Adelaide River Corymbia latifolia    -<span style="color: #BB0000;">13.0</span>      131. <span style="color: #949494;">&lt;tibble [2 × 4]&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Adelaide River Banksia aemula        -<span style="color: #BB0000;">13.0</span>      131. <span style="color: #949494;">&lt;tibble [2 × 4]&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> AgnesBanks     Acacia aneura         -<span style="color: #BB0000;">33.6</span>      151. <span style="color: #949494;">&lt;tibble [2 × 4]&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Unnest to view full long format data frame</span></span></span>
 <span class="r-in"><span><span class="va">df_dwc</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">measurementOrFact</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Site           Species       Latitude Longitude measurementValue measurementID</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Adelaide River Corymbia lat…    -<span style="color: #BB0000;">13.0</span>      131.           <span style="color: #BB0000;">NA</span>     LMA_g.m2|1   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Adelaide River Corymbia lat…    -<span style="color: #BB0000;">13.0</span>      131.            1.1   LeafN_area_g…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Adelaide River Banksia aemu…    -<span style="color: #BB0000;">13.0</span>      131.          180.    LMA_g.m2|2   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Adelaide River Banksia aemu…    -<span style="color: #BB0000;">13.0</span>      131.            0.913 LeafN_area_g…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> AgnesBanks     Acacia aneura    -<span style="color: #BB0000;">33.6</span>      151.          159.    LMA_g.m2|3   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> AgnesBanks     Acacia aneura    -<span style="color: #BB0000;">33.6</span>      151.            2.96  LeafN_area_g…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: measurementUnit &lt;chr&gt;, measurementType &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
