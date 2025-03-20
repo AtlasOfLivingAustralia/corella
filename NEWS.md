@@ -1,3 +1,7 @@
+# corella 0.1.3
+
+* Fix CPU limit error in `set_measurements()`
+
 # corella 0.1.2
 
 * Update package DESCRIPTION

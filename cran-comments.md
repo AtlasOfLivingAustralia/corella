@@ -1,5 +1,15 @@
 ## Resubmission
 
+This is a second resubmission (v0.1.2 -> v0.1.3) to fix a bug that appeared 
+when building the documentation with pkgdown using GH Actions. 
+
+* The function `set_measurements()` 
+was causing a CPU limit error to trigger, and the website build process would 
+fail (this bug wasn't appearing locally so it was missed). We fixed the issue 
+and have subsequently increased the version number as a patch.
+
+## Resubmission
+
 This is a resubmission. In this version we have:
 
 * Added more details about this package to the DESCRIPTION.
@@ -8,7 +18,7 @@ This is a resubmission. In this version we have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes
 
 
 
