@@ -10,6 +10,6 @@
 ^Meta$
 ^codecov\.yml$
 ^\.github$
-^man\figures\corella-logo.png
+^man/figures/corella-logo.png
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
