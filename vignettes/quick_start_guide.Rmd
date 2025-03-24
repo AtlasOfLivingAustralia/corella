@@ -1,15 +1,13 @@
 ---
 title: "Quick start guide"
 author: "Dax Kellie"
-date: '2024-12-12'
+date: '2025-03-24'
 output: 
   rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Quick start guide}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-resource_files:
-  - './westerband_2022_wdate.csv'
 ---
 
 ```{r, include = FALSE}

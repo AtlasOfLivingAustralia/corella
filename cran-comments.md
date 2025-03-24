@@ -1,5 +1,12 @@
 ## Resubmission
 
+This is a resubmission. In this version we have:
+
+* Formatted package names in DESCRIPTION using single quotes.
+* Removed hi-def logo image from package build.
+
+## Resubmission
+
 This is a second resubmission (v0.1.2 -> v0.1.3) to fix a bug that appeared 
 when building the documentation with pkgdown using GH Actions. 
 

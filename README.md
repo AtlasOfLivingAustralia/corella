@@ -178,5 +178,5 @@ citation(package = "corella")
 
 The current recommended citation is:
 
-> Kellie D, Balasubramaniam S & Westgate MJ (2024) corella: Tools to
-> standardize biodiversity data to Darwin Core. R Package version 0.1.0.
+> Kellie D, Balasubramaniam S & Westgate MJ (2025) corella: Tools to
+> standardize biodiversity data to Darwin Core. R Package version 0.1.4.
