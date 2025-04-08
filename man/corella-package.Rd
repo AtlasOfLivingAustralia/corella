@@ -87,7 +87,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Shandiya Balasubramanium \email{shandiya.balasubramanium@csiro.au}
+  \item Shandiya Balasubramaniam \email{shandiya.balasubramaniam@csiro.au}
   \item Martin Westgate \email{martin.westgate@csiro.au}
 }
 
