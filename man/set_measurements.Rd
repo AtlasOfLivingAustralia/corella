@@ -25,6 +25,7 @@ A tibble with the requested fields added.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 This function is a work in progress, and should be used with caution.
 
 In raw collected data, many types of information can be captured in one
@@ -33,7 +34,7 @@ column. For example, the column name \code{LMA_g.m2} contains the measured trait
 squared, g/m2), and recorded in that column are the values themselves. In
 Darwin Core, these different types of information must be separated into
 multiple columns so that they can be ingested correctly and aggregated with
-sources of data accurately.
+other data accurately.
 
 This function converts information preserved in a single measurement column
 into multiple columns (\code{measurementID}, \code{measurementUnit}, and

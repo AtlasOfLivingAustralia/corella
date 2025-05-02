@@ -2,6 +2,7 @@
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
+#'
 #' This function is a work in progress, and should be used with caution.
 #'
 #' In raw collected data, many types of information can be captured in one
@@ -10,7 +11,7 @@
 #' squared, g/m2), and recorded in that column are the values themselves. In
 #' Darwin Core, these different types of information must be separated into
 #' multiple columns so that they can be ingested correctly and aggregated with
-#' sources of data accurately.
+#' other data accurately.
 #'
 #' This function converts information preserved in a single measurement column
 #' into multiple columns (`measurementID`, `measurementUnit`, and
@@ -102,8 +103,10 @@ set_measurements <- function(
       n_row = row_number()
       )
 
+  # Using `split()` causes cpu time limit error if not restricted
   df_split <- split(df_split, f = df_split$n_row)
-    # NOTE: Must use group_split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
+  setTimeLimit(.1)
+  # NOTE: Must split to preserve grouping by row, not an unexpected grouping (ie force rowwise)
 
   nested_df <- purrr::map(df_split,
                  ~ .x |>
@@ -151,11 +154,10 @@ set_measurements <- function(
 
   cli::cli_progress_step("Successfully nested measurement columns in column {.field measurementOrFact}.")
 
-  # To fix 'reached time limit' error:
-  # could set time limit, but needs testing how long? From: https://stackoverflow.com/questions/51247102/reached-elapsed-time-limit-errors-in-r
-  setTimeLimit(1)
-  # clear memory (NOTE: Can we do this?)
-  gc()
+  # Clearing memory to avoid cpu limit error
+  # See: https://stackoverflow.com/questions/51247102/reached-elapsed-time-limit-errors-in-r
+  gc() # clear memory (NOTE: Can we do this?)
+
   return(result)
 }
 
