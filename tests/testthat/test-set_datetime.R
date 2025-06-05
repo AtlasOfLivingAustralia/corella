@@ -148,6 +148,24 @@ test_that("set_datetime checks time format", {
   )
 })
 
+test_that("set_datetime handles correct lubridate format as character", {
+  my_data <- tibble::tibble(
+    eventTime = c("10H 23M", "11H 25M"),
+  )
+
+  result1 <- my_data |>
+    quiet_set_datetime()
+
+  expect_s3_class(result1$result, c("tbl_df", "tbl", "data.frame"))
+  expect_equal(colnames(result1$result), c("eventTime"))
+  expect_type(result1$result$eventTime, "character")
+
+  expect_no_error(
+    suppressMessages(
+      my_data |> set_datetime(eventTime = eventTime)
+    ))
+})
+
 test_that("set_datetime checks year format", {
   correct_year <- tibble(year = c(2021, 105),
                          col2 = 1:2)

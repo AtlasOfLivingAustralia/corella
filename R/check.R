@@ -349,9 +349,6 @@ check_is_time <- function(.df,
   field_name <- colnames(.df)[[1]]
   x <- .df |> pull(field_name)
 
-  # browser()
-  # hms::parse_hm(x)
-
   # time period supplied
   if (any(lubridate::is.period(x)) |
     any(hms::is_hms(x))) {
@@ -360,15 +357,18 @@ check_is_time <- function(.df,
     # character class supplied
     if (any(is.character(x))) {
       # are they time format?
-      if (!any(is.na(as.POSIXct(x, format = "%H:%M:%S")))) {
-        .df[1] <- hms::parse_hms(x) # hours minutes seconds
+      time_format <- has_time_format(x)
+
+      if (time_format == "hms") {
+        .df[1] <- x |> lubridate::hms() |> hms::hms() # hours minutes seconds
       } else {
-        if (!any(is.na(as.POSIXct(x, format = "%H:%M")))) {
-          .df[1] <- hms::parse_hm(x)
+        if (time_format == "hm") {
+          .df[1] <- x |> lubridate::hm() |> hms::hms() # hours minutes
         } else {
           bullets <- c(
             "Invalid time format in {.field {field_name}}.",
-            i = "{.field {field_name}} accepts hours:minutes:seconds or hours:minutes."
+            i = "{.field {field_name}} accepts format '%H %M %S' or '%H %M'.",
+            i = "Specify time format with {.pkg lubridate} e.g. {.code hms()} or {.code hm()}}."
           ) |>
             cli::cli_bullets() |>
             cli::cli_fmt()
@@ -380,7 +380,7 @@ check_is_time <- function(.df,
       }
     } else {
       bullets <- c(
-        "Must format {.field {field_name}} as hours:minutes:seconds or hours:minutes.",
+        "Must format {.field {field_name}} as '%H %M %S' or '%H %M'.",
         i = "Specify time format with {.pkg lubridate} e.g. {.code hms()} or {.code hm()}}."
       ) |>
         cli::cli_bullets() |>
@@ -393,6 +393,32 @@ check_is_time <- function(.df,
   }
   # NOTE: This class isn't retained in final df for some reason
   .df
+}
+
+#' checks whether character vector has a valid time format
+#' @noRd
+#' @keywords Internal
+has_time_format <- function(chr_vector) {
+
+  # hours minutes seconds
+  hms_colon_format <- !any(is.na(as.POSIXct(chr_vector, format = "%H:%M:%S")))
+  hms_period_format <- !any(is.na(as.POSIXct(chr_vector, format = "%HH %MM %SS")))
+
+  # hours minutes
+  hm_colon_format <- !any(is.na(as.POSIXct(chr_vector, format = "%H:%M")))
+  hm_period_format <- !any(is.na(as.POSIXct(chr_vector, format = "%HH %MM")))
+
+  if (any(isTRUE(c(hms_colon_format, hms_period_format)))) {
+    format <- "hms"
+  } else {
+    if (any(c(hm_colon_format, hm_period_format))) {
+    format <- "hm"
+    } else {
+    format <- NA
+    }
+  }
+
+  return(format)
 }
 
 #' check whether all column args are missing in a function call
