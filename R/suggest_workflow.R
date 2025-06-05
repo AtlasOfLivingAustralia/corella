@@ -141,18 +141,24 @@ check_contains_terms <- function(.df,
     pull("set_function")
 
   # this wraps text (which might not be optimal for this table)
-  # withr::with_options(
-  #   list(cli.width = 80),
-  #   full_workflow_message()
-  # )
+  withr::with_options(
+    list(cli.width = 80),
+    full_workflow_message(matched_values,
+                          unmatched_values,
+                          all_cols_match,
+                          req_terms_results,
+                          suggested_functions,
+                          is_sf,
+                          optional_functions)
+  )
 
-  full_workflow_message(matched_values,
-                        unmatched_values,
-                        all_cols_match,
-                        req_terms_results,
-                        suggested_functions,
-                        is_sf,
-                        optional_functions)
+  # full_workflow_message(matched_values,
+  #                       unmatched_values,
+  #                       all_cols_match,
+  #                       req_terms_results,
+  #                       suggested_functions,
+  #                       is_sf,
+  #                       optional_functions)
 
   .df
 }
@@ -257,7 +263,7 @@ suggest_functions_message <- function(suggested_functions,
       cat_line(cli_text(paste0("Run checks, or use your dataframe to build a Darwin Core Archive with {.pkg galaxias}:\n")))
       cli_text("df |>")
       cli_div(theme = list(.alert = list(`margin-left` = 2, before = "")))
-      lapply(paste0("check_dataset()"), cli_alert, .envir = .envir)
+      lapply(paste0("galaxias::use_data()"), cli_alert, .envir = .envir)
       cli_end()
     }
 }
@@ -292,7 +298,7 @@ additional_functions_message <- function(optional_functions,
     cli_text(paste0("Based on your matched terms, you can also add to your pipe: ", "\n"))
     cli_bullets(c("*" = optional_functions_message))
   }
-  cli_bullets(c("i" = col_grey("See all `set_` functions at http://corella.ala.org.au/reference/index.html#add-rename-or-edit-columns-to-match-darwin-core-terms")))
+  cli_bullets(c("i" = col_grey("See all `set_` functions at {.url https://corella.ala.org.au/reference/index.html}")))
 }
 
 
