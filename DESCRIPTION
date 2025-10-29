@@ -46,7 +46,7 @@ Suggests:
   testthat (>= 3.0.0),
   withr
 License: GPL-3
-URL: https://corella.ala.org.au
+URL: https://corella.ala.org.au/R/
 BugReports: https://github.com/AtlasOfLivingAustralia/corella/issues
 Maintainer: Dax Kellie <dax.kellie@csiro.au>
 Encoding: UTF-8
