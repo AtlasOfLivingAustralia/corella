@@ -57,6 +57,7 @@ dwc_spinny_message <- function(message) {
 
   # clear the spinner from the status bar
   spinny$finish()
+  cli::cli_text() # note: prevents loss of text in next message
 }
 
 
@@ -160,6 +161,7 @@ check_contains_terms <- function(.df,
   #                       is_sf,
   #                       optional_functions)
 
+
   .df
 }
 
@@ -183,11 +185,11 @@ matching_terms_message <- function(matched_values,
   matched_string <- ansi_collapse(glue("{matched_values}"), sep = ", ", last = ", ")
   unmatched_string <- ansi_collapse(glue("{unmatched_values}"), sep = ", ", last = ", ")
 
-  results_summary <- paste0("Matched {length(matched_values)} of {sum(length(matched_values), length(unmatched_values))} column name{?s} to DwC terms:")
+  results_summary <- paste0("\f", "Matched {length(matched_values)} of {sum(length(matched_values), length(unmatched_values))} column name{?s} to DwC terms:", "\f")
 
   # message
-  cat_line()
-  cat_line(cli_text(results_summary))
+  # cat_line()
+  cli_text(results_summary)
   cli_bullets(c("v" = "Matched: {.field {matched_string}}"))
   cli_bullets(c("x" = "Unmatched: {col_red({unmatched_string})}"))
   cli_par()
@@ -210,11 +212,10 @@ minreq_terms_message <- function(req_terms_results) {
   all_req_terms_found <- all(req_terms_results$result == "pass")
 
   # message
-  cat_line()
-  cat_line(req_terms_table)
+  req_terms_table
   if(isTRUE(all_req_terms_found)) {
     # celebrate
-    cat_line(paste0("\n", add_emoji(), " ", col_green("All minimum column requirements met!"), "\n"))
+    cat_line(paste0("\f", add_emoji(), " ", col_green("All minimum column requirements met!"), "\f"))
   }
 }
 
@@ -252,14 +253,14 @@ suggest_functions_message <- function(suggested_functions,
   workflow_is_empty <- is_empty(suggested_functions_piped)
 
     if(!any(workflow_is_empty)) {
-      cat_line(style_italic(paste0("\n", "To make your data Darwin Core compliant, use the following workflow:", "\n")))
+      cli_text(style_italic(paste0("\f", "To make your data Darwin Core compliant, use the following workflow:", "\f")))
       cli_text("df |>")
       cli_div(theme = list(.alert = list(`margin-left` = 2, before = "")))
       lapply(suggested_functions_piped, cli_alert, .envir = .envir)
       cli_end()
 
     } else {
-      cat_line(paste0("\n", add_emoji(), " ", col_green("Your dataframe is Darwin Core compliant!"), "\n"))
+      cat_line(paste0("\n", add_emoji(), " ", col_green("Your dataframe meets the minimum requirements of a Darwin Core Archive!"), "\n"))
       cat_line(cli_text(paste0("Run checks, or use your dataframe to build a Darwin Core Archive with {.pkg galaxias}:\n")))
       cli_text("df |>")
       cli_div(theme = list(.alert = list(`margin-left` = 2, before = "")))
@@ -330,7 +331,7 @@ full_workflow_message <- function(matched_values,
 
   cli_h1("Minimum required Darwin Core terms")
   minreq_terms_message(req_terms_results)
-  cli_end()
+
 
   # Suggested workflow
   cli_h1("Suggested workflow")
@@ -339,6 +340,8 @@ full_workflow_message <- function(matched_values,
 
   cli_h3(col_grey("Additional functions"))
   additional_functions_message(optional_functions)
+  cli_end()
+
 }
 
 
@@ -354,7 +357,8 @@ fn_to_term_table <- function() {
   main_terms <- c("basisOfRecord", "occurrenceID", "scientificName",
                   "occurrenceID", "scientificName", "decimalLatitude",
                   "decimalLongitude", "geodeticDatum",
-                  "coordinateUncertaintyInMeters", "eventDate")
+                  "coordinateUncertaintyInMeters", "eventDate",
+                  "kingdom", "family")
 
   terms_table <- corella::darwin_core_terms |>
     select("set_function", "term")
@@ -460,7 +464,7 @@ build_req_terms_table <- function(req_terms) {
     unnest(cols = "missing") |>
     group_by(.data$term_group) |>
     mutate( # glue names
-      missing = ansi_collapse(.data$missing, sep = ", ", last = ", ")
+      missing = ansi_collapse(.data$missing, sep = ", ", sep2 = ", ", last = ", ")
     ) |>
     unique()
 
@@ -469,7 +473,7 @@ build_req_terms_table <- function(req_terms) {
     unnest(cols = "matched") |>
     group_by(.data$term_group) |>
     mutate( # glue names
-      matched = ansi_collapse(.data$matched, sep = ", ", last = ", ")
+      matched = ansi_collapse(.data$matched, sep = ", ", sep2 = ", ", last = ", ")
     ) |>
     unique()
 
@@ -536,11 +540,13 @@ build_req_terms_table <- function(req_terms) {
   }
 
   # final message
-  paste0(
-    headers,
-    bullets_found,
-    bullets_missing
-  )
+    paste0(
+      "\n",
+      headers,
+      bullets_found,
+      bullets_missing
+    ) |> cli::cli_verbatim()
+
 }
 
 #' Minimum required terms for a Darwin Core compliant data archive
@@ -567,6 +573,10 @@ required_terms <- function() {
     ),
     date = c(
       "eventDate"
+    ),
+    taxonomy = c(
+      "kingdom",
+      "family"
     )
   )
 }
@@ -619,9 +629,17 @@ check_required_terms <- function(user_column_names) {
     mutate(
       result = ifelse(length(missing[[1]]) == 0, "pass", "fail")
     )
+  taxonomy <- tibble(
+    term_group= "Taxonomy",
+    missing = list(terms$taxonomy[!terms$taxonomy %in% user_column_names]),
+    matched = list(terms$taxonomy[terms$taxonomy %in% user_column_names])
+  ) |>
+    mutate(
+      result = ifelse(length(missing[[1]]) == 0, "pass", "fail")
+    )
 
   # combine
-  all_terms <- bind_rows(id, basis, name, location, date)
+  all_terms <- bind_rows(id, basis, name, location, date, taxonomy)
 
   # convert empty row value to NULL
   result <- all_terms |>

@@ -71,7 +71,7 @@ col_progress_bar <- function(cols) {
     wait(0.3)
     cli::cli_progress_update()
   }
-
+  cli::cli_progress_done()
 }
 
 #' check a vector consists only of values in a second vector
