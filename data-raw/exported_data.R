@@ -28,7 +28,23 @@ darwin_core_terms <- terms_versions_raw |>
   # add missing individualID term
   tibble::add_row(class = "Generic",
                   term = "individualID",
+                  url = "https://dwc.tdwg.org/list/#dwc_individualID") |>
+  tibble::add_row(class = "GeologicalContext",
+                  term = "GeologicalContext",
                   url = "https://dwc.tdwg.org/list/#dwc_individualID")
+
+## NOTE: Can be added once galaxias/delma support `ChronometricAge` extension 
+##       https://github.com/AtlasOfLivingAustralia/corella/issues/21
+# get Chronometric Age extension dataset
+# terms_chrono_raw <- readr::read_csv("https://raw.githubusercontent.com/tdwg/chrono/refs/heads/master/vocabulary/term_versions.csv")
+# chrono_terms <- terms_chrono_raw |>
+#   filter(status == "recommended",
+#          grepl("Property$", rdf_type)) |>
+#   rename(url = term_iri,
+#          term = term_localName) |>
+#   mutate(class = basename(organized_in)) |>
+#   filter(!duplicated(term)) |>
+#   select(class, term, url, definition, comments, examples)
 
 # add terms & functions supported by corella
 # NOTE: To add more supported terms/function, edit the supported-terms.csv file

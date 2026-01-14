@@ -51,3 +51,15 @@ set_measurements(),measurementValue
 set_measurements(),measurementID
 set_measurements(),measurementUnit
 set_measurements(),measurementType
+set_geological_context(),geologicalContextID
+set_geological_context(),earliestAgeOrLowestStage
+set_geological_context(),latestAgeOrHighestStage
+set_geological_context(),earliestPeriodOrLowestSystem
+set_geological_context(),latestPeriodOrHighestSystem
+set_geological_context(),lowestBiostratigraphicZone
+set_geological_context(),highestBiostratigraphicZone
+set_geological_context(),lithostratigraphicTerms
+set_geological_context(),group
+set_geological_context(),formation
+set_geological_context(),member
+set_geological_context(),bed
