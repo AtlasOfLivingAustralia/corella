@@ -25,11 +25,11 @@ switch_check <- function(level = "inform",
 check_is_dataframe <- function(.df,
                              call = caller_env()
 ){
-  if(!inherits(.df, "data.frame")){
+  if(!inherits(.df, c("data.frame", "tbl", "grouped_df"))){
     abort("Must supply a `tibble` or `data.frame` to `check_` functions.",
           call = call)
   }
-  if(ncol(.df) > 1){
+  if(!inherits(.df, "grouped_df") && ncol(.df) > 1){
     abort("Must supply `data.frame` with one column to `check_` functions.",
           call = call)
   }
@@ -207,7 +207,14 @@ check_is_unique <- function(.df,
                          call = caller_env()
 ){
   check_is_dataframe(.df)
-  field_name <- colnames(.df)[[1]]
+
+  if(inherits(.df, "grouped_df")) {
+    # multiple columns are provided, so must subset to last column (which should be the new one)
+    field_name <- colnames(.df)[[length(.df)]]
+  } else {
+    # one column provided
+    field_name <- colnames(.df)[[1]]
+  }
   x <- .df |> pull(field_name)
   unique_check <- length(unique(x)) == length(x)
   if(!unique_check){
