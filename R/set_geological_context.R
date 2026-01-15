@@ -104,8 +104,8 @@
 #'   eventDate = c("2010-07-20", "2014-03-31"),
 #'   geologicalContextID = c("https://opencontext.org/subjects/576d8322-9a55-4a9b-e60d-b466be610bb7", 
 #'                           "https://opencontext.org/subjects/4ef35961-af07-4dec-3106-48baf0967a0a"),
-#'   earliestPeriodOrLowestSystem = c("Quartenary", "Quartenary"),
-#'   latestPeriodOrLowestSystem = c("Quartenary", "Quartenary"),
+#'   earliest_period = c("Quartenary", "Quartenary"),
+#'   latest_period = c("Quartenary", "Quartenary"),
 #'   country = c("Turkey", "Turkey"),
 #'   locality = c("Mound East", "Mound West Trench 1")
 #' )
@@ -113,16 +113,17 @@
 #' # Reformat columns to Darwin Core Standard terms
 #' df |>
 #'   set_geological_context(
-#'     countryCode = countryCode,
-#'     stateProvince = state,
-#'     locality = locality
+#'     geologicalContextID = geologicalContextID
+#'     earliestPeriodOrLowestSystem = earliest_period,
+#'     latestPeriodOrHighestSystem = latest_period
 #'   )
 #'
 #' # Columns with valid Darwin Core terms as names are automatically detected
 #' # and checked. This will do the same as above.
 #' df |>
-#'   set_locality(
-#'     stateProvince = state
+#'   set_geological_context(
+#'     earliestPeriodOrLowestSystem = earliest_period,
+#'     latestPeriodOrHighestSystem = latest_period
 #'   )
 #'
 #'
@@ -197,6 +198,8 @@ set_geological_context <- function(.df,
   check_geologicalContextID(result, level = "abort")
   check_earliestAgeOrLowestStage(result, level = "abort")
   check_latestAgeOrHighestStage(result, level = "abort")
+  check_earliestPeriodOrLowestSystem(result, level = "abort")
+  check_latestPeriodOrHighestSystem(result, level = "abort")
   check_lowestBiostratigraphicZone(result, level = "abort")
   check_highestBiostratigraphicZone(result, level = "abort")
   check_lithostratigraphicTerms(result, level = "abort")
