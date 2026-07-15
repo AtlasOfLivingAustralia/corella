@@ -63,3 +63,8 @@ set_geological_context(),group
 set_geological_context(),formation
 set_geological_context(),member
 set_geological_context(),bed
+set_relationships(),resourceID
+set_relationships(),relationshipOfResource
+set_relationships(),relatedResourceID
+set_relationships(),relationshipAccordingTo
+set_relationships(),relationshipEstablishedDate

@@ -72,3 +72,22 @@ countryCode_values <- function(){
   country_codes |>
     dplyr::pull(.data$code)
 }
+
+#' @rdname accepted_values
+#' @export
+relationshipOfResource_values <- function(){
+  c("same as",
+    "duplicate of",
+    "mother of",
+    "offspring of",
+    "sibling of",
+    "parasite of",
+    "host of",
+    "valid synonym of",
+    "located within",
+    "pollinator of members of taxon",
+    "pollinated specific plant",
+    "pollinated by members of taxon",
+    "on slab with"
+    )
+}
