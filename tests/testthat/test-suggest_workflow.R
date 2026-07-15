@@ -58,6 +58,8 @@ test_that("suggest_workflow celebrates when data meets Darwin Core Standard", {
     decimalLongitude = c(149.125, 149.133),
     eventDate = lubridate::dmy(c("14-01-2023", "15-01-2023")),
     scientificName = c("Callocephalon fimbriatum", "Eolophus roseicapilla"),
+    family = c("Cacatuidae", "Cacatuidae"),
+    kingdom = c("Animalia", "Animalia"),
     basisOfRecord = "humanObservation",
     geodeticDatum = "WGS84",
     coordinateUncertaintyInMeters = "10",
